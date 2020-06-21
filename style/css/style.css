@@ -192,6 +192,16 @@ img {
 	display: none;
 }
 
+.Star_war{
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	left: 40%;
+	top: 20%;
+	bottom: auto;
+	right: auto;
+}
+
 .cd-hero-slider .cd-img-container img {
 	position: absolute;
 	left: 50%;
