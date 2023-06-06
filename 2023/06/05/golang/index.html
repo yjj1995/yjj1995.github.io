@@ -252,7 +252,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(3)</small>
+                <small>(4)</small>
             
         </div>
     </li>
@@ -276,7 +276,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="3">
+<input type="hidden" id="yelog_site_posts_number" value="4">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -339,10 +339,19 @@
         
         
         <a  class="全部文章 "
-           href="/2023/06/06/gorm%E4%BD%95%E6%97%B6%E4%BC%9A%E6%8A%9B%E5%87%BAErrRecordNotFound%E9%94%99%E8%AF%AF/"
+           href="/2023/06/06/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="回调函数">回调函数</span>
+            <span class="post-date" title="2023-06-06 06:33:22">2023/06/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/06/06/gorm/"
            data-tag="gorm 相关"
            data-author="" >
-            <span class="post-title" title="gorm何时会抛出ErrRecordNotFound错误">gorm何时会抛出ErrRecordNotFound错误</span>
+            <span class="post-title" title="gorm">gorm</span>
             <span class="post-date" title="2023-06-06 02:09:37">2023/06/06</span>
         </a>
         
@@ -401,7 +410,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-06 14:16:54'>2023-06-05 01:05</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-06 14:40:16'>2023-06-05 01:05</time>
         
     </div>
     <div class="article-meta">
@@ -439,7 +448,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Go向函数传递切片该使用值还是指针？"><a href="#Go向函数传递切片该使用值还是指针？" class="headerlink" title="Go向函数传递切片该使用值还是指针？"></a>Go向函数传递切片该使用值还是指针？</h3>
+        <h3 id="Go向函数传递切片该使用值还是指针？"><a href="#Go向函数传递切片该使用值还是指针？" class="headerlink" title="Go向函数传递切片该使用值还是指针？"></a>Go向函数传递切片该使用值还是指针？</h3><ul>
+<li><p>切片的本质是一个结构体，包含一个指向底层数组的指针prt, 长度len, 容量cap。</p>
+<ul>
+<li>切片本身包含一个指针，将切片按值传递给函数，在函数内对其修改，影响将会传递到函数外。</li>
+</ul>
+</li>
+<li><p>对切片进行append() 操作的时候，若是元素数量超过原有切片的容量，将会使得切片容量增大。</p>
+<ul>
+<li>扩容后的切片，本质上是产生一个新的底层数组。如果在函数内对切片添加元素导致扩容，会导致元素内的切片指向一个新的数组，但是函数外的切片仍然指向原来旧的数组，则将会导致影响无法传递到函数外。</li>
+</ul>
+</li>
+<li><p>如果希望函数内对切片扩容作用于函数外，就需要以指针形式传递切片。</p>
+</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>
