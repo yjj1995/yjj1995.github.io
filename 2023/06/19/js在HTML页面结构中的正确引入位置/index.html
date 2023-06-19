@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>go常见的坑 | 记好笔记</title>
-  <meta name="keywords" content=" go语言 ">
-  <meta name="description" content="go常见的坑 | 记好笔记">
+  <title>js在HTML页面结构中的正确引入位置 | 记好笔记</title>
+  <meta name="keywords" content=" HTML,Web,js ">
+  <meta name="description" content="js在HTML页面结构中的正确引入位置 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -344,9 +344,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-golang" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-js在HTML页面结构中的正确引入位置" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">go常见的坑</h1>
+        <h1 class="article-title">js在HTML页面结构中的正确引入位置</h1>
     
     <div class="article-meta">
         
@@ -356,14 +356,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">go语言</a>
+            <a class="color2">HTML,Web,js</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-06 14:40:16'>2023-06-05 01:05</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-19 15:17:47'>2023-06-19 07:16</time>
         
     </div>
     <div class="article-meta">
@@ -385,7 +385,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Go%E5%90%91%E5%87%BD%E6%95%B0%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E8%AF%A5%E4%BD%BF%E7%94%A8%E5%80%BC%E8%BF%98%E6%98%AF%E6%8C%87%E9%92%88%EF%BC%9F"><span class="toc-text">Go向函数传递切片该使用值还是指针？</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -401,18 +401,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Go向函数传递切片该使用值还是指针？"><a href="#Go向函数传递切片该使用值还是指针？" class="headerlink" title="Go向函数传递切片该使用值还是指针？"></a>Go向函数传递切片该使用值还是指针？</h3><ul>
-<li><p>切片的本质是一个结构体，包含一个指向底层数组的指针prt, 长度len, 容量cap。</p>
+        <ul>
+<li><p>在错误的位置引用大量的JS文件会导致页面静态元素迟迟加载不出来而给人一种网页顿卡的感觉.那么怎么才能解决这个问题呢?</p>
 <ul>
-<li>切片本身包含一个指针，将切片按值传递给函数，在函数内对其修改，影响将会传递到函数外。</li>
+<li>**正确的做法是在<body></body>标签后面引入js文件.而body前面引入CSS文件.**不会像我以前的通常做法是在<head></head>节点里面直接引入所有的css和js.因为如果有多个js文件被引入，那么对于浏览器来说，这些js文件被被串行地载入，并依次执行.</li>
 </ul>
 </li>
-<li><p>对切片进行append() 操作的时候，若是元素数量超过原有切片的容量，将会使得切片容量增大。</p>
+<li><p>DOM文件加载步骤：</p>
 <ul>
-<li>扩容后的切片，本质上是产生一个新的底层数组。如果在函数内对切片添加元素导致扩容，会导致元素内的切片指向一个新的数组，但是函数外的切片仍然指向原来旧的数组，则将会导致影响无法传递到函数外。</li>
+<li>解析html结构；</li>
+<li>加载外部脚本和样式表文件；</li>
+<li>解析并执行脚本；</li>
+<li>dom树构建完成（触发DOMContentLoaded和 jquery ready事件）；</li>
+<li>加载图片等外部文件；（会触发图片load事件）</li>
+<li>页面加载完毕。（触发load事件）</li>
 </ul>
-</li>
-<li><p>如果希望函数内对切片扩容作用于函数外，就需要以指针形式传递切片。</p>
 </li>
 </ul>
 
