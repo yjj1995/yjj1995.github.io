@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(9)</small>
+                <small>(10)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="9">
+<input type="hidden" id="yelog_site_posts_number" value="10">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -249,6 +249,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据一致性</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>Ceph</a>
             </li>
         
@@ -270,6 +274,15 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/06/21/%E4%B8%80%E8%87%B4%E6%80%A7/"
+           data-tag="数据一致性"
+           data-author="" >
+            <span class="post-title" title="一致性">一致性</span>
+            <span class="post-date" title="2023-06-21 07:34:35">2023/06/21</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -389,7 +402,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-20 14:58:04'>2023-06-20 06:50</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-21 15:13:58'>2023-06-20 06:50</time>
         
     </div>
     <div class="article-meta">
@@ -428,7 +441,20 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Ceph简介"><a href="#Ceph简介" class="headerlink" title="Ceph简介"></a>Ceph简介</h2><ul>
-<li>所有Ceph存储集群的部署集群的部署都始于各Ceph节点</li>
+<li><p>所有Ceph存储集群的部署集群的部署都始于各Ceph节点、网络和Ceph存储集群的配置。最简的Ceph存储集群至少要一个Ceph监视器，Ceph管理器，和Ceph OSD(对象存储守护进程)。要跑Ceph文件系统客户端的话，还必须有Ceph元数据服务器。</p>
+<ul>
+<li><p>Monitors: Ceph监视器（ceph-mon）维护着集群状态的各种运行图，包括监视器运行图，管理器运行图，OSD运行图，MDS运行图，和CRUSH图。</p>
+</li>
+<li><p>Managers: Ceph管理器守护进程（ceph-mgr）负责持续跟踪运行时指标和Ceph当前的状态，包括存储利用率，当前的性能指标，和系统负载。Ceph管理器守护进程还托管着基于python的插件。</p>
+</li>
+<li><p>Ceph OSDs: Ceph OSD(对象存储守护进程，ceph-osd)负责存储数据，处理数据复制，恢复，重均衡，以及向Ceph监视器和管理器提供些监控信息.</p>
+</li>
+<li><p>MDSs: Ceph 元数据服务器（MDS，ceph-mds）为Ceph文件系统存储元数据。（Ceph块设备和Ceph对象存储不使用MDS）。元数据服务器有益于POSIX文件系统用户执行基本命令。</p>
+</li>
+</ul>
+</li>
+<li><p>Ceph 把数据保存为逻辑存储池内的对象。根据 CRUSH 算法， Ceph 可计算出哪个归置组应该持有指定对象， 然后进一步计算出哪个 OSD 守护进程持有归置组， 正因为有了 CRUSH 算法， Ceph 存储集群才具备动态伸缩、重均衡和动态恢复功能。</p>
+</li>
 </ul>
 
       
@@ -479,7 +505,7 @@
         </div>
     </div>
     <div class="shang_payselect">
-        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
     </div>
 </div>
 

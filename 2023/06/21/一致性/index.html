@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>寄存器 | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="寄存器 | 记好笔记">
+  <title>一致性 | 记好笔记</title>
+  <meta name="keywords" content=" 数据一致性 ">
+  <meta name="description" content="一致性 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -383,19 +383,26 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-寄存器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-一致性" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">寄存器</h1>
+        <h1 class="article-title">一致性</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">数据一致性</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-16 15:40:49'>2023-06-13 06:56</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-21 16:17:39'>2023-06-21 07:34</time>
         
     </div>
     <div class="article-meta">
@@ -417,7 +424,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%9F"><span class="toc-text">什么是寄存器？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="toc-text">一致性模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-text">强一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-text">顺序一致性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-text">线性一致性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-text">区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-text">弱一致性</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -433,26 +440,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是寄存器？"><a href="#什么是寄存器？" class="headerlink" title="什么是寄存器？"></a>什么是寄存器？</h2><ul>
-<li><p>寄存器是cpu内部用来存放数据的一些小型存储区域，用来暂时存放参与运算的数据和运算结果以及一些CPU运行需要的信息。</p>
+        <h2 id="一致性模型"><a href="#一致性模型" class="headerlink" title="一致性模型"></a>一致性模型</h2><p>  分布式系统中的一致性按照一致性要求的不同，主要分为强一致性，这两大类。前者是基于safety的概念，后者是基于liveness的概念。</p>
+<h3 id="强一致性"><a href="#强一致性" class="headerlink" title="强一致性"></a>强一致性</h3><ul>
+<li>强一致性包含线性一致性和顺序一致性，其中前者对safety的约束更强，也是分布式系统中能保证的最好的一致性。</li>
+</ul>
+<h4 id="顺序一致性"><a href="#顺序一致性" class="headerlink" title="顺序一致性"></a>顺序一致性</h4><ul>
+<li><p>如果一个并发执行过程所包含的所有读写操作能够重排成一个全局线性有序的序列，并且这个序列满足以下两个条件，那么这个并发执行过程就是满足顺序一致性的：</p>
 <ul>
-<li>通用寄存器：临时保存数据</li>
-<li>指令寄存器：专门保存指令编码或者指令地址的寄存器。</li>
+<li>条件 I：重排后的序列中每一个读操作返回的值，必须等于前面对同一个数据对象的最近一次写操作所写入的值。</li>
+<li>条件 II：原来每个进程中各个操作的执行先后顺序，在这个重排后的序列中必须保持一致。（进程中执行顺序）</li>
 </ul>
 </li>
-<li><p>D触发器</p>
+</ul>
+<h4 id="线性一致性"><a href="#线性一致性" class="headerlink" title="线性一致性"></a>线性一致性</h4><ul>
+<li><p>线性一致性的定义，与顺序一致性非常相似，也是试图把所有读写操作重排成一个全局线性有序的序列，但除了满足前面的条件 I 和条件 II 之外，还要同时满足一个条件：</p>
 <ul>
-<li>触发器是具有存储信息能力的基本单元，它有很多种类型，D触发器是其中一种。</li>
+<li>条件 III：不同进程的操作，如果在时间上不重叠，那么它们的执行先后顺序，在这个重排后的序列中必须保持一致。（进程间的顺序）</li>
 </ul>
 </li>
-<li><p>仅就D触发器而言，以后有很多的实现方式，在这里我们就不深入到它的内部实现细节，而重点关注它对外提供的功能。这个D触发器主要有这三个接口，一个数据输入，一个数据输出和一个时钟输入。</p>
-</li>
-<li><p>它的功能表现是这样的，在时钟clock的上升沿，也就是clock从低电平变为高电平，也可以说是从0变到1的时候，这是一个很短的时间，在这时D触发器会采样输入端口D的值，经过一段很短的时间会将这个值传送到输出端口Q。在其它的时候也就是不在时钟信号的上升沿的时候，无论输入端口D如何变化，其输出端口Q的值都是保持不变的。</p>
-</li>
 </ul>
-<blockquote>
-<p>两个输入，一个时钟，一个数据。<br>输出的改变 依赖于 时钟的变化，当时钟上升时，输出&#x3D;输入数据。 当时钟不在上升的时候，输出不会变化。<br><img src="2023-06-16T153913.png" alt="2023-06-16T153913"></p>
-</blockquote>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><ul>
+<li>它们都试图让系统“表现得像只有一个副本”一样。</li>
+<li>它们都保证了程序执行顺序不会被打乱。体现在条件 II 对于进程内各个操作的排序保持上。</li>
+<li>线性一致性考虑了时间先后顺序，而顺序一致性没有。</li>
+<li>满足线性一致性的执行过程，肯定都满足顺序一致性；反之不一定。</li>
+<li>线性一致性隐含了时效性保证（recency guarantee）。它保证我们总是能读到数据最新的值。</li>
+<li>在顺序一致性中，我们有可能读到旧版本的数据。</li>
+</ul>
+<h3 id="弱一致性"><a href="#弱一致性" class="headerlink" title="弱一致性"></a>弱一致性</h3><ul>
+<li>弱一致性是指系统在数据成功写到之后，不承诺立即可以读到最新写入的值，也不会具体承诺多久读到，但是会尽可能保证在某个时间级别之后，可以让数据达到一致性状态。</li>
+</ul>
+<p>可以根据能够恢复一致的时间将弱一致性进一步分类，如果是有限时间那就是最终一致性，如果是无限时间那实际上相当于没有一致性。对于前者，可以进一步分类，如下图所示：</p>
+<p><img src="2023-06-21T161738.png" alt="2023-06-21T161738"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
