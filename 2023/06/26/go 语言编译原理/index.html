@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>nodejs 和 npm | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="nodejs 和 npm | 记好笔记">
+  <title>go 语言编译原理 | 记好笔记</title>
+  <meta name="keywords" content=" go ">
+  <meta name="description" content="go 语言编译原理 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -396,19 +396,26 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-nodejs 和 npm" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-go 语言编译原理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">nodejs 和 npm</h1>
+        <h1 class="article-title">go 语言编译原理</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">go</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-12 13:36:09'>2023-06-07 10:53</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-26 17:06:44'>2023-06-26 08:48</time>
         
     </div>
     <div class="article-meta">
@@ -430,7 +437,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js"><span class="toc-text">Node.js</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-text">作用</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86"><span class="toc-text">编译原理</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -446,8 +453,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>一种通过JavaScript语言开发web服务端的东西</li>
+        <h3 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h3><ul>
+<li><p>Go语言编译器的源代码在<code>src/cmd/compile</code>目录中，目录下的文件共同组成了Go语言的编译器</p>
+<ul>
+<li>编译器前端: 词法分析，语法分析，类型检查和中间代码生成。</li>
+<li>编译器后端: 目标代码的生成和优化，将中间代码翻译成目标机器能够运行的二进制机器码。<br><img src="2023-06-26T165936.png" alt="2023-06-26T165936"></li>
+</ul>
+</li>
+<li><p>四个阶段：</p>
+<ul>
+<li><ol>
+<li>词法与语法分析</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>类型检查和AST转换</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>通用SSA生成和最后的机器代码生成</li>
+</ol>
+</li>
+</ul>
+</li>
 </ul>
 
       
