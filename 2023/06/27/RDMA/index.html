@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>寄存器 | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="寄存器 | 记好笔记">
+  <title>RDMA 工作原理 | 记好笔记</title>
+  <meta name="keywords" content=" RDMA ">
+  <meta name="description" content="RDMA 工作原理 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -422,19 +422,26 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-寄存器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-RDMA" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">寄存器</h1>
+        <h1 class="article-title">RDMA 工作原理</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">RDMA</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-16 15:40:49'>2023-06-13 06:56</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-27 10:21:21'>2023-06-27 01:53</time>
         
     </div>
     <div class="article-meta">
@@ -456,7 +463,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%9F"><span class="toc-text">什么是寄存器？</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -472,26 +479,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是寄存器？"><a href="#什么是寄存器？" class="headerlink" title="什么是寄存器？"></a>什么是寄存器？</h2><ul>
-<li><p>寄存器是cpu内部用来存放数据的一些小型存储区域，用来暂时存放参与运算的数据和运算结果以及一些CPU运行需要的信息。</p>
-<ul>
-<li>通用寄存器：临时保存数据</li>
-<li>指令寄存器：专门保存指令编码或者指令地址的寄存器。</li>
-</ul>
-</li>
-<li><p>D触发器</p>
-<ul>
-<li>触发器是具有存储信息能力的基本单元，它有很多种类型，D触发器是其中一种。</li>
-</ul>
-</li>
-<li><p>仅就D触发器而言，以后有很多的实现方式，在这里我们就不深入到它的内部实现细节，而重点关注它对外提供的功能。这个D触发器主要有这三个接口，一个数据输入，一个数据输出和一个时钟输入。</p>
-</li>
-<li><p>它的功能表现是这样的，在时钟clock的上升沿，也就是clock从低电平变为高电平，也可以说是从0变到1的时候，这是一个很短的时间，在这时D触发器会采样输入端口D的值，经过一段很短的时间会将这个值传送到输出端口Q。在其它的时候也就是不在时钟信号的上升沿的时候，无论输入端口D如何变化，其输出端口Q的值都是保持不变的。</p>
+        <ul>
+<li>RDMA 提供了基于消息队列的点对点通信<ul>
+<li><ol>
+<li>本端和目标端建立通信连接时，创建一条channel 连接，每条channel的首尾端点时两队</li>
+</ol>
 </li>
 </ul>
-<blockquote>
-<p>两个输入，一个时钟，一个数据。<br>输出的改变 依赖于 时钟的变化，当时钟上升时，输出&#x3D;输入数据。 当时钟不在上升的时候，输出不会变化。<br><img src="2023-06-16T153913.png" alt="2023-06-16T153913"></p>
-</blockquote>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

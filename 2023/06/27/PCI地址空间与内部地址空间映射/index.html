@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>寄存器 | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="寄存器 | 记好笔记">
+  <title>PCI地址空间与内部地址空间映射 | 记好笔记</title>
+  <meta name="keywords" content=" PCIe ">
+  <meta name="description" content="PCI地址空间与内部地址空间映射 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -422,19 +422,26 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-寄存器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-PCI地址空间与内部地址空间映射" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">寄存器</h1>
+        <h1 class="article-title">PCI地址空间与内部地址空间映射</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">PCIe</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-16 15:40:49'>2023-06-13 06:56</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-27 14:02:03'>2023-06-27 06:00</time>
         
     </div>
     <div class="article-meta">
@@ -456,7 +463,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%9F"><span class="toc-text">什么是寄存器？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81PCI%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-text">1、PCI地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-text">2、系统地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81PCI%E6%80%BB%E7%BA%BF%E5%9C%B0%E5%9D%80%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2%E6%98%A0%E5%B0%84"><span class="toc-text">3、PCI总线地址与系统存储空间转换映射</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%BB%A5%E4%B8%8A%E5%81%87%E8%AE%BE%EF%BC%8C%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E8%AF%A5PCI%E6%80%BB%E7%BA%BF%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B%E5%A6%82%E4%B8%8B%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-text">根据以上假设，系统软件该PCI总线树的遍历过程如下所示。</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -472,26 +479,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是寄存器？"><a href="#什么是寄存器？" class="headerlink" title="什么是寄存器？"></a>什么是寄存器？</h2><ul>
-<li><p>寄存器是cpu内部用来存放数据的一些小型存储区域，用来暂时存放参与运算的数据和运算结果以及一些CPU运行需要的信息。</p>
-<ul>
-<li>通用寄存器：临时保存数据</li>
-<li>指令寄存器：专门保存指令编码或者指令地址的寄存器。</li>
+        <h3 id="1、PCI地址空间"><a href="#1、PCI地址空间" class="headerlink" title="1、PCI地址空间"></a>1、PCI地址空间</h3><ul>
+<li>PCI总线具有32位数据&#x2F;地址复用总线，所以其存储地址空间为2的32次方&#x3D;4GB。也就是PCI上的所有设备共同映射到这4GB上，每个PCI设备占用唯一的一段PCI地址，以便于PCI总线统一寻址。每个PCI设备通过PCI寄存器中的基地址寄存器来指定映射的首地址。PCI地址空间对应于计算机系统结构中的PCI总线。</li>
 </ul>
-</li>
-<li><p>D触发器</p>
-<ul>
-<li>触发器是具有存储信息能力的基本单元，它有很多种类型，D触发器是其中一种。</li>
+<h3 id="2、系统地址空间"><a href="#2、系统地址空间" class="headerlink" title="2、系统地址空间"></a>2、系统地址空间</h3><ul>
+<li>如果处理器具有32位的地址总线，其理论可寻址空间为2的32次方&#x3D;4GB。但这并不意味着内存就可以4GB大小，其实XP系统最大内存大约为2GB，这与CPU访问系统中其它设备的存储器方式有关（比如CPU访问PCI总线上的存储器）。</li>
 </ul>
-</li>
-<li><p>仅就D触发器而言，以后有很多的实现方式，在这里我们就不深入到它的内部实现细节，而重点关注它对外提供的功能。这个D触发器主要有这三个接口，一个数据输入，一个数据输出和一个时钟输入。</p>
-</li>
-<li><p>它的功能表现是这样的，在时钟clock的上升沿，也就是clock从低电平变为高电平，也可以说是从0变到1的时候，这是一个很短的时间，在这时D触发器会采样输入端口D的值，经过一段很短的时间会将这个值传送到输出端口Q。在其它的时候也就是不在时钟信号的上升沿的时候，无论输入端口D如何变化，其输出端口Q的值都是保持不变的。</p>
-</li>
-</ul>
-<blockquote>
-<p>两个输入，一个时钟，一个数据。<br>输出的改变 依赖于 时钟的变化，当时钟上升时，输出&#x3D;输入数据。 当时钟不在上升的时候，输出不会变化。<br><img src="2023-06-16T153913.png" alt="2023-06-16T153913"></p>
-</blockquote>
+<p>计算机系统中在不同的物理位置上存在着不同设备，不同的设备又各自具有存储器，那么CPU如何访问这些存储器呢？CPU把系统中各个设备的存储空间映射到一个统一的存储空间上，称为系统存储空间共4GB，这样CPU就可以访问到所有的存储器。比如PCI存储器映射到从0xFFF80000开始的地址空间，显卡映射到0XFFF00000，再加上操作系统会占用一些空间，就只剩下不到2G能真正分配给物理内存了。（具体数值是为解释需要取的任意值，不代表真实情况）</p>
+<p>系统地址空间对应于计算机系统结构中的前端总线（FSB）。</p>
+<h3 id="3、PCI总线地址与系统存储空间转换映射"><a href="#3、PCI总线地址与系统存储空间转换映射" class="headerlink" title="3、PCI总线地址与系统存储空间转换映射"></a>3、PCI总线地址与系统存储空间转换映射</h3><p>我们假设在一个32位处理器中，其存储器域的0xF000-0000~0xF7FF-FFFF(共128MB)这段物理地址空间与PCI总线的地址空间存在映射关系。</p>
+<p>当处理器访问这段存储器地址空间时，HOST主桥将会认领这个存储器访问，并将这个存储器访问使用的物理地址空间转换为PCI总线地址空间，并与0x7000-0000~0x77FF-FFFF这段PCI总线地址空间对应。</p>
+<p>为简化起见，我们假定在存储器域中只映射了PCI设备的存储器地址空间，而不映射PCI设备的I&#x2F;O地址空间。而PCI设备的BAR空间使用0x7000-0000~0x77FF-FFFF这段PCI总线域的存储器地址空间。</p>
+<p>PCI桥的Base、Limit寄存器保存“该桥所管理的PCI子树”的存储器或者I&#x2F;O空间的基地址和长度。值得注意的是，PCI桥也是PCI总线上的一个设备，在其配置空间中也有BAR寄存器，本节不对PCI桥BAR寄存器进行说明，因为在多数情况下透明桥并不使用其内部的BAR寄存器。</p>
+<p>在PCI设备的BAR寄存器中，包含该设备使用的PCI总线域的地址范围。在PCI设备的配置空间中共有6个BAR寄存器，因此一个PCI设备最多可以使用6组32位的PCI总线地址空间，或者3组64位的PCI总线地址空间。这些BAR空间可以保存PCI总线域的存储器地址空间或者I&#x2F;O地址空间，目前多数PCI设备仅使用存储器地址空间。而在通常情况下，一个PCI设备使用2到3个BAR寄存器就足够了。</p>
+<p>为简化起见，我们首先假定所有PCI Agent设备只使用了BAR0寄存器，其申请的数据空间大小为16M字节(即0x1000000字节)而且不可预读，而且PCI桥不占用PCI总线地址空间，即PCI桥不含有BAR空间。并且假定当前HOST主桥已经完成了对PCI总线树的编号。</p>
+<h4 id="根据以上假设，系统软件该PCI总线树的遍历过程如下所示。"><a href="#根据以上假设，系统软件该PCI总线树的遍历过程如下所示。" class="headerlink" title="根据以上假设，系统软件该PCI总线树的遍历过程如下所示。"></a>根据以上假设，系统软件该PCI总线树的遍历过程如下所示。</h4><p>(1) 系统软件根据DFS算法，系统软件率先寻找到第一组PCI设备，分别为PCI设备31和PCI设备32[1]，并根据这两个PCI设备需要的PCI空间大小，从PCI总线地址空间中(0x7000-0000~0x77FF-FFFF)为这两个PCI设备的BAR0寄存器分配基地址，分别为0x7000-0000和0x7100-0000。</p>
+<p>(2) 当系统软件完成PCI总线3下所有设备的BAR空间的分配后，将初始化PCI桥3的配置空间。这个桥片的Memory Base寄存器保存其下所有PCI设备使用的“PCI总线域地址空间的基地址”，而Memory Limit寄存器保存其下PCI设备使用的“PCI总线域地址空间的大小”。系统软件将Memory Base寄存器赋值为0x7000-0000，而将Memory Limit寄存器赋值为0x200-0000。</p>
+<p>(3) 系统软件回朔到PCI总线2，并找到PCI总线2上的PCI设备21，并将PCI设备21的BAR0寄存器赋值为0x7200-0000。</p>
+<p>(4) 完成PCI总线2的遍历后，系统软件初始化PCI桥2的配置寄存器，将Memory Base寄存器赋值为0x7000-0000，Memory Limit寄存器赋值为0x300-0000。</p>
+<p>(5)系统软件回朔到PCI总线1，并找到PCI设备11，并将这个设备的BAR0寄存器赋值为0x7300-0000。并将PCI桥1的Memory Base寄存器赋值为0x7000-0000，Memory Limit寄存器赋值为0x400-0000。</p>
+<p>(6) 系统软件回朔到PCI总线0，并在这条总线上发现另外一个PCI桥，即PCI桥4。并使用DFS算法继续遍历PCI桥4。首先系统软件将遍历PCI总线4，并发现PCI设备41和PCI设备42，并将这两个PCI设备的BAR0寄存器分别赋值为0x7400-0000和0x7500-0000。</p>
+<p>(7) 系统软件初始化PCI桥4的配置寄存器，将Memory Base寄存器赋值为0x7400-0000，Memory Limit寄存器赋值为0x200-0000。系统软件再次回到PCI总线0，这一次系统软件没有发现新的PCI桥，于是将初始化这条总线上的所有PCI设备。</p>
+<p>(8) PCI总线0上只有一个PCI设备，PCI设备01。系统软件将这个设备的BAR0寄存器赋值为0x7600-0000，并结束整个DFS遍历过程</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
