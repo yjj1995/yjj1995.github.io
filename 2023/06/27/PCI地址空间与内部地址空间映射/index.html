@@ -441,7 +441,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-27 14:02:03'>2023-06-27 06:00</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-27 15:00:04'>2023-06-27 06:00</time>
         
     </div>
     <div class="article-meta">
@@ -463,7 +463,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81PCI%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-text">1、PCI地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-text">2、系统地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81PCI%E6%80%BB%E7%BA%BF%E5%9C%B0%E5%9D%80%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2%E6%98%A0%E5%B0%84"><span class="toc-text">3、PCI总线地址与系统存储空间转换映射</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%BB%A5%E4%B8%8A%E5%81%87%E8%AE%BE%EF%BC%8C%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E8%AF%A5PCI%E6%80%BB%E7%BA%BF%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B%E5%A6%82%E4%B8%8B%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-text">根据以上假设，系统软件该PCI总线树的遍历过程如下所示。</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81PCI%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-text">1、PCI地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="toc-text">2、系统地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81PCI%E6%80%BB%E7%BA%BF%E5%9C%B0%E5%9D%80%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E8%BD%AC%E6%8D%A2%E6%98%A0%E5%B0%84"><span class="toc-text">3、PCI总线地址与系统存储空间转换映射</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%BB%A5%E4%B8%8A%E5%81%87%E8%AE%BE%EF%BC%8C%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E8%AF%A5PCI%E6%80%BB%E7%BA%BF%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E8%BF%87%E7%A8%8B%E5%A6%82%E4%B8%8B%E6%89%80%E7%A4%BA%E3%80%82"><span class="toc-text">根据以上假设，系统软件该PCI总线树的遍历过程如下所示。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BAR%E5%AF%84%E5%AD%98%E5%99%A8%E5%AD%98%E5%82%A8%E7%9A%84%E6%80%BB%E7%BA%BF%E5%9C%B0%E5%9D%80%E5%92%8C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">BAR寄存器存储的总线地址和应用程序内存地址的关系</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -501,6 +501,7 @@
 <p>(6) 系统软件回朔到PCI总线0，并在这条总线上发现另外一个PCI桥，即PCI桥4。并使用DFS算法继续遍历PCI桥4。首先系统软件将遍历PCI总线4，并发现PCI设备41和PCI设备42，并将这两个PCI设备的BAR0寄存器分别赋值为0x7400-0000和0x7500-0000。</p>
 <p>(7) 系统软件初始化PCI桥4的配置寄存器，将Memory Base寄存器赋值为0x7400-0000，Memory Limit寄存器赋值为0x200-0000。系统软件再次回到PCI总线0，这一次系统软件没有发现新的PCI桥，于是将初始化这条总线上的所有PCI设备。</p>
 <p>(8) PCI总线0上只有一个PCI设备，PCI设备01。系统软件将这个设备的BAR0寄存器赋值为0x7600-0000，并结束整个DFS遍历过程</p>
+<h3 id="BAR寄存器存储的总线地址和应用程序内存地址的关系"><a href="#BAR寄存器存储的总线地址和应用程序内存地址的关系" class="headerlink" title="BAR寄存器存储的总线地址和应用程序内存地址的关系"></a>BAR寄存器存储的总线地址和应用程序内存地址的关系</h3><p>BAR寄存器存储的总线地址，应用程序是不能直接利用的，应用程序首先要做的就是读出BAR寄存器的值，然后用mmap函数建立应用程序内存空间和总线地址空间的映射关系。这样应用程序往PCIE设备内存读写数据的时候，直接利用PCIE设备映射到应用程序中的内存地址即可。但是应用程序的内存地址该由谁解析到PCIE设备对应的总线空间给EP呢，这个工作是由北桥或者是RC(root complex)来完成的，解析到总线地址空间之后，EP会把总线的地址空间解析成PCIE设备对应的设备内存地址。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
