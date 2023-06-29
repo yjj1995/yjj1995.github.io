@@ -490,7 +490,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-21 15:13:58'>2023-06-20 06:50</time>
+            发布时间 : <time class="date" title='最后更新: 2023-06-29 14:24:32'>2023-06-20 06:50</time>
         
     </div>
     <div class="article-meta">
@@ -512,7 +512,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -543,6 +543,72 @@
 </li>
 <li><p>Ceph 把数据保存为逻辑存储池内的对象。根据 CRUSH 算法， Ceph 可计算出哪个归置组应该持有指定对象， 然后进一步计算出哪个 OSD 守护进程持有归置组， 正因为有了 CRUSH 算法， Ceph 存储集群才具备动态伸缩、重均衡和动态恢复功能。</p>
 </li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>Ceph允许每块硬盘驱动器上允许多个OSD，但这会导致资源竞争并降低总体吞吐量。</li>
+<li>机架之间至少要配备 10Gbps 以上的网络连接。 </li>
+<li>如果在只有一块硬盘的机器上运行 OSD ， 要把数据和操作系统分别放到不同分区； 一般来说，我们推荐操作系统和数据分别使用不同的硬盘。</li>
+</ul>
+<h3 id="OSD"><a href="#OSD" class="headerlink" title="OSD"></a>OSD</h3><ul>
+<li>实际存储数据的进程，通常一个OSD daemon 绑定一个物理磁盘。Client write&#x2F;read数据最终都会走到OSD去执行 write&#x2F;read操作。</li>
+</ul>
+<h4 id="BLUESTORE"><a href="#BLUESTORE" class="headerlink" title="BLUESTORE"></a>BLUESTORE</h4><ul>
+<li><p>BlueStore是个专用存储后端，是为Ceph OSD工作载荷专门设计的，<strong>用于管理磁盘上的数据</strong>。BlueStore是在支持和管理FileStore OSD十年之久的基础上涉及到。</p>
+</li>
+<li><p>BlueStore的关键功能包括：</p>
+<ul>
+<li>直接管理存储设备。BlueStore使用的是原始块设备或分区。这样可以避免抽象的中间层（类似XFS的本地文件系统），它们会降低性能，或增加复杂性。</li>
+<li>用RocksDB管理元数据。RocksDB的键值数据库是嵌入式的，可以用于管理<strong>内部元数据</strong>，包括对象名到磁盘上数据块位置的映射情况。</li>
+<li>完整的数据及其元数据校验和。默认情况下，写入BlueStore的所有数据和元数据都会被一个或多个校验和保护起来。数据或元数据从磁盘读出来，没有校验不会返回给用户。</li>
+<li>内联压缩。数据写入磁盘前 可以选择性压缩。</li>
+<li>元数据在多个设备上分级存储。BlueStore 允许它的内部日志（预写日志）写到一个单独的、 高速设备（像 SSD 、 NVMe 、或 NVDIMM ）上，以提升性能。 如果高速存储的数量足够， 内部元数据可以存储在高速设备上。</li>
+<li>高效的写时复制（ copy-on-write ）。 RBD 和 CephFS 快照功能全靠 BlueStore 实现的一种高效的写时复制 克隆（ clone ） 机制。 这就产生了高效的 I&#x2F;O ，对于常规快照和纠删码存储池 （它仰仗克隆功能实现高效的二阶段提交）都是如此。</li>
+</ul>
+</li>
+</ul>
+<h4 id="FILESTORE"><a href="#FILESTORE" class="headerlink" title="FILESTORE"></a>FILESTORE</h4><ul>
+<li>FileStore是Ceph存储对象的老方法。它依赖于标准文件系统（XFS）和用于元数据的键值数据库组合、</li>
+</ul>
+<h3 id="RADOS-（Reliable-Autonomic-Distributed-Object-Store-RADOS）"><a href="#RADOS-（Reliable-Autonomic-Distributed-Object-Store-RADOS）" class="headerlink" title="RADOS （Reliable Autonomic Distributed Object Store, RADOS）"></a>RADOS （Reliable Autonomic Distributed Object Store, RADOS）</h3><ul>
+<li><p>RADOS 是Ceph 存储集群的基础。<strong>Ceph中的一切都以对象的形式存储，而RADOS就负责存储这些对象，而不考虑它们的数据类型</strong>。RADOS层确保数据一致性和可靠性。对于数据一致性，它执行数据复制，故障检测和恢复。还包括数据在集群节点间的recovery.</p>
+</li>
+<li><p>Ceph 的核心，ceph存储集群。</p>
+</li>
+<li><p>Ceph 的数据访问方法（如RBD， CephFS, RADOS GW和librados）的所有操作都是在RADOS层之上构建的。</p>
+</li>
+<li><p>当 Ceph 集群接收到来自客户端的写请求—CRUSH 算法首先计算出存储位置，以此决定应该将数据写入什么地方。— 信息传递到队DOS 层进行进一步处理。基于CRUSH 规则集，RADOS 以小对象的形式将数据分发到集群内的所有节点。最后，将这些对象存储在OSD 中。</p>
+</li>
+<li><p>RADOS 能够保证在一个RADOS 集群中的对象副本总是不少于一个，只要你有足够的设备。</p>
+</li>
+</ul>
+<h3 id="MON-（monitor）"><a href="#MON-（monitor）" class="headerlink" title="MON （monitor）"></a>MON （monitor）</h3><ul>
+<li>Monitor 在Ceph 集群中扮演着管理员的角色，维护了整个集群的状态，是Ceph集群中最重要的组件。</li>
+<li><strong>Mon保证集群的相关组件在同一时刻能够达成一致，相当于集群的领导层，负责收集、更新和发布集群信息。</strong>为了规避单点故障，在实际的Ceph部署环境中会<strong>部署多个Mon</strong>，同样会引来多个Mon之前如何协同工作的问题。在一个标准的Ceph环境中，Monitor的功能可以分为以下两点<ul>
+<li>管好自己：<ul>
+<li>多个monitor之间如何协同工作，怎么同步数据</li>
+</ul>
+</li>
+<li>管理集群信息<ul>
+<li>数据的存储，保证数据存储的正确性等。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Librados"><a href="#Librados" class="headerlink" title="Librados"></a>Librados</h3><ul>
+<li>简化访问RADOS的一种方法，目前支持PHP、Ruby、Java、Python、C和C＋＋语言。它提供了Ceph 存储集群的一个本地接口RADOS ，并且是其他服务（如RBD 、RGW） 的基础，以及为CephFS 提供POSIX 接口。librados API 支持直接访问RADOS ，使得开发者能够创建自己的接口来访问Ceph 集群存储。</li>
+</ul>
+<h3 id="RBD"><a href="#RBD" class="headerlink" title="RBD"></a>RBD</h3><ul>
+<li>ceph 块设备。对外提供块存储，可以像磁盘一样被映射，格式化以及挂载到服务器上。支持snapshot</li>
+</ul>
+<h3 id="RGW"><a href="#RGW" class="headerlink" title="RGW"></a>RGW</h3><ul>
+<li>ceph 对象网关，提供了一个兼容S3和Swift的restful API接口。RGW还支持多租户和Openstack的keyston身份验证服务。</li>
+</ul>
+<h3 id="MDS"><a href="#MDS" class="headerlink" title="MDS"></a>MDS</h3><ul>
+<li>ceph 元数据服务器，跟踪文件层次结构并存储只供CephFS使用的元数据。<strong>Ceph块设备和RADOS网关不需要元数据。MDS不直接给client提供数据服务</strong>。</li>
+</ul>
+<h3 id="CephFs"><a href="#CephFs" class="headerlink" title="CephFs"></a>CephFs</h3><ul>
+<li>提供了一个任意大小且兼容POSIX的分布式文件系统，CephFS依赖Ceph MDS来跟踪文件层次结构，即元数据。</li>
 </ul>
 
       
