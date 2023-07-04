@@ -503,7 +503,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-03 14:51:17'>2023-06-30 02:46</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-04 16:03:01'>2023-06-30 02:46</time>
         
     </div>
     <div class="article-meta">
@@ -525,7 +525,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#define-%E4%B8%AD%E7%9A%84%E4%B8%89%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%EF%BC%9A-%EF%BC%8C-%EF%BC%8C"><span class="toc-text">define 中的三个特殊符号：#， ##， #@</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undef"><span class="toc-text">undef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E6%8C%87%E9%92%88%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92"><span class="toc-text">值传递，指针传递，引用传递</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#define-%E4%B8%AD%E7%9A%84%E4%B8%89%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%EF%BC%9A-%EF%BC%8C-%EF%BC%8C"><span class="toc-text">define 中的三个特殊符号：#， ##， #@</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undef"><span class="toc-text">undef</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%BC%E4%BC%A0%E9%80%92%EF%BC%8C%E6%8C%87%E9%92%88%E4%BC%A0%E9%80%92%EF%BC%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92"><span class="toc-text">值传递，指针传递，引用传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88-%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F"><span class="toc-text">常量指针 指针常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%88%86%E7%B1%BB"><span class="toc-text">变量分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E5%92%8C-%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">深拷贝 和 浅拷贝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="toc-text">静态成员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E5%92%8Cthis-%E6%8C%87%E9%92%88"><span class="toc-text">对象模型和this 指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#this-%E6%8C%87%E9%92%88"><span class="toc-text">this 指针</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E5%87%BD%E6%95%B0"><span class="toc-text">常函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E5%AF%B9%E8%B1%A1"><span class="toc-text">常对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%AF%E8%99%9A%E5%87%BD%E6%95%B0%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-text">纯虚函数和抽象类</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -568,7 +568,142 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#define MAX 50  </span><br><span class="line">#include &quot;common.h&quot;  </span><br><span class="line">#undef  MAX  </span><br></pre></td></tr></table></figure>
 <p>这样就只有在common.h中才能使用宏MAX。</p>
 <p><strong>#undef就是取消一个宏的定义，之后这个宏所定义的就无效；</strong></p>
-<h2 id="值传递，指针传递，引用传递"><a href="#值传递，指针传递，引用传递" class="headerlink" title="值传递，指针传递，引用传递"></a>值传递，指针传递，引用传递</h2><p>- </p>
+<h2 id="值传递，指针传递，引用传递"><a href="#值传递，指针传递，引用传递" class="headerlink" title="值传递，指针传递，引用传递"></a>值传递，指针传递，引用传递</h2><ul>
+<li>值传递：形参改变不了实参</li>
+<li>指针传递：传地址，形参可以改变实参（本质还是值传递）</li>
+<li>引用传递：别名，形参可以改变实参</li>
+</ul>
+<h2 id="常量指针-指针常量"><a href="#常量指针-指针常量" class="headerlink" title="常量指针 指针常量"></a>常量指针 指针常量</h2><ul>
+<li>常量指针<ul>
+<li>const 修饰 指针，指向常量，指向可以变，指向的内容不能变</li>
+</ul>
+</li>
+<li>指针常量<ul>
+<li>const 修饰 常量，指向不可以变，指向的内容可以变</li>
+</ul>
+</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li>本质是指针常量</li>
+<li>引用是可以作为函数的返回值存在的。<ul>
+<li><strong>不要返回局部变量引用</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h2><ul>
+<li><p>C++ 变量根据定义的位置的不同的生命周期，具有不同的作用域，作用域可分为6中：</p>
+<ul>
+<li>全局作用域</li>
+<li>局部作用域</li>
+<li>语句作用域</li>
+<li>类作用域</li>
+<li>命名空间作用域</li>
+<li>文件作用域</li>
+</ul>
+</li>
+<li><p>static 全局变量:改变作用范围，不改变存储位置</p>
+</li>
+<li><p>static 局部变量：改变存储位置，不改变作用范围</p>
+</li>
+<li><p>静态函数 ：在函数的返回类型前加上static关键字,函数即被定义为静态函数。静态函数与普通函数不同，它只能在声明它的文件当中可见，不能被其它文件使用。</p>
+</li>
+<li><p>static全局变量与普通的全局变量有什么区别：static全局变量只初使化一次，防止在其他文件单元中被引用;</p>
+</li>
+<li><p>static局部变量和普通局部变量有什么区别：static局部变量只被初始化一次，下一次依据上一次结果值；</p>
+</li>
+<li><p>static函数与普通函数有什么区别：static函数与普通函数作用域不同，只在定义该变量的源文件内有效；</p>
+</li>
+<li><p>全局变量和静态变量如果没有手工初始化，则由编译器初始化为0。局部变量的值不可知。</p>
+</li>
+</ul>
+<h2 id="深拷贝-和-浅拷贝"><a href="#深拷贝-和-浅拷贝" class="headerlink" title="深拷贝 和 浅拷贝"></a>深拷贝 和 浅拷贝</h2><ul>
+<li>浅拷贝 ：<ul>
+<li>只是对指针的拷贝，拷贝后，两个指针指向同一个内存空间</li>
+</ul>
+</li>
+<li>深拷贝 ：<ul>
+<li>不但对指针进行拷贝，而且对指针指向的内容进行拷贝，经过深拷贝后的指针是指向两个不同地址的指针。</li>
+<li>新对象跟原对象不共享内存, 修改新对象不会改到原对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><ul>
+<li><p>静态成员就是在成员变量和成员函数前加上关键字static，称为静态成员</p>
+</li>
+<li><p>静态成员分为：</p>
+<ul>
+<li>静态成员变量<ul>
+<li>所有对象共享同一份数据</li>
+<li>在编译阶段分配内存</li>
+<li>类内声明，类外初始化<ul>
+<li>形式为： <code>type class::name = value</code></li>
+<li><code>int Student::m_total = 0;</code></li>
+<li>静态成员变量在初始化时不能再加static， 但必须要有数据类型。</li>
+<li><strong>注意：static 成员变量的内存既不是在声明类时分配，也不是在创建对象时分配，而是在（类外）初始化时分配。反过来说，没有在类外初始化的 static 成员变量不能使用。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>静态成员函数<ul>
+<li>所有对象共享同一个函数</li>
+<li><strong>静态成员函数只能访问静态成员变量</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="对象模型和this-指针"><a href="#对象模型和this-指针" class="headerlink" title="对象模型和this 指针"></a>对象模型和this 指针</h2><ul>
+<li>类内的成员变量和成员函数分开存储</li>
+<li>只有非静态成员变量才属于类的对象上<ul>
+<li>非静态成员变量占对象空间</li>
+<li>静态成员变量不占对象空间</li>
+<li>函数也不占对象空间，所有函数共享一个函数实例</li>
+<li>静态成员函数也不占对象空间</li>
+</ul>
+</li>
+</ul>
+<h3 id="this-指针"><a href="#this-指针" class="headerlink" title="this 指针"></a>this 指针</h3><ul>
+<li>没有非静态成员函数只会诞生一份函数实例，也就是说多个同类型的对象会共用一块代码</li>
+<li>this 指针指向被调用的成员函数所有的对象</li>
+<li>this 指针是隐含每一个非静态成员函数内的一种指针。</li>
+<li>this 指针不需要定义，直接使用即可。</li>
+<li>this 指针的用途<ul>
+<li>当形参和成员变量同名时，可用this指针来区分</li>
+<li>在类的非静态成员函数中返回对象本身，可使用return *this</li>
+</ul>
+</li>
+<li>C++中空指针也是可以调用成员函数的，但是也要注意有没有用到this指针</li>
+</ul>
+<h2 id="常函数"><a href="#常函数" class="headerlink" title="常函数"></a>常函数</h2><ul>
+<li>成员函数后加const 后我们称这个函数为常函数</li>
+<li>常函数内不可以修改成员属性</li>
+<li>成员属性声明时，附加关键字mutable后，在常函数中依然可以修改</li>
+</ul>
+<h2 id="常对象"><a href="#常对象" class="headerlink" title="常对象"></a>常对象</h2><ul>
+<li>声明对象前加const称该对象为常对象</li>
+<li>常对象只能调用常函数</li>
+</ul>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ul>
+<li>同名静态成员处理方式和非静态处理方式一样，只不过有两种访问的方式（通过对象 和 通过类名）</li>
+</ul>
+<h2 id="纯虚函数和抽象类"><a href="#纯虚函数和抽象类" class="headerlink" title="纯虚函数和抽象类"></a>纯虚函数和抽象类</h2><ul>
+<li><p>纯虚函数：virtual 返回值类型 函数名 (参数列表) &#x3D; 0;</p>
+</li>
+<li><p>当类中有了纯虚函数，这个类也被称为 抽象类</p>
+</li>
+<li><p>抽象类特点：</p>
+<ul>
+<li>无法实例化对象</li>
+<li>子类必须重写抽象类中的纯虚函数，否则也属于抽象类</li>
+</ul>
+</li>
+<li><p>纯析构或纯虚析构就是用来解决通过弗雷指针释放子类对象</p>
+</li>
+<li><p>如果子类中没有堆区数据，可以不写为虚析构或者纯虚析构</p>
+</li>
+<li><p>拥有纯虚析构函数也属于抽象类。</p>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
