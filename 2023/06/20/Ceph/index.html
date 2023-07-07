@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(19)</small>
+                <small>(21)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="19">
+<input type="hidden" id="yelog_site_posts_number" value="21">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -257,6 +257,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>Ceph</a>
             </li>
         
@@ -281,6 +285,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>PCIe</a>
             </li>
         
@@ -294,6 +302,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/06/linux/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux">linux</span>
+            <span class="post-date" title="2023-07-06 01:47:06">2023/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/05/ceph%20msg/"
+           data-tag="ceph"
+           data-author="" >
+            <span class="post-title" title="ceph msg">ceph msg</span>
+            <span class="post-date" title="2023-07-05 02:58:46">2023/07/05</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -503,7 +529,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-03 15:18:08'>2023-06-20 06:50</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-06 13:20:03'>2023-06-20 06:50</time>
         
     </div>
     <div class="article-meta">
@@ -525,7 +551,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceph%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">ceph中对象的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RADOS-%E5%AF%B9%E8%B1%A1"><span class="toc-text">RADOS 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG"><span class="toc-text">PG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">PG的数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">文件数据写入的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">各层次之间的映射关系：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph%E6%95%B0%E6%8D%AE%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">Ceph数据的写入流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs-1"><span class="toc-text">CephFs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS%E5%92%8CMonitor%E4%BA%A4%E4%BA%92"><span class="toc-text">MDS和Monitor交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="toc-text">代码流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E7%8A%B6%E6%80%81"><span class="toc-text">MDS状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-text">状态分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS-1"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph-Monitor-Paxos%E5%AE%9E%E7%8E%B0"><span class="toc-text">Ceph Monitor Paxos实现</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceph%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">ceph中对象的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RADOS-%E5%AF%B9%E8%B1%A1"><span class="toc-text">RADOS 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG"><span class="toc-text">PG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">PG的数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">文件数据写入的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">各层次之间的映射关系：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph%E6%95%B0%E6%8D%AE%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">Ceph数据的写入流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-1"><span class="toc-text">MDS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs-1"><span class="toc-text">CephFs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS%E5%92%8CMonitor%E4%BA%A4%E4%BA%92"><span class="toc-text">MDS和Monitor交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="toc-text">代码流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E7%8A%B6%E6%80%81"><span class="toc-text">MDS状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-text">状态分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">MDS启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">MDS 之间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph-Monitor-Paxos%E5%AE%9E%E7%8E%B0"><span class="toc-text">Ceph Monitor Paxos实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cephfs-%E5%88%9B%E5%BB%BA"><span class="toc-text">cephfs 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-%E6%B5%81%E7%A8%8B"><span class="toc-text">main 流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preforker"><span class="toc-text">preforker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mds-forker"><span class="toc-text">mds forker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-text"></span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -685,7 +711,7 @@
 <li>&lt;2&gt; object -&gt; PG<br>每个object都会被映射到一个PG中，然后以PG为单位进行备份以及进一步映射到具体的OSD上。</li>
 <li>&lt;3&gt; PG -&gt; OSD<br>根据用户设置的冗余存储的个数r，PG会最终存储到r个OSD上，这个映射是通过一种伪随机的映射算法 CRUSH 来实现的，这个算法的特点是可以进行配置。<br><img src="2023-07-03T132401.png" alt="2023-07-03T132401"></li>
 </ul>
-<h3 id><a href="#" class="headerlink" title></a></h3><p><img src="2023-06-29T152641.png" alt="2023-06-29T152641"></p>
+<p><img src="2023-06-29T152641.png" alt="2023-06-29T152641"></p>
 <h4 id="Ceph数据的写入流程"><a href="#Ceph数据的写入流程" class="headerlink" title="Ceph数据的写入流程"></a>Ceph数据的写入流程</h4><ul>
 <li>&lt;1&gt; 数据通过负载均衡获得节点动态IP地址；</li>
 <li>&lt;2&gt; 通过块、文件、对象协议将文件传输到节点上；</li>
@@ -693,7 +719,7 @@
 <li>&lt;4&gt; 对象ID通过HASH算法被分配到不同的PG；</li>
 <li>&lt;5&gt; 不同的PG通过CRUSH算法被分配到不同的OSD</li>
 </ul>
-<h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><h3 id="CephFs-1"><a href="#CephFs-1" class="headerlink" title="CephFs"></a>CephFs</h3><h4 id="MDS和Monitor交互"><a href="#MDS和Monitor交互" class="headerlink" title="MDS和Monitor交互"></a>MDS和Monitor交互</h4><ul>
+<h2 id="MDS-1"><a href="#MDS-1" class="headerlink" title="MDS"></a>MDS</h2><h3 id="CephFs-1"><a href="#CephFs-1" class="headerlink" title="CephFs"></a>CephFs</h3><h4 id="MDS和Monitor交互"><a href="#MDS和Monitor交互" class="headerlink" title="MDS和Monitor交互"></a>MDS和Monitor交互</h4><ul>
 <li><p>为提供FS服务，首先要ceph fs new 命令创建 filesystem. 然后再启动mds进程</p>
 </li>
 <li><p>ceph fs new 命令由mds monitor 组件处理，将一个文件系统信息（底层pool是哪些，一些feature等）写入monitor store, 此时文件系统时没有关联mds的，所以是不可用的。</p>
@@ -735,10 +761,7 @@
 <li><p>对于resolve等状态MDSMonitor是不涉及的，这些是在MDS端处理。</p>
 </li>
 </ul>
-<h4 id="MDS-1"><a href="#MDS-1" class="headerlink" title="MDS"></a>MDS</h4><ol>
-<li>MDS启动过程</li>
-</ol>
-<ul>
+<h3 id="MDS启动过程"><a href="#MDS启动过程" class="headerlink" title="MDS启动过程"></a>MDS启动过程</h3><ul>
 <li><ol>
 <li>命令行参数解析</li>
 </ol>
@@ -767,16 +790,141 @@
 <li>新建一个MDSDaemon实例并初始化</li>
 </ol>
 </li>
-</ul>
-<ol start="2">
 <li>mds启动后默认开一个启定时器，间隔为mds_tick_interval(默认5s)</li>
 <li>mds的消息处理入口为ms_dispatch2</li>
-</ol>
+</ul>
+<h3 id="MDS-之间通信"><a href="#MDS-之间通信" class="headerlink" title="MDS 之间通信"></a>MDS 之间通信</h3><ul>
+<li><p>Ceph MDS (Metadata Server) 是 Ceph 存储系统的一部分，负责管理文件系统的元数据信息。它采用了一种分布式的、高可用的通信架构来实现元数据的管理和访问。</p>
+</li>
+<li><p>Ceph MDS 系统由多个 MDS 守护进程组成，每个 MDS 进程都可以独立地运行在不同的节点上。这些 MDS 进程之间通过内部通信协议来进行相互通信和数据交换，保持元数据的一致性和正确性。</p>
+</li>
+<li><p>Ceph MDS 之间的通信主要包括以下几个方面：</p>
+<ul>
+<li><p>客户端请求：当客户端需要对文件系统进行操作时，它会发送相应的请求给 MDS。请求可以包括文件创建、读取、写入、删除等操作。MDS 会根据请求的类型和内容进行处理，并返回相应的响应给客户端。</p>
+</li>
+<li><p>元数据修改：当需要修改文件系统的元数据时，例如更新文件的属性、重命名文件等操作，MDS 进程之间需要进行元数据的传输和同步。通过协议和算法，MDS 进程可以实现元数据的分布式更新和一致性。</p>
+</li>
+<li><p>元数据缓存更新：为了提高元数据的访问效率，Ceph MDS 会将一部分元数据缓存在内存中，以减少磁盘 IO 的开销。当元数据发生变化时，MDS 会将相应的更新信息发送给其他 MDS 进程，以保证缓存的一致性。</p>
+</li>
+<li><p>数据传输：当客户端需要读取或写入文件时，MDS 会将相应的数据块的位置信息返回给客户端，以便进行数据的传输。MDS 进程之间也可能需要进行数据的传输，以实现文件的复制、迁移等操作。</p>
+</li>
+</ul>
+</li>
+<li><p>总之，Ceph MDS 的通信架构是基于分布式系统的原则，通过协议和算法来实现元数据的管理和访问。这种架构可以提供高可用性、容错性和性能的优化，使得 Ceph 存储系统能够适应大规模和高并发的应用场景。</p>
+</li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
+<li><p>Ceph MDS（元数据服务器）是Ceph文件系统中负责管理文件系统元数据的组件。它负责跟踪文件和目录的层次结构，处理文件和目录的操作，以及维护文件系统的一致性。</p>
+</li>
+<li><p>以下是Ceph MDS源码的主要流程：</p>
+<ul>
+<li><p>初始化：Ceph MDS启动时，它需要进行一些初始化操作，包括加载配置文件、建立与Ceph监视器和存储器之间的连接等。</p>
+</li>
+<li><p>启动服务：初始化完成后，Ceph MDS开始监听客户端的连接请求，并开始提供文件系统服务。</p>
+</li>
+<li><p>客户端请求处理：当Ceph MDS接收到客户端的请求时，它会先检查请求的合法性，然后根据请求的类型进行相应的处理。处理的过程包括直接回复、发起元数据操作、读取元数据等。</p>
+</li>
+<li><p>元数据操作：当Ceph MDS需要对文件系统的元数据进行操作，比如创建文件、删除文件、重命名文件等，它会通过与Ceph监视器和存储器之间的通信来实现。具体的操作过程包括更新元数据、更新目录的链接信息、更新权限等。</p>
+</li>
+<li><p>元数据日志：Ceph MDS将对文件系统的元数据操作记录在元数据日志中，以便在发生故障时可以进行恢复。</p>
+</li>
+<li><p>元数据故障恢复：如果Ceph MDS遇到故障，比如崩溃或网络中断，它需要进行故障恢复以保持文件系统的一致性。恢复的过程包括重新加载元数据、检查日志、恢复丢失的操作等。恢复完成后，Ceph MDS可以继续提供文件系统服务。</p>
+</li>
+<li><p>停止服务：当Ceph MDS需要停止服务时，它会先关闭与客户端的连接，然后释放资源，最后退出。</p>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="Ceph-Monitor-Paxos实现"><a href="#Ceph-Monitor-Paxos实现" class="headerlink" title="Ceph Monitor Paxos实现"></a>Ceph Monitor Paxos实现</h4><p><img src="2023-07-03T142543.png" alt="2023-07-03T142543"></p>
 <ul>
-<li>Monitor的Paxos实验主要包括leveldb, Paxos和PaxosService三层，其中Leveldb负责底层存储，同时也负责PaxosService给Paxos传递数据。<br><img src="2023-07-03T143604.png" alt="2023-07-03T143604"></li>
+<li><p>Monitor的Paxos实验主要包括leveldb, Paxos和PaxosService三层，其中Leveldb负责底层存储，同时也负责PaxosService给Paxos传递数据。<br><img src="2023-07-03T143604.png" alt="2023-07-03T143604"></p>
+</li>
+<li><p>(1) 主monitor收到客户端修改monmap请求，monitor节点更新暂时记录在pending_map中。</p>
+</li>
+<li><p>(2) 将pending_map编码(bl)，并将&lt;“monmap”+pending_map.epoch, bl&gt;和&lt;“monmap”+“last_committed”，pending_map.epoch &gt;（下面的说明中，省去”monmap”前缀）添加到pending_proposal所代表的MonitorDBStore缓存中，pending_proposal就代表了需要在monitor集群间同步的数据。</p>
+</li>
+<li><p>(3) 主monitor调用paxos层的begin函数开启paxos算法的第一阶段，begin记录&lt;last_committed+1, pending_proposal&gt;、&lt;“pending_v”, last_committed+1&gt;、&lt;“pending_pn”, accepted_pn&gt;到RocksDB数据库，这三个键值对分别表明了下一个要commit的版本号和提议内容、下一个要commit的版本号，本节点的提议号，主节点的accepted_pn表示本次选举后的提议号，每次选举后都会生成一个递增的提议号，从节点的表示接受到的最大提议号，(当节点故障恢复后，可以从RocksDB获得这上键值对，继续工作)。然后将pending_proposal中的内容分发到quorum里的其它monitor从节点，这部分消息叫OP_BEGIN。</p>
+</li>
+<li><p>(4) 从节点收到OP_BEGIN消息后，如果对方的提议号小于自己接受过的最大提议号，则不作任何回应，否则和主节点一样，记录&lt;last_committed+1, pending_proposal&gt;、&lt;“pending_v”, last_committed+1&gt;、&lt;“pending_pn”, accepted_pn&gt;到RocksDB数据库。并给主节点回应OP_ACCEPT消息。</p>
+</li>
+<li><p>(5) 如果主节点收到了全部从节点的OP_ACCEPT消息，就记录&lt;“last_committed”, last_committed+1&gt;键值对到数据库，并给从节点发送OP_COMMIT消息。自己则从数据库中读取最新版本的monmap。</p>
+</li>
+<li><p>(6) 从节点收到OP_COMMIT消息后，将最新commit的内容记录到RocksDB数据库，并更新monmap。</p>
+</li>
 </ul>
-<p>(1) 主monitor收到客户端修改monmap请求，monitor节点更新暂时记录在pending_map中。<br>(2) 将pending_map编码(bl)，并将&lt;“monmap”+pending_map.epoch, bl&gt;和&lt;“monmap”+“last_committed”，pending_map.epoch &gt;（下面的说明中，省去”monmap”前缀）添加到pending_proposal所代表的MonitorDBStore缓存中，pending_proposal就代表了需要在monitor集群间同步的数据。<br>(3) 主monitor调用paxos层的begin函数开启paxos算法的第一阶段，begin记录&lt;last_committed+1, pending_proposal&gt;、&lt;“pending_v”, last_committed+1&gt;、&lt;“pending_pn”, accepted_pn&gt;到RocksDB数据库，这三个键值对分别表明了下一个要commit的版本号和提议内容、下一个要commit的版本号，本节点的提议号，主节点的accepted_pn表示本次选举后的提议号，每次选举后都会生成一个递增的提议号，从节点的表示接受到的最大提议号，(当节点故障恢复后，可以从RocksDB获得这上键值对，继续工作)。然后将pending_proposal中的内容分发到quorum里的其它monitor从节点，这部分消息叫OP_BEGIN。<br>(4) 从节点收到OP_BEGIN消息后，如果对方的提议号小于自己接受过的最大提议号，则不作任何回应，否则和主节点一样，记录&lt;last_committed+1, pending_proposal&gt;、&lt;“pending_v”, last_committed+1&gt;、&lt;“pending_pn”, accepted_pn&gt;到RocksDB数据库。并给主节点回应OP_ACCEPT消息。<br>(5) 如果主节点收到了全部从节点的OP_ACCEPT消息，就记录&lt;“last_committed”, last_committed+1&gt;键值对到数据库，并给从节点发送OP_COMMIT消息。自己则从数据库中读取最新版本的monmap。<br>(6) 从节点收到OP_COMMIT消息后，将最新commit的内容记录到RocksDB数据库，并更新monmap。</p>
+<h3 id="cephfs-创建"><a href="#cephfs-创建" class="headerlink" title="cephfs 创建"></a>cephfs 创建</h3><ul>
+<li><p>创建 CephFS：</p>
+<ul>
+<li>在 <code>src/mds/MDS.cc</code> 中，首先需要创建一个 CephFS 实例。此过程涉及到调用 <code>MDSMap::create</code> 方法创建一个 MDSMap 对象，该对象负责管理 MDS 守护进程的信息和状态。之后，需要从 Monitors 获取全局的 Ceph 配置信息，包括 MDS 的数量、标记位等。</li>
+</ul>
+</li>
+<li><p>创建 MDS 守护进程：</p>
+<ul>
+<li>在 <code>src/mds/MDS.cc</code> 中，调用 <code>MDS::create</code> 方法，对每个 MDS 守护进程创建一个实例。这个过程包括对守护进程属性的设置，如日志文件路径、内存限制等。之后，启动 MDS 守护进程，并开始监听客户端的请求。</li>
+</ul>
+</li>
+<li><p>客户端挂载 CephFS：</p>
+<ul>
+<li>当客户端挂载 CephFS 时，它会向 MDS 守护进程发送 MDS 拓扑查询请求。MDS 守护进程会通过 <code>InodeHierarchyManager</code> 来处理该请求。在 <code>src/mds/InodeHierarchyManager.cc</code> 中，连接到 MDS 守护进程的客户端会发送 <code>MClientRequest</code> 请求，并在 <code>MClientHandler</code> 中处理请求。该处理会调用 <code>Client::mount</code> 方法，其中创建一个 <code>Client</code> 对象，并与 MDS 进行通信，建立与 MDS 的会话。</li>
+</ul>
+</li>
+<li><p>拓扑查询过程：</p>
+<ul>
+<li>在 <code>src/mds/Server.cc</code> 中，<code>handle_client_query</code> 方法负责处理来自客户端的查询请求。该方法会先通过调用 <code>mds-&gt;balancer-&gt;calc_fs_topology</code> 方法获取文件系统的拓扑结构。之后，会调用 <code>mds-&gt;sessionmap.get_sessions</code> 方法获取与 MDS 会话相关的信息。</li>
+</ul>
+</li>
+<li><p>响应客户端请求：</p>
+<ul>
+<li>在 <code>src/mds/MDSRank.cc</code> 中的 <code>handle_query</code> 方法会分析拓扑结构信息，并将结果返回给客户端。在 <code>src/client/MetaSession.cc</code> 中，客户端会处理 MDS 拓扑结构的响应，包括更新并缓存 MDSMap、MDS 的状态等。</li>
+</ul>
+</li>
+</ul>
+<h3 id="main-流程"><a href="#main-流程" class="headerlink" title="main 流程"></a>main 流程</h3><ul>
+<li><p>ceph_pthread_setname(pthread_self(), “ceph-mds”); 的作用是将当前线程的名称设置为 “ceph-mds”。这样可以方便地识别和调试当前线程在多线程程序中的执行情况。</p>
+</li>
+<li><p><code>ceph_heap_profiler_init()</code> 函数的作用是启堆内存分析器是用于跟用 Ceph 堆内存分析器。追踪和分析应用程序中的堆内存分配和释放的工具。它可以提供有关内存使用情况的详细信息，例如内存泄漏和不正确的内存管理。通过调用 <code>ceph_heap_profiler_init()</code> 函数，可以在程序执行开始时启用堆内存分析器，从而进行内存分析和优化。</p>
+</li>
+<li><p>‘ argv _ to _ vec’函数将传递给‘ main’函数的命令行参数转换为字符串的向量。这很有用，因为它允许更容易地操作和访问代码中的命令行参数。</p>
+</li>
+<li><p>ceph_argparse_need_usage(args)的作用是检查命令行参数中是否包含–help或-h选项，如果包含则返回true，表示需要打印使用说明。</p>
+</li>
+<li></li>
+<li><p>global_init 是 Ceph 中的一个函数，用于进行 Ceph 的全局初始化。它接受以下参数：命令行参数数组</p>
+</li>
+</ul>
+<p>entity_type：Ceph：</p>
+<p>argc：命令行参数数量</p>
+<p>argv 实体类型，可以是 MDS、OSD、MON、RGW 等</p>
+<p>code_env：代码运行环境，可以是 DAEMON、CLIENT 等</p>
+<p>flags：全局初始化标志，用于指定一些选项，例如是否启用调试模式等括解析命令行参数、设置全局变量、创建和启动 MDS、OSD、MON 等子系统，最终返回一个 Ceph 上下文（CephContext）对象，可以在后续的代码中使用该对象进行各种操作。</p>
+<p>在上述代码中，global_init 函数的返回值被赋给了 cct 变量，表示 Ceph 的上下文对象。</p>
+<h2 id="preforker"><a href="#preforker" class="headerlink" title="preforker"></a>preforker</h2><p>Preforker forker是一个用于预分叉（prefork）的工具，它的作用是在服务器应用程序启动之前预先创建多个子进程，每个子进程都有自己的资源并能够独立处理客户端请求。这种预分叉的方式可以避免每次处理请求都需要创建新进程的开销，从而提高服务器的性能和响应速度。</p>
+<p>具体来说，Preforker forker可以帮助服务器应用程序实现以下功能：</p>
+<p>创建并管理多个子进程：Preforker forker可以在服务器启动时创建指定数量的子进程，这些子进程会共享服务器的监听端口和资源。</p>
+<p>进程池管理：Preforker forker会维护一个进程池，将客户端请求均匀地分配给空闲的子进程处理。这样可以避免因为单个进程处理请求过多而导致的性能下降。</p>
+<p>资源隔离：每个子进程都有自己独立的资源，包括内存、文件句柄等。这样可以避免不同请求之间相互干扰，提高了服务器的稳定性和安全性。</p>
+<p>进程复用：Preforker forker可以在处理完一个客户端请求后，将子进程重新放回进程池中，以便下次请求可以复用该进程，减少了进程创建和销毁的开销。</p>
+<p>总体来说，Preforker forker通过预先创建多个子进程，并有效地管理和复用这些子进程，可以提高服务器的并发处理能力和响应速度，提供更好的用户体验。</p>
+<h3 id="mds-forker"><a href="#mds-forker" class="headerlink" title="mds forker"></a>mds forker</h3><p>在 MDS（Metadata Server）中，Preforker forker 是一种用于派生子进程的机制。它负责在 MDS 启动时，根据配置的参数预先派生一定数量的子进程。这些子进程会负责处理客户端的请求，并为每个请求分配一个进程来处理。</p>
+<p>Preforker forker 的作用是提高 MDS 的并发处理能力。通过预先派生一定数量的子进程，可以避免请求到来时需要动态创建新进程的延迟，从而提高系统的响应速度和并发性。</p>
+<p>此外，Preforker forker 还可以使用 CPU Affinity（CPU 亲和性）技术来将派生的子进程绑定到特定的 CPU 核心上，以进一步提高性能和避免 CPU 资源竞争。</p>
+<p>总结来说，Preforker forker 对于 MDS 来说，是一种预先派生子进程用于处理客户端请求的机制，它能够提高系统的并发处理能力和响应速度。</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><p>在 Ceph 源代码的“ global _ init _ postfork _ start ()”函数中调用函数“ pick _ address ()”。下面是这个函数的功能概述:</p>
+<p>它接受两个参数: ‘ g _ CEPH _ context’，这是一个指向 CEPH 上下文结构的指针，以及‘ CEPH _ PICK _ ADDRESS _ PUBLIC’，它指定所需要选择的网络地址类型。</p>
+<p>在‘ pick _ address ()’函数中，它初始化一个空列表来存储称为‘ addres’的地址。</p>
+<p>然后检查“ CEPH _ PICK _ ADDRESS _ PUBLIC”的值，以确定要选择的地址类型。在这种情况下，它将选择公共网络地址。</p>
+<p>该函数执行一系列步骤来检索本地机器的公共 IP 地址。</p>
+<p>它遍历计算机的所有网络接口，并排除那些标记为环回或点对点(例如，本地主机、虚拟接口)的接口。</p>
+<p>对于每个剩余的网络接口，它检索与之关联的 IP 地址。</p>
+<p>它基于某些条件对地址进行过滤，如 IPv4或 IPv6地址类型，排除链路本地地址，以及已经添加到“地址”列表中的地址。</p>
+<p>经过筛选的 IP 地址随后被添加到“地址”列表中。</p>
+<p>处理完所有网络接口后，“地址”列表包含本地计算机的公共 IP 地址。</p>
+<p>总的来说，‘ pick _ address ()’函数负责根据给定的条件选择本地机器的合适公共 IP 地址，并将它们存储在‘ addres’列表中。</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><p>Global _ init _ postfork _ start ()函数是 Ceph 代码库的一部分。它是在 Ceph 存储系统初始化过程中的 fork ()系统调用之后调用的。此函数的用途是在 fork 之后的子进程中执行必要的初始化任务。</p>
+<p>特别是，global _ init _ postfork _ start ()函数接受 g _ Ceph _ context 变量作为参数，并初始化 Ceph 在子进程中需要的各种全局资源。这些资源包括网络连接、线程池和其他系统级资源。</p>
+<p>通过调用 global _ init _ postfork _ start (g _ Ceph _ context) ，Ceph 可以确保正确地设置子进程以执行其存储任务，而不依赖于父进程。</p>
+<h3 id="-2"><a href="#-2" class="headerlink" title></a></h3><p>global_init_chdir 函数是一个用于在程序开始时进行全局初始化并设置当前工作目录的函数。它通常用于设置程序的运行环境和路径。</p>
+<p>common_init_finish 函数是一个用于在程序结束时进行一些常见的清理工作的函数。它通常用于释放资源、关闭连接、保存状态等操作。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
