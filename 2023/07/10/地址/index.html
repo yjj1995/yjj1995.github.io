@@ -531,7 +531,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-10 14:04:27'>2023-07-10 05:48</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-10 14:16:17'>2023-07-10 05:48</time>
         
     </div>
     <div class="article-meta">
@@ -553,7 +553,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80-%EF%BC%88%E5%8F%AA%E8%83%BD%E6%98%A0%E5%B0%84%E5%88%B0%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%EF%BC%8C%E4%B8%8D%E8%83%BD%E6%98%AF%E7%A1%AC%E7%9B%98%EF%BC%89"><span class="toc-text">逻辑地址 （只能映射到物理内存，不能是硬盘）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80-%EF%BC%88%E5%8F%AF%E8%83%BD%E6%98%A0%E5%B0%84%E5%88%B0%E7%A1%AC%E7%9B%98%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%83%BD%E6%98%A0%E5%B0%84%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%89"><span class="toc-text">虚拟地址 （可能映射到硬盘，也可以能映射到内存）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">虚拟地址转换为物理地址的过程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9C%B0%E5%9D%80-%EF%BC%88%E5%8F%AA%E8%83%BD%E6%98%A0%E5%B0%84%E5%88%B0%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%EF%BC%8C%E4%B8%8D%E8%83%BD%E6%98%AF%E7%A1%AC%E7%9B%98%EF%BC%89"><span class="toc-text">逻辑地址 （只能映射到物理内存，不能是硬盘）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E5%9C%B0%E5%9D%80%E3%80%81%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80-%EF%BC%88%E5%8F%AF%E8%83%BD%E6%98%A0%E5%B0%84%E5%88%B0%E7%A1%AC%E7%9B%98%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%83%BD%E6%98%A0%E5%B0%84%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%89"><span class="toc-text">线性地址、虚拟地址 （可能映射到硬盘，也可以能映射到内存）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E6%B5%81%E7%A8%8B"><span class="toc-text">地址转换流程</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -586,18 +586,11 @@
 <li><p>逻辑地址则是一一映射物理内存的那一块，也叫做直接映射或平坦映射</p>
 </li>
 </ul>
-<h3 id="虚拟地址-（可能映射到硬盘，也可以能映射到内存）"><a href="#虚拟地址-（可能映射到硬盘，也可以能映射到内存）" class="headerlink" title="虚拟地址 （可能映射到硬盘，也可以能映射到内存）"></a>虚拟地址 （可能映射到硬盘，也可以能映射到内存）</h3><ul>
+<h3 id="线性地址、虚拟地址-（可能映射到硬盘，也可以能映射到内存）"><a href="#线性地址、虚拟地址-（可能映射到硬盘，也可以能映射到内存）" class="headerlink" title="线性地址、虚拟地址 （可能映射到硬盘，也可以能映射到内存）"></a>线性地址、虚拟地址 （可能映射到硬盘，也可以能映射到内存）</h3><ul>
 <li>凡是通过MMU页表访问的地址都叫虚拟地址，而一旦启用了MMU，那CPU发出的所有地址都是虚拟地址</li>
+<li>CPU在保护模式下，“段基址+段内偏移地址”叫做线性地址，注意，保护模式下段基址寄存器中存储的不是真正的段基值（和实模式的含义不一样），而是被称为“段选择子”的东西，通过段选择子在GDT（全局描述表）中找到真正的段基值。另外，如果CPU在保护模式下没有开启分页功能，则线性地址就被当做最终的物理地址来用，若开启了分页功能，则线性地址就叫虚拟地址（在没开启分页功能的情况下线性地址和虚拟地址就是一回事）。但是，如果开启分页功能，虚拟地址（或线性地址）还要通过页部件电路转换成最终的物理地址。</li>
 </ul>
-<h3 id="虚拟地址转换为物理地址的过程"><a href="#虚拟地址转换为物理地址的过程" class="headerlink" title="虚拟地址转换为物理地址的过程"></a>虚拟地址转换为物理地址的过程</h3><ul>
-<li><p>逻辑地址和虚拟地址是一个意思 叫法不同而已 编译器产生的地址</p>
-<ul>
-<li>逻辑（虚拟）地址经过分段转化为线性地址</li>
-<li>线性地址经过分页转为物理地址</li>
-</ul>
-</li>
-<li><p>地址转换流程</p>
-</li>
+<h3 id="地址转换流程"><a href="#地址转换流程" class="headerlink" title="地址转换流程"></a>地址转换流程</h3><ul>
 <li><p>按照逻辑地址中的页号查快表</p>
 </li>
 <li><p>若该页已存在快表中，则由页架号和单元号形成绝对地址</p>
@@ -612,12 +605,8 @@
 </ul>
 </li>
 </ul>
-<blockquote>
-<p>虚拟地址：cpu访问的地址，即C语言中”%p”打印出来的地址</p>
-</blockquote>
-<blockquote>
-<p>物理地址：物理内存实际地址，经过MMU从虚拟地址转换而来</p>
-</blockquote>
+<p><img src="2023-07-10T141616.png" alt="2023-07-10T141616"></p>
+<p><img src="2023-07-10T141310.png" alt="2023-07-10T141310"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
