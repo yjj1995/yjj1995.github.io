@@ -538,7 +538,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-06 13:20:03'>2023-06-20 06:50</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-11 10:16:51'>2023-06-20 06:50</time>
         
     </div>
     <div class="article-meta">
@@ -560,7 +560,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceph%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">ceph中对象的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RADOS-%E5%AF%B9%E8%B1%A1"><span class="toc-text">RADOS 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG"><span class="toc-text">PG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">PG的数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">文件数据写入的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">各层次之间的映射关系：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph%E6%95%B0%E6%8D%AE%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">Ceph数据的写入流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-1"><span class="toc-text">MDS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs-1"><span class="toc-text">CephFs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS%E5%92%8CMonitor%E4%BA%A4%E4%BA%92"><span class="toc-text">MDS和Monitor交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="toc-text">代码流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E7%8A%B6%E6%80%81"><span class="toc-text">MDS状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-text">状态分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">MDS启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">MDS 之间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph-Monitor-Paxos%E5%AE%9E%E7%8E%B0"><span class="toc-text">Ceph Monitor Paxos实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cephfs-%E5%88%9B%E5%BB%BA"><span class="toc-text">cephfs 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-%E6%B5%81%E7%A8%8B"><span class="toc-text">main 流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preforker"><span class="toc-text">preforker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mds-forker"><span class="toc-text">mds forker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-text"></span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceph%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">ceph中对象的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RADOS-%E5%AF%B9%E8%B1%A1"><span class="toc-text">RADOS 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG"><span class="toc-text">PG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">PG的数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beacon-%E7%BB%84%E4%BB%B6"><span class="toc-text">Beacon 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#msg-dispatcher"><span class="toc-text">msg dispatcher</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#auth-%E7%BB%84%E4%BB%B6"><span class="toc-text">auth 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%AE%9E%E4%BD%93"><span class="toc-text">守护进程和实体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-1"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97-%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">日志 元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">文件数据写入的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">各层次之间的映射关系：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph%E6%95%B0%E6%8D%AE%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">Ceph数据的写入流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-2"><span class="toc-text">MDS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs-1"><span class="toc-text">CephFs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS%E5%92%8CMonitor%E4%BA%A4%E4%BA%92"><span class="toc-text">MDS和Monitor交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="toc-text">代码流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E7%8A%B6%E6%80%81"><span class="toc-text">MDS状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-text">状态分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">MDS启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">MDS 之间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph-Monitor-Paxos%E5%AE%9E%E7%8E%B0"><span class="toc-text">Ceph Monitor Paxos实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cephfs-%E5%88%9B%E5%BB%BA"><span class="toc-text">cephfs 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-%E6%B5%81%E7%A8%8B"><span class="toc-text">main 流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preforker"><span class="toc-text">preforker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mds-forker"><span class="toc-text">mds forker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-2"><span class="toc-text"></span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -702,6 +702,54 @@
 <h3 id="pool"><a href="#pool" class="headerlink" title="pool"></a>pool</h3><ul>
 <li>Pool是一个抽象的存储池，它是PG之上的一层逻辑<br>它规定了数据冗余的类型以及对应的副本分布策略。目前实现了两种pool类型：replicated类型和Erasure Code类型。<br>关系说明：<br>(1) 一个pool由多个PG构成，一个PG只能属于一个POOL<br>(2) 同一个Pool中的PG具有相同的类型，比如，如Pool为副本类型，则Pool中所有的PG都是多副本的</li>
 </ul>
+<h2 id="Beacon-组件"><a href="#Beacon-组件" class="headerlink" title="Beacon 组件"></a>Beacon 组件</h2><ul>
+<li>Ceph Beacon 组件是Ceph存储集群中的一个重要组件，它的作用是检测并报告存储集群的监控状况</li>
+<li>Ceph Beacon 组件会定期向Ceph存储集群中的各个节点发送心跳信号，用以检查节点的可用性。</li>
+<li>如果某个节点长时间没有回应心跳信号，Beacon组件会将其标记为离线状态，并通知整个存储集群。</li>
+<li>Ceph Beacon组件还会检测集群中各个OSD（对象存储守护进程）的健康状况。如果某个OSD出现故障或异常，Beacon组件会及时发出警告</li>
+<li>在ceph 集群中起到监控和报警的作用，保障了集群的稳定性和可用性。</li>
+</ul>
+<h2 id="msg-dispatcher"><a href="#msg-dispatcher" class="headerlink" title="msg dispatcher"></a>msg dispatcher</h2><ul>
+<li><p>messenger调度器队列的头部（dispatcher head）是指首先被调度执行的dispatcher。头部的dispatcher通常用于处理较高优先级的消息或事件，例如处理控制消息或管理任务。同时，头部的dispatcher也可以拦截或过滤消息，从而提供一些派遣消息的额外逻辑。</p>
+</li>
+<li><p>而尾部（dispatcher tail）是指按照添加顺序执行的dispatcher队列中的最后一个dispatcher。尾部的dispatcher通常用于处理低优先级的消息或事件，例如处理数据传输或其他常规任务。尾部的dispatcher也可以作为响应处理完以后默认的派遣路径。</p>
+</li>
+</ul>
+<h2 id="auth-组件"><a href="#auth-组件" class="headerlink" title="auth 组件"></a>auth 组件</h2><ul>
+<li><p>数据安全性：验证可以防止未经授权的组件访问和修改敏感数据。通过验证组件间的通信可以确保数据只能被授权的组件访问和修改，从而保护数据的安全性。</p>
+</li>
+<li><p>身份认证：验证可以保证通信双方的身份合法，防止冒充和伪造。通过验证可以确保通信的双方都是经过身份认证的合法组件，避免了可能的冒充和伪造，提高了系统的安全性。</p>
+</li>
+<li><p>权限控制：验证可以限制组件之间的访问和操作权限。通过验证可以实现对组件间通信的权限控制，确保只有具备相应权限的组件才能进行特定的操作性。通过验证可以检查传输的数据是否完整、准确，并且与原始数据保持一致，从而避免了因为通信错误而引起数据的不一致和错误。</p>
+</li>
+<li><p>总之，主要是为了确保通信的安全性和完整性。验证可以防止未经授权的访问或篡改消息的发生。在Ceph中，通常会使用密钥或数字签名等方法对消息进行验证，以确保消息的发送者和内容的真实性。通过验证，组件间的通信可以信任，并且可以防止恶意或错误的消息导致系统出现问题。同时，验证也可以帮助检测和排除网络通信中的故障或错误。</p>
+</li>
+</ul>
+<h2 id="守护进程和实体"><a href="#守护进程和实体" class="headerlink" title="守护进程和实体"></a>守护进程和实体</h2><ul>
+<li><p>实体（Entities）：Ceph中的实体通常指的是集群中负责存储或访问数据的各类组件，这些实体可以是物理机器，也可以是运行在这些物理机器之上的各类服务。它们有自己的实体名（entity name），可以根据实体类型（如客户端、监控节点、元数据服务器、OSD等）和数字ID组合生成。</p>
+</li>
+<li><p>Ceph中的守护进程是指运行在实体上的后台服务程序。它们执行实体的各项功能，可以独立启动和关闭，并向外提供各种服务。具体来说就是 MON, OSD, MDS, RGW, MGR 这些服务进程。</p>
+</li>
+<li><p>因此，可以理解为，实体是守护进程运行的载体，是物理的概念；而守护进程则是运行在实体之上的各类服务。</p>
+</li>
+</ul>
+<h2 id="MDS-1"><a href="#MDS-1" class="headerlink" title="MDS"></a>MDS</h2><ul>
+<li>MDS Rank类，代表一个元数据服务器，负责处理元数据读写请求。</li>
+<li>MDS Cache 类，用于缓存文件系统元数据，当客户端请求元数据时，MDS先从该缓存中查找，如果没有，则需要从磁盘读取。</li>
+<li>Server类，主要负责处理客户端的请求，包括元数据的读写操作，创建，删除文件等。</li>
+<li>Locker类，主要负责元数据的锁定和版本管理，保证元数据的一致性并发访问。</li>
+<li>LogSegment 类和 MDLog 类是实现元数据的持久化。</li>
+</ul>
+<h2 id="日志-元数据"><a href="#日志-元数据" class="headerlink" title="日志 元数据"></a>日志 元数据</h2><ul>
+<li><p>Ceph的CephFS中，元数据的持久化是通过LogSegment类和MDLog类来完成的。Ceph通过这两个类来构造一种日志系统，将元数据的操作记录在日志中并持久化。</p>
+</li>
+<li><p>LogSegment 类：这个类主要是用于表示元数据日志的一个时间段。CephFS会把修改元数据的操作按时间顺序分段录入日志，每个LogSegment对象就代表了一段时间内的所有元数据的修改操作。</p>
+</li>
+<li><p>MDLog 类：这个类是元数据日志（Metadata Log，MLog）的具体实现。MLog是一个元数据操作的顺序记录，CephFS通过MLog来维护元数据操作的一致性和顺序性。MDLog类会使用一个LogSegment对象的列表来存储当前的元数据日志。当一个LogSegment对象被填满后，MDLog会开辟一个新的LogSegment对象来继续记录元数据的操作。</p>
+</li>
+<li><p>总结，LogSegment类和MDLog类主要是通过创建日志系统，记录元数据的操作来实现元数据的持久化操作。对元数据的任何修改，都会记录在LogSegment中，然后通过MDLog持久化存储，以便在系统出现问题时，可以通过日志来恢复元数据的状态。</p>
+</li>
+</ul>
 <h3 id="文件数据写入的过程"><a href="#文件数据写入的过程" class="headerlink" title="文件数据写入的过程"></a>文件数据写入的过程</h3><p><img src="2023-06-29T152445.png" alt="2023-06-29T152445"></p>
 <ul>
 <li><p>RADOS中基本的存储单位是对象，一般为2MB或4MB，当一个文件要存入RADOS时，首先会被切分成大小固定的对象（最后一个对象大小可能不同），然后将对象分配到一个PG（Placement Group）中，然后PG会复制几份，伪随机地派给不同的存储节点。</p>
@@ -728,7 +776,7 @@
 <li>&lt;4&gt; 对象ID通过HASH算法被分配到不同的PG；</li>
 <li>&lt;5&gt; 不同的PG通过CRUSH算法被分配到不同的OSD</li>
 </ul>
-<h2 id="MDS-1"><a href="#MDS-1" class="headerlink" title="MDS"></a>MDS</h2><h3 id="CephFs-1"><a href="#CephFs-1" class="headerlink" title="CephFs"></a>CephFs</h3><h4 id="MDS和Monitor交互"><a href="#MDS和Monitor交互" class="headerlink" title="MDS和Monitor交互"></a>MDS和Monitor交互</h4><ul>
+<h2 id="MDS-2"><a href="#MDS-2" class="headerlink" title="MDS"></a>MDS</h2><h3 id="CephFs-1"><a href="#CephFs-1" class="headerlink" title="CephFs"></a>CephFs</h3><h4 id="MDS和Monitor交互"><a href="#MDS和Monitor交互" class="headerlink" title="MDS和Monitor交互"></a>MDS和Monitor交互</h4><ul>
 <li><p>为提供FS服务，首先要ceph fs new 命令创建 filesystem. 然后再启动mds进程</p>
 </li>
 <li><p>ceph fs new 命令由mds monitor 组件处理，将一个文件系统信息（底层pool是哪些，一些feature等）写入monitor store, 此时文件系统时没有关联mds的，所以是不可用的。</p>
