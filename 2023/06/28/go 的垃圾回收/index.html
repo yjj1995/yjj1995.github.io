@@ -273,10 +273,6 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>go语言</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>gorm 相关</a>
             </li>
         
@@ -360,7 +356,7 @@
         
         <a  class="全部文章 "
            href="/2023/06/28/go%20%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9%E8%A7%84%E5%88%99/"
-           data-tag=""
+           data-tag="go"
            data-author="" >
             <span class="post-title" title="go 切片扩容规则">go 切片扩容规则</span>
             <span class="post-date" title="2023-06-28 05:11:05">2023/06/28</span>
@@ -495,9 +491,9 @@
         
         <a  class="全部文章 "
            href="/2023/06/05/golang/"
-           data-tag="go语言"
+           data-tag="go"
            data-author="" >
-            <span class="post-title" title="go常见的坑">go常见的坑</span>
+            <span class="post-title" title="go常见的注意事项">go常见的注意事项</span>
             <span class="post-date" title="2023-06-05 01:05:04">2023/06/05</span>
         </a>
         
@@ -538,7 +534,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-28 11:11:52'>2023-06-28 02:22</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-21 13:33:56'>2023-06-28 02:22</time>
         
     </div>
     <div class="article-meta">
@@ -560,7 +556,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">什么是垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E5%9B%9E%E6%94%B6%E7%9A%84%E6%98%AF%EF%BC%9F"><span class="toc-text">GC回收的是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E7%AE%97%E6%B3%95%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-text">GC算法的种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E9%94%99%E8%AF%AF%E5%9B%9E%E6%94%B6"><span class="toc-text">避免错误回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E5%B1%8F%E9%9A%9C%E6%8A%80%E6%9C%AF"><span class="toc-text">读写屏障技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1"><span class="toc-text">根对象</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">什么是垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E5%9B%9E%E6%94%B6%E7%9A%84%E6%98%AF%EF%BC%9F"><span class="toc-text">GC回收的是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1"><span class="toc-text">根对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E7%AE%97%E6%B3%95%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-text">GC算法的种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E9%94%99%E8%AF%AF%E5%9B%9E%E6%94%B6"><span class="toc-text">避免错误回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E5%B1%8F%E9%9A%9C%E6%8A%80%E6%9C%AF"><span class="toc-text">读写屏障技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1-1"><span class="toc-text">根对象</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -584,8 +580,17 @@
 </li>
 </ul>
 <h3 id="GC回收的是？"><a href="#GC回收的是？" class="headerlink" title="GC回收的是？"></a>GC回收的是？</h3><ul>
-<li>程序中主要会使用到两种内存：堆(Heap)和栈(Stack),GC负责回收堆内存，而不负责回收栈中的内存。<ul>
+<li>程序中主要会使用到两种内存：堆(Heap)和栈(Stack),<strong>GC负责回收堆内存</strong>，而不负责回收栈中的内存。<ul>
 <li>栈是一块专用内存，专门为了函数执行而准备的，存储着函数中的局部变量以及调用栈。除此以外，栈中的数据都有一个特点——简单。比如<strong>局部变量不能被函数外访问，所以这块内存用完就可以直接释放。正是因为这个特点，栈中的数据可以通过简单的编译器指令自动清理</strong>，并不需要通过 GC 来回收。</li>
+</ul>
+</li>
+</ul>
+<h3 id="根对象"><a href="#根对象" class="headerlink" title="根对象"></a>根对象</h3><ul>
+<li><p>根对象在垃圾回收的术语中又叫做根集合，它是垃圾回收器在标记过程时最先检查的对象，包括：</p>
+<ul>
+<li>全局变量：程序在编译期就能确定的那些存在于程序整个生命周期的变量。</li>
+<li>执行栈：每个 goroutine 都包含自己的执行栈，这些执行栈上包含栈上的变量及指向分配的堆内存区块的指针。</li>
+<li>寄存器：寄存器的值可能表示一个指针，参与计算的这些指针可能指向某些赋值器分配的堆内存区块。</li>
 </ul>
 </li>
 </ul>
@@ -623,7 +628,7 @@
 <blockquote>
 <p>GC中使用的内存读写屏障技术指的是编译器会在编译期间生成一段代码，该代码在运行期间用户读取、创建或更新对象指针时会拦截内存读写操作，相当于一个hook调用，根据hook时机不同可分为不同的屏障技术。由于读屏障Read barrier技术需要在读操作中插入代码片段从而影响用户程序性能，所以一般使用写屏障技术来保证三色标记的稳健性。</p>
 </blockquote>
-<h3 id="根对象"><a href="#根对象" class="headerlink" title="根对象"></a>根对象</h3><ul>
+<h3 id="根对象-1"><a href="#根对象-1" class="headerlink" title="根对象"></a>根对象</h3><ul>
 <li>根对象在垃圾回收的术语中又叫根集合。是垃圾回收器在标记过程时，最先检查的对象：<ul>
 <li>全局变量</li>
 <li>执行栈：每个 goroutine 都包含自己的执行栈，这些执行栈上包含栈上的变量及指向分配的堆内存区块的指针。</li>
