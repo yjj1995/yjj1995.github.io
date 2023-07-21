@@ -534,7 +534,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-17 15:06:03'>2023-06-20 06:50</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-21 16:16:37'>2023-06-20 06:50</time>
         
     </div>
     <div class="article-meta">
@@ -556,7 +556,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceph%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">ceph中对象的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RADOS-%E5%AF%B9%E8%B1%A1"><span class="toc-text">RADOS 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG"><span class="toc-text">PG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">PG的数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beacon-%E7%BB%84%E4%BB%B6"><span class="toc-text">Beacon 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#msg-dispatcher"><span class="toc-text">msg dispatcher</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#auth-%E7%BB%84%E4%BB%B6"><span class="toc-text">auth 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%AE%9E%E4%BD%93"><span class="toc-text">守护进程和实体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-1"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97-%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">日志 元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">文件数据写入的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">各层次之间的映射关系：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph%E6%95%B0%E6%8D%AE%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">Ceph数据的写入流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-2"><span class="toc-text">MDS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs-1"><span class="toc-text">CephFs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS%E5%92%8CMonitor%E4%BA%A4%E4%BA%92"><span class="toc-text">MDS和Monitor交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="toc-text">代码流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E7%8A%B6%E6%80%81"><span class="toc-text">MDS状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-text">状态分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">MDS启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">MDS 之间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph-Monitor-Paxos%E5%AE%9E%E7%8E%B0"><span class="toc-text">Ceph Monitor Paxos实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cephfs-%E5%88%9B%E5%BB%BA"><span class="toc-text">cephfs 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-%E6%B5%81%E7%A8%8B"><span class="toc-text">main 流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preforker"><span class="toc-text">preforker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mds-forker"><span class="toc-text">mds forker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Global-init-postfork-start"><span class="toc-text">Global _ init _ postfork _ start ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#global-init-chdir-common-init-finish"><span class="toc-text">global_init_chdir  common_init_finish</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ceph%E7%AE%80%E4%BB%8B"><span class="toc-text">Ceph简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSD"><span class="toc-text">OSD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BLUESTORE"><span class="toc-text">BLUESTORE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FILESTORE"><span class="toc-text">FILESTORE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RADOS-%EF%BC%88Reliable-Autonomic-Distributed-Object-Store-RADOS%EF%BC%89"><span class="toc-text">RADOS （Reliable Autonomic Distributed Object Store, RADOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MON-%EF%BC%88monitor%EF%BC%89"><span class="toc-text">MON （monitor）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Librados"><span class="toc-text">Librados</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBD"><span class="toc-text">RBD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RGW"><span class="toc-text">RGW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs"><span class="toc-text">CephFs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ceph%E4%B8%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">ceph中对象的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RADOS-%E5%AF%B9%E8%B1%A1"><span class="toc-text">RADOS 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG"><span class="toc-text">PG</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">PG的数量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beacon-%E7%BB%84%E4%BB%B6"><span class="toc-text">Beacon 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#msg-dispatcher"><span class="toc-text">msg dispatcher</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#auth-%E7%BB%84%E4%BB%B6"><span class="toc-text">auth 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%AE%9E%E4%BD%93"><span class="toc-text">守护进程和实体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-1"><span class="toc-text">MDS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97-%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">日志 元数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">文件数据写入的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E6%AC%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9A"><span class="toc-text">各层次之间的映射关系：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph%E6%95%B0%E6%8D%AE%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">Ceph数据的写入流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MDS-2"><span class="toc-text">MDS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CephFs-1"><span class="toc-text">CephFs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MDS%E5%92%8CMonitor%E4%BA%A4%E4%BA%92"><span class="toc-text">MDS和Monitor交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B"><span class="toc-text">代码流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E7%8A%B6%E6%80%81"><span class="toc-text">MDS状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="toc-text">状态分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">MDS启动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="toc-text">MDS 之间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ceph-Monitor-Paxos%E5%AE%9E%E7%8E%B0"><span class="toc-text">Ceph Monitor Paxos实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cephfs-%E5%88%9B%E5%BB%BA"><span class="toc-text">cephfs 创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-%E6%B5%81%E7%A8%8B"><span class="toc-text">main 流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preforker"><span class="toc-text">preforker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mds-forker"><span class="toc-text">mds forker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Global-init-postfork-start"><span class="toc-text">Global _ init _ postfork _ start ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#global-init-chdir-common-init-finish"><span class="toc-text">global_init_chdir  common_init_finish</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%E7%9B%B8%E5%85%B3"><span class="toc-text">元数据持久化相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97"><span class="toc-text">日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MDS-%E7%BB%84%E4%BB%B6"><span class="toc-text">MDS 组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B7%E7%83%AD%E5%A4%87-%E4%B8%8E-%E6%81%A2%E5%A4%8D"><span class="toc-text">冷热备 与 恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%B4%BB"><span class="toc-text">单活</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -978,6 +978,75 @@
 <p>通过调用 global _ init _ postfork _ start (g _ Ceph _ context) ，Ceph 可以确保正确地设置子进程以执行其存储任务，而不依赖于父进程。</p>
 <h3 id="global-init-chdir-common-init-finish"><a href="#global-init-chdir-common-init-finish" class="headerlink" title="global_init_chdir  common_init_finish"></a>global_init_chdir  common_init_finish</h3><p>global_init_chdir 函数是一个用于在程序开始时进行全局初始化并设置当前工作目录的函数。它通常用于设置程序的运行环境和路径。</p>
 <p>common_init_finish 函数是一个用于在程序结束时进行一些常见的清理工作的函数。它通常用于释放资源、关闭连接、保存状态等操作。</p>
+<h2 id="元数据持久化相关"><a href="#元数据持久化相关" class="headerlink" title="元数据持久化相关"></a>元数据持久化相关</h2><ul>
+<li><p>元数据是什么，包含哪些？</p>
+<ul>
+<li>元数据信息 <a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/794645">https://developer.aliyun.com/article/794645</a></li>
+</ul>
+</li>
+<li><p>流程 <a target="_blank" rel="noopener" href="https://krunerge.github.io/2021/03/11/MDS-metadata-op/">https://krunerge.github.io/2021/03/11/MDS-metadata-op/</a></p>
+</li>
+</ul>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138086811">https://zhuanlan.zhihu.com/p/138086811</a></p>
+<h3 id="MDS-组件"><a href="#MDS-组件" class="headerlink" title="MDS 组件"></a>MDS 组件</h3><ul>
+<li><p>Ceph 文件系统有两个主要组件：</p>
+</li>
+<li><p>客户端</p>
+<ul>
+<li>CephFS 客户端代表使用 CephFS 的应用执行 I&#x2F;O 操作，如用于 FUSE 客户端的 ceph-fuse，kcephfs 用于内核客户端。CephFS 客户端向活跃的元数据服务器发送元数据请求。为返回，CephFS 客户端了解文件元数据，可以安全地开始缓存元数据和文件数据。</li>
+</ul>
+</li>
+<li><p>元数据服务器 (MDS)</p>
+</li>
+<li><p>MDS 执行以下操作：</p>
+<ul>
+<li>为 CephFS 客户端提供元数据。</li>
+<li>管理与 Ceph 文件系统中存储的文件相关的元数据。</li>
+<li>协调对共享 Red Hat Ceph Storage 的访问。</li>
+<li>缓存热元数据，以减少对后备元数据池存储的请求。</li>
+<li>管理 CephFS 客户端的缓存，以维护缓存一致性。**MDS作</li>
+</ul>
+</li>
+</ul>
+<p>为元数据cache**</p>
+<ul>
+<li>在活动 MDS 之间复制热元数据.</li>
+<li>将元数据操作更新到压缩日志，并定期刷新到后备元数据池。</li>
+<li>CephFS 要求至少运行一个元数据服务器守护进程 (ceph-mds)。</li>
+</ul>
+<h3 id="冷热备-与-恢复"><a href="#冷热备-与-恢复" class="headerlink" title="冷热备 与 恢复"></a>冷热备 与 恢复</h3><p><a target="_blank" rel="noopener" href="https://blog.51cto.com/liangchaoxi/4048929">https://blog.51cto.com/liangchaoxi/4048929</a></p>
+<h3 id="单活"><a href="#单活" class="headerlink" title="单活"></a>单活</h3><p>单活MDS介绍</p>
+<p>说明：</p>
+<ul>
+<li><p>MDS全称Ceph Metadata Server，是CephFS服务依赖的元数据服务。</p>
+</li>
+<li><p>元数据的内存缓存，为了加快元数据的访问。</p>
+</li>
+<li><p>保存了文件系统的元数据(对象里保存了子目录和子文件的名称和inode编号)</p>
+</li>
+<li><p>保存cephfs日志journal，日志是用来恢复mds里的元数据缓存</p>
+</li>
+<li><p>重启mds的时候会通过replay的方式从osd上加载之前缓存的元数据</p>
+</li>
+<li><p>对外提供服务只有一个active mds。</p>
+</li>
+<li><p>所有用户的请求都只落在一个active mds上。</p>
+</li>
+</ul>
+<p>5.2 单活MDS高可用</p>
+<p>说明：</p>
+<ul>
+<li><p>对外提供服务只有一个active mds, 多个standby mds。</p>
+</li>
+<li><p>active mds挂掉，standby mds会立马接替，保证集群高可用性。</p>
+</li>
+<li><p>standby mds</p>
+</li>
+<li><p>冷备就是备份的mds，只起到一个进程备份的作用，并不备份lru元数据。主备进程保持心跳关系，一旦主的mds挂了，备份mds replay()元数据到缓存，当然这需要消耗一点时间。</p>
+</li>
+<li><p>热备除了进程备份，元数据缓存还时时刻刻的与主mds保持同步，当 active mds挂掉后，热备的mds直接变成主mds，并且没有replay()的操作，元数据缓存大小和主mds保持一致。</p>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
