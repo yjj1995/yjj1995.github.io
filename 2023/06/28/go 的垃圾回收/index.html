@@ -534,7 +534,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-21 13:33:56'>2023-06-28 02:22</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-21 13:44:13'>2023-06-28 02:22</time>
         
     </div>
     <div class="article-meta">
@@ -556,7 +556,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">什么是垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E5%9B%9E%E6%94%B6%E7%9A%84%E6%98%AF%EF%BC%9F"><span class="toc-text">GC回收的是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1"><span class="toc-text">根对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E7%AE%97%E6%B3%95%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-text">GC算法的种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E9%94%99%E8%AF%AF%E5%9B%9E%E6%94%B6"><span class="toc-text">避免错误回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E5%B1%8F%E9%9A%9C%E6%8A%80%E6%9C%AF"><span class="toc-text">读写屏障技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1-1"><span class="toc-text">根对象</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">什么是垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E5%9B%9E%E6%94%B6%E7%9A%84%E6%98%AF%EF%BC%9F"><span class="toc-text">GC回收的是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1"><span class="toc-text">根对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GC%E7%AE%97%E6%B3%95%E7%9A%84%E7%A7%8D%E7%B1%BB"><span class="toc-text">GC算法的种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E9%94%99%E8%AF%AF%E5%9B%9E%E6%94%B6"><span class="toc-text">避免错误回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E5%B1%8F%E9%9A%9C%E6%8A%80%E6%9C%AF"><span class="toc-text">读写屏障技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B9%E5%AF%B9%E8%B1%A1-1"><span class="toc-text">根对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STW-%EF%BC%88Stop-The-World%EF%BC%89"><span class="toc-text">STW （Stop The World）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">写屏障</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -636,6 +636,11 @@
 </ul>
 </li>
 </ul>
+<h3 id="STW-（Stop-The-World）"><a href="#STW-（Stop-The-World）" class="headerlink" title="STW （Stop The World）"></a>STW （Stop The World）</h3><ul>
+<li>为了避免在 GC 的过程中，对象之间的引用关系发生新的变更，使得GC的结果发生错误（如GC过程中新增了一个引用，但是由于未扫描到该引用导致将被引用的对象清除了），停止所有正在运行的协程。</li>
+<li>STW对性能有一些影响，Golang目前已经可以做到1ms以下的STW。</li>
+</ul>
+<h3 id="写屏障"><a href="#写屏障" class="headerlink" title="写屏障"></a>写屏障</h3><p>- </p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

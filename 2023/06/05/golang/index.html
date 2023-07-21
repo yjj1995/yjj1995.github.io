@@ -534,7 +534,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-07-21 13:20:51'>2023-06-05 01:05</time>
+            发布时间 : <time class="date" title='最后更新: 2023-07-21 14:13:56'>2023-06-05 01:05</time>
         
     </div>
     <div class="article-meta">
@@ -556,7 +556,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Go%E5%90%91%E5%87%BD%E6%95%B0%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E8%AF%A5%E4%BD%BF%E7%94%A8%E5%80%BC%E8%BF%98%E6%98%AF%E6%8C%87%E9%92%88%EF%BC%9F"><span class="toc-text">Go向函数传递切片该使用值还是指针？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-%E5%A4%84%E7%90%86%E8%A7%84%E8%8C%83"><span class="toc-text">Error 处理规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recover"><span class="toc-text">recover</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80"><span class="toc-text">项目布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go%E5%90%91%E5%87%BD%E6%95%B0%E4%BC%A0%E9%80%92%E5%88%87%E7%89%87%E8%AF%A5%E4%BD%BF%E7%94%A8%E5%80%BC%E8%BF%98%E6%98%AF%E6%8C%87%E9%92%88%EF%BC%9F"><span class="toc-text">Go向函数传递切片该使用值还是指针？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-%E5%A4%84%E7%90%86%E8%A7%84%E8%8C%83"><span class="toc-text">Error 处理规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#recover"><span class="toc-text">recover</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -572,7 +572,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Go向函数传递切片该使用值还是指针？"><a href="#Go向函数传递切片该使用值还是指针？" class="headerlink" title="Go向函数传递切片该使用值还是指针？"></a>Go向函数传递切片该使用值还是指针？</h3><ul>
+        <h3 id="项目布局"><a href="#项目布局" class="headerlink" title="项目布局"></a>项目布局</h3><ul>
+<li><p>目录命名参考</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/golang-standards/project-layout">https://github.com/golang-standards/project-layout</a></li>
+</ul>
+</li>
+<li><p>参考</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── assets                <span class="comment">## 静态资源</span></span><br><span class="line">│   ├── bootstrap</span><br><span class="line">│   └── templates</span><br><span class="line">├── cmd                   <span class="comment">## 可独立执行程序</span></span><br><span class="line">│   ├── ...</span><br><span class="line">├── configs               <span class="comment">## 配置文件</span></span><br><span class="line">├── deploy                <span class="comment">## 部署相关配置</span></span><br><span class="line">│   ├── loki            </span><br><span class="line">│   └── prometheus</span><br><span class="line">├── docs</span><br><span class="line">├── internal              <span class="comment">## 业务目录</span></span><br><span class="line">│   ├── api               <span class="comment">## api 接口</span></span><br><span class="line">│   ├── code              <span class="comment">## 错误码定义</span></span><br><span class="line">│   ├── graph             <span class="comment">## graph 接口</span></span><br><span class="line">│   ├── pkg               <span class="comment">## 内部使用的 package</span></span><br><span class="line">│   ├── proposal          <span class="comment">## 提案</span></span><br><span class="line">│   ├── render            <span class="comment">## 渲染 HTML</span></span><br><span class="line">│   ├── repository        <span class="comment">## 资源</span></span><br><span class="line">│   ├── router            <span class="comment">## 路由</span></span><br><span class="line">│   ├── services          <span class="comment">## 服务</span></span><br><span class="line">│   └── websocket         <span class="comment">## websocket 接口</span></span><br><span class="line">├── logs                  <span class="comment">## 日志目录</span></span><br><span class="line">├── pkg                   <span class="comment">## 可供外部使用的 package</span></span><br><span class="line">│   ├── ...</span><br><span class="line">└── scripts               <span class="comment">## 脚本程序</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Go向函数传递切片该使用值还是指针？"><a href="#Go向函数传递切片该使用值还是指针？" class="headerlink" title="Go向函数传递切片该使用值还是指针？"></a>Go向函数传递切片该使用值还是指针？</h3><ul>
 <li><p>切片的本质是一个结构体，包含一个指向底层数组的指针prt, 长度len, 容量cap。</p>
 <ul>
 <li>切片本身包含一个指针，将切片按值传递给函数，在函数内对其修改，影响将会传递到函数外。</li>
