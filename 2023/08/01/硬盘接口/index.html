@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>go timer ticker 定时器 | 记好笔记</title>
+  <title>硬盘接口 | 记好笔记</title>
   <meta name="keywords" content="">
-  <meta name="description" content="go timer ticker 定时器 | 记好笔记">
+  <meta name="description" content="硬盘接口 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -524,9 +524,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-go timer ticker 定时器" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-硬盘接口" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">go timer ticker 定时器</h1>
+        <h1 class="article-title">硬盘接口</h1>
     
     <div class="article-meta">
         
@@ -536,7 +536,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-15 19:10:37'>2023-06-14 02:45</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-01 17:19:55'>2023-08-01 09:17</time>
         
     </div>
     <div class="article-meta">
@@ -558,7 +558,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#timer"><span class="toc-text">timer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ticker"><span class="toc-text">ticker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goland-%E4%B8%AD%E7%9A%84time-Duration"><span class="toc-text">goland 中的time.Duration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E9%9B%85%E7%9A%84%E5%85%B3%E9%97%ADticker"><span class="toc-text">优雅的关闭ticker</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E5%B1%82"><span class="toc-text">协议分层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E7%94%B1%E5%A5%BD%E5%88%B0%E5%9D%8F"><span class="toc-text">性能由好到坏</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -574,43 +574,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>Timer 和 Ticker 是关于时间的两个Channel</li>
-</ul>
-<h3 id="timer"><a href="#timer" class="headerlink" title="timer"></a>timer</h3><ul>
-<li>timer 是一个定时器，代表未来的一个<strong>单一事件</strong>，可以设置timer的等待时间。提供一个Channel，在将来的那个时间，那个channel 提供了一个时间值。</li>
-</ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">timer1 := time.NewTimer(time.Second * <span class="number">2</span>)</span><br><span class="line">&lt;-timer1.C</span><br><span class="line">fmt.Println(<span class="string">&quot;Timer 1 expired&quot;</span>)</span><br><span class="line"><span class="comment">// 第二行会阻塞2秒钟左右的时间，直到时间到了才会继续执行！</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>单纯的等待，可以使用 <code>time.Sleep</code>来实现</p>
-</blockquote>
+        <h3 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h3><ul>
+<li><p>协议栈或者某一种通讯标准通常由多个层面组成，包括</p>
 <ul>
-<li>可以使用<code>time.Stop</code>来停止计时器</li>
+<li>机械层接口标准</li>
+<li>物理层电平与编码标准</li>
+<li>物理层协议</li>
+<li>应用层协议（事务层协议）</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">timer2 := time.NewTimer(time.Second)</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">    &lt;-timer2.C</span><br><span class="line">    fmt.Println(<span class="string">&quot;Timer 2 expired&quot;</span>)</span><br><span class="line">&#125;()</span><br><span class="line">stop2 := timer2.Stop()</span><br><span class="line"><span class="keyword">if</span> stop2 &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Timer 2 stopped&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="ticker"><a href="#ticker" class="headerlink" title="ticker"></a>ticker</h3><ul>
-<li>定时触发的计时器，它会以一个间隔(interval)往channel 发送一个事件（当前时间），而Channel的接收者可以固定的时间间隔从channel 中读取事件。</li>
+</li>
+<li><p>机械层接口标准包括 M.2(NGFF)，[m]SATA，USB Type-(A|B|C) [mini|micro]，IDE，RJ-45 双绞线，SFR 光纤 等</p>
+</li>
+<li><p>物理层电平与编码层包括 NRZ，NRZ-I(MLT-3，PAM-5) 等</p>
+</li>
+<li><p>物理层协议包括 PCI-E、SATA、SCSI，USB，PATA，MAC 等</p>
+</li>
+<li><p>应用层协议包括 NVM Express，AHCI, (x|O|U|E)HCI，ATA（ATAPI），TCP&#x2F;IP 等</p>
+</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;time&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        ticker := time.NewTicker(time.Millisecond * <span class="number">500</span>)</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">                <span class="keyword">for</span> t := <span class="keyword">range</span> ticker.C &#123;</span><br><span class="line">                        fmt.Println(<span class="string">&quot;Tick at&quot;</span>, t)</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;()</span><br><span class="line"></span><br><span class="line">        timer := time.NewTimer(time.Hour * <span class="number">1</span>)</span><br><span class="line">        &lt;-timer.C</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 500 毫秒触发一次</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>类似timer, ticker 也可以通过 <code>stop</code>的方法来停止，一旦停止，接收者不再会从channel中接收数据了。</p>
-</blockquote>
-<h3 id="goland-中的time-Duration"><a href="#goland-中的time-Duration" class="headerlink" title="goland 中的time.Duration"></a>goland 中的time.Duration</h3><ul>
-<li>Duration将两个瞬间之间的经过时间表示为int64纳秒计数。该表示将最大持续时间限制为大约290年。</li>
-<li>默认是纳秒单位</li>
-</ul>
-<blockquote>
-<p>如果想传递一个10秒的时间进去，需要这样转换，其实就是把我们传递的整型进行了乘法</p>
-</blockquote>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">second := <span class="number">10</span></span><br><span class="line"></span><br><span class="line">time.Duration(seconds)*time.Second</span><br><span class="line"></span><br><span class="line"><span class="comment">// time.Second是一个常量</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    Nanosecond  Duration = <span class="number">1</span></span><br><span class="line">    Microsecond          = <span class="number">1000</span> * Nanosecond</span><br><span class="line">    Millisecond          = <span class="number">1000</span> * Microsecond</span><br><span class="line">    Second               = <span class="number">1000</span> * Millisecond</span><br><span class="line">    Minute               = <span class="number">60</span> * Second</span><br><span class="line">    Hour                 = <span class="number">60</span> * Minute</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>time.Duration(seconds) 是进行的类型转换，把我们的整型转换成了time.Duration类型<br>然后把我们传递的10 * 1000 * 1000 ，这样就是我们想要的结果了</p>
-</blockquote>
-<h3 id="优雅的关闭ticker"><a href="#优雅的关闭ticker" class="headerlink" title="优雅的关闭ticker"></a>优雅的关闭ticker</h3><ul>
-<li>在ticker和goroutine组合使用中当调用ticker.Stop()关闭ticker之后，相应的goroutine中的ticker.C并没有停掉，下面总结一种优雅的方式关闭ticker.<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	Demo()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Demo</span><span class="params">()</span></span> &#123;</span><br><span class="line">	done := startTicker(PrintInfo)</span><br><span class="line">	time.Sleep(time.Duration(<span class="number">12</span>) * time.Second)</span><br><span class="line">	<span class="built_in">close</span>(done)</span><br><span class="line">	time.Sleep(time.Duration(<span class="number">1</span>) * time.Minute)</span><br><span class="line">	fmt.Println(<span class="string">&quot;main finished&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">startTicker</span><span class="params">(f <span class="keyword">func</span>()</span></span>) <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125; &#123;</span><br><span class="line">	done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		ticker := time.NewTicker(<span class="number">5</span> * time.Second)</span><br><span class="line">		<span class="comment">//	ticker := time.NewTicker(5 * time.Minute)</span></span><br><span class="line">		<span class="keyword">defer</span> ticker.Stop()</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			<span class="keyword">select</span> &#123;</span><br><span class="line">			<span class="keyword">case</span> &lt;-ticker.C:</span><br><span class="line">				f()</span><br><span class="line">			<span class="keyword">case</span> &lt;-done:</span><br><span class="line">				<span class="keyword">return</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="keyword">return</span> done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrintInfo</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<h3 id="性能由好到坏"><a href="#性能由好到坏" class="headerlink" title="性能由好到坏"></a>性能由好到坏</h3><ul>
+<li>机械层 M.2 + 物理层 PCI-E + 应用层 NVME</li>
+<li>机械层 M.2 + 物理层 SATA + 应用层 AHCI</li>
+<li>机械层 USB Type-(A|B|C) [mini|micro] + 物理层 USB + 应用层 xHCI，这一套规格统称 USB 3.x</li>
+<li>机械层 USB Type-(A|B|C) [mini|micro] + 物理层 USB + 应用层 EHCI</li>
+<li>机械层 mSATA + 物理层 SATA + 应用层 AHCI</li>
+<li>机械层 SFR 光纤 + 物理层 MAC over PAM-5+ 应用层 TCP&#x2F;IP，这一套规格统称 1000BASE-FX 千兆光纤以太网</li>
+<li>机械层 USB Type-(A|B|C) [mini|micro] + 物理层 USB + 应用层 UHCI，这一套规格统称 USB 2.0</li>
+<li>机械层 RJ-45 + 物理层 MAC over MLT-3 + 应用层 TCP&#x2F;IP，这一套规格统称 100BASE-TX 百兆快速以太网</li>
+<li>机械层 IDE + 物理层 PATA + 应用层 ATA（ATAPI）</li>
+<li>机械层 USB Type-(A|B|C) [mini|micro] + 物理层 USB + 应用层 OHCI，这一套规格统称 USB 1.x</li>
 </ul>
 
       
