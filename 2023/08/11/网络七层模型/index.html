@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(1)</small>
+                <small>(2)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="1">
+<input type="hidden" id="yelog_site_posts_number" value="2">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -248,12 +248,25 @@
                 <i class="iconfont icon-tag"></i><a>网络</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>虚拟化</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/KVM/"
+           data-tag="虚拟化"
+           data-author="" >
+            <span class="post-title" title="KVM">KVM</span>
+            <span class="post-date" title="2023-08-11 03:29:06">2023/08/11</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -301,7 +314,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-11 11:22:18'>2023-08-11 03:22</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-11 14:50:31'>2023-08-11 03:22</time>
         
     </div>
     <div class="article-meta">
@@ -323,7 +336,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E6%9C%AF%E8%AF%AD"><span class="toc-text">常见网络术语</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF"><span class="toc-text">链路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE"><span class="toc-text">协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C"><span class="toc-text">网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%93%E6%89%91"><span class="toc-text">拓扑</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -339,7 +352,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="常见网络术语"><a href="#常见网络术语" class="headerlink" title="常见网络术语"></a>常见网络术语</h2><h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><ul>
+<li>节点是连接到网络的物理电子设备，比如电脑，打印机，路由器等。如果配置正确，节点可以在网络上进行信息的收发。</li>
+<li>节点可以彼此相邻，也可以有中间节点。<blockquote>
+<p>主机: 一种需要IP地址的节点。所有主机都是节点; 但不是所有的节点都是主机。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="链路"><a href="#链路" class="headerlink" title="链路"></a>链路</h3><ul>
+<li><strong>链路连接网络中的节点</strong>，<ul>
+<li>有线的，比如以太网</li>
+<li>无线的，比如wifi</li>
+</ul>
+</li>
+<li>链路要么是点对点的，要么是多点的。</li>
+</ul>
+<h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><ul>
+<li><p>协议（protocol）是一组互相商定的规则，允许网络中的两个节点交换数据。</p>
+<blockquote>
+<p>协议定义了管理通信过程中语法（可通信的内容）、语义（如何通信）以及同步（何时通信以及通信的速度）的规则。协议可以由硬件、软件或二者的组合实现。</p>
+</blockquote>
+</li>
+<li><p>无线和有线链路都可以有协议。</p>
+</li>
+</ul>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><ul>
+<li>网络（network）是一组计算机、打印机或任何其它想要共享数据的设备的通用术语。</li>
+</ul>
+<h3 id="拓扑"><a href="#拓扑" class="headerlink" title="拓扑"></a>拓扑</h3><ul>
+<li>拓扑（topology）描述的是节点和链路如何在网络配置中组合在一起，通常用图描述。这里是一些常见的网络拓扑类型：<br><img src="2023-08-11T145029.png" alt="2023-08-11T145029"></li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
     </div>
