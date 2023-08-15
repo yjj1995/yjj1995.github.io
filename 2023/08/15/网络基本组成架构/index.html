@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="记好笔记">
+  <title>网络基本组成架构 | 记好笔记</title>
+  <meta name="keywords" content=" 网络 ">
+  <meta name="description" content="网络基本组成架构 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -56,7 +56,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -302,12 +302,50 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-网络基本组成架构" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2"><span class="toc-text">关于博客</span></a></li></ol>
+        <h1 class="article-title">网络基本组成架构</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">网络</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-15 17:42:36'>2023-08-15 01:34</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%A7%84%E5%88%99"><span class="toc-text">总结规则</span></a>
     
 <style>
     .left-col .switch-btn,
@@ -320,17 +358,110 @@
     }
 </style>
 </div>
-            <h1 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h1><p>记录学习。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="2023-08-15T164520.png" alt="2023-08-15T164520"></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li><ol>
+<li>A如何知道，哪个设备是路由器？</li>
+</ol>
+<ul>
+<li>在 A 上要设置默认网关<ul>
+<li>上一步 A 通过是否与 C 在同一个子网内，判断出自己应该把包发给路由器，那路由器的 IP 是多少呢？其实说发给路由器不准确，应该说 A 会把包发给默认网关。对 A 来说，A 只能直接把包发给同处于一个子网下的某个 IP 上，所以发给路由器还是发给某个电脑，对 A 来说也不关心，只要这个设备有个 IP 地址就行。<strong>所以默认网关，就是 A 在自己电脑里配置的一个 IP 地址，以便在发给不同子网的机器时，发给这个 IP 地址。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>路由器如何知道C在哪？</li>
+</ol>
+<ul>
+<li>现在A要给C发数据包，已经可以成功发到路由器这里了</li>
+<li>路由器收到的数据包有目的IP也就是C的IP地址，需要转化成从自己的哪个端口出去，即路由表。</li>
+</ul>
+</li>
+<li><ol start="3">
+<li>刚才说的都是 IP 层，但<strong>发送数据包的数据链路层需要知道 MAC 地址</strong>，可是我只知道 IP 地址该怎么办呢？</li>
+</ol>
+<ul>
+<li>arp,在网络层，我需要把 IP 地址对应的 MAC 地址找到，也就是通过某种方式，找到 192.168.0.2 对应的 MAC 地址 BBBB。</li>
+<li>这种方式就是 arp 协议，同时电脑 A 和 B 里面也会有一张 arp 缓存表，表中记录着 IP 与 MAC 地址的对应关系。<br><img src="2023-08-15T171031.png" alt="2023-08-15T171031"></li>
+<li>一开始的时候这个表是空的，电脑 A 为了知道电脑 B（192.168.0.2）的 MAC 地址，将会广播一条 arp 请求，B 收到请求后，带上自己的 MAC 地址给 A 一个响应。此时 A 便更新了自己的 arp 表。</li>
+<li>这样通过大家不断广播 arp 请求，最终所有电脑里面都将 arp 缓存表更新完整。</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结规则"><a href="#总结规则" class="headerlink" title="总结规则"></a>总结规则</h2><ul>
+<li><p>电脑视角:</p>
+<ul>
+<li>首先我要知道我的 IP 以及对方的 IP</li>
+<li>通过子网掩码判断我们是否在同一个子网</li>
+<li>在同一个子网就通过arp获取对方mac地址直接发出去</li>
+<li>不在同一个子网就通过arp获取默认网关的mac地址直接发出去</li>
+</ul>
+</li>
+<li><p>交换机视角</p>
+<ul>
+<li>我收到的数据包必须有目标 MAC 地址</li>
+<li>通过 MAC 地址表查映射关系</li>
+<li>查到了就按照映射关系从我的指定端口发出去</li>
+<li>查不到就所有端口都发出去</li>
+</ul>
+</li>
+<li><p>路由器视角</p>
+<ul>
+<li>我收到的数据包必须有目标 IP 地址</li>
+<li>通过路由表查映射关系</li>
+<li>查到了就按照映射关系从我的指定端口发出去（不在任何一个子网范围，走其路由器的默认网关也是查到了）</li>
+<li>查不到则返回一个路由不可达的数据包</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>网络层（IP协议）本身没有传输包的功能，包的实际传输是委托给数据链路层（以太网中的交换机）来实现的。</strong></p>
+</blockquote>
+<ul>
+<li><p>涉及到的三张表分别是</p>
+<ul>
+<li>交换机中有 MAC 地址表用于映射 MAC 地址和它的端口</li>
+<li>路由器中有路由表用于映射 IP 地址(段)和它的端口</li>
+<li>电脑和路由器中都有 arp 缓存表用于缓存 IP 和 MAC 地址的映射关系</li>
+</ul>
+</li>
+<li><p>这三张表是怎么来的</p>
+</li>
+<li><p>MAC 地址表是通过以太网内各节点之间不断通过交换机通信，不断完善起来的。</p>
+</li>
+<li><p>路由表是各种路由算法 + 人工配置逐步完善起来的。</p>
+</li>
+<li><p>arp 缓存表是不断通过 arp 协议的请求逐步完善起来的。</p>
+</li>
+</ul>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ">https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ</a></p>
+</blockquote>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -339,11 +470,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
