@@ -323,7 +323,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-15 17:42:36'>2023-08-15 01:34</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-16 16:04:12'>2023-08-15 01:34</time>
         
     </div>
     <div class="article-meta">
@@ -345,7 +345,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%A7%84%E5%88%99"><span class="toc-text">总结规则</span></a>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%A7%84%E5%88%99"><span class="toc-text">总结规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1"><span class="toc-text">网卡</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -441,6 +441,39 @@
 <blockquote>
 <p>参考 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ">https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ</a></p>
 </blockquote>
+<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><ul>
+<li>互联网Internet，广域网WAN，局域网LAN 等是范围和区域的概念。</li>
+<li>以太网Ethernet 、ATM网、FDDI网是技术实现的概念。<ul>
+<li>按照传输技术来分类，属于OSI参考类型的数据链路层。<ul>
+<li>电脑上的以太网接口，WI-FI接口，以太网交换机、路由器上的千兆，万兆以太网口，还有网线，都是以太网的组成部分，以太网可以用在局域网、广域网、也可以用在互联网上。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>以太网Ethernet 、ATM网、FDDI网可以算作一类，按照传输技术来分类，属于OSI参考类型的<strong>数据链路层。</strong></li>
+<li><strong>以太网只是组成互联网的一个子集，以太网是现在主流的局域网标准，而互联网是指将大量的局域网连接起来，进行资源的分享。</strong><br><img src="2023-08-16T143530.png" alt="2023-08-16T143530"></li>
+<li>以太网采用的CSMA&#x2F;CD（载波侦听多路访问&#x2F;冲突检测）的控制技术。他主要定义了物理层和数据链路层的工作方式。数据链路层和物理层各自实现自己的功能，相互之间不关心对方如何操作。二者之间有标准的接口(例如MII，GMII等)来传递数据和控制。</li>
+</ul>
+<h3 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h3><ul>
+<li><p>网卡工作在物理层和数据链路层的MAC子层。</p>
+</li>
+<li><p>网卡本身是局域网的设备，通过网关、路由器等设备就可以把这个局域网挂接到Internet上。</p>
+</li>
+<li><p>网卡有很多种</p>
+<ul>
+<li>数据链路层控制：<ul>
+<li>以太网卡，令牌环网卡，ATM网卡</li>
+</ul>
+</li>
+<li>物理层<ul>
+<li>无线网卡，RJ-45网卡，同轴电缆网卡，光线网卡</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>以太网卡的物理层可以包含很多种技术，常见的有RJ45，光纤，无线等，它们的区别在于传送信号的物理介质和媒质不同。这些都在IEEE的802协议族中有详细的定义。</p>
+</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
