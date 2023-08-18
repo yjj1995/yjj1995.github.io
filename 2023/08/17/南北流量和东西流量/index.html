@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>网络基本组成架构 | 记好笔记</title>
+  <title>南北流量和东西流量 | 记好笔记</title>
   <meta name="keywords" content=" 网络 ">
-  <meta name="description" content="网络基本组成架构 | 记好笔记">
+  <meta name="description" content="南北流量和东西流量 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -322,9 +322,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-网络基本组成架构" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-南北流量和东西流量" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">网络基本组成架构</h1>
+        <h1 class="article-title">南北流量和东西流量</h1>
     
     <div class="article-meta">
         
@@ -341,7 +341,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-16 16:04:12'>2023-08-15 01:34</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-17 13:52:20'>2023-08-17 03:08</time>
         
     </div>
     <div class="article-meta">
@@ -363,7 +363,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%A7%84%E5%88%99"><span class="toc-text">总结规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1"><span class="toc-text">网卡</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -379,117 +379,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="2023-08-15T164520.png" alt="2023-08-15T164520"></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
-<li><ol>
-<li>A如何知道，哪个设备是路由器？</li>
-</ol>
+        <p><img src="2023-08-17T135044.png" alt="2023-08-17T135044"></p>
 <ul>
-<li>在 A 上要设置默认网关<ul>
-<li>上一步 A 通过是否与 C 在同一个子网内，判断出自己应该把包发给路由器，那路由器的 IP 是多少呢？其实说发给路由器不准确，应该说 A 会把包发给默认网关。对 A 来说，A 只能直接把包发给同处于一个子网下的某个 IP 上，所以发给路由器还是发给某个电脑，对 A 来说也不关心，只要这个设备有个 IP 地址就行。<strong>所以默认网关，就是 A 在自己电脑里配置的一个 IP 地址，以便在发给不同子网的机器时，发给这个 IP 地址。</strong></li>
+<li>东西向通讯：指服务间的相互访问，其通讯流量在服务间流转，流量都位于系统内部<ul>
+<li>南北流量是server-client流量。</li>
 </ul>
 </li>
+<li>南北向通讯：指服务对外部提供访问，通常是通过API Gateway提供的API对外部保罗，其通讯流量是从系统外部进入系统内部。<ul>
+<li>东西流量是server-server流量。<br><strong>解释一下“东西南北”的由来：如上图所示，通常在地图上习惯性的遵循“上北下南，左西右东”的原则。</strong></li>
 </ul>
-</li>
-<li><ol start="2">
-<li>路由器如何知道C在哪？</li>
-</ol>
-<ul>
-<li>现在A要给C发数据包，已经可以成功发到路由器这里了</li>
-<li>路由器收到的数据包有目的IP也就是C的IP地址，需要转化成从自己的哪个端口出去，即路由表。</li>
-</ul>
-</li>
-<li><ol start="3">
-<li>刚才说的都是 IP 层，但<strong>发送数据包的数据链路层需要知道 MAC 地址</strong>，可是我只知道 IP 地址该怎么办呢？</li>
-</ol>
-<ul>
-<li>arp,在网络层，我需要把 IP 地址对应的 MAC 地址找到，也就是通过某种方式，找到 192.168.0.2 对应的 MAC 地址 BBBB。</li>
-<li>这种方式就是 arp 协议，同时电脑 A 和 B 里面也会有一张 arp 缓存表，表中记录着 IP 与 MAC 地址的对应关系。<br><img src="2023-08-15T171031.png" alt="2023-08-15T171031"></li>
-<li>一开始的时候这个表是空的，电脑 A 为了知道电脑 B（192.168.0.2）的 MAC 地址，将会广播一条 arp 请求，B 收到请求后，带上自己的 MAC 地址给 A 一个响应。此时 A 便更新了自己的 arp 表。</li>
-<li>这样通过大家不断广播 arp 请求，最终所有电脑里面都将 arp 缓存表更新完整。</li>
-</ul>
-</li>
-</ul>
-<h2 id="总结规则"><a href="#总结规则" class="headerlink" title="总结规则"></a>总结规则</h2><ul>
-<li><p>电脑视角:</p>
-<ul>
-<li>首先我要知道我的 IP 以及对方的 IP</li>
-<li>通过子网掩码判断我们是否在同一个子网</li>
-<li>在同一个子网就通过arp获取对方mac地址直接发出去</li>
-<li>不在同一个子网就通过arp获取默认网关的mac地址直接发出去</li>
-</ul>
-</li>
-<li><p>交换机视角</p>
-<ul>
-<li>我收到的数据包必须有目标 MAC 地址</li>
-<li>通过 MAC 地址表查映射关系</li>
-<li>查到了就按照映射关系从我的指定端口发出去</li>
-<li>查不到就所有端口都发出去</li>
-</ul>
-</li>
-<li><p>路由器视角</p>
-<ul>
-<li>我收到的数据包必须有目标 IP 地址</li>
-<li>通过路由表查映射关系</li>
-<li>查到了就按照映射关系从我的指定端口发出去（不在任何一个子网范围，走其路由器的默认网关也是查到了）</li>
-<li>查不到则返回一个路由不可达的数据包</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p><strong>网络层（IP协议）本身没有传输包的功能，包的实际传输是委托给数据链路层（以太网中的交换机）来实现的。</strong></p>
-</blockquote>
-<ul>
-<li><p>涉及到的三张表分别是</p>
-<ul>
-<li>交换机中有 MAC 地址表用于映射 MAC 地址和它的端口</li>
-<li>路由器中有路由表用于映射 IP 地址(段)和它的端口</li>
-<li>电脑和路由器中都有 arp 缓存表用于缓存 IP 和 MAC 地址的映射关系</li>
-</ul>
-</li>
-<li><p>这三张表是怎么来的</p>
-</li>
-<li><p>MAC 地址表是通过以太网内各节点之间不断通过交换机通信，不断完善起来的。</p>
-</li>
-<li><p>路由表是各种路由算法 + 人工配置逐步完善起来的。</p>
-</li>
-<li><p>arp 缓存表是不断通过 arp 协议的请求逐步完善起来的。</p>
-</li>
-</ul>
-<blockquote>
-<p>参考 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ">https://mp.weixin.qq.com/s/jiPMUk6zUdOY6eKxAjNDbQ</a></p>
-</blockquote>
-<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><ul>
-<li>互联网Internet，广域网WAN，局域网LAN 等是范围和区域的概念。</li>
-<li>以太网Ethernet 、ATM网、FDDI网是技术实现的概念。<ul>
-<li>按照传输技术来分类，属于OSI参考类型的数据链路层。<ul>
-<li>电脑上的以太网接口，WI-FI接口，以太网交换机、路由器上的千兆，万兆以太网口，还有网线，都是以太网的组成部分，以太网可以用在局域网、广域网、也可以用在互联网上。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>以太网Ethernet 、ATM网、FDDI网可以算作一类，按照传输技术来分类，属于OSI参考类型的<strong>数据链路层。</strong></li>
-<li><strong>以太网只是组成互联网的一个子集，以太网是现在主流的局域网标准，而互联网是指将大量的局域网连接起来，进行资源的分享。</strong><br><img src="2023-08-16T143530.png" alt="2023-08-16T143530"></li>
-<li>以太网采用的CSMA&#x2F;CD（载波侦听多路访问&#x2F;冲突检测）的控制技术。他主要定义了物理层和数据链路层的工作方式。数据链路层和物理层各自实现自己的功能，相互之间不关心对方如何操作。二者之间有标准的接口(例如MII，GMII等)来传递数据和控制。</li>
-</ul>
-<h3 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h3><ul>
-<li><p>网卡工作在物理层和数据链路层的MAC子层。</p>
-</li>
-<li><p>网卡本身是局域网的设备，通过网关、路由器等设备就可以把这个局域网挂接到Internet上。</p>
-</li>
-<li><p>网卡有很多种</p>
-<ul>
-<li>数据链路层控制：<ul>
-<li>以太网卡，令牌环网卡，ATM网卡</li>
-</ul>
-</li>
-<li>物理层<ul>
-<li>无线网卡，RJ-45网卡，同轴电缆网卡，光线网卡</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>以太网卡的物理层可以包含很多种技术，常见的有RJ45，光纤，无线等，它们的区别在于传送信号的物理介质和媒质不同。这些都在IEEE的802协议族中有详细的定义。</p>
 </li>
 </ul>
 
