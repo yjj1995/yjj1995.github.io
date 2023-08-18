@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>网卡虚拟 | 记好笔记</title>
-  <meta name="keywords" content=" 网络 ">
-  <meta name="description" content="网卡虚拟 | 记好笔记">
+  <title>记好笔记</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -56,7 +56,7 @@
 
 
 <body>
-<aside class="nav">
+<aside class="nav mobile">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -320,50 +320,12 @@
         </div>
     </div>
 </aside>
-<div id="post">
+<div id="post" class="index">
     <div class="pjax">
-        <article id="post-网卡虚拟" class="article article-type-post" itemscope itemprop="blogPost">
+        <article class="index">
+            <div class="toc-ref">
     
-        <h1 class="article-title">网卡虚拟</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color3">网络</a>
-            
-        </span>
-        
-    </div>
-    <div class="article-meta">
-        
-            发布时间 : <time class="date" title='最后更新: 2023-08-18 13:42:24'>2023-08-18 01:10</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        
-        <span id="busuanzi_container_page_pv">
-            阅读 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">网卡虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">虚拟机网络连接模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5"><span class="toc-text">桥接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT"><span class="toc-text">NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#NAT%E4%B8%8E%E6%A1%A5%E6%8E%A5%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text">NAT与桥接的比较</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Host-Only"><span class="toc-text">Host-Only</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">网卡虚拟化的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于硬件的虚拟化</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2"><span class="toc-text">关于博客</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -376,78 +338,17 @@
     }
 </style>
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="网卡虚拟化"><a href="#网卡虚拟化" class="headerlink" title="网卡虚拟化"></a>网卡虚拟化</h3><ul>
-<li>网卡虚拟化在云环境下必不可少, 其核心是为<strong>各虚拟实例构建虚拟网卡和虚拟网桥等虚拟网络设备</strong>, 将各虚拟实例的数据传输和网络管理连接到外部的物理网络.</li>
-<li>虚拟网络一般需要通过物理网卡进行网络通信。</li>
-<li>linux系统中，虚拟网卡和物理网卡之间可以通过网络桥接（bridge）（虚拟交换机）来实现通信。<ul>
-<li>网络桥接可以将多个网卡连接起来，形成一个网络交换机的功能，将数据包转发到目标网卡，从而实现虚拟机与外部网络的通信。</li>
-<li>其他将物理网卡和虚拟网卡连接起来的方式<ul>
-<li>虚拟局域网VLAN</li>
-<li>NAT网络地址转换</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="虚拟机网络连接模式"><a href="#虚拟机网络连接模式" class="headerlink" title="虚拟机网络连接模式"></a>虚拟机网络连接模式</h3><h4 id="桥接"><a href="#桥接" class="headerlink" title="桥接"></a>桥接</h4><ul>
-<li>桥接网络是指 本地物理网卡和虚拟网卡通过  VMnet0 虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位，那么物理网卡和虚拟网卡就相当于处于同一个网段，虚拟交换机就相当于一台显示网络中的交换机，所以<strong>两个网卡的IP需要设置成同一个网段</strong></li>
-<li>所以当我们要在局域网使用虚拟机，对局域网其他pc提供服务时，例如提供ftp，提供ssh，提供http服务，那么就要选择桥接模式。</li>
-<li>虚拟机需要访问外网的时候，需要配置子网的网关（路由器地址），并且需要配置dns 解析服务器。</li>
-</ul>
-<h4 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h4><ul>
-<li>NAT模式，就是使虚拟机 能借助NAT（网络地址转换）功能，通过宿主机器所在的网络来访问公网。</li>
-<li>NAT模式中，虚拟机的网卡和物理网卡的网络不在同一个网络中，也就是说没有连到虚拟交换机上。虚拟机的网卡，是vmware提供的一个虚拟网络。</li>
-</ul>
-<h5 id="NAT与桥接的比较"><a href="#NAT与桥接的比较" class="headerlink" title="NAT与桥接的比较"></a>NAT与桥接的比较</h5><ul>
-<li>NAT模式和桥接模式虚拟机都可以上外网</li>
-<li>由于NAT的网络在vmware提供的一个虚拟网络里，所以局域网其他主机是无法访问虚拟机的，而宿主机可以访问虚拟机（一个机器内可以互通），虚拟机可以访问局域网（相当于宿主机访问）的所有主机，因为真实的局域网相对于NAT的虚拟网络，就是NAT的虚拟网络的外网。（虚拟机-其他主机 单向通信）</li>
-<li>桥接模式下，多个虚拟机之间可以互相访问；NAT模式下，多个虚拟机之间也可以相互访问。</li>
-</ul>
-<h4 id="Host-Only"><a href="#Host-Only" class="headerlink" title="Host-Only"></a>Host-Only</h4><ul>
-<li>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。其实Host-Only网络和NAT网络很相似，不同的地方就是Host-Only网络没有NAT服务，所以虚拟网络不能连接到Internet。主机和虚拟机之间的通信是通过VMware Network Adepter VMnet1虚拟网卡来实现的。</li>
-<li>Host-Only的宗旨就是建立一个与外界隔绝的内部网络，来提高内网的安全性。这个功能或许对普通用户来说没有多大意义，但大型服务商会常常利用这个功能。如果你想为VMnet1网段提供路由功能，那就需要使用RRAS，而不能使用XP或2000的ICS，因为ICS会把内网的IP地址改为192.168.0.1，但虚拟机是不会给VMnet1虚拟网卡分配这个地址的，那么主机和虚拟机之间就不能通信了。</li>
-</ul>
-<h3 id="网卡虚拟化的分类"><a href="#网卡虚拟化的分类" class="headerlink" title="网卡虚拟化的分类"></a>网卡虚拟化的分类</h3><h4 id="基于硬件的虚拟化"><a href="#基于硬件的虚拟化" class="headerlink" title="基于硬件的虚拟化"></a>基于硬件的虚拟化</h4><ul>
-<li>基于硬件的网卡虚拟化方法让虚拟机或容器直接使用物理网卡，<strong>不用经过软件虚拟层</strong>。<ul>
-<li>设备直达和SR-IOV</li>
-</ul>
-</li>
-<li><ol>
-<li>设备直达</li>
-</ol>
-<ul>
-<li>在虚拟机中，物理网卡可以通过PCI透传技术分配给虚拟机，供虚拟机独占使用。PCI透传技术需要VT-d或IOMMU等硬件支持, 其作用是将PCI设备地址空间映射到客户虚拟机中。<ul>
-<li>独占性和性能： PCI透传技术确保单个虚拟机可以独占使用一个物理网卡设备，从而实现了虚拟机间的网络隔离。这也保证了该虚拟机获得与原生网卡相当的性能。然而，这种独占性也限制了网卡设备无法被多个虚拟机共享使用，这对于需要多个虚拟机间共享网络资源的场景不太适用。</li>
-<li>宿主机控制和迁移： PCI透传技术的使用会限制宿主机对物理网卡的管控能力，因为这些网卡被直接分配给了虚拟机。另外，虚拟机在迁移过程中，由于网卡设备的独占性，需要重新配置相应的物理网卡接口，这可能增加管理和配置的复杂性。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+            <h1 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h1><p>记录学习。</p>
+<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
+<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
 
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
-    </div>
-</article>
-
-
-<p>
-    <a  class="dashang" onclick="dashangToggle()">赏</a>
-</p>
-
-
-
-
-
-
-    
-
-
-
-
+        </article>
+        
+        <p>
+            <a  class="dashang" onclick="dashangToggle()">赏</a>
+        </p>
+        
+        
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -456,11 +357,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-    <div class="full-toc">
-        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+</div>
+<div class="full-toc">
+    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
-    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
