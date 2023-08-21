@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>南北流量和东西流量 | 记好笔记</title>
+  <title>网卡总结 | 记好笔记</title>
   <meta name="keywords" content=" 网络 ">
-  <meta name="description" content="南北流量和东西流量 | 记好笔记">
+  <meta name="description" content="网卡总结 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -331,9 +331,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-南北流量和东西流量" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-网卡功能" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">南北流量和东西流量</h1>
+        <h1 class="article-title">网卡总结</h1>
     
     <div class="article-meta">
         
@@ -350,7 +350,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-17 13:52:20'>2023-08-17 03:08</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-18 15:48:14'>2023-08-18 07:19</time>
         
     </div>
     <div class="article-meta">
@@ -388,17 +388,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="2023-08-17T135044.png" alt="2023-08-17T135044"></p>
-<ul>
-<li>东西向通讯：指服务间的相互访问，其通讯流量在服务间流转，流量都位于系统内部<ul>
-<li>南北流量是server-client流量。</li>
-</ul>
-</li>
-<li>南北向通讯：指服务对外部提供访问，通常是通过API Gateway提供的API对外部保罗，其通讯流量是从系统外部进入系统内部。<ul>
-<li>东西流量是server-server流量。<br><strong>解释一下“东西南北”的由来：如上图所示，通常在地图上习惯性的遵循“上北下南，左西右东”的原则。</strong></li>
-</ul>
-</li>
-</ul>
+        <ol>
+<li>物理网卡是硬件设备，工作在 OSI 最底层，其硬件功能是以比特流的方式接收和发送数据</li>
+<li>物理网卡需网卡驱动程序向内核注册后方可工作，注册后一般会显示对应的网卡接口，网卡接口名称是给用户看的，内核不以接口名称来识别网卡</li>
+<li>为网卡接口做的配置属于内核而非网卡，内核中有些接口属性来自硬件网卡，而且有些属性可以修改。另外，可以为一个接口配置多个 IP 地址</li>
+<li>内核在和某网卡交互时，会基于内核中属于该网卡 (接口) 的配置属性做出决策和对应的处理</li>
+<li>物理网卡一端是内核 (网络协议栈)，另一端是外界网络</li>
+<li>物理网卡收发数据 (先不考虑 DMA 方式)：<br> 发：本机通过某物理网卡发送数据时，内核将网络协议栈中的数据写入该网卡，该网卡将其发送出去<br> 收：网卡收到数据后，中断通知内核，内核从网卡读取数据并放入网络协议栈</li>
+<li>网卡具有 DMA 功能，所以网卡和网络协议栈之间的数据传输主要由网卡负责，DMA 传输完毕后 DMA 控制器中断通知内核已传输完毕</li>
+</ol>
+<blockquote>
+<p>绝不可能通过虚拟网卡向外界发送数据，外界数据也不可能直接发送到虚拟网卡上。能够直接收发外界数据的，只能是物理设备。</p>
+</blockquote>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

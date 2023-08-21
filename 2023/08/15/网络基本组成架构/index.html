@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(5)</small>
+                <small>(6)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="5">
+<input type="hidden" id="yelog_site_posts_number" value="6">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -258,6 +258,15 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/18/%E7%BD%91%E5%8D%A1%E5%8A%9F%E8%83%BD/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网卡总结">网卡总结</span>
+            <span class="post-date" title="2023-08-18 07:19:12">2023/08/18</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -341,7 +350,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-16 16:04:12'>2023-08-15 01:34</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-21 10:42:34'>2023-08-15 01:34</time>
         
     </div>
     <div class="article-meta">
@@ -363,7 +372,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%A7%84%E5%88%99"><span class="toc-text">总结规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1"><span class="toc-text">网卡</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E8%A7%84%E5%88%99"><span class="toc-text">总结规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1"><span class="toc-text">网卡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%B1%82%E7%BD%91%E7%BB%9C-x2F-%E4%B8%89%E5%B1%82%E7%BD%91%E7%BB%9C"><span class="toc-text">二层网络&#x2F;三层网络</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-text">传统网络架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="toc-text">传统网络的弊端</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -490,6 +499,62 @@
 </ul>
 </li>
 <li><p>以太网卡的物理层可以包含很多种技术，常见的有RJ45，光纤，无线等，它们的区别在于传送信号的物理介质和媒质不同。这些都在IEEE的802协议族中有详细的定义。</p>
+</li>
+</ul>
+<h3 id="二层网络-x2F-三层网络"><a href="#二层网络-x2F-三层网络" class="headerlink" title="二层网络&#x2F;三层网络"></a>二层网络&#x2F;三层网络</h3><ul>
+<li>二层网络仅仅通过MAC寻址即可实现通讯，但仅仅是同一个冲突域内；</li>
+<li>三层网络需要通过IP路由实现跨网段的通讯，可以跨多个冲突域；</li>
+<li>二层设备以三层设备的区别是看能不能识别三层的东西，比如IP地址、路由、ARP等三层的东西。能识别的就为三层设备。三层设备常用于多网段，隔离广播域。</li>
+<li>二层设备一般为交换机，三层设备一般为路由器。</li>
+</ul>
+<h2 id="传统网络架构"><a href="#传统网络架构" class="headerlink" title="传统网络架构"></a>传统网络架构</h2><p><img src="2023-08-21T092828.png" alt="2023-08-21T092828"></p>
+<ul>
+<li><p>通常将网络中直接<strong>面向用户连接或访问网络的部分称为接入层</strong>，将位于接入层和核心层之间的部分称为分布层或汇聚层，接入层目的是允许终端用户连接到网络，因此接入层交换机具有低成本和高端口密度特性！</p>
+</li>
+<li><p>比如说一个大学，其用户数至少几千人，其网络机房中的网络设备，如核心交换机、路由器、防火墙等设备共同组成的区域可以看做是核心层，每个楼层中的交换机等设备可以看做是接入层，而连接接入层和核心层之间的区域就是汇聚层。 </p>
+<ul>
+<li>汇聚 接入到核心的交换机 就是 汇聚层</li>
+</ul>
+</li>
+<li><p>接入层</p>
+<ul>
+<li>为多业务应用和其他的网络应用提供用户到网络的接入！</li>
+<li>接入交换机通常位于机架顶部，被称为TOR（top of rack）交换机，物理连接服务器</li>
+<li>接入层是最终用户(如：教师、学生) 与网络的接口，提供着即插即用的特性，同时易于使用和维护（注意考虑端口密度）。</li>
+<li>接入层为用户提供了在本地网段访问应用系统的能力，主要解决相邻用户之间的互访需求，并且为这些访问提供足够的带宽，接入层还应当适当负责一些用户管理功能（如地址认证、用户认证、计费管理等），以及用户信息收集工作（如用户的IP地址、MAC地址、访问日志等）。</li>
+</ul>
+</li>
+<li><p>汇聚层</p>
+<ul>
+<li><p>提供基于策略的连接</p>
+</li>
+<li><p>将位于接入层和核心层之间的部分称为分布层或汇聚层，汇聚层交换层是多台接入层交换机的汇聚点，它必须能够处理来自接入层设备的所有通信量，并提供到核心层的上行链路，因此汇聚层交换机与接入层交换机比较，需要更高的性能，更少的接口和更高的交换速率。</p>
+</li>
+<li><p>汇聚层主要承担的基本功能有：</p>
+<ul>
+<li>汇接接入层的用户流量，进行数据分组传输的汇聚、转发和交换；</li>
+<li>根据接入层的用户流量，进行本地路由、过滤、流量均衡、QoS优先级管理，以及安全机制，IP地址转换、流量整形、组播管理等处理；</li>
+<li>根据处理结果将用户流量转发到核心交换层或在本地进行路由处理；</li>
+<li>完成各种协议的转换（如路由的汇总和重新发布等），以保证核心层连接运行不同的协议的区域。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>核心层</p>
+<ul>
+<li>提供最优的区间传输</li>
+<li>核心层的功能主要是实现骨干网络之间的优化传输，骨干层设计任务的重点通常是冗余能力、可靠性和高速的传输。<strong>网络的控制功能最好尽量的少在骨干层上实施。</strong></li>
+<li>核心层一直被认为是所有流量的最终承受者和汇聚者，所以对核心层的设计以及网络设备的要求十分严格，核心层设备占网络投资的主要部分。</li>
+</ul>
+</li>
+</ul>
+<h3 id="传统网络的弊端"><a href="#传统网络的弊端" class="headerlink" title="传统网络的弊端"></a>传统网络的弊端</h3><ul>
+<li><p>带宽的浪费：为了防止环路，汇聚层和接入层之间通常会运行STP协议，使得接入交换机的上联链路中实际承载流量的只有一条，而其他上行链路将被阻塞（如图中虚线所示），造成了带宽的浪费；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">环路的影响</span><br><span class="line">  1. 数据包无限循环： 在一个有回路的网络中，数据包可能会在网络中来回传递，造成数据包无限循环，占用带宽和资源，最终导致网络堵塞。</span><br><span class="line">  2. 广播风暴： 如果有回路存在，广播消息可能会在网络中无限传播，导致大量的冗余流量，降低网络性能。</span><br><span class="line">  3. 数据包丢失： 数据包在回路中循环时，可能会因为循环次数过多而丢失，导致数据不可达目的地。</span><br><span class="line">  4. 网络稳定性下降： 回路可能导致网络拓扑不稳定，增加网络管理和故障排除的复杂性，降低整体网络稳定性。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>故障域较大：STP协议由于其本身的算法，在网络拓扑发生变更时需要重新收敛，容易发生故障，从而影响整个VLAN的网络；</p>
+</li>
+<li><p>难以适应超大规模网络：在云计算领域，网络规模扩大，数据中心也分布在不同的地理位置，虚拟机要求能在任意地点创建，迁移，而保持其网络属性（IP, 网关等）保持不变，需要支持大二层网络，在上图的拓扑中，无法在VLAN10和VLAN20之间作上述迁移；</p>
 </li>
 </ul>
 
