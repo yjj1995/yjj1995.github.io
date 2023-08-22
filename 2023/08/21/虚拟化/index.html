@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>虚拟化 | 记好笔记</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="虚拟化 | 记好笔记">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
+<meta property="og:type" content="website">
+<meta property="og:title" content="标题">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="记好笔记">
+<meta property="og:description" content="这里写关于页的正文，支持 Markdown, HTML">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-02T09:05:23.598Z">
+<meta property="article:modified_time" content="2023-06-02T09:05:10.272Z">
+<meta property="article:author" content="JoJo Yu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>JoJo Yu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yjj1995"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_26826331?type=blog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:1065016533@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(7)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="7">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://github.com/yjj1995">github</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>虚拟化</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/21/%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="虚拟化">虚拟化</span>
+            <span class="post-date" title="2023-08-21 07:46:24">2023/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/18/%E7%BD%91%E5%8D%A1%E5%8A%9F%E8%83%BD/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网卡总结">网卡总结</span>
+            <span class="post-date" title="2023-08-18 07:19:12">2023/08/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/18/%E7%BD%91%E5%8D%A1%E8%99%9A%E6%8B%9F/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网卡虚拟">网卡虚拟</span>
+            <span class="post-date" title="2023-08-18 01:10:44">2023/08/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/17/%E5%8D%97%E5%8C%97%E6%B5%81%E9%87%8F%E5%92%8C%E4%B8%9C%E8%A5%BF%E6%B5%81%E9%87%8F/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="南北流量和东西流量">南北流量和东西流量</span>
+            <span class="post-date" title="2023-08-17 03:08:37">2023/08/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/15/%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90%E6%9E%B6%E6%9E%84/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网络基本组成架构">网络基本组成架构</span>
+            <span class="post-date" title="2023-08-15 01:34:07">2023/08/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/KVM/"
+           data-tag="虚拟化"
+           data-author="" >
+            <span class="post-title" title="KVM">KVM</span>
+            <span class="post-date" title="2023-08-11 03:29:06">2023/08/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网络七层模型">网络七层模型</span>
+            <span class="post-date" title="2023-08-11 03:22:14">2023/08/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-虚拟化" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">虚拟化</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-22 14:09:06'>2023-08-21 07:46</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E7%9A%84%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于二进制翻译的全虚拟化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%9A-%E6%8A%8ACPU%E7%9A%84%E6%89%80%E6%9C%89%E5%AF%84%E5%AD%98%E5%99%A8%E9%83%BD%E5%86%99%E5%88%B0%E4%B8%80%E7%BB%84%E5%8F%98%E9%87%8F%E4%B8%AD%EF%BC%88CPUFile%EF%BC%89%EF%BC%88AX-x3D-%E2%80%A6-BX-x3D-%E2%80%A6-%E8%BF%99%E6%A0%B7%EF%BC%89%E3%80%82%E7%84%B6%E5%90%8E%E7%94%A8%E4%B8%80%E7%89%87%E5%86%85%E5%AD%98%E5%BD%93%E4%BD%9C%E6%A8%A1%E6%8B%9FCPU%E7%9A%84%E5%86%85%E5%AD%98%EF%BC%88vMem%EF%BC%89-%E7%84%B6%E5%90%8E%E5%9C%A8%E7%94%A8%E4%B8%80%E4%BA%9B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A1%A8%E7%A4%BAIO%E8%AE%BE%E5%A4%87%E7%9A%84%E7%8A%B6%E6%80%81%EF%BC%88%E8%BF%99%E9%87%8C%E7%A7%B0%E4%B8%BAvIO%EF%BC%89%EF%BC%8C%E4%B8%89%E8%80%85%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%9C%A8%E4%B8%80%E8%B5%B7%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%BB%A3%E8%A1%A8%E4%B8%80%E4%B8%AA%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E7%8E%AF%E5%A2%83%E4%BA%86%EF%BC%88%E8%BF%99%E9%87%8C%E7%A7%B0%E4%B9%8B%E4%B8%BAVM%EF%BC%89-%E4%B9%8B%E5%90%8E%E6%8C%89%E9%A1%BA%E5%BA%8F%E8%AF%BB%E5%87%BA%E4%B8%80%E6%9D%A1%E6%9D%A1%E7%9A%84%E6%8C%87%E4%BB%A4%EF%BC%8C%E6%A0%B9%E6%8D%AE%E8%BF%99%E4%B8%AA%E6%8C%87%E4%BB%A4%E7%9A%84%E8%AF%AD%E4%B9%89%EF%BC%8C%E6%9B%B4%E6%94%B9VM%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E7%8A%B6%E6%80%81%EF%BC%88%E5%A6%82%E6%9E%9C%E6%A8%A1%E6%8B%9F%E4%BA%86%E7%A1%AC%E4%BB%B6%EF%BC%8C%E8%BF%98%E8%A6%81%E6%A8%A1%E6%8B%9F%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%A1%8C%E4%B8%BA%EF%BC%8C%E6%AF%94%E5%A6%82%E5%8F%91%E7%8E%B0%E6%98%BE%E5%AD%98%E8%A2%AB%E5%86%99%E4%BA%86%E4%B8%80%E4%B8%AA%E5%80%BC%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%99%9A%E6%8B%9F%E5%B1%8F%E5%B9%95%E4%B8%8A%E6%98%BE%E7%A4%BA%E4%B8%80%E4%B8%AA%E7%82%B9%E7%AD%89%EF%BC%89%EF%BC%8C%E8%BF%99%E6%A0%B7%EF%BC%8C%E5%AE%9E%E6%96%BD%E8%99%9A%E6%8B%9F%E7%9A%84%E9%82%A3%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%B0%B1%E7%9B%B8%E5%BD%93%E4%BA%8E%E7%BB%99%E8%A2%AB%E8%99%9A%E6%8B%9F%E7%9A%84%E7%A8%8B%E5%BA%8F%E6%A8%A1%E6%8B%9F%E4%BA%86%E4%B8%80%E5%8F%B0%E8%AE%A1%E7%AE%97%E6%9C%BA%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%8A%80%E6%9C%AF%EF%BC%8C%E6%88%91%E7%A7%B0%E5%AE%83%E4%B8%BA%E2%80%9C%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E2%80%9D%E3%80%82%E6%8C%87%E4%BB%A4%E6%98%AF%E8%A2%AB%E4%B8%80%E6%9D%A1%E4%B8%80%E6%9D%A1%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C%E7%9A%84%E3%80%82"><span class="toc-text">原理：- 把CPU的所有寄存器都写到一组变量中（CPUFile）（AX &#x3D; …; BX &#x3D; …;这样）。然后用一片内存当作模拟CPU的内存（vMem）,然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）,之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E6%88%96%E8%80%85%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96-x2F-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%89"><span class="toc-text">超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">硬件辅助的虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E4%B8%89%E7%A7%8D%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="toc-text">CPU 三种虚拟化机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">CPU硬件辅助虚拟化技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%9C%89Intel%E7%9A%84VT-x-%E5%92%8C-AMD%E7%9A%84AMD-V-%E8%BF%99%E4%B8%A4%E7%A7%8D%E6%8A%80%E6%9C%AF%E3%80%82-%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%EF%BC%9A-%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%96%B0%E7%9A%84%E6%8C%87%E4%BB%A4%E5%92%8C%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F%EF%BC%8C-%E4%BD%BF%E5%BE%97VMM%E5%92%8CGuest-OS-%E5%88%86%E5%88%AB%E8%BF%90%E8%A1%8C%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%BC%8F%EF%BC%88ROOT%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9D%9EROOT%E6%A8%A1%E5%BC%8F%EF%BC%89%E4%B8%8B%E3%80%82%E4%B8%94Guest-OS%E8%BF%90%E8%A1%8C%E5%9C%A8Ring-0%E4%B8%8B%E3%80%82%E9%80%9A%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8CGuest-OS%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8C%87%E4%BB%A4%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BE%BE%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E6%89%A7%E8%A1%8C%EF%BC%8C%E8%80%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E7%BB%8F%E8%BF%87VMM%E3%80%82%E5%BD%93Guest-OS%E6%89%A7%E8%A1%8C%E5%88%B0%E7%89%B9%E6%AE%8A%E6%8C%87%E4%BB%A4%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E7%B3%BB%E7%BB%9F%E4%BC%9A%E5%88%87%E6%8D%A2%E5%88%B0VMM%EF%BC%8C%E8%AE%A9VMM%E6%9D%A5%E5%A4%84%E7%90%86%E7%89%B9%E6%AE%8A%E6%8C%87%E4%BB%A4%E3%80%82"><span class="toc-text">主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。- 核心思想： 通过引入新的指令和运行模式， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kvm-%E5%92%8C-xen"><span class="toc-text">kvm 和 xen</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kvm-%EF%BC%88kernel-based-Virtual-Machine%EF%BC%89"><span class="toc-text">kvm （kernel-based Virtual Machine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xen"><span class="toc-text">Xen</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/0voice/Introduce_to_virtualization#nav_vt0">https://github.com/0voice/Introduce_to_virtualization#nav_vt0</a></p>
+</blockquote>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+<li><p>VMM: 虚拟机监视器</p>
+<ul>
+<li>在宿主机上表现为一个提供虚拟机CPU, 内存以及一系列硬件虚拟的实体，这个实体在体系中就是一个进程，如qemu-kvm.</li>
+<li><strong>VMM负责管理虚拟机的资源，并拥有所有虚拟机资源的控制权，包括切换虚拟机的CPU上下文等</strong>。</li>
+</ul>
+</li>
+<li><p>Guest: 客户机操作系统&#x2F;二进制程序。</p>
+<ul>
+<li>对于VMM，是一堆指令集，只需要知道rip寄存器值就可以加载。</li>
+<li><strong>Guest运行需要虚拟CPU，当Guest代码运行的时候，处于VMX non-root模式</strong>，此模式下，该用什么指令还是用什么指令，该用什么寄存器还用什么寄存器，该用cache还是用cache，但是在执行到特殊指令的时候（比如Demo中的out指令），把CPU控制权交给VMM，由VMM来处理特殊指令，完成硬件操作。</li>
+</ul>
+</li>
+<li><p>CPU运行级别：</p>
+<ul>
+<li>CPU支持ring0~ring3 4个等级，但是Linux只使用了其中的两个ring0,ring3。当CPU寄存器标示了当前CPU处于ring0级别的时候，表示此时CPU正在运行的是内核的代码。而当CPU处于ring3级别的时候，表示此时CPU正在运行的是用户级别的代码。当发生系统调用或者进程切换的时候，CPU会从ring3级别转到ring0级别。ring3级别是不允许执行硬件操作的，所有硬件操作都需要内核提供的系统调用来完成。</li>
+</ul>
+</li>
+<li><p>VMX：</p>
+<ul>
+<li>为了从CPU层面支持VT技术，Intel-V 在 ring0~ring3 的基础上， 扩展了传统的x86处理器架构，引入了VMX模式，VMX分为root和non-root。VMM运行在VMX root模式；Guest运行在VMX non-root模式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="CPU虚拟化"><a href="#CPU虚拟化" class="headerlink" title="CPU虚拟化"></a>CPU虚拟化</h2><h3 id="基于二进制翻译的全虚拟化"><a href="#基于二进制翻译的全虚拟化" class="headerlink" title="基于二进制翻译的全虚拟化"></a>基于二进制翻译的全虚拟化</h3><p><img src="2023-08-21T160108.png" alt="2023-08-21T160108"></p>
+<ul>
+<li><p>客户操作系统运行在Ring 1, 它在执行特权指令时，会触发异常（CPU的机制，没权限的指令会触发异常），VMM（hypervisor ）会捕获这个异常，在异常里面做翻译，模拟，最后返回到客户操作系统内，客户操作系统认为自己的特权指令工作正常，继续运行。但是这个性能损耗，就非常的大，简单的一条指令，执行完，了事，现在却要通过复杂的异常处理过程。</p>
+<ul>
+<li><p>所谓特权指令是指有特权权限的指令，由于这类指令的权限最大，如果使用不当，将导致整个系统崩溃。比如：清内存、置时钟、分配系统资源、修改虚存的段表和页表，修改用户的访问权限等。</p>
+</li>
+<li><h2 id="原理：-把CPU的所有寄存器都写到一组变量中（CPUFile）（AX-x3D-…-BX-x3D-…-这样）。然后用一片内存当作模拟CPU的内存（vMem）-然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）-之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。"><a href="#原理：-把CPU的所有寄存器都写到一组变量中（CPUFile）（AX-x3D-…-BX-x3D-…-这样）。然后用一片内存当作模拟CPU的内存（vMem）-然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）-之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。" class="headerlink" title="原理：- 把CPU的所有寄存器都写到一组变量中（CPUFile）（AX &#x3D; …; BX &#x3D; …;这样）。然后用一片内存当作模拟CPU的内存（vMem）,然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）,之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。"></a>原理：<br>- 把CPU的所有寄存器都写到一组变量中（CPUFile）（AX &#x3D; …; BX &#x3D; …;这样）。然后用一片内存当作模拟CPU的内存（vMem）,然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）,之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。</h2><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="2023-08-21T162925.png" alt="2023-08-21T162925"></p>
+<h3 id="超虚拟化（或者半虚拟化-x2F-操作系统辅助虚拟化）"><a href="#超虚拟化（或者半虚拟化-x2F-操作系统辅助虚拟化）" class="headerlink" title="超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）"></a>超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</h3><ul>
+<li>半虚拟化的思想就是， <strong>修改操作系统内核，替换掉不能虚拟化的指令， 通过超级调用（hypercall ）直接和底层的虚拟化层hypervisor 来通讯</strong> ，hypervisor 同时也提供了超级调用接口来满足其他关键内核操作，比如内存管理、中断和时间保持。</li>
+<li>这种做法省去了全虚拟化中的捕获和模拟，大大提高了效率。所以像XEN这种半虚拟化技术，客户机操作系统都是有一个专门的定制内核版本，和x86、mips、arm这些内核版本等价。这样以来，就不会有捕获异常、翻译、模拟的过程了，性能损耗非常低。这就是XEN这种半虚拟化架构的优势。这也是为什么XEN只支持虚拟化Linux，无法虚拟化windows原因，微软不改代码啊。<br><img src="2023-08-21T164352.png" alt="2023-08-21T164352"></li>
+</ul>
+<h3 id="硬件辅助的虚拟化"><a href="#硬件辅助的虚拟化" class="headerlink" title="硬件辅助的虚拟化"></a>硬件辅助的虚拟化</h3><p><strong>- CPU厂商Intel 和 AMD 开始支持虚拟化了。 Intel 引入了 Intel-VT （Virtualization Technology）技术。 这种 CPU，有 VMX root operation 和 VMX non-root operation两种模式，两种模式都支持Ring 0 ~ Ring 3 共 4 个运行级别。这样，VMM 可以运行在 VMX root operation模式下，客户OS运行在VMX non-root operation模式下。</strong><br><img src="2023-08-21T165138.png" alt="2023-08-21T165138"></p>
+<ul>
+<li>两种操作模式可以相互转换。运行在VMX root operation 模式下的VMM通过显示调用 VMLAUNCH 或 VMRESUME 指令切换到 VMX non-root operation 模式，硬件自动加载 Guest OS 的上下文，于是 Guest OS 获得运行，这种转换称为 VM entry。<ul>
+<li>Guest OS 运行过程中遇到需要VMM处理的事件，例如外部中断或缺页异常，或者主动调用式，恢复VMM的运行。这种转换称为VM exit. VMX root operation 模式下软件的行为与在没有 VT-x 技术的处理器上的行为基本一致；而VMX non-root operation 模式则有很大不同，最主要的区别是此时运行某些指令或遇到某些事件时，发生 VM exit。</li>
+</ul>
+</li>
+</ul>
+<h3 id="CPU-三种虚拟化机制"><a href="#CPU-三种虚拟化机制" class="headerlink" title="CPU 三种虚拟化机制"></a>CPU 三种虚拟化机制</h3><ul>
+<li><p>不同类型的虚拟化技术是从不同的地方开始引导虚拟机系统的：</p>
+<ul>
+<li><ol>
+<li>从模拟的BIOS开始引导，支持MBR,EFI,PXE等启动方式，如QEMU,VMWare</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>从内核开始引导的，虚拟机镜像内不包含内核，如KVM,Xen;</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>从 init 进程开始引导的，虚拟机是一个与主机共享内核的容器，会按照操作系统的引导过程启动各种系统服务，如 LXC、OpenVZ；</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>只运行一个特定的应用程序或服务的，也是基于容器，如 Docker。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>&#x2F;dev&#x2F;kvm提供的操作包括：</p>
+<ul>
+<li>创建一个新的虚拟机</li>
+<li>向一个虚拟机中分配内存</li>
+<li>读写虚拟cpu寄存器</li>
+<li>向一个虚拟cpu中注入中断</li>
+<li>运行一个虚拟cpu<br><img src="2023-08-21T184813.png" alt="2023-08-21T184813"></li>
+</ul>
+</li>
+</ul>
+<p><img src="2023-08-21T184945.png" alt="2023-08-21T184945"></p>
+<p><img src="2023-08-21T185030.png" alt="2023-08-21T185030"></p>
+<h3 id="CPU硬件辅助虚拟化技术"><a href="#CPU硬件辅助虚拟化技术" class="headerlink" title="CPU硬件辅助虚拟化技术"></a>CPU硬件辅助虚拟化技术</h3><ul>
+<li><h2 id="主要有Intel的VT-x-和-AMD的AMD-V-这两种技术。-核心思想：-通过引入新的指令和运行模式，-使得VMM和Guest-OS-分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest-OS运行在Ring-0下。通常情况下，Guest-OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest-OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。"><a href="#主要有Intel的VT-x-和-AMD的AMD-V-这两种技术。-核心思想：-通过引入新的指令和运行模式，-使得VMM和Guest-OS-分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest-OS运行在Ring-0下。通常情况下，Guest-OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest-OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。" class="headerlink" title="主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。- 核心思想： 通过引入新的指令和运行模式， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。"></a>主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。<br>- 核心思想： <strong>通过引入新的指令和运行模式</strong>， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。</h2></li>
+</ul>
+<p><img src="2023-08-21T185630.png" alt="2023-08-21T185630"></p>
+<blockquote>
+<ul>
+<li>没有VT-x之前，x86上的虚拟化只能走二进制翻译的方式，比如vmware，扫描目标码，找到特权指令，实时替换成对自己的系统调用。Xen是预先把部分特权指令替换成了自己的系统调用，需要改内核，重新编译。</li>
+<li>有了VT-X之后，就可以直接跑目标代码，遇到特权指令直接内陷进入虚拟机管理程序。KVM就是这样的虚拟机管理程序，只是它的事先是在现成的linux内核里干活，做成一个核心模块，各个虚拟机就成为linux下的一个普通进程，由linux核心里现成的进程管理、内存管理、I&#x2F;O驱动等等来提供服务。</li>
+<li>Xen是自己搞了一个内核做这些事。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>UEFI和BIOS在对硬件检测的流程是一样的，但最大区别的是对后续的系统影响不一样，就用制造来比喻，UEFI&#x2F;BIOS跟操作系统是两个工序，UEFI&#x2F;BIOS是前工序，操作系统是后工序，UEFI对比BIOS要多出一个流程就是形成交接文件，BIOS是该我工作的部分（自检）我一个不落的完成，但我把我完成的东西就扔给操作系统，但操作系统完全不知道前一工序的状态，还得重新做一篇检查，而UEFI就是把自己检测好的状态写进文件，告诉操作系统这些东西没问题，你可以启动就启动吧不用再次检查了</p>
+</blockquote>
+<h2 id="kvm-和-xen"><a href="#kvm-和-xen" class="headerlink" title="kvm 和 xen"></a>kvm 和 xen</h2><h3 id="kvm-（kernel-based-Virtual-Machine）"><a href="#kvm-（kernel-based-Virtual-Machine）" class="headerlink" title="kvm （kernel-based Virtual Machine）"></a>kvm （kernel-based Virtual Machine）</h3><p><img src="2023-08-22T135052.png" alt="2023-08-22T135052"></p>
+<ul>
+<li>从V2.6.0开始，打包在linux内核中发行</li>
+<li>需运行在硬件虚拟化特性的物理机上（Intel-VT&#x2F;AMD-V）</li>
+<li>二型虚拟机监控器（形式上）</li>
+<li>利用QEMU进行设备模拟</li>
+<li>KVM在linux内核 直接与硬件通信 不经过os</li>
+</ul>
+<p><img src="2023-08-22T135844.png" alt="2023-08-22T135844"></p>
+<ul>
+<li>仅支持全虚拟化<ul>
+<li>是指完整模拟客户机，包含指令，输入输出操作，中断。（需要qemu支持）</li>
+</ul>
+</li>
+<li>支持准虚拟化驱动提升I&#x2F;O性能</li>
+<li>充分利用Linux内核<ul>
+<li>虚拟机为标准Linux进程</li>
+<li>利用Linux调度功能</li>
+<li>内存管理</li>
+<li>电源管理</li>
+</ul>
+</li>
+<li><strong>Kvm 把linux 内核变成一个大的虚拟机监控器</strong><br><img src="2023-08-22T140137.png" alt="2023-08-22T140137"></li>
+</ul>
+<h3 id="Xen"><a href="#Xen" class="headerlink" title="Xen"></a>Xen</h3><p><img src="2023-08-22T140335.png" alt="2023-08-22T140335"></p>
+<ul>
+<li>采用定制微内核</li>
+<li>特殊虚机Domain0作为管理平台 （只有Domain0 有权限访问硬件）</li>
+<li>一型虚拟机监控器<br><img src="2023-08-22T140526.png" alt="2023-08-22T140526"></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2023 YJJ
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
