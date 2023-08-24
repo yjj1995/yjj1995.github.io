@@ -352,7 +352,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-23 10:14:40'>2023-08-21 07:46</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-24 15:43:56'>2023-08-21 07:46</time>
         
     </div>
     <div class="article-meta">
@@ -374,7 +374,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E7%9A%84%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于二进制翻译的全虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E6%88%96%E8%80%85%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96-x2F-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%89"><span class="toc-text">超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">硬件辅助的虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E4%B8%89%E7%A7%8D%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="toc-text">CPU 三种虚拟化机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">CPU硬件辅助虚拟化技术</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%9C%89Intel%E7%9A%84VT-x-%E5%92%8C-AMD%E7%9A%84AMD-V-%E8%BF%99%E4%B8%A4%E7%A7%8D%E6%8A%80%E6%9C%AF%E3%80%82-%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%EF%BC%9A-%E9%80%9A%E8%BF%87%E5%BC%95%E5%85%A5%E6%96%B0%E7%9A%84%E6%8C%87%E4%BB%A4%E5%92%8C%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F%EF%BC%8C-%E4%BD%BF%E5%BE%97VMM%E5%92%8CGuest-OS-%E5%88%86%E5%88%AB%E8%BF%90%E8%A1%8C%E5%9C%A8%E4%B8%8D%E5%90%8C%E6%A8%A1%E5%BC%8F%EF%BC%88ROOT%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9D%9EROOT%E6%A8%A1%E5%BC%8F%EF%BC%89%E4%B8%8B%E3%80%82%E4%B8%94Guest-OS%E8%BF%90%E8%A1%8C%E5%9C%A8Ring-0%E4%B8%8B%E3%80%82%E9%80%9A%E5%B8%B8%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8CGuest-OS%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8C%87%E4%BB%A4%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BE%BE%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E6%89%A7%E8%A1%8C%EF%BC%8C%E8%80%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E7%BB%8F%E8%BF%87VMM%E3%80%82%E5%BD%93Guest-OS%E6%89%A7%E8%A1%8C%E5%88%B0%E7%89%B9%E6%AE%8A%E6%8C%87%E4%BB%A4%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E7%B3%BB%E7%BB%9F%E4%BC%9A%E5%88%87%E6%8D%A2%E5%88%B0VMM%EF%BC%8C%E8%AE%A9VMM%E6%9D%A5%E5%A4%84%E7%90%86%E7%89%B9%E6%AE%8A%E6%8C%87%E4%BB%A4%E3%80%82"><span class="toc-text">主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。- 核心思想： 通过引入新的指令和运行模式， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9E%B6%E6%9E%84"><span class="toc-text">虚拟化架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#kvm-%EF%BC%88kernel-based-Virtual-Machine%EF%BC%89"><span class="toc-text">kvm （kernel-based Virtual Machine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xen"><span class="toc-text">Xen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hypervisor-%E5%92%8C-vmm"><span class="toc-text">Hypervisor 和 vmm</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9B%91%E6%8E%A7%E7%A8%8B%E5%BA%8FVMM%E7%B1%BB%E5%9E%8B"><span class="toc-text">虚拟化监控程序VMM类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="toc-text">虚拟化技术分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E7%9A%84%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于二进制翻译的全虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E6%88%96%E8%80%85%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96-x2F-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%89"><span class="toc-text">超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">硬件辅助的虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E4%B8%89%E7%A7%8D%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="toc-text">CPU 三种虚拟化机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">CPU硬件辅助虚拟化技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kvm-%EF%BC%88kernel-based-Virtual-Machine%EF%BC%89"><span class="toc-text">kvm （kernel-based Virtual Machine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xen"><span class="toc-text">Xen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hypervisor-%E5%92%8C-vmm"><span class="toc-text">Hypervisor 和 vmm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94"><span class="toc-text">总结对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qemu%E5%92%8CVMWare%E7%9A%84CPU%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Qemu和VMWare的CPU虚拟化的区别</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -391,9 +391,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/0voice/Introduce_to_virtualization#nav_vt0">https://github.com/0voice/Introduce_to_virtualization#nav_vt0</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/0voice/Introduce_to_virtualization#nav_vt0">https://github.com/0voice/Introduce_to_virtualization#nav_vt0</a><br><a target="_blank" rel="noopener" href="https://qiankunli.github.io/2021/09/02/kvm_intro.html">https://qiankunli.github.io/2021/09/02/kvm_intro.html</a></p>
 </blockquote>
-<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
+<ul>
+<li>虚拟机监控程序是一种创建并运行虚拟机（VM）的软件。</li>
+<li>虚拟机监控程序（有时也称为 VMM）会将虚拟机监控程序的操作系统与虚拟机的资源分离开，并创建和管理这些 VM。</li>
+</ul>
+<h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
 <li><p>VMM: 虚拟机监视器</p>
 <ul>
 <li>在宿主机上表现为一个提供虚拟机CPU, 内存以及一系列硬件虚拟的实体，这个实体在体系中就是一个进程，如qemu-kvm.</li>
@@ -429,17 +433,71 @@
 <ul>
 <li>自陷：<strong>通过处理器所拥有的软件指令、可预期地使处理器正在执行的程序的执行流程发生变化，以执行特定的程序。自陷是显式的事件，需要无条件地执行</strong></li>
 </ul>
-<h2 id="CPU虚拟化"><a href="#CPU虚拟化" class="headerlink" title="CPU虚拟化"></a>CPU虚拟化</h2><h3 id="基于二进制翻译的全虚拟化"><a href="#基于二进制翻译的全虚拟化" class="headerlink" title="基于二进制翻译的全虚拟化"></a>基于二进制翻译的全虚拟化</h3><p><img src="2023-08-21T160108.png" alt="2023-08-21T160108"></p>
+<h1 id="虚拟化监控程序VMM类型"><a href="#虚拟化监控程序VMM类型" class="headerlink" title="虚拟化监控程序VMM类型"></a>虚拟化监控程序VMM类型</h1><ul>
+<li><p><strong>系统虚拟化体系结构分为宿主型&#x2F;独立监控型两种类型：</strong></p>
+<ul>
+<li>独立监控型（Type-1）是直接运行于硬件层之上的虚拟化类型<ul>
+<li>Xen、Hyper-V、Vmware ESXi</li>
+</ul>
+</li>
+<li>宿主型（Type-2）是需要运行在Host OS之上的，并提供驱动程序与硬件通信的虚拟化类型<ul>
+<li>VMware Workstation, VirtualBox</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>KVM 将 Linux 转变为 1 类（裸机）虚拟机监控程序。</p>
+<ul>
+<li><p>基于内核的虚拟机（KVM）是一种内建于Linux的开源虚拟化技术，</p>
+<ul>
+<li><strong>KVM可以将Linux转变为虚拟机监控程序</strong>，是主机计算机能够运行多个隔离的虚拟环境，即虚拟客户机（VM）。</li>
+<li>KVM 将 Linux 转变为 1 类（裸机）虚拟机监控程序。</li>
+</ul>
+</li>
+<li><p>所有的虚拟机监控程序都需要一些操作系统层面的组件才能运行虚拟机</p>
+<ul>
+<li>内存管理器</li>
+<li>进程调度程序</li>
+<li>输入&#x2F;输出（I&#x2F;O）堆栈</li>
+<li>设备驱动程序</li>
+<li>安全管理器</li>
+<li>网络堆栈等</li>
+</ul>
+</li>
+<li><p>由于 KVM 是 Linux 内核的一部分，因此它包含了所有这些组件。每个虚拟机都像常规 Linux 进程一样实施，由标准的 Linux 调度程序进行调度，并且使用专门的虚拟硬件，如网卡、图形适配器、CPU、内存和磁盘等。</p>
+</li>
+</ul>
+</li>
+<li><p>虚拟机监控程序的类型</p>
+<ul>
+<li><p>虚拟化有两种不同类型的虚拟机监控程序可用：第 1 类和第 2 类虚拟机监控程序。</p>
+</li>
+<li><p>第 1 类</p>
+<ul>
+<li>第 1 类虚拟机监控程序（也称为本机或裸机虚拟机监控程序）<strong>直接在主机的硬件上运行，以管理虚拟客户机操作系统。它可取代主机操作系统，而虚拟机监控程序会直接向硬件调度 VM 资源</strong>。 </li>
+<li>这一类虚拟机监控程序在企业数据中心或其他基于服务器的环境中最为常见。</li>
+<li>KVM、Microsoft Hyper-V 和 VMware vSphere 就是典型的第 1 类虚拟机监控程序。从 2007 年开始，KVM 已被合并到 Linux 内核中。因此，如果您使用的是较新版本的 Linux，就已经可以访问 KVM。</li>
+</ul>
+</li>
+<li><p>第 2 类</p>
+<ul>
+<li>第 2 类虚拟机监控程序也称为托管虚拟机监控程序，它在常规操作系统上以软件层或应用的形式运行。</li>
+<li>这种虚拟机监控程序是通过从主机操作系统中抽象出虚拟客户机操作系统来工作的。<strong>虚拟机资源针对主机操作系统进行调度，然后针对硬件来执行</strong>。 </li>
+<li>第 2 类虚拟机监控程序更适合希望在私人计算机上运行多个操作系统的个人用户。 </li>
+<li>VMware Workstation 和 Oracle VirtualBox 就是典型的第 2 类虚拟机监控程序。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="虚拟化技术分类"><a href="#虚拟化技术分类" class="headerlink" title="虚拟化技术分类"></a>虚拟化技术分类</h1><h2 id="CPU虚拟化"><a href="#CPU虚拟化" class="headerlink" title="CPU虚拟化"></a>CPU虚拟化</h2><ul>
+<li>cpu 虚拟化的核心难点是特权指令，对于特权指令，guest os 要么改自己不执行特权指令，要么VMM 为cpu 报错擦屁股，要么cpu 不报错。</li>
+</ul>
+<h3 id="基于二进制翻译的全虚拟化"><a href="#基于二进制翻译的全虚拟化" class="headerlink" title="基于二进制翻译的全虚拟化"></a>基于二进制翻译的全虚拟化</h3><p><img src="2023-08-23T152639.png" alt="2023-08-23T152639"><br><img src="2023-08-21T160108.png" alt="2023-08-21T160108"></p>
 <ul>
 <li><p>客户操作系统运行在Ring 1, 它在执行特权指令时，会触发异常（CPU的机制，没权限的指令会触发异常），VMM（hypervisor ）会捕获这个异常，在异常里面做翻译，模拟，最后返回到客户操作系统内，客户操作系统认为自己的特权指令工作正常，继续运行。但是这个性能损耗，就非常的大，简单的一条指令，执行完，了事，现在却要通过复杂的异常处理过程。</p>
 <ul>
-<li><p>所谓特权指令是指有特权权限的指令，由于这类指令的权限最大，如果使用不当，将导致整个系统崩溃。比如：清内存、置时钟、分配系统资源、修改虚存的段表和页表，修改用户的访问权限等。</p>
-</li>
-<li><p>原理：</p>
-<ul>
-<li>把CPU的所有寄存器都写到一组变量中（CPUFile）（AX &#x3D; …; BX &#x3D; …;这样）。然后用一片内存当作模拟CPU的内存（vMem）,然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）,之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。</li>
-</ul>
-</li>
+<li>所谓特权指令是指有特权权限的指令，由于这类指令的权限最大，如果使用不当，将导致整个系统崩溃。比如：清内存、置时钟、分配系统资源、修改虚存的段表和页表，修改用户的访问权限等。</li>
 </ul>
 </li>
 <li><ol>
@@ -458,9 +516,14 @@
 </li>
 </ul>
 <p><img src="2023-08-21T162925.png" alt="2023-08-21T162925"></p>
-<h3 id="超虚拟化（或者半虚拟化-x2F-操作系统辅助虚拟化）"><a href="#超虚拟化（或者半虚拟化-x2F-操作系统辅助虚拟化）" class="headerlink" title="超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）"></a>超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</h3><ul>
-<li>半虚拟化的思想就是， <strong>修改操作系统内核，替换掉不能虚拟化的指令， 通过超级调用（hypercall ）直接和底层的虚拟化层hypervisor 来通讯</strong> ，hypervisor 同时也提供了超级调用接口来满足其他关键内核操作，比如内存管理、中断和时间保持。</li>
-<li>这种做法省去了全虚拟化中的捕获和模拟，大大提高了效率。所以像XEN这种半虚拟化技术，客户机操作系统都是有一个专门的定制内核版本，和x86、mips、arm这些内核版本等价。这样以来，就不会有捕获异常、翻译、模拟的过程了，性能损耗非常低。这就是XEN这种半虚拟化架构的优势。这也是为什么XEN只支持虚拟化Linux，无法虚拟化windows原因，微软不改代码啊。<br><img src="2023-08-21T164352.png" alt="2023-08-21T164352"></li>
+<h3 id="超虚拟化（或者半虚拟化-x2F-操作系统辅助虚拟化）"><a href="#超虚拟化（或者半虚拟化-x2F-操作系统辅助虚拟化）" class="headerlink" title="超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）"></a>超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</h3><p><img src="2023-08-23T110427.png" alt="2023-08-23T110427"></p>
+<ul>
+<li><p>不需要去翻译 指令</p>
+</li>
+<li><p>半虚拟化的思想就是， <strong>修改操作系统内核，替换掉不能虚拟化的指令， 通过超级调用（hypercall ）直接和底层的虚拟化层hypervisor 来通讯</strong> ，hypervisor 同时也提供了超级调用接口来满足其他关键内核操作，比如内存管理、中断和时间保持。</p>
+</li>
+<li><p>这种做法省去了全虚拟化中的捕获和模拟，大大提高了效率。所以像XEN这种半虚拟化技术，客户机操作系统都是有一个专门的定制内核版本，和x86、mips、arm这些内核版本等价。这样以来，就不会有捕获异常、翻译、模拟的过程了，性能损耗非常低。这就是XEN这种半虚拟化架构的优势。这也是为什么XEN只支持虚拟化Linux，无法虚拟化windows原因，微软不改代码啊。<br><img src="2023-08-21T164352.png" alt="2023-08-21T164352"></p>
+</li>
 </ul>
 <h3 id="硬件辅助的虚拟化"><a href="#硬件辅助的虚拟化" class="headerlink" title="硬件辅助的虚拟化"></a>硬件辅助的虚拟化</h3><ul>
 <li>CPU厂商Intel 和 AMD 开始支持虚拟化了。 Intel 引入了 Intel-VT （Virtualization Technology）技术。 这种 CPU，有 VMX root operation 和 VMX non-root operation两种模式，两种模式都支持Ring 0 ~ Ring 3 共 4 个运行级别。这样，VMM 可以运行在 VMX root operation模式下，客户OS运行在VMX non-root operation模式下。<br><img src="2023-08-21T165138.png" alt="2023-08-21T165138"></li>
@@ -503,20 +566,24 @@
 <p><img src="2023-08-21T184945.png" alt="2023-08-21T184945"></p>
 <p><img src="2023-08-21T185030.png" alt="2023-08-21T185030"></p>
 <h3 id="CPU硬件辅助虚拟化技术"><a href="#CPU硬件辅助虚拟化技术" class="headerlink" title="CPU硬件辅助虚拟化技术"></a>CPU硬件辅助虚拟化技术</h3><ul>
-<li><h2 id="主要有Intel的VT-x-和-AMD的AMD-V-这两种技术。-核心思想：-通过引入新的指令和运行模式，-使得VMM和Guest-OS-分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest-OS运行在Ring-0下。通常情况下，Guest-OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest-OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。"><a href="#主要有Intel的VT-x-和-AMD的AMD-V-这两种技术。-核心思想：-通过引入新的指令和运行模式，-使得VMM和Guest-OS-分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest-OS运行在Ring-0下。通常情况下，Guest-OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest-OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。" class="headerlink" title="主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。- 核心思想： 通过引入新的指令和运行模式， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。"></a>主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。<br>- 核心思想： <strong>通过引入新的指令和运行模式</strong>， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。</h2></li>
+<li>KVM<br><img src="2023-08-23T110635.png" alt="2023-08-23T110635"></li>
+<li>主要有Intel的VT-x 和 AMD的AMD-V 这两种技术。<ul>
+<li>核心思想： <strong>通过引入新的指令和运行模式</strong>， 使得VMM和Guest OS 分别运行在不同模式（ROOT模式和非ROOT模式）下。且Guest OS运行在Ring 0下。通常情况下，Guest OS的核心指令可以直接下达到计算机系统硬件执行，而不需要经过VMM。当Guest OS执行到特殊指令的时候，系统会切换到VMM，让VMM来处理特殊指令。</li>
+</ul>
+</li>
 </ul>
 <p><img src="2023-08-21T185630.png" alt="2023-08-21T185630"></p>
 <blockquote>
 <ul>
 <li>没有VT-x之前，x86上的虚拟化只能走二进制翻译的方式，比如vmware，扫描目标码，找到特权指令，实时替换成对自己的系统调用。Xen是预先把部分特权指令替换成了自己的系统调用，需要改内核，重新编译。</li>
-<li>有了VT-X之后，就可以直接跑目标代码，遇到特权指令直接内陷进入虚拟机管理程序。KVM就是这样的虚拟机管理程序，只是它的事先是在现成的linux内核里干活，做成一个核心模块，各个虚拟机就成为linux下的一个普通进程，由linux核心里现成的进程管理、内存管理、I&#x2F;O驱动等等来提供服务。</li>
+<li>有了VT-X之后，就可以直接跑目标代码，遇到特权指令直接内陷进入虚拟机管理程序。<strong>KVM就是这样的虚拟机管理程序，只是它的事先是在现成的linux内核里干活，做成一个核心模块，各个虚拟机就成为linux下的一个普通进程，由linux核心里现成的进程管理、内存管理、I&#x2F;O驱动等等来提供服务。</strong></li>
 <li>Xen是自己搞了一个内核做这些事。</li>
 </ul>
 </blockquote>
 <blockquote>
 <p>UEFI和BIOS在对硬件检测的流程是一样的，但最大区别的是对后续的系统影响不一样，就用制造来比喻，UEFI&#x2F;BIOS跟操作系统是两个工序，UEFI&#x2F;BIOS是前工序，操作系统是后工序，UEFI对比BIOS要多出一个流程就是形成交接文件，BIOS是该我工作的部分（自检）我一个不落的完成，但我把我完成的东西就扔给操作系统，但操作系统完全不知道前一工序的状态，还得重新做一篇检查，而UEFI就是把自己检测好的状态写进文件，告诉操作系统这些东西没问题，你可以启动就启动吧不用再次检查了</p>
 </blockquote>
-<h2 id="虚拟化架构"><a href="#虚拟化架构" class="headerlink" title="虚拟化架构"></a>虚拟化架构</h2><blockquote>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://support.huawei.com/enterprise/zh/knowledge/EKB1002005920">https://support.huawei.com/enterprise/zh/knowledge/EKB1002005920</a> 参考<br>从虚拟化的实现方式来看，虚拟化架构主要有三种形式：寄居虚拟化架构、裸金属虚拟化架构和操作系统虚拟化架构，其性能及主流产品如下<br><img src="2023-08-22T141954.png" alt="2023-08-22T141954"></p>
 </blockquote>
 <ul>
@@ -545,11 +612,24 @@
 </ul>
 <h3 id="kvm-（kernel-based-Virtual-Machine）"><a href="#kvm-（kernel-based-Virtual-Machine）" class="headerlink" title="kvm （kernel-based Virtual Machine）"></a>kvm （kernel-based Virtual Machine）</h3><p><img src="2023-08-22T135052.png" alt="2023-08-22T135052"></p>
 <ul>
-<li>从V2.6.0开始，打包在linux内核中发行</li>
-<li>需运行在硬件虚拟化特性的物理机上（Intel-VT&#x2F;AMD-V）</li>
-<li>二型虚拟机监控器（形式上）</li>
-<li>利用QEMU进行设备模拟</li>
-<li>KVM在linux内核 直接与硬件通信 不经过os</li>
+<li><p>从V2.6.0开始，打包在linux内核中发行</p>
+</li>
+<li><p>需运行在硬件虚拟化特性的物理机上（Intel-VT&#x2F;AMD-V）</p>
+</li>
+<li><p>二型虚拟机监控器（形式上）</p>
+<ul>
+<li>虚拟机监视器好像一个运行在操作系统上的软件。你的客户机的操作系统呢，把最终到硬件的所有指令，都发送给虚拟机监视器。而虚拟机监视器，又会把这些指令再交给宿主机的操作系统去执行。</li>
+</ul>
+</li>
+<li><p>利用QEMU进行设备模拟</p>
+</li>
+<li><p>KVM在linux内核 直接与硬件通信 不经过os</p>
+</li>
+<li><p>原理：</p>
+<ul>
+<li>把CPU的所有寄存器都写到一组变量中（CPUFile）（AX &#x3D; …; BX &#x3D; …;这样）。然后用一片内存当作模拟CPU的内存（vMem）,然后在用一些数据结构表示IO设备的状态（这里称为vIO），三者的数据结构综合在一起，就是代表一个虚拟化的环境了（这里称之为VM）,之后按顺序读出一条条的指令，根据这个指令的语义，更改VM的数据结构的状态（如果模拟了硬件，还要模拟硬件的行为，比如发现显存被写了一个值，可以在虚拟屏幕上显示一个点等），这样，实施虚拟的那个程序就相当于给被虚拟的程序模拟了一台计算机，这种技术，我称它为“解释型虚拟化技术”。指令是被一条一条解释执行的。</li>
+</ul>
+</li>
 </ul>
 <p><img src="2023-08-22T135844.png" alt="2023-08-22T135844"></p>
 <ul>
@@ -569,10 +649,40 @@
 </ul>
 <h3 id="Xen"><a href="#Xen" class="headerlink" title="Xen"></a>Xen</h3><p><img src="2023-08-22T140335.png" alt="2023-08-22T140335"></p>
 <ul>
-<li>采用定制微内核</li>
-<li>特殊虚机Domain0作为管理平台 （只有Domain0 有权限访问硬件）</li>
-<li>一型虚拟机监控器<br><img src="2023-08-22T140526.png" alt="2023-08-22T140526"></li>
-<li>与寄居虚拟化最大的不同之处，在于裸机虚拟化其虚拟机管理器即可作为一个“操作系统”，同为虚拟机管理器（vmm），当VMM与操作系统“合二为一”时，一般叫做“Hypervisor(虚拟机监控器)”，如图所示：<br><img src="2023-08-22T140951.png" alt="2023-08-22T140951"></li>
+<li><p>采用定制微内核</p>
+</li>
+<li><p>特殊虚机Domain0作为管理平台 （只有Domain0 有权限访问硬件）</p>
+</li>
+<li><p>一型虚拟机监控器<br><img src="2023-08-22T140526.png" alt="2023-08-22T140526"></p>
+</li>
+<li><p>与寄居虚拟化最大的不同之处，在于裸机虚拟化其虚拟机管理器即可作为一个“操作系统”，同为虚拟机管理器（vmm），当VMM与操作系统“合二为一”时，一般叫做“Hypervisor(虚拟机监控器)”，如图所示：<br><img src="2023-08-22T140951.png" alt="2023-08-22T140951"></p>
+</li>
+<li><p>在 Xen 架构中，主机操作系统通常被称为“Dom0”（Domain 0），它与其他虚拟机（称为“DomU”或非特权域）有一些区别。虽然 Dom0 在某种程度上也可以看作一个虚拟机，但在 Xen 架构中，它具有一些特殊的角色和责任。</p>
+<ul>
+<li><p>Dom0 在 Xen 中具有以下重要功能：</p>
+<ul>
+<li><ol>
+<li><strong>管理和控制：</strong> Dom0 是一个特殊的虚拟机，它具有管理和控制其他虚拟机的功能。它可以管理虚拟机的创建、启动、停止和资源分配。Dom0 通常运行一个特殊的操作系统，如 Linux，专门用于管理 Xen 虚拟化环境。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li><strong>设备驱动程序：</strong> Dom0 通常负责管理和操作物理设备，如网络适配器、存储控制器等。它包含了与硬件交互的驱动程序，这些驱动程序负责与虚拟机共享硬件资源。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li><strong>Xen API：</strong> Dom0 提供 Xen API，这是一组接口和工具，用于管理和监控虚拟机。通过 Xen API，管理员可以执行各种操作，如创建虚拟机、配置资源、监控性能等。</li>
+</ol>
+</li>
+<li><ol start="4">
+<li><strong>安全性：</strong> Dom0 在 Xen 中具有较高的特权级别，它需要访问一些敏感资源和操作。因此，为了维护整个虚拟化环境的安全性，对 Dom0 的访问和管理需要进行适当的限制。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>虽然 Dom0 可以看作一个特殊的虚拟机，但它在 Xen 架构中具有独特的角色和功能。与其他普通虚拟机相比，Dom0 具有更多的特权和责任，以便有效地管理和控制整个虚拟化环境。</p>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="Hypervisor-和-vmm"><a href="#Hypervisor-和-vmm" class="headerlink" title="Hypervisor 和 vmm"></a>Hypervisor 和 vmm</h3><ul>
 <li>Hypervisor接入硬件、抽象资源；</li>
@@ -591,6 +701,20 @@
 <p>VMM（虚拟机管理器）：VMM 是一种更广泛的术语，可以指代管理虚拟机的软件或组件。VMM 是 Hypervisor 的一部分，它是用于创建、配置、监视和管理虚拟机的工具集。VMM 可以包括虚拟机创建、删除、克隆、快照管理等功能。因此，VMM 可以用来描述 Hypervisor 所提供的管理接口和工具。</p>
 <p>综上所述，”Hypervisor” 是一种特定的虚拟化技术，用于管理硬件资源和运行多个虚拟机。”VMM” 是更一般性的术语，用于描述虚拟机的管理工具和接口，可以涵盖 Hypervisor 提供的管理功能。在许多情况下，这两个术语可以互换使用，但在某些上下文中，可能会强调其不同的方面。</p>
 </blockquote>
+<h2 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h2><ul>
+<li><p>半虚拟化中的特权指令处理是虚拟机<strong>主动调用</strong>虚拟化层（xen 提供这样的主动调用的接口），而全虚拟化中的特权指令处理是通过<strong>被动捕获和解释</strong>来实现的。这两种方式在处理特权操作时有不同的性能和安全权衡。</p>
+</li>
+<li><p>在虚拟化环境中，<strong>通常虚拟跟模拟是两个概念，VMWare的动态二进制翻译技术（BT）是虚拟的，而QEMU软件技术是模拟的</strong>。最大的区别在于，模拟通过软件实现时需要模拟CPU ring 0-3，也就是需要转换CPU ring 0-3所有的指令，而虚拟只需要转换CPU ring 0特权指令即可。</p>
+<ul>
+<li>虚拟机（大部分）指令（非特权指令的敏感指令）是直接跑在真实的CPU上的。虚拟机内的指令集与宿主机相同，执行速度接近原生（宿主机）执行的速度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Qemu和VMWare的CPU虚拟化的区别"><a href="#Qemu和VMWare的CPU虚拟化的区别" class="headerlink" title="Qemu和VMWare的CPU虚拟化的区别"></a>Qemu和VMWare的CPU虚拟化的区别</h3><ul>
+<li>常见的软件虚拟机例如QEMU，它是通过纯软件来仿真X86平台处理器的取指、解码和执行，客户机的指令并不在物理平台上直接执行。由于所有的指令都是软件模拟的，因此性能往往比较差，但是<strong>可以在同一平台上模拟不同架构平台的虚拟机。</strong></li>
+<li>VMWare的软件虚拟化则使用了动态二进制翻译（BT）的技术，与QEMU这种模拟的方式不同，BT是一种加速虚拟化的方案（另一种常见的虚拟化加速方案就是硬件辅助虚拟化技术）。BT就是在VMM可控制的范围内，允许客户机的指令在物理平台上直接运行。但是，客户机指令在运行前会被VMM扫描，其中突破VMM限制的指令会被动态替换为可以在物理平台上直接运行的安全指令，或者替换为对VMM的软件调用。这样做的好处是比纯软件模拟技术在性能上有大幅的提升， 但是也同时失去了跨平台虚拟化的能力。</li>
+<li>VMware的二进制翻译技术也融合了部分的直接执行。</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
