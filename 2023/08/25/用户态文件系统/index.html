@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>标题 | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="标题 | 记好笔记">
+  <title>用户态文件系统 | 记好笔记</title>
+  <meta name="keywords" content=" 文件系统 ceph ">
+  <meta name="description" content="用户态文件系统 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -375,19 +375,26 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="about-" class="article article-type-about" itemscope itemprop="blogPost">
+        <article id="post-用户态文件系统" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">标题</h1>
+        <h1 class="article-title">用户态文件系统</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">文件系统 ceph</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-02 17:05:10'>2023-06-02 17:05</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-28 17:11:46'>2023-08-25 09:27</time>
         
     </div>
     <div class="article-meta">
@@ -409,7 +416,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FUSE%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">FUSE是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81FUSE"><span class="toc-text">为什么需要FUSE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-text">内核文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6fuse%E4%B9%8B%E5%90%8E"><span class="toc-text">带fuse之后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fuse-ko-%E5%92%8C-libfuse%E5%BA%93%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">fuse.ko 和 libfuse库的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%80%81%EF%BC%8C%E5%86%85%E6%A0%B8%E6%80%81%E7%9A%84%E7%BA%BD%E5%B8%A6"><span class="toc-text">用户态，内核态的纽带</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%82%E8%BD%BDFUSE%E5%86%85%E6%A0%B8%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-%E4%BE%BF%E4%BA%8E%E7%AE%A1%E7%90%86"><span class="toc-text">挂载FUSE内核文件系统 便于管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E8%B4%A8"><span class="toc-text">本质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%BF%9B%E7%A8%8B%E5%92%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E8%A1%8C%E4%BA%A4%E4%BA%92%EF%BC%88read%E6%96%87%E4%BB%B6%E4%B8%BA%E4%BE%8B%EF%BC%89%EF%BC%9A"><span class="toc-text">用户进程和操作系统进行交互（read文件为例）：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -425,7 +432,118 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这里写关于页的正文，支持 Markdown, HTML</p>
+        <p><img src="2023-08-28T110224.png" alt="2023-08-28T110224"></p>
+<h2 id="FUSE是什么？"><a href="#FUSE是什么？" class="headerlink" title="FUSE是什么？"></a>FUSE是什么？</h2><ul>
+<li>FUSE是Filesystem in Userspace的缩写，也就是用户态文件系统<ul>
+<li><p>FUSE是一个用户空间文件系统的框架</p>
+<ul>
+<li><ol>
+<li>内核模块fsue.ko: 用来接收VFS传递下来的IO请求，并且把这个IO封装之后通过管道发送到用户态；</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>用户态lib库libfuse：解析内核态转发出来的协议包，拆解成常规的IO请求；</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>mount 工具fsuermount;</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>可以在用户态实现文件系统，并且让IO在内核态和用户态文件系统之间自由穿梭。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="为什么需要FUSE"><a href="#为什么需要FUSE" class="headerlink" title="为什么需要FUSE"></a>为什么需要FUSE</h2><ul>
+<li>文件系统一般是实现在内核里面的，比如，Ext4、Fat32、NTFS(Kernel原生版)等常见的文件系统，其代码都在内核中，内核开发的难点在于调试和排查故障，而FUSE特殊之处就是，其文件系统的核心逻辑是在用户空间实现的。<ul>
+<li>优点：开发调试效率高</li>
+<li>缺点：损失性能</li>
+</ul>
+</li>
+</ul>
+<h3 id="内核文件系统"><a href="#内核文件系统" class="headerlink" title="内核文件系统"></a>内核文件系统</h3><ul>
+<li>内核文件系统 是内核的一个模块</li>
+<li>IO流程图<br><img src="2023-08-28T152135.png" alt="2023-08-28T152135"></li>
+</ul>
+<p><img src="2023-08-28T152146.png" alt="2023-08-28T152146"></p>
+<h3 id="带fuse之后"><a href="#带fuse之后" class="headerlink" title="带fuse之后"></a>带fuse之后</h3><ul>
+<li><p><img src="2023-08-28T152233.png" alt="2023-08-28T152233"></p>
+<ul>
+<li>背景：一个用户态文件系统，挂载点为 &#x2F;tmp&#x2F;fuse ，用户二进制程序文件为 .&#x2F;hello（该二进制程序可以理解为用户自己根据自身需求实现的文件系统）;</li>
+<li>当执行 ls -l &#x2F;tmp&#x2F;fuse 命令的时候，流程如下：</li>
+<li>(1) IO 请求先进内核，经VFS传递给内核 FUSE 文件系统模块；</li>
+<li>(2) 内核 FUSE 模块把请求发给到用户态，由 .&#x2F;hello 程序接收并且处理。处理完成之后，响应原路返回；</li>
+</ul>
+</li>
+<li><p>内核FUSE模块在内核态中间做协议封装和协议解析的工作</p>
+<ul>
+<li>接收从VFS传下来的请求，并封装成FUSE协议转发到用户态</li>
+<li>接收用户态的响应，随后返回给用户</li>
+</ul>
+</li>
+</ul>
+<h3 id="fuse-ko-和-libfuse库的作用"><a href="#fuse-ko-和-libfuse库的作用" class="headerlink" title="fuse.ko 和 libfuse库的作用"></a>fuse.ko 和 libfuse库的作用</h3><ul>
+<li><p>这两个模块一个位于内核，一个位于用户态，是配套使用的，最核心的功能是协议封装和解析。</p>
+<ul>
+<li>内核fuse.ko用于接收VFS下来的IO请求，然后封装成FUSE数据包，转发到用户态。</li>
+<li>用户态文件系统接收到这个FUSE数据包</li>
+<li><strong>如果想要看懂这个数据包，就必须实现一套FUSE协议的代码，这套代码是公开透明的，属于FUSE框架的公共的代码，这种代码不需要让所有的用户文件系统都重复实现一遍，于是libfuse库就诞生了。</strong><ul>
+<li>libfuse公共库</li>
+<li>用户文件系统调用这个库与 内核交互</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户态，内核态的纽带"><a href="#用户态，内核态的纽带" class="headerlink" title="用户态，内核态的纽带"></a>用户态，内核态的纽带</h2><ul>
+<li>&#x2F;dev&#x2F;fuse ，这个虚设备文件就是内核模块和用户程序的桥梁。<ul>
+<li>整个过程中，用户的IO通过正常的系统调用进来，走到内核文件系统FUSE</li>
+<li>FUSE文件系统把这个IO请求按照FUSE协议封装起来，打包成特定的格式</li>
+<li>通过 &#x2F;dev&#x2F;fuse 这个管道传递到用户态。</li>
+<li>在此之前有守护进程监听这个管道，看到有消息出来之后，立马读出来，</li>
+<li>然后利用libfuse库解析协议，之后就是用户文件系统的代码逻辑了。<br><img src="2023-08-28T165814.png" alt="2023-08-28T165814"></li>
+</ul>
+</li>
+</ul>
+<h3 id="挂载FUSE内核文件系统-便于管理"><a href="#挂载FUSE内核文件系统-便于管理" class="headerlink" title="挂载FUSE内核文件系统 便于管理"></a>挂载FUSE内核文件系统 便于管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount -t fusectl none /sys/fs/fuse/connections</span><br><span class="line"></span><br><span class="line">ls -l /sys/fs/fuse/connections/</span><br><span class="line">// 可以查看所有实现的用户态文件系统</span><br></pre></td></tr></table></figure>
+
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>fuse本质上（数据处理时）是处于现有文件系统之上的（具体实现是和现有文件系统处于同一个层次的），fuse不参与底层磁盘数据的存取，<strong>只负责处理对读取和写入的数据在逻辑上的操作而已。</strong></p>
+<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>当应用程序在一个mount fuse的文件系统上执行操作，虚拟文件系统路由这个操作到fuse内核驱动，然后创建一个fuse request放到fuse的队列中，此时应用程序进程处于等待状态；fuse的用户态的daemon从&#x2F;dev&#x2F;fuse读取request，<strong>处理过程中damon需要陷入内核态读&#x2F;dev&#x2F;fuse设备</strong>，处理完成了把处理结果写入到&#x2F;dev&#x2F;fuse设备，最后在唤醒应用程序的进程</p>
+<ul>
+<li>陷入内核态 代表还是要经过内核的驱动<ul>
+<li>文件系统要实现对具体的设备的操作的话必须要使用设备驱动提供的接口，而设备驱动位于内核空间，这时可以直接读写块设备文件，就相当于只把文件系统摘到用户态，用户直接管理块设备空间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="用户进程和操作系统进行交互（read文件为例）："><a href="#用户进程和操作系统进行交互（read文件为例）：" class="headerlink" title="用户进程和操作系统进行交互（read文件为例）："></a>用户进程和操作系统进行交互（read文件为例）：</h3><ul>
+<li><p>该fuse文件系统挂载在现有ext4文件系统之上. </p>
+<ul>
+<li>1.一个用户进程发出read文件请求； </li>
+<li>2.该请求被转换为一个内核系统调用，内核VFS层调用fuse文件系统内核模块； </li>
+<li>3.fuse 内核模块通过&#x2F;dev&#x2F;fuse，将read请求传递到fuse 用户态进程； </li>
+<li>4.fuse daemon根据用户实现的read接口，产生新的系统调用，最终调用ext4文件系统的read操作函数，从存储介质中提取读操作要求的数据（page cache中有，直接从其中获取，否则读磁盘）； </li>
+<li>5.内核将数据返回给fuse文件系统； </li>
+<li>6.用户级文件系统再次调用内核操作，把数据返回给用户进程； </li>
+<li>7.内核将数据传给用户进程完成操作。</li>
+</ul>
+</li>
+<li><p>库函数fuse_main()具体处理流程：</p>
+<ul>
+<li>1.先打开设备文件&#x2F;dev&#x2F;fuse； </li>
+<li>2.然后挂载FUSE文件系统； </li>
+<li>3.产生FUSE文件系统指针； </li>
+<li>4.初始化FUSE文件系统的操作函数集： </li>
+<li>5.初始化信号处理函数集； </li>
+<li>6.进入等待循环： </li>
+<li>从设备文件&#x2F;dev&#x2F;fuse中读取来自内核模块的请求； </li>
+<li>运行相应的操作函数，并获取返回结果； </li>
+<li>将返回给内核的应答结果写入设备文件&#x2F;dev&#x2F;fuse中；</li>
+</ul>
+</li>
+</ul>
+<p>– 用户态<br><img src="2023-08-28T103923.png" alt="2023-08-28T103923"><br><code>ceph-fuse -c /etc/ceph/ceph.conf -o nonempty /nas/cephfs --client_mds_namespace cephfs --id cephfs.node1</code><br><code>--client_mds_namespace cephfs</code> 指定ceph 文件系统</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

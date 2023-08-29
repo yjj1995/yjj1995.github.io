@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>标题 | 记好笔记</title>
+  <title>ceph 集群的访问方式 | 记好笔记</title>
   <meta name="keywords" content="">
-  <meta name="description" content="标题 | 记好笔记">
+  <meta name="description" content="ceph 集群的访问方式 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -375,9 +375,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="about-" class="article article-type-about" itemscope itemprop="blogPost">
+        <article id="post-ceph 集群的访问方式" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">标题</h1>
+        <h1 class="article-title">ceph 集群的访问方式</h1>
     
     <div class="article-meta">
         
@@ -387,7 +387,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-02 17:05:10'>2023-06-02 17:05</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-25 17:26:53'>2023-08-25 06:48</time>
         
     </div>
     <div class="article-meta">
@@ -425,7 +425,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这里写关于页的正文，支持 Markdown, HTML</p>
+        <ul>
+<li><p>Ceph 客户端和 Ceph 集群是密切相关的，它们之间的关系涉及到数据的访问和交互。</p>
+<ul>
+<li><p>Ceph 集群：Ceph 集群是一个由多个节点组成的分布式存储系统。它包括存储数据的 OSD（Object Storage Daemon），管理存储池的 Monitor（MON），提供元数据服务的 MDS（Metadata Server），以及可能的对象存储网关和块设备服务。Ceph 集群负责存储、管理和复制数据，以确保高可用性、冗余和性能。</p>
+</li>
+<li><p>Ceph 客户端：Ceph 客户端是位于集群外部的系统，它通过不同的方式与 Ceph 集群进行交互。客户端可以是应用程序、服务器、虚拟机等，它们需要访问 Ceph 集群中存储的数据。Ceph 客户端使用不同的工具和接口来访问集群中的不同存储服务，如 RADOS、RBD 和 Ceph 文件系统。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>关系解释：</p>
+<ul>
+<li>当 Ceph 客户端想要访问存储在 Ceph 集群中的对象（Object）时，它使用 RADOS 客户端工具（如 rados 命令行工具或编程语言的 RADOS API）与 RADOS 存储集群交互。</li>
+<li>如果客户端想要访问 Ceph 集群中的块设备（RBD），它可以使用 RBD 客户端工具（如 rbd 命令行工具或编程语言的 RBD API）。</li>
+<li>如果客户端想要访问 Ceph 文件系统（CephFS）中的文件，它可以使用 CephFS 客户端工具（如 ceph-fuse 或 CephFS API）。</li>
+<li>总之，Ceph 客户端是外部系统与 Ceph 集群之间的桥梁，使应用程序能够访问和操作存储在 Ceph 集群中的各种数据。这些客户端工具和接口提供了各种方式来与 Ceph 集群交互，根据不同的用例和需求进行数据访问。</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

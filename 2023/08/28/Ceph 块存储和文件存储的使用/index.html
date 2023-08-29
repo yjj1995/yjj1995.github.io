@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>标题 | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="标题 | 记好笔记">
+  <title>Ceph 块存储和文件存储的使用 | 记好笔记</title>
+  <meta name="keywords" content=" ceph 存储 ">
+  <meta name="description" content="Ceph 块存储和文件存储的使用 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -375,19 +375,26 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="about-" class="article article-type-about" itemscope itemprop="blogPost">
+        <article id="post-Ceph 块存储和文件存储的使用" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">标题</h1>
+        <h1 class="article-title">Ceph 块存储和文件存储的使用</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">ceph 存储</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-06-02 17:05:10'>2023-06-02 17:05</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-29 15:58:49'>2023-08-28 01:06</time>
         
     </div>
     <div class="article-meta">
@@ -409,7 +416,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E5%AD%98%E5%82%A8"><span class="toc-text">块存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="toc-text">文件存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-text">通信流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ganesha"><span class="toc-text">ganesha</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -425,7 +432,80 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这里写关于页的正文，支持 Markdown, HTML</p>
+        <p><img src="2023-08-29T133733.png" alt="2023-08-29T133733"></p>
+<ul>
+<li>librados是Ceph存储集群协议，由文件、块和对象存储共用。</li>
+</ul>
+<h2 id="块存储"><a href="#块存储" class="headerlink" title="块存储"></a>块存储</h2><ul>
+<li>RBD（Reliable Block Device）组件是一种构建在RADOS集群之上为客户端提供块设备存储接口接口的中间层，提供的块存储服务可以形成一个裸磁盘，提供格式化、映射的功能，挂载到服务器中。都通过了librados</li>
+</ul>
+<p><img src="2023-08-28T172652.png" alt="2023-08-28T172652"></p>
+<ul>
+<li>这类的客户端包括虚拟化KVM和云计算OpenStack。</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>当ceph集群搭建好以后，如果在其他的主机上要使用，则必须要安装好ceph的客户端（ceph-common），才能挂载ceph的rbd块。</p>
+<ul>
+<li>（密钥文件挂载客户端需要安装ceph-common）</li>
+<li>它将提供基本的 ceph 和 rados 命令，以及其他命令，如 mount.ceph 和 rbd。</li>
+</ul>
+</li>
+<li><p>客户端访问RBD的方式 </p>
+<ul>
+<li>通过内核模块rbd.ko将块存储映射成本地的一块磁盘，例如&#x2F;dev&#x2F;vdbx等等，可以进行格式化和分区。<ul>
+<li><a target="_blank" rel="noopener" href="https://www.toutiao.com/article/6675543056256598539/?app=news_article&timestamp=1693220304&use_new_style=1&req_id=20230828185824A5699EEAA2CAE0A398A7&group_id=6675543056256598539&share_token=25987e90-285c-4e48-8046-0904befd8d0c&tt_from=copy_link&utm_source=copy_link&utm_medium=toutiao_android&utm_campaign=client_share&source=m_redirect&wid=1693271193922">内核访问流程</a></li>
+<li>客户端可以通过内核模块挂载rbd使用，客户端使用rbd块设备就像使用普通硬盘一样，可以对<br>其进行格式化然后使用.</li>
+</ul>
+</li>
+<li>通过librbd接口，KVM虚拟化就是使用这种接口。<ul>
+<li>应用调用librbd提供的接口，来操作ceph的块存储。</li>
+<li>Librbd 是Ceph提供的块存储接口的抽象，它提供C&#x2F;C++、Python等多种接口。对于C++，最主要的两个类就是RBD 和 Image。 RBD 主要负责创建、删除、克隆映像等操作，而Image 类负责映像的读写等操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建完RBD块存储类型的存储后，从块存储中映射出来的裸磁盘，如果想要被集群之外的其他服务器连接使用，该服务器需要具备以下三个条件：</p>
+<ul>
+<li>该服务器需要安装RBD组件。<ul>
+<li>在要连接使用RBD的服务器上，需要安装Ceph的RBD组件，通常是librbd库和相关的工具。这可以通过在服务器上安装Ceph的客户端软件包来完成。具体的安装命令取决于服务器所使用的操作系统。</li>
+</ul>
+</li>
+<li>该服务器的网络需要与Ceph集群的Public网络互相通信。</li>
+<li>Ceph集群的keyring文件要拷贝到该服务器中。</li>
+</ul>
+</li>
+<li><p>Ceph集群的RBD块存储通常情况下是给虚拟化集群做底层存储使用，有专门的接口连接，如果想单独为某个服务器挂载块存储虚拟出来的磁盘，就需要先具备以上的三个条件。</p>
+<ul>
+<li><p><strong>单独服务器挂载块存储的磁盘一般都是通过内核级别进行挂载。</strong></p>
+</li>
+<li><p>RBD存储是建立在Pool资源池中的，一个Pool资源池中可以创建多个RBD块存储设备。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="2023-08-28T171543.png" alt="2023-08-28T171543"><br><img src="2023-08-29T130436.png" alt="2023-08-29T130436"><br><img src="2023-08-29T130715.png" alt="2023-08-29T130715"><br><a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/4/html/block_device_guide/create-a-ceph-block-device-and-use-it-from-a-linux-kernel-module-client">使用流程</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038366631">架构参考</a></p>
+<h2 id="文件存储"><a href="#文件存储" class="headerlink" title="文件存储"></a>文件存储</h2><ul>
+<li><p>Ceph支持两种类型的客户端，一种是基于内核模块ceph.ko，这种需要客户端安装ceph-common程序包，并在&#x2F;etc&#x2F;ceph&#x2F;目录下有ceph.conf集群配置文件和用于认证的密钥文件。</p>
+</li>
+<li><p>另外一种客户端为FUSE客户端，当有些操作系统无法使用ceph.ko内核的时候就可以使用此客户端连接。要求需要安装ceph-fuse程序软件，该客户端也需要从从&#x2F;etc&#x2F;ceph目录加载ceph集群配置文件和keyring文件进行连接。</p>
+</li>
+</ul>
+<p><img src="2023-08-29T132012.png" alt="2023-08-29T132012"></p>
+<ul>
+<li><p>CephFS 客户端代表使用 CephFS 的应用执行 I&#x2F;O 操作，如用于 FUSE 客户端的 cephfuse，kcephfs 用于内核客户端。CephFS 客户端向活跃的元数据服务器发送元数据请求。为返回，CephFS 客户端了解文件元数据，可以安全地开始缓存元数据和文件数据。</p>
+</li>
+<li><p>挂载的linux 版本，表示内核支持cephfs </p>
+</li>
+<li><p>在Linux内核2.6.34和以后的版本中添加了对Ceph的支持。</p>
+</li>
+<li><p>用户态挂载表示，文件系统通过安装fuse工具 挂载在用户态，而不在内核。内核为统一的FUSE模块。</p>
+</li>
+</ul>
+<h3 id="通信流程"><a href="#通信流程" class="headerlink" title="通信流程"></a>通信流程</h3><ul>
+<li>fuse进行挂载cephfs，因为用户态的客户端才会调用osdc，如果使用内核态的客户端的话，是不会经过osdc代码的，会走内核的一个osd client代码，估计功能跟osdc类似，不过内核的osd client的缓存是使用的内核中的一些缓存机制。</li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1428004">参考</a></li>
+</ul>
+<h2 id="ganesha"><a href="#ganesha" class="headerlink" title="ganesha"></a>ganesha</h2><p><a target="_blank" rel="noopener" href="http://elrond.wang/2021/06/26/nfs-ganesha%E5%AF%BC%E5%87%BAcephfs%E4%B8%BAnfs/">参考1</a><br><a target="_blank" rel="noopener" href="https://documentation.suse.com/zh-cn/ses/5.5/html/ses-all/cha-ceph-nfsganesha.html">参考2</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135288558">参考3</a><br>nfs-ganesha开始支持ceph，ganesha通过两种方式支持将ceph导出为nfs。一种通过rgw，一种通过cephfs，FSAL_RGW调用librgw2将NFS协议转义为S3协议再通过RGW存入到Ceph中，FSAL_CEPH 调用libcephfs2将NFS转义为Cephfs协议再存入到Ceph 中,但之前都是命令行方式的支持，在Ceph Nautilus中Ceph Dashboard现在也支持配置这两种方式的NFS。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

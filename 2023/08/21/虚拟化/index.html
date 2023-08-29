@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(7)</small>
+                <small>(10)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_posts_number" value="10">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -249,7 +249,15 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件系统 ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>虚拟化</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph 存储</a>
             </li>
         
     </div>
@@ -258,6 +266,33 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/28/Ceph%20%E5%9D%97%E5%AD%98%E5%82%A8%E5%92%8C%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="ceph 存储"
+           data-author="" >
+            <span class="post-title" title="Ceph 块存储和文件存储的使用">Ceph 块存储和文件存储的使用</span>
+            <span class="post-date" title="2023-08-28 01:06:52">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/25/%E7%94%A8%E6%88%B7%E6%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"
+           data-tag="文件系统 ceph"
+           data-author="" >
+            <span class="post-title" title="用户态文件系统">用户态文件系统</span>
+            <span class="post-date" title="2023-08-25 09:27:08">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/25/ceph%20%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ceph 集群的访问方式">ceph 集群的访问方式</span>
+            <span class="post-date" title="2023-08-25 06:48:21">2023/08/25</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -352,7 +387,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-24 15:43:56'>2023-08-21 07:46</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-29 09:28:16'>2023-08-21 07:46</time>
         
     </div>
     <div class="article-meta">
@@ -374,7 +409,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9B%91%E6%8E%A7%E7%A8%8B%E5%BA%8FVMM%E7%B1%BB%E5%9E%8B"><span class="toc-text">虚拟化监控程序VMM类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="toc-text">虚拟化技术分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E7%9A%84%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于二进制翻译的全虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E6%88%96%E8%80%85%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96-x2F-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%89"><span class="toc-text">超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">硬件辅助的虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E4%B8%89%E7%A7%8D%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="toc-text">CPU 三种虚拟化机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">CPU硬件辅助虚拟化技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kvm-%EF%BC%88kernel-based-Virtual-Machine%EF%BC%89"><span class="toc-text">kvm （kernel-based Virtual Machine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xen"><span class="toc-text">Xen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hypervisor-%E5%92%8C-vmm"><span class="toc-text">Hypervisor 和 vmm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94"><span class="toc-text">总结对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qemu%E5%92%8CVMWare%E7%9A%84CPU%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Qemu和VMWare的CPU虚拟化的区别</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="toc-text">名词解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9B%91%E6%8E%A7%E7%A8%8B%E5%BA%8FVMM%E7%B1%BB%E5%9E%8B"><span class="toc-text">虚拟化监控程序VMM类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="toc-text">虚拟化技术分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">CPU虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%BF%BB%E8%AF%91%E7%9A%84%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于二进制翻译的全虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%88%E6%88%96%E8%80%85%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96-x2F-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%89"><span class="toc-text">超虚拟化（或者半虚拟化&#x2F;操作系统辅助虚拟化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">硬件辅助的虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU-%E4%B8%89%E7%A7%8D%E8%99%9A%E6%8B%9F%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="toc-text">CPU 三种虚拟化机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E7%A1%AC%E4%BB%B6%E8%BE%85%E5%8A%A9%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">CPU硬件辅助虚拟化技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kvm-%EF%BC%88kernel-based-Virtual-Machine%EF%BC%89"><span class="toc-text">kvm （kernel-based Virtual Machine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xen"><span class="toc-text">Xen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hypervisor-%E5%92%8C-vmm"><span class="toc-text">Hypervisor 和 vmm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94"><span class="toc-text">总结对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qemu%E5%92%8CVMWare%E7%9A%84CPU%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Qemu和VMWare的CPU虚拟化的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenStack-%E4%B8%8E-libvirt"><span class="toc-text">OpenStack 与 libvirt</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -715,7 +750,7 @@
 <li>VMWare的软件虚拟化则使用了动态二进制翻译（BT）的技术，与QEMU这种模拟的方式不同，BT是一种加速虚拟化的方案（另一种常见的虚拟化加速方案就是硬件辅助虚拟化技术）。BT就是在VMM可控制的范围内，允许客户机的指令在物理平台上直接运行。但是，客户机指令在运行前会被VMM扫描，其中突破VMM限制的指令会被动态替换为可以在物理平台上直接运行的安全指令，或者替换为对VMM的软件调用。这样做的好处是比纯软件模拟技术在性能上有大幅的提升， 但是也同时失去了跨平台虚拟化的能力。</li>
 <li>VMware的二进制翻译技术也融合了部分的直接执行。</li>
 </ul>
-
+<h3 id="OpenStack-与-libvirt"><a href="#OpenStack-与-libvirt" class="headerlink" title="OpenStack 与 libvirt"></a>OpenStack 与 libvirt</h3>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
     </div>
