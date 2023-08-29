@@ -394,7 +394,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-29 15:58:49'>2023-08-28 01:06</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-29 16:07:59'>2023-08-28 01:06</time>
         
     </div>
     <div class="article-meta">
@@ -416,7 +416,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E5%AD%98%E5%82%A8"><span class="toc-text">块存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="toc-text">文件存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-text">通信流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ganesha"><span class="toc-text">ganesha</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9D%97%E5%AD%98%E5%82%A8"><span class="toc-text">块存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-text">通信流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-text">架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8"><span class="toc-text">文件存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B-1"><span class="toc-text">通信流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ganesha"><span class="toc-text">ganesha</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -432,7 +432,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="2023-08-29T133733.png" alt="2023-08-29T133733"></p>
+        <p><img src="2023-08-29T133733.png" alt="2023-08-29T133733"><br><img src="2023-08-29T160546.png" alt="2023-08-29T160546"></p>
 <ul>
 <li>librados是Ceph存储集群协议，由文件、块和对象存储共用。</li>
 </ul>
@@ -483,7 +483,16 @@
 </ul>
 </li>
 </ul>
-<p><img src="2023-08-28T171543.png" alt="2023-08-28T171543"><br><img src="2023-08-29T130436.png" alt="2023-08-29T130436"><br><img src="2023-08-29T130715.png" alt="2023-08-29T130715"><br><a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/4/html/block_device_guide/create-a-ceph-block-device-and-use-it-from-a-linux-kernel-module-client">使用流程</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038366631">架构参考</a></p>
+<h3 id="通信流程"><a href="#通信流程" class="headerlink" title="通信流程"></a>通信流程</h3><p><img src="2023-08-29T160719.png" alt="2023-08-29T160719"></p>
+<ul>
+<li>客户端写数据osd过程：<ul>
+<li>采用的是librbd的形式，使用librbd创建一个块设备，向这个块设备中写入数据。</li>
+<li>在客户端本地同过调用librados接口，然后经过pool，rbd，object、pg进行层层映射,在PG这一层中，可以知道数据保存在哪3个OSD上，这3个OSD分为主从的关系。</li>
+<li>客户端与primay OSD建立SOCKET 通信，将要写入的数据传给primary OSD，由primary OSD再将数据发送给其他replica OSD数据节点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><img src="2023-08-28T171543.png" alt="2023-08-28T171543"><br><img src="2023-08-29T130436.png" alt="2023-08-29T130436"><br><img src="2023-08-29T130715.png" alt="2023-08-29T130715"><br><a target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/4/html/block_device_guide/create-a-ceph-block-device-and-use-it-from-a-linux-kernel-module-client">使用流程</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038366631">架构参考</a></p>
 <h2 id="文件存储"><a href="#文件存储" class="headerlink" title="文件存储"></a>文件存储</h2><ul>
 <li><p>Ceph支持两种类型的客户端，一种是基于内核模块ceph.ko，这种需要客户端安装ceph-common程序包，并在&#x2F;etc&#x2F;ceph&#x2F;目录下有ceph.conf集群配置文件和用于认证的密钥文件。</p>
 </li>
@@ -501,7 +510,7 @@
 <li><p>用户态挂载表示，文件系统通过安装fuse工具 挂载在用户态，而不在内核。内核为统一的FUSE模块。</p>
 </li>
 </ul>
-<h3 id="通信流程"><a href="#通信流程" class="headerlink" title="通信流程"></a>通信流程</h3><ul>
+<h3 id="通信流程-1"><a href="#通信流程-1" class="headerlink" title="通信流程"></a>通信流程</h3><ul>
 <li>fuse进行挂载cephfs，因为用户态的客户端才会调用osdc，如果使用内核态的客户端的话，是不会经过osdc代码的，会走内核的一个osd client代码，估计功能跟osdc类似，不过内核的osd client的缓存是使用的内核中的一些缓存机制。</li>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1428004">参考</a></li>
 </ul>
