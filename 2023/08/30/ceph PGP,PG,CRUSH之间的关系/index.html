@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ceph PGP,PG,CRUSH之间的关系 | 记好笔记</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="ceph PGP,PG,CRUSH之间的关系 | 记好笔记">
+  <title>ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系 | 记好笔记</title>
+  <meta name="keywords" content=" ceph ">
+  <meta name="description" content="ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(11)</small>
+                <small>(12)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_posts_number" value="12">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -257,6 +257,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>ceph 存储</a>
             </li>
         
@@ -270,10 +274,19 @@
         
         <a  class="全部文章 "
            href="/2023/08/30/ceph%20PGP,PG,CRUSH%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/"
-           data-tag=""
+           data-tag="ceph"
            data-author="" >
-            <span class="post-title" title="ceph PGP,PG,CRUSH之间的关系">ceph PGP,PG,CRUSH之间的关系</span>
+            <span class="post-title" title="ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系">ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系</span>
             <span class="post-date" title="2023-08-30 05:12:15">2023/08/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/30/ceph%20hash%20crush%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/"
+           data-tag="ceph"
+           data-author="" >
+            <span class="post-title" title="Ceph 的工作原理及流程,寻址过程，客户读取数据">Ceph 的工作原理及流程,寻址过程，客户读取数据</span>
+            <span class="post-date" title="2023-08-30 01:09:21">2023/08/30</span>
         </a>
         
         
@@ -386,17 +399,24 @@
     <div class="pjax">
         <article id="post-ceph PGP,PG,CRUSH之间的关系" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ceph PGP,PG,CRUSH之间的关系</h1>
+        <h1 class="article-title">ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系</h1>
     
     <div class="article-meta">
         
         
         
         
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">ceph</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-30 13:13:02'>2023-08-30 05:12</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-30 17:12:00'>2023-08-30 05:12</time>
         
     </div>
     <div class="article-meta">
@@ -418,7 +438,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#POOL-%E5%92%8C-PG-%E6%95%B0"><span class="toc-text">POOL 和 PG 数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pg-%E8%B7%9F-pool-%E5%85%B3%E8%81%94%EF%BC%8C%E4%B8%80%E4%B8%AApool%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AApg%EF%BC%8C%E8%B7%9Fosd%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="toc-text">- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97PG%E6%95%B0"><span class="toc-text">计算PG数</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pool-%E5%92%8C-pg"><span class="toc-text">pool 和 pg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG-ceph-placement-Groups"><span class="toc-text">PG (ceph placement Groups)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%89%B9%E7%82%B9"><span class="toc-text">PG特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POOL-%E5%92%8C-PG-%E6%95%B0"><span class="toc-text">POOL 和 PG 数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pg-%E8%B7%9F-pool-%E5%85%B3%E8%81%94%EF%BC%8C%E4%B8%80%E4%B8%AApool%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AApg%EF%BC%8C%E8%B7%9Fosd%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="toc-text">- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97PG%E6%95%B0"><span class="toc-text">计算PG数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%89%AF%E6%9C%AC%E7%9A%84%E5%AF%BB%E5%9D%80%E5%92%8C%E6%B6%88%E6%81%AF%E8%BF%94%E5%9B%9E%E6%B5%81%E7%A8%8B-%EF%BC%88%E4%BB%8Eosd%E7%9A%84%E5%AF%BB%E6%89%BE%EF%BC%89"><span class="toc-text">多副本的寻址和消息返回流程 （从osd的寻找）</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -434,7 +454,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="POOL-和-PG-数"><a href="#POOL-和-PG-数" class="headerlink" title="POOL 和 PG 数"></a>POOL 和 PG 数</h2><ul>
+        <h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
+<li>Object是ceph的最小存储单元，大小可以自己定义通常为2M或4M，每个Object都包含了在集群范围内唯一的标识OID、二进制数据、以及由一组键值对组成的元数据。</li>
+<li>OID是由ino与ono生成，ino是文件的file id，用于全局标识每一个文件，ono则是分片的编号。无论上层应用的是RBD、CephFS还是RADOSGW，最终都会以Object的方式存储在OSD上。当RADOS接收到来向客户端的数据写请求时，它将接收到的数据转换为Object，然后OSD守护进程将数据写入OSD文件系统上的一个文件中。<br><img src="2023-08-30T170342.png" alt="2023-08-30T170342"></li>
+</ul>
+<h2 id="pool-和-pg"><a href="#pool-和-pg" class="headerlink" title="pool 和 pg"></a>pool 和 pg</h2><h3 id="pool"><a href="#pool" class="headerlink" title="pool"></a>pool</h3><ul>
+<li>Pool是Ceph中的一些object的逻辑分组，它只是一个逻辑概念，类似于LVM中的Volume Group，类似于一个命名空间。Pool由若干个PG组成，其属性包括：所有者和访问权限、Object副本数目、PG数目和CRUSH规则集合等。用户可以对不同的Pool设置相关的优化策略，比如PG副本数、数据清洗次数、数据块及Object的Size等。<strong>当把数据写人到一个 Pool 时，首先会在CRUSH Map找到与Pool对应的规则集，这个规则集描述了Pool的副本数信息。在部署Ceph集群时会默认创建data、metadata和rbd Pool。</strong></li>
+<li>存储池通常可以为特定的应用程序或者不同类型的数据需求创建专用的存储池，如rbd存储池，rgw存储池，等等。<strong>客户端在连接到Ceph集群的时候必须指定一个存储池的名称，并完成用户名和密钥的认证方可连接至指定的存储池。</strong></li>
+<li>存储池类型<ul>
+<li>通过存储池的使用类型有rbd存储池，个人存储池等。按存储池的官方类型可以将存储池分为副本池（replicated）和纠删码池（ erasure code ）<ul>
+<li>副本池：默认的存储池类型，把每个存入的对象（Object）存储为多个副本，其中分为主副本和从副本，从副本相当于备份副本。如果客户端在上传对象的时候不指定副本数，默认为3个副本。</li>
+<li>纠删码池：此类型会将数据存储为K+M，其中K数据块数量。每个对象存储到Ceph集群的时候会分成多个数据块分开进行存储。而M为为编码块，也代表最多容忍可坏的数据块数量。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="PG-ceph-placement-Groups"><a href="#PG-ceph-placement-Groups" class="headerlink" title="PG (ceph placement Groups)"></a>PG (ceph placement Groups)</h3><ul>
+<li>Ceph采用Placement Group来存储数据对象，同时PG也是一个Pool的子集。Ceph把很多PG在分散Pool中，然后通过获取到集群的map信息和状态通过crush算法把pg伪随机分布到集群的osd中。</li>
+<li>PG相当于一个虚拟组件，出于集群伸缩，性能方面的考虑。Ceph将每个存储池分为多个PG，如果存储池为副本池类型，并会给该存储池每个PG分配一个主OSD和多个从OSD，当数据量大的时候PG将均衡的分布在集群中的每个OSD上面。</li>
+<li><strong>PG（ placement group）是一个放置策略组，它是对象的集合，该集合里的所有对象都具有相同的放置策略；简单点说就是相同PG内的对象都会放到相同的硬盘上；</strong> PG是 ceph的核心概念， 服务端数据均衡和恢复的最小粒度就是PG；</li>
+<li>PG是一些Objects的集合，这些objects组成一个group，放在某些OSD上（place），组合起来就是Placement Group。将objects以PG为单位进行管理，有以下好处：<ul>
+<li>集群中的PG数目经过规划因为严格可控，使得基于PG可以精准控制单个OSD乃至整个节点的资源消耗，如CPU、内存、网络带宽等</li>
+<li>因为集群中的PG数目远小于objects数目，并且PG数目和每个PG的身份相对固定，以PG为单位进行数据备份策略和数据同步、迁移等，相较于直接以对象为单位而言，难度更小且更加灵活</li>
+</ul>
+</li>
+</ul>
+<h4 id="PG特点"><a href="#PG特点" class="headerlink" title="PG特点"></a>PG特点</h4><p>- </p>
+<h2 id="POOL-和-PG-数"><a href="#POOL-和-PG-数" class="headerlink" title="POOL 和 PG 数"></a>POOL 和 PG 数</h2><ul>
 <li>Pool： 是ceph存储数据时的逻辑分区，它起到namespace的作用。每个pool包含一定数量(可配置) 的PG。PG里的对象被映射到不同的Object上。pool是分布到整个集群的。 pool可以做故障隔离域，根据不同的用户场景不统一进行隔离。</li>
 <li>支持两种类型：副本（replicated）和 纠删码（ Erasure Code）<ul>
 <li>副本（replicated）：即复制，例如三副本，即为该Pool内的PG会复制三份</li>
@@ -468,8 +515,17 @@
 </li>
 <li><p>注： 一旦设置pg和pgp数量，最好就不需要再调整，否则会引发数据的大量迁移。如果一定要调整，请确保调整前，集群是ok状态；</p>
 </li>
-<li><p>严格意义上来说，我们无论为池分配多少个 pg 都没有问题。但有时候 pg_num 配置小了集群状态会报错，配置大了也会报错。这不是因为这么配置不对，是因为有其它的参数在限制我们随意配置 pg_num。</p>
+<li><p>严格意义上来说，我们无论为池分配多少个 pg 都没有问题。但有时候 pg_num 配置小了集群状态会报错，配置大了也会报错。这不是因为这么配置不对，是因为有其它的参数在限制我们随意配置 pg_num。<br><img src="2023-08-30T163820.png" alt="2023-08-30T163820"></p>
 </li>
+</ul>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><ul>
+<li>当用户创建pool过程中，crush来创建这个pool中的pg数量。通常来讲PGs的数量应该是一个合理数值。例如每个osd中有100PG。这就意味着每个pg包含了整个pool的1%的数据。</li>
+<li>PGs的数量会影响性能，这涉及到pg在osd之间的移动。如果出现了osd的故障或者异常情况，一个pool有少量的pg,ceph会迁移大量pg，到一个可用的osd中，同时pg中包含了大量的数据对象，这涉及的迁移数据量太多对于集群性能影响调大。如果一个pool中包含了非常多的pg,虽然迁移的数据量小了，但是会消耗更多的CPU和内存。一般会采用如下公式进行计算PG的数量<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">           (OSDs * 100)</span><br><span class="line">Total PGs =  ------------</span><br><span class="line">              pool size</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="多副本的寻址和消息返回流程-（从osd的寻找）"><a href="#多副本的寻址和消息返回流程-（从osd的寻找）" class="headerlink" title="多副本的寻址和消息返回流程 （从osd的寻找）"></a>多副本的寻址和消息返回流程 （从osd的寻找）</h3><ul>
+<li>和ceph客户端一样，ceph的osd可以从ceph monitor获取最新的cluster map信息。ceph的osd可以使用crush算法，osd使用crush算法数据对象存储需要的pg id和主osd。<strong>当客户端写数据对象到主的osd,主的osd发现需要些副本，这个是副本的值是通过osd_pool_default_size来定义，然后主的osd拿到object id、pool名称、集群的map,然后使用cursh算法来计算从的osd的位置</strong>，然后主osd通过集群网络写数据对象到从的osd，完成后主的osd通知客户端写入成功。</li>
+<li>客户端会先tcp连接到Monitor，从中获取Cluster Map，并在客户端进行计算，当知道对象的位置后，再直接与OSD通信（去中心化的思想）。OSD节点平常会向Monitor节点发送简单心跳，只有当添加、删除或者出现异常状况时，才会自动上报信息给Monitor。</li>
+<li>在Ceph中，如果要写数据，只能向主OSD写，然后再由主OSD向从OSD同步地写，只有当从OSD返回结果给主OSD后，主OSD才会向客户端报告写入完成的消息。如果要读数据，不会使用读写分离，而是也需要先向主OSD发请求，以保证数据的强一致性。</li>
 </ul>
 
       
