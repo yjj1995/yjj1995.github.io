@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>记好笔记</title>
+  <title>ceph PGP,PG,CRUSH之间的关系 | 记好笔记</title>
   <meta name="keywords" content="">
-  <meta name="description" content="记好笔记">
+  <meta name="description" content="ceph PGP,PG,CRUSH之间的关系 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -56,7 +56,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -382,12 +382,43 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-ceph PGP,PG,CRUSH之间的关系" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2"><span class="toc-text">关于博客</span></a></li></ol>
+        <h1 class="article-title">ceph PGP,PG,CRUSH之间的关系</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-30 13:13:02'>2023-08-30 05:12</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#POOL-%E5%92%8C-PG-%E6%95%B0"><span class="toc-text">POOL 和 PG 数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pg-%E8%B7%9F-pool-%E5%85%B3%E8%81%94%EF%BC%8C%E4%B8%80%E4%B8%AApool%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AApg%EF%BC%8C%E8%B7%9Fosd%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="toc-text">- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97PG%E6%95%B0"><span class="toc-text">计算PG数</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -400,17 +431,67 @@
     }
 </style>
 </div>
-            <h1 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h1><p>记录学习。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="POOL-和-PG-数"><a href="#POOL-和-PG-数" class="headerlink" title="POOL 和 PG 数"></a>POOL 和 PG 数</h2><ul>
+<li>Pool： 是ceph存储数据时的逻辑分区，它起到namespace的作用。每个pool包含一定数量(可配置) 的PG。PG里的对象被映射到不同的Object上。pool是分布到整个集群的。 pool可以做故障隔离域，根据不同的用户场景不统一进行隔离。</li>
+<li>支持两种类型：副本（replicated）和 纠删码（ Erasure Code）<ul>
+<li>副本（replicated）：即复制，例如三副本，即为该Pool内的PG会复制三份</li>
+<li>纠删码（Erasure Code）：是一种编码容错技术，其基本原理就是把传输的信号分段，加入一定的校验再让各段间发生相互关联，即使在传输过程中丢失部分信号，接收端仍然能通过算法将完整的信息计算出来。在数据存储中，纠删码将数据分割成片段，把冗余数据块扩展和编码，并将其存储在不同的位置，比如磁盘、存储节点或者其他地理位置。用更少的空间实现存储，即节约空间</li>
+</ul>
+</li>
+</ul>
+<h3 id="pg-跟-pool-关联，一个pool有多少个pg，跟osd数相关"><a href="#pg-跟-pool-关联，一个pool有多少个pg，跟osd数相关" class="headerlink" title="- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关"></a>- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关</h3><ul>
+<li>Ceph官方给的计算方式为：<a target="_blank" rel="noopener" href="https://ceph.com/pgcalc/">https://ceph.com/pgcalc/</a></li>
+<li>根据以下的官方介绍，结合自身集群的规模大小（OSD多少）去计算合理的PG数<br><img src="2023-08-30T110014.png" alt="2023-08-30T110014"></li>
+</ul>
+<h3 id="计算PG数"><a href="#计算PG数" class="headerlink" title="计算PG数"></a>计算PG数</h3><ul>
+<li><p>计算ceph集群中的PG数公式：</p>
+<ul>
+<li>PG总数&#x3D;（OSD总数*100）&#x2F;副本数</li>
+<li>结果必须舍入到最接近2的N次幂的值。</li>
+</ul>
+</li>
+<li><p>计算每个Pool的PG数，公式：</p>
+<ul>
+<li>PG总数&#x3D;（（OSD总数*100）&#x2F;副本数）&#x2F;Pool数</li>
+<li>结果必须舍入到最接近2的N次幂的值。</li>
+</ul>
+</li>
+<li><p>根据官方计算出：（使用3副本模式）</p>
+<ul>
+<li>5 个 osd时，设置128个pg</li>
+<li>10个 osd 时，设置256个pg。</li>
+<li>100个 osd 时，设置2048个pg。</li>
+</ul>
+</li>
+<li><p>注： 一旦设置pg和pgp数量，最好就不需要再调整，否则会引发数据的大量迁移。如果一定要调整，请确保调整前，集群是ok状态；</p>
+</li>
+<li><p>严格意义上来说，我们无论为池分配多少个 pg 都没有问题。但有时候 pg_num 配置小了集群状态会报错，配置大了也会报错。这不是因为这么配置不对，是因为有其它的参数在限制我们随意配置 pg_num。</p>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -419,11 +500,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
