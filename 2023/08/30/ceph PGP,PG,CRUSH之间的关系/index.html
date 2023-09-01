@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(12)</small>
+                <small>(13)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="12">
+<input type="hidden" id="yelog_site_posts_number" value="13">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -264,12 +264,25 @@
                 <i class="iconfont icon-tag"></i><a>ceph 存储</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/01/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E4%B9%8BSMB/CIFS%E5%8D%8F%E8%AE%AE%E5%8F%8ASamba%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载"
+           data-author="" >
+            <span class="post-title" title="CIFS协议及Samba的使用">CIFS协议及Samba的使用</span>
+            <span class="post-date" title="2023-09-01 06:38:04">2023/09/01</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -416,7 +429,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-30 17:12:00'>2023-08-30 05:12</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-31 09:40:43'>2023-08-30 05:12</time>
         
     </div>
     <div class="article-meta">
@@ -438,7 +451,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pool-%E5%92%8C-pg"><span class="toc-text">pool 和 pg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG-ceph-placement-Groups"><span class="toc-text">PG (ceph placement Groups)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%89%B9%E7%82%B9"><span class="toc-text">PG特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POOL-%E5%92%8C-PG-%E6%95%B0"><span class="toc-text">POOL 和 PG 数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pg-%E8%B7%9F-pool-%E5%85%B3%E8%81%94%EF%BC%8C%E4%B8%80%E4%B8%AApool%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AApg%EF%BC%8C%E8%B7%9Fosd%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="toc-text">- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97PG%E6%95%B0"><span class="toc-text">计算PG数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%89%AF%E6%9C%AC%E7%9A%84%E5%AF%BB%E5%9D%80%E5%92%8C%E6%B6%88%E6%81%AF%E8%BF%94%E5%9B%9E%E6%B5%81%E7%A8%8B-%EF%BC%88%E4%BB%8Eosd%E7%9A%84%E5%AF%BB%E6%89%BE%EF%BC%89"><span class="toc-text">多副本的寻址和消息返回流程 （从osd的寻找）</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pool-%E5%92%8C-pg"><span class="toc-text">pool 和 pg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pool"><span class="toc-text">pool</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PG-ceph-placement-Groups"><span class="toc-text">PG (ceph placement Groups)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#PG%E7%89%B9%E7%82%B9"><span class="toc-text">PG特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POOL-%E5%92%8C-PG-%E6%95%B0"><span class="toc-text">POOL 和 PG 数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pg-%E8%B7%9F-pool-%E5%85%B3%E8%81%94%EF%BC%8C%E4%B8%80%E4%B8%AApool%E6%9C%89%E5%A4%9A%E5%B0%91%E4%B8%AApg%EF%BC%8C%E8%B7%9Fosd%E6%95%B0%E7%9B%B8%E5%85%B3"><span class="toc-text">- pg 跟 pool 关联，一个pool有多少个pg，跟osd数相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97PG%E6%95%B0"><span class="toc-text">计算PG数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA"><span class="toc-text">创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%89%AF%E6%9C%AC%E7%9A%84%E5%AF%BB%E5%9D%80%E5%92%8C%E6%B6%88%E6%81%AF%E8%BF%94%E5%9B%9E%E6%B5%81%E7%A8%8B-%EF%BC%88%E4%BB%8Eosd%E7%9A%84%E5%AF%BB%E6%89%BE%EF%BC%89"><span class="toc-text">多副本的寻址和消息返回流程 （从osd的寻找）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crush-%E8%A7%84%E5%88%99%E9%9B%86"><span class="toc-text">Crush 规则集</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -515,7 +528,7 @@
 </li>
 <li><p>注： 一旦设置pg和pgp数量，最好就不需要再调整，否则会引发数据的大量迁移。如果一定要调整，请确保调整前，集群是ok状态；</p>
 </li>
-<li><p>严格意义上来说，我们无论为池分配多少个 pg 都没有问题。但有时候 pg_num 配置小了集群状态会报错，配置大了也会报错。这不是因为这么配置不对，是因为有其它的参数在限制我们随意配置 pg_num。<br><img src="2023-08-30T163820.png" alt="2023-08-30T163820"></p>
+<li><p>严格意义上来说，我们无论为池分配多少个 pg 都没有问题。但有时候 pg_num 配置小了集群状态会报错，配置大了也会报错。这不是因为这么配置不对，是因为有其它的参数在限制我们随意配置 pg_num。<br><img src="2023-08-30T163820.png" alt="2023-08-30T163820"><br><img src="2023-08-30T183233.png" alt="2023-08-30T183233"></p>
 </li>
 </ul>
 <h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><ul>
@@ -527,6 +540,7 @@
 <li>客户端会先tcp连接到Monitor，从中获取Cluster Map，并在客户端进行计算，当知道对象的位置后，再直接与OSD通信（去中心化的思想）。OSD节点平常会向Monitor节点发送简单心跳，只有当添加、删除或者出现异常状况时，才会自动上报信息给Monitor。</li>
 <li>在Ceph中，如果要写数据，只能向主OSD写，然后再由主OSD向从OSD同步地写，只有当从OSD返回结果给主OSD后，主OSD才会向客户端报告写入完成的消息。如果要读数据，不会使用读写分离，而是也需要先向主OSD发请求，以保证数据的强一致性。</li>
 </ul>
+<h2 id="Crush-规则集"><a href="#Crush-规则集" class="headerlink" title="Crush 规则集"></a>Crush 规则集</h2><p>- </p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>

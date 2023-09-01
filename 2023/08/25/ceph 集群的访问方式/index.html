@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(12)</small>
+                <small>(13)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="12">
+<input type="hidden" id="yelog_site_posts_number" value="13">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -264,12 +264,25 @@
                 <i class="iconfont icon-tag"></i><a>ceph 存储</a>
             </li>
         
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载</a>
+            </li>
+        
     </div>
 
 </div>
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/01/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E4%B9%8BSMB/CIFS%E5%8D%8F%E8%AE%AE%E5%8F%8ASamba%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载"
+           data-author="" >
+            <span class="post-title" title="CIFS协议及Samba的使用">CIFS协议及Samba的使用</span>
+            <span class="post-date" title="2023-09-01 06:38:04">2023/09/01</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -409,7 +422,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-25 17:26:53'>2023-08-25 06:48</time>
+            发布时间 : <time class="date" title='最后更新: 2023-08-31 13:08:46'>2023-08-25 06:48</time>
         
     </div>
     <div class="article-meta">
@@ -431,7 +444,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#librados%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="toc-text">librados的访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E9%80%9A%E8%BF%87librbd%E5%92%8Clinux%E5%86%85%E6%A0%B8%EF%BC%8Clibrados-%E4%B8%8E%E9%9B%86%E7%BE%A4%E9%80%9A%E4%BF%A1"><span class="toc-text">编程语言通过librbd和linux内核，librados 与集群通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">集群和客户端</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -447,7 +460,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
+        <h2 id="librados的访问"><a href="#librados的访问" class="headerlink" title="librados的访问"></a>librados的访问</h2><p>一个 Ceph client 通过 librados 存放或者读取数据块到 Ceph 中，需要经过以下步骤：</p>
+<p>Client 调用 librados 连接到 Ceph monitor，获取 Cluster map。<br>当 client 要读或者写数据时，它创建一个与 pool 的 I&#x2F;O Context。该 pool 关联有 ruleset，它定义了数据在 Ceph 存储集群中是怎么存放的。<br>client 通过 I&#x2F;O Context 提供 object name 给 librados，它使用该 object name 和 cluster map 计算出 PG 和 OSD 来定位到数据的位置。<br>client 直接和 OSD Deamon 交互来读或者写数据。</p>
+<h2 id="编程语言通过librbd和linux内核，librados-与集群通信"><a href="#编程语言通过librbd和linux内核，librados-与集群通信" class="headerlink" title="编程语言通过librbd和linux内核，librados 与集群通信"></a>编程语言通过librbd和linux内核，librados 与集群通信</h2><ul>
+<li>以go 语言为例<ul>
+<li>go语言的librbd 的源代码在 <a target="_blank" rel="noopener" href="https://github.com/contiv/librbd%EF%BC%8C%E6%98%AF%E4%BD%BF%E7%94%A8">https://github.com/contiv/librbd，是使用</a> Go 语言实现的，调用 librados 的 C 库以及linux 内核模块，在 Ubuntu 14 上它的文件在 &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;librbd.so.</li>
+<li>RBD 是  Rados Block Device  的缩写，而 librbd 是访问 RBD 的库。它调用 librados C 语言绑定，以及与Linux 内核中的 rbd 模块通信，来提供 RMD image 的创建、删除、映射和删除映射等操作。其中，创建和删除等操作是调用 librados，而将 RDB Image 映射到主机上则是调用 Linux rbd 内核模块。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h2 id="集群和客户端"><a href="#集群和客户端" class="headerlink" title="集群和客户端"></a>集群和客户端</h2><ul>
 <li><p>Ceph 客户端和 Ceph 集群是密切相关的，它们之间的关系涉及到数据的访问和交互。</p>
 <ul>
 <li><p>Ceph 集群：Ceph 集群是一个由多个节点组成的分布式存储系统。它包括存储数据的 OSD（Object Storage Daemon），管理存储池的 Monitor（MON），提供元数据服务的 MDS（Metadata Server），以及可能的对象存储网关和块设备服务。Ceph 集群负责存储、管理和复制数据，以确保高可用性、冗余和性能。</p>
