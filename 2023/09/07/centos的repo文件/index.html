@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>记好笔记</title>
+  <title>centos的 yum,repo,rpm ,dnf介绍 | 记好笔记</title>
   <meta name="keywords" content="">
-  <meta name="description" content="记好笔记">
+  <meta name="description" content="centos的 yum,repo,rpm ,dnf介绍 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -56,7 +56,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -426,12 +426,43 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-centos的repo文件" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2"><span class="toc-text">关于博客</span></a></li></ol>
+        <h1 class="article-title">centos的 yum,repo,rpm ,dnf介绍</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-09-07 19:09:06'>2023-09-07 07:19</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
     
 <style>
     .left-col .switch-btn,
@@ -444,17 +475,65 @@
     }
 </style>
 </div>
-            <h1 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h1><p>记录学习。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>RPM</p>
+<ul>
+<li>RPM（red-hat Package Manager），是一个由红帽开发的包管理器，**RPM管理的包都是以.rpm结尾，其中存储了该软件的安装压缩包，以及一些额外信息，例如所依赖的其余的包还有安装，升级，卸载时候执行的一些脚本。 **</li>
+<li>对比ubuntu的deb</li>
+<li>一个包在安装的时候往往依赖于很多的其它的包，如果这些被依赖的包没有被安装会造成很多意想不到的麻烦。RPM的一大缺点，就是它可以检测这些被依赖的包有没有被安装，但是假如有包没有安装它不会自动去进行安装。</li>
+<li>于是需要一种新的工具来弥补这个缺点，这个新工具在Centos中就是Yum。</li>
+</ul>
+</li>
+<li><p>YUM </p>
+<ul>
+<li>Yum(Yellowdog Updater Modified)，也是包管理工具，只适用于红帽和Centos发行版本。比起RPM来，Yum的优势在于可以自动检测依赖，并且对于不存在的依赖会自动去进行安装。</li>
+<li>所以通常是用Yum来进行包的操作，例如查看，安装，更新，删除等等。</li>
+<li>但是又有了另一个问题，RPM包里面只是写了依赖包的名字，Yum怎么知道去哪下载这些包呢？如果能有一个仓库，里面放着成千上万的包给Yum去选择，这个问题也就迎刃而解了。</li>
+<li>是的，很多的公司和团体都维护着这样的仓库，这些仓库就叫做repository，简称repo。</li>
+</ul>
+</li>
+<li><p>Repo</p>
+<ul>
+<li>Repo就像是一个大仓库，每个repo里面包含着很多的.rpm文件，但是一个repo不可能把这个世界所有的.rpm包都包括进去，往往是某个特定目的的包集合放在一个repo里面，例如centos需要的基础包做一个repo，额外特性的包再放一个repo，mysql维护自己的repo，docker维护自己的repo，等等。所以我们往往一台机器上要配置好几个repo的地址供yum去查询和选择，而且安装新软件的时候可能还需要新安装他们自己维护的repo来使用。</li>
+</ul>
+</li>
+<li><p>EPEL</p>
+<ul>
+<li>EPEL (Extra Packages for Enterprise Linux) 想必大多数人都用过，它是一个免费、开源，广受欢迎的，基于社区的库项目。其目标是提供一个在Fedora下开发、测试和完善的高质量的软件包。并且可以在RHEL, CentOS和Scientific Linux等Linux系统可用。后续本文列举的库依赖于EPEL.</li>
+<li>如果想在你的系统上使用EPEL库，使用如下命令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum install epel-release</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>repo和epel的关系</p>
+<ul>
+<li>repo是配置源的，即配置从哪里下载包（以及依赖关系）的。</li>
+<li>epel是作为桥的，centos等企业linux不具有repo，yum的功能，所以需要安装epel，使得其具有yum功能。</li>
+</ul>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -463,11 +542,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
