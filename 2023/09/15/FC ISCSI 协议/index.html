@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>网络虚拟化 | 记好笔记</title>
-  <meta name="keywords" content=" 网络 ">
-  <meta name="description" content="网络虚拟化 | 记好笔记">
+  <title>FC ISCSI 协议 | 记好笔记</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="FC ISCSI 协议 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -437,26 +437,19 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-网卡虚拟" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-FC ISCSI 协议" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">网络虚拟化</h1>
+        <h1 class="article-title">FC ISCSI 协议</h1>
     
     <div class="article-meta">
         
         
         
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color3">网络</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-25 09:34:18'>2023-08-18 01:10</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-18 13:32:19'>2023-09-15 01:41</time>
         
     </div>
     <div class="article-meta">
@@ -478,7 +471,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">网卡虚拟化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">虚拟机网络连接模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5"><span class="toc-text">桥接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT"><span class="toc-text">NAT</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#NAT%E4%B8%8E%E6%A1%A5%E6%8E%A5%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text">NAT与桥接的比较</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Host-Only"><span class="toc-text">Host-Only</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E5%8D%A1%E8%99%9A%E6%8B%9F%E5%8C%96%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">网卡虚拟化的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%A1%AC%E4%BB%B6%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于硬件的虚拟化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%BD%AF%E4%BB%B6%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">基于软件的虚拟化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%85%A8%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">1. 全虚拟化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%8D%8A%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="toc-text">2. 半虚拟化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%BD%91%E6%A1%A5"><span class="toc-text">虚拟网桥</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E6%80%81%E7%BD%91%E6%A1%A5"><span class="toc-text">内核态网桥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%80%81%E7%BD%91%E6%A1%A5"><span class="toc-text">用户态网桥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E7%BD%91%E6%A1%A5"><span class="toc-text">多层网桥</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-text">数据包处理方法</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FC-%E5%8D%8F%E8%AE%AE"><span class="toc-text">FC 协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISCSI"><span class="toc-text">ISCSI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISCSI-Target"><span class="toc-text">ISCSI Target</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SCSI"><span class="toc-text">SCSI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#target%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">target实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#TGT%E6%96%B9%E5%BC%8F"><span class="toc-text">TGT方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LIO%E6%96%B9%E5%BC%8F"><span class="toc-text">LIO方式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-text">比较</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -494,124 +487,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="网卡虚拟化"><a href="#网卡虚拟化" class="headerlink" title="网卡虚拟化"></a>网卡虚拟化</h3><ul>
-<li>网卡虚拟化在云环境下必不可少, 其核心是为<strong>各虚拟实例构建虚拟网卡和虚拟网桥等虚拟网络设备</strong>, 将各虚拟实例的数据传输和网络管理连接到外部的物理网络.</li>
-<li>虚拟网络一般需要通过物理网卡进行网络通信。</li>
-<li>linux系统中，虚拟网卡和物理网卡之间可以通过网络桥接（bridge）（虚拟交换机）来实现通信。<ul>
-<li>网络桥接可以将多个网卡连接起来，形成一个网络交换机的功能，将数据包转发到目标网卡，从而实现虚拟机与外部网络的通信。</li>
-<li>其他将物理网卡和虚拟网卡连接起来的方式<ul>
-<li>虚拟局域网VLAN</li>
-<li>NAT网络地址转换</li>
+        <ul>
+<li>都属于存储协议的一种。</li>
+</ul>
+<h2 id="FC-协议"><a href="#FC-协议" class="headerlink" title="FC 协议"></a>FC 协议</h2><ul>
+<li>FC: Fibre Channel 网状通道；Fibre&#x2F;Fiber都有纤维之意，与光纤无关</li>
+<li><strong>已经被大多数人误解为Fiber Channel光纤通道。</strong><ul>
+<li>提示：由于Fiebre（纤维、网络）和Fiber（光线）只有一字之差，所以产生了很多流传的误解。FC只代表Fibre Channel，而不是Fiber Channel，后者被翻译为“光纤通道”，甚至接口为FC的磁盘也被称为“光纤磁盘”，其实这些都是很滑稽的误解。再加上FC协议普遍都用光纤作为传输线缆而不用铜线，所以人们下意识的称FC为光纤通道协议而不是网状通道协议。但是要理解，FC其实是一套网络协议的称呼，FC协议和光纤根本没有必然地联系，Fibre Channel可以称其为FC协议，或者FC网络、FC互联。同样“FC交换机就是插光纤的以太网交换机”和“以太网就是双绞线，以太网就是水晶头”这些说法都是错误的</li>
+</ul>
+</li>
+<li>FC只是适用于SAN（存储区域网络）中的一种传输协议；可以将其看作SAN中的TCP&#x2F;IP</li>
+</ul>
+<h2 id="ISCSI"><a href="#ISCSI" class="headerlink" title="ISCSI"></a>ISCSI</h2><ul>
+<li>iSCSI 是一种在TCP&#x2F;IP上进行数据传输的标准。iSCSI可以实现在IP网络上运行SCSI协议，使其能够在诸如高速千兆以太网上进行快速的数据存取备份操作。</li>
+<li>用于本机的SCSI协义透过TCP&#x2F;IP网络发送就是iSCSI协议。</li>
+</ul>
+<h3 id="ISCSI-Target"><a href="#ISCSI-Target" class="headerlink" title="ISCSI Target"></a>ISCSI Target</h3><ul>
+<li>iscsi target是位于互联网上服务器上的存储资源。<ul>
+<li>可以用来执行各种存储相关的工作，比如为微软Hyper-V提供共享存储等。</li>
+</ul>
+</li>
+<li>被访问的设备称为target, 而访问target称为initiator</li>
+<li>把存储资源接入网络，在网络上用SCSI协议传输数据，通过一定的机制，使得Target接入网络后能被Initiator发现，Initiator通过网络直接连Target读写数据。</li>
+</ul>
+<h4 id="SCSI"><a href="#SCSI" class="headerlink" title="SCSI"></a>SCSI</h4><ul>
+<li>SCSI: SCSI是用于计算机主机与外围设备之间连接的一套软硬件标准。同时它可以支持很多中设备类型，但主要是用于存储设备（磁盘、磁带）。<ul>
+<li>SCSI协议使用的是client-server模式。所有的请求由client发起，我们称之为initiator；然后由server处理这些请求，并将响应返回给client，server的角色在SCSI协议中被称之为target。</li>
+<li>针对存储设备硬盘为例：<ul>
+<li>initiator是运行在主机上的一套软件，作用是初始化和发送读写请求。target是运行在设备端（硬盘）上的一套软件，作用是处理主机对硬盘的读写请求。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="虚拟机网络连接模式"><a href="#虚拟机网络连接模式" class="headerlink" title="虚拟机网络连接模式"></a>虚拟机网络连接模式</h3><h4 id="桥接"><a href="#桥接" class="headerlink" title="桥接"></a>桥接</h4><ul>
-<li>桥接网络是指 本地物理网卡和虚拟网卡通过  VMnet0 虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位，那么物理网卡和虚拟网卡就相当于处于同一个网段，虚拟交换机就相当于一台显示网络中的交换机，所以<strong>两个网卡的IP需要设置成同一个网段</strong></li>
-<li>所以当我们要在局域网使用虚拟机，对局域网其他pc提供服务时，例如提供ftp，提供ssh，提供http服务，那么就要选择桥接模式。</li>
-<li>虚拟机需要访问外网的时候，需要配置子网的网关（路由器地址），并且需要配置dns 解析服务器。</li>
-</ul>
-<h4 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h4><ul>
-<li>NAT模式，就是使虚拟机 能借助NAT（网络地址转换）功能，通过宿主机器所在的网络来访问公网。</li>
-<li>NAT模式中，虚拟机的网卡和物理网卡的网络不在同一个网络中，也就是说没有连到虚拟交换机上。虚拟机的网卡，是vmware提供的一个虚拟网络。</li>
-</ul>
-<h5 id="NAT与桥接的比较"><a href="#NAT与桥接的比较" class="headerlink" title="NAT与桥接的比较"></a>NAT与桥接的比较</h5><ul>
-<li>NAT模式和桥接模式虚拟机都可以上外网</li>
-<li>由于NAT的网络在vmware提供的一个虚拟网络里，所以局域网其他主机是无法访问虚拟机的，而宿主机可以访问虚拟机（一个机器内可以互通），虚拟机可以访问局域网（相当于宿主机访问）的所有主机，因为真实的局域网相对于NAT的虚拟网络，就是NAT的虚拟网络的外网。（虚拟机-其他主机 单向通信）</li>
-<li>桥接模式下，多个虚拟机之间可以互相访问；NAT模式下，多个虚拟机之间也可以相互访问。</li>
-</ul>
-<h4 id="Host-Only"><a href="#Host-Only" class="headerlink" title="Host-Only"></a>Host-Only</h4><ul>
-<li>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。其实Host-Only网络和NAT网络很相似，不同的地方就是Host-Only网络没有NAT服务，所以虚拟网络不能连接到Internet。主机和虚拟机之间的通信是通过VMware Network Adepter VMnet1虚拟网卡来实现的。</li>
-<li>Host-Only的宗旨就是建立一个与外界隔绝的内部网络，来提高内网的安全性。这个功能或许对普通用户来说没有多大意义，但大型服务商会常常利用这个功能。如果你想为VMnet1网段提供路由功能，那就需要使用RRAS，而不能使用XP或2000的ICS，因为ICS会把内网的IP地址改为192.168.0.1，但虚拟机是不会给VMnet1虚拟网卡分配这个地址的，那么主机和虚拟机之间就不能通信了。</li>
-</ul>
-<h3 id="网卡虚拟化的分类"><a href="#网卡虚拟化的分类" class="headerlink" title="网卡虚拟化的分类"></a>网卡虚拟化的分类</h3><h4 id="基于硬件的虚拟化"><a href="#基于硬件的虚拟化" class="headerlink" title="基于硬件的虚拟化"></a>基于硬件的虚拟化</h4><ul>
-<li><p>基于硬件的网卡虚拟化方法让虚拟机或容器直接使用物理网卡，<strong>不用经过软件虚拟层</strong>。</p>
+<p><img src="2023-09-15T140330.png" alt="2023-09-15T140330"></p>
 <ul>
-<li>设备直达和SR-IOV</li>
+<li>target和lun的关系<ul>
+<li>lun的全称是logical unit number，逻辑单元号。</li>
+<li>以iSCSI磁盘存储为例：一个target就是一块磁盘，而一个lun就是在这个磁盘里划分的一个分区。磁盘划分分区后方便对存储空间的管理和使用，也更有利于数据存储安全。现代操作系统的文件系统必须建立在分区即lun上。</li>
 </ul>
 </li>
-<li><ol>
-<li>设备直达</li>
-</ol>
+</ul>
+<h4 id="target实现方式"><a href="#target实现方式" class="headerlink" title="target实现方式"></a>target实现方式</h4><h5 id="TGT方式"><a href="#TGT方式" class="headerlink" title="TGT方式"></a>TGT方式</h5><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137047153">参考</a></p>
 <ul>
-<li>在虚拟机中，物理网卡可以通过PCI透传技术分配给虚拟机，供虚拟机独占使用。PCI透传技术需要VT-d或IOMMU等硬件支持, 其作用是将PCI设备地址空间映射到客户虚拟机中。<ul>
-<li>独占性和性能： PCI透传技术确保单个虚拟机可以独占使用一个物理网卡设备，从而实现了虚拟机间的网络隔离。这也保证了该虚拟机获得与原生网卡相当的性能。然而，这种独占性也限制了网卡设备无法被多个虚拟机共享使用，这对于需要多个虚拟机间共享网络资源的场景不太适用。</li>
-<li>宿主机控制和迁移： PCI透传技术的使用会限制宿主机对物理网卡的管控能力，因为这些网卡被直接分配给了虚拟机。另外，虚拟机在迁移过程中，由于网卡设备的独占性，需要重新配置相应的物理网卡接口，这可能增加管理和配置的复杂性。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><ol start="2">
-<li>SR-IOV</li>
-</ol>
+<li><p>TGT是什么？</p>
 <ul>
-<li>在设备直达的基础上，解决了多个虚拟示例无法共享物理网卡的问题。</li>
-<li>SR-IOV从一个物理网卡设备虚拟出多个接口, 各虚拟实例可以分别使用各个接口。<ul>
-<li>一个具备SR-IOV功能的物理网卡, 都可提供一个PF及多个VF, 其中VF的数量与具体网卡的硬件资源相关（VF能控制自身的配置资源）</li>
-<li>理网卡的硬件资源限制了VF数量, 因此, 仅使用SR-IOV难以适应大规模虚拟实例的场景</li>
+<li>TGT是一套专门为简化SCSI target驱动的创建和维护而开发的开源软件。<br><img src="2023-09-15T143417.png" alt="2023-09-15T143417"></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-<h4 id="基于软件的虚拟化"><a href="#基于软件的虚拟化" class="headerlink" title="基于软件的虚拟化"></a>基于软件的虚拟化</h4><ul>
-<li>基于软件的网卡虚拟化, 在实现上更加灵活. 按照是否完全模拟网卡设备功能和硬件接口, 网卡虚拟化可以分为全虚拟化和半虚拟化. 此外, 还有针对容器的虚拟网卡, 如veth pair.</li>
-</ul>
-<h5 id="1-全虚拟化"><a href="#1-全虚拟化" class="headerlink" title="1. 全虚拟化"></a>1. 全虚拟化</h5><ul>
-<li>由虚拟机监视器完整模拟网卡设备. 虚拟机监视器完整实现了物理网卡设备的功能和接口, 包括网卡每条I&#x2F;O请求的处理逻辑. 客户机虚拟网卡在执行任何I&#x2F;O指令时, 均会陷入到虚拟机监视器. 后者将I&#x2F;O指令按照既定的处理逻辑, 通过软件模拟或交给硬件进行处理. 在操作完成后, 虚拟机监视器会将结果反馈给虚拟机. 全虚拟化架构如图3所示, 虚拟机不用修改自身操作系统, 直接使用现有的物理网卡驱动就可以执行网络I&#x2F;O. 全虚拟化网卡设备有QEMU e1000等.</li>
-</ul>
-<p><img src="2023-08-18T135531.png" alt="2023-08-18T135531"></p>
+<li><p>分为内核空间和用户空间两部分。Target Drivers的主要职责是关于target与Initiator之间的传输连接，并将命令传送给tgt core模块。tgt core是Target Drivers与用户空间守护进程之间一个简单的连接器。tgt daemon是整个系统的核心，负责维护SCSI状态机并执行SCSI命令。tgtadm是一个简单的管理程序。Transport libraries是用户空间的传输层驱动，目前主要是对iSCSI协议的支持。Target driver libraries是用户层的target驱动库。</p>
 <ul>
-<li>全虚拟化每条I&#x2F;O请求的处理路径过长, 上下文切换和数据拷贝次数过多, 导致网络I&#x2F;O的性能下降, 也消耗了更多的CPU资源.</li>
-<li>全虚拟化适合硬件功能简单和普遍使用的网卡类型</li>
-<li>实现较为复杂，存在过多的切换和拷贝</li>
-</ul>
-<h5 id="2-半虚拟化"><a href="#2-半虚拟化" class="headerlink" title="2. 半虚拟化"></a>2. 半虚拟化</h5><ul>
-<li>半虚拟化技术并未完整按照原生硬件模拟设备的功能和硬件接口, 而是采用自定义功能和接口的方式. 如图3所示, 半虚拟化通过前后端框架的协作来完成网络I&#x2F;O功能的模拟. 其中, <strong>后端在位于虚拟机监视器层, 作为一个可定制的I&#x2F;O设备</strong>; <strong>前端位于客户机中, 视为后端设备的特有驱动</strong>. 前后端通过共享队列、特征协商和事件通知等机制为客户机提供高性能与定制化的I&#x2F;O功能.<ul>
-<li>将驱动和硬件设备都模拟出来，完成自定义的功能。</li>
-</ul>
+<li><p>其中内核空间部分 曾 短暂进入过linux内核主线，现在是被LinuxIO项目代替。后面我们默认只讲用户空间的部分。</p>
+</li>
+<li><p>TGT可以使linux系统方便的对外提供SCSI服务。安装了TGT的linux机器可以方便的提供磁盘、磁带、打印机、DVD等服务，又因其支持iSCSI协议，用户可以通过网络访问我们提供的服务。</p>
 </li>
 </ul>
-<h3 id="虚拟网桥"><a href="#虚拟网桥" class="headerlink" title="虚拟网桥"></a>虚拟网桥</h3><p><img src="2023-08-18T140946.png" alt="2023-08-18T140946"></p>
-<h4 id="内核态网桥"><a href="#内核态网桥" class="headerlink" title="内核态网桥"></a>内核态网桥</h4><ul>
-<li>虚拟网桥的功能完全在内核态实现，如linux Bridge<ul>
-<li>各个虚拟网卡在桥接虚拟网桥时，会注册该虚拟网桥的处理函数。</li>
-<li>数据包-&gt; 物理网卡-&gt; 内核协议栈 -&gt; 虚拟网桥-&gt; 端口转发&#x2F;广播端口</li>
-</ul>
+</li>
+<li><p>TGT程序框架<br><img src="2023-09-15T155838.png" alt="2023-09-15T155838"></p>
 </li>
 </ul>
-<h4 id="用户态网桥"><a href="#用户态网桥" class="headerlink" title="用户态网桥"></a>用户态网桥</h4><ul>
-<li>虚拟网桥的功能完全在用户态实现，如Snabb Switch.<ul>
-<li>用户态网桥通常与用户态网络协议栈配合使用.</li>
-</ul>
-</li>
-</ul>
-<h4 id="多层网桥"><a href="#多层网桥" class="headerlink" title="多层网桥"></a>多层网桥</h4><ul>
-<li>虚拟网桥的功能由内核模块和用户空间守护进程共同完成.</li>
-</ul>
-<h3 id="数据包处理方法"><a href="#数据包处理方法" class="headerlink" title="数据包处理方法"></a>数据包处理方法</h3><ul>
-<li><ol>
-<li>隧道网络</li>
-</ol>
+<h5 id="LIO方式"><a href="#LIO方式" class="headerlink" title="LIO方式"></a>LIO方式</h5><ul>
+<li><p>Linux-IO Target在Linux内核中（linux 2.6.38后），用软件实现各种SCSI Target</p>
 <ul>
-<li>隧道网络, 都需要对原始的虚拟网络数据包进行封装, 导致物理网络中的有效数据负荷降低. 其次, 除数据拷贝开销以外, 封装和解封的过程也存在开<br>销, 在消耗 CPU 的同时也引入了更多网络延迟.</li>
+<li><img src="2023-09-15T160144.png" alt="2023-09-15T160144"></li>
 </ul>
 </li>
-<li><ol start="2">
-<li>路由转发</li>
-</ol>
-<ul>
-<li>各虚拟实例的数据包经过虚拟网卡到达虚拟网桥后, 根据配置的路由转发规则, 可以在 3 层网络进行转发并传输到终端主机,同样地, 数据包在终端主机同样根据路由规则转发给对应虚拟实例的网卡接口.</li>
-</ul>
+<li><p>Ceph中实现iscsi 方式有两种，一种是通过Linux target framework(tgt)实现，一种是通过Linux-IO Target（lio）实现，本文是使用的方式是LIO，LIO现在也是官方推荐的方式。</p>
 </li>
-<li><ol start="3">
-<li>NAT</li>
-</ol>
-<ul>
-<li>NAT, 即网络地址转换. NAT 技术构建虚拟网络的 IP 和端口与物理网络地址之间的映射关系, 当虚拟网络数据包到达虚拟网桥后, 按 NAT 规则将虚拟数据包的虚拟地址转换成对应的物理地址, 然后经物理网络发送到终端主机. 终端主机同样可以根据 NAT 完成对等转换, 实现虚拟实例跨主机互通. NAT 技术和上述的路由转,不同, 不需要交换各个节点的路由信息,仅需维护本地 NAT 规则. 在 Linux 系统中, 用户可以通过 iptables 配置 NAT 规则, 虚拟网络数据包经过主机内核协议栈时, 将完成网络地址转换.</li>
-</ul>
+<li><p>LIO的实现方式主要是利用TCMU与Ceph的librbd库进行交互，并将RBD images映射给iSCSI客户端，所以需要有TCMU软件包安装在系统中。</p>
 </li>
+</ul>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><ul>
+<li>传输层看，光纤通道的传输采用其FC协议，iSCSI采用TCP&#x2F;IP协议。</li>
 </ul>
 
       
