@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>KVM | 记好笔记</title>
-  <meta name="keywords" content=" 虚拟化 ">
-  <meta name="description" content="KVM | 记好笔记">
+  <title>ceph 对象 与 元数据 | 记好笔记</title>
+  <meta name="keywords" content=" ceph 对象 元数据 ">
+  <meta name="description" content="ceph 对象 与 元数据 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -463,9 +463,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-KVM" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-ceph 对象 与 元数据" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">KVM</h1>
+        <h1 class="article-title">ceph 对象 与 元数据</h1>
     
     <div class="article-meta">
         
@@ -475,14 +475,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">虚拟化</a>
+            <a class="color2">ceph 对象 元数据</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-11 11:29:10'>2023-08-11 03:29</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-22 17:02:13'>2023-09-22 01:28</time>
         
     </div>
     <div class="article-meta">
@@ -504,7 +504,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-text">对象</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -520,7 +520,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><ul>
+<li><p>对象（rgw Object）是Ceph 对象存储服务中数据存储的基本单位（区别于RADOS层的文件数据切片Object的概念）</p>
+</li>
+<li><p>一个对象实际是一个文件的数据及其相关属性信息（元数据）的集合体。</p>
+</li>
+<li><p>用户上传到ceph 对象存储系统的数据都以对象的形式保存在存储桶中，一个对象一般包括键值（Key）、元数据（Metadata）、实体数据（Data）三部分。 </p>
+<ul>
+<li>Key ：键值，即对象的名称。一个桶里的每个对象必须拥有唯一的对象键值。对象文件命名规则为经过 UTF-8编码的长度大于 0且不超过 1024 的字符序列，对象的名称对大小写敏感。</li>
+<li>Metadata ：对象元数据，即对象的描述信息，包括系统元数据和用户元数据。这些元数据以键值对（Key-Value）的形式被上传到 Ceph中。<ul>
+<li>系统元数据由Ceph自动生成，在处理对象数据时使用，包括Date、Content- length、Last-modify、Content-MD5等；</li>
+<li>用户元数据由用户在上传对象时指定，是用户自定义的对象描述信息。</li>
+</ul>
+</li>
+<li>Data：实体数据，即文件的数据内容。</li>
+</ul>
+</li>
+<li><p>RGW中的应用对象对应RADOS对象。应用对象上传分整体上传和分段上传，不同的上传方式应用对象对应RADOS对象的方式不同。</p>
+</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
     </div>

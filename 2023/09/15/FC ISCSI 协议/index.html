@@ -174,7 +174,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(16)</small>
+                <small>(18)</small>
             
         </div>
     </li>
@@ -198,7 +198,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="16">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -265,6 +265,14 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph 对象 元数据</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Elasticsearch</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载</a>
             </li>
         
@@ -274,6 +282,24 @@
 
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/26/nosql/"
+           data-tag="Elasticsearch"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch">Elasticsearch</span>
+            <span class="post-date" title="2023-09-26 01:26:06">2023/09/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/22/ceph%20%E5%AF%B9%E8%B1%A1%20%E4%B8%8E%20%E5%85%83%E6%95%B0%E6%8D%AE/"
+           data-tag="ceph 对象 元数据"
+           data-author="" >
+            <span class="post-title" title="ceph 对象 与 元数据">ceph 对象 与 元数据</span>
+            <span class="post-date" title="2023-09-22 01:28:58">2023/09/22</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -449,7 +475,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-18 13:32:19'>2023-09-15 01:41</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-25 09:00:23'>2023-09-15 01:41</time>
         
     </div>
     <div class="article-meta">
@@ -471,7 +497,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FC-%E5%8D%8F%E8%AE%AE"><span class="toc-text">FC 协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISCSI"><span class="toc-text">ISCSI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISCSI-Target"><span class="toc-text">ISCSI Target</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SCSI"><span class="toc-text">SCSI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#target%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">target实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#TGT%E6%96%B9%E5%BC%8F"><span class="toc-text">TGT方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LIO%E6%96%B9%E5%BC%8F"><span class="toc-text">LIO方式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-text">比较</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FC-%E5%8D%8F%E8%AE%AE"><span class="toc-text">FC 协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISCSI"><span class="toc-text">ISCSI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-text">比较</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISCSI-Target"><span class="toc-text">ISCSI Target</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SCSI"><span class="toc-text">SCSI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#target%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">target实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#TGT%E6%96%B9%E5%BC%8F"><span class="toc-text">TGT方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#LIO%E6%96%B9%E5%BC%8F"><span class="toc-text">LIO方式</span></a></li></ol></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -501,6 +527,9 @@
 <h2 id="ISCSI"><a href="#ISCSI" class="headerlink" title="ISCSI"></a>ISCSI</h2><ul>
 <li>iSCSI 是一种在TCP&#x2F;IP上进行数据传输的标准。iSCSI可以实现在IP网络上运行SCSI协议，使其能够在诸如高速千兆以太网上进行快速的数据存取备份操作。</li>
 <li>用于本机的SCSI协义透过TCP&#x2F;IP网络发送就是iSCSI协议。</li>
+</ul>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><ul>
+<li>传输层看，光纤通道的传输采用其FC协议，iSCSI采用TCP&#x2F;IP协议。</li>
 </ul>
 <h3 id="ISCSI-Target"><a href="#ISCSI-Target" class="headerlink" title="ISCSI Target"></a>ISCSI Target</h3><ul>
 <li>iscsi target是位于互联网上服务器上的存储资源。<ul>
@@ -556,9 +585,6 @@
 </li>
 <li><p>LIO的实现方式主要是利用TCMU与Ceph的librbd库进行交互，并将RBD images映射给iSCSI客户端，所以需要有TCMU软件包安装在系统中。</p>
 </li>
-</ul>
-<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><ul>
-<li>传输层看，光纤通道的传输采用其FC协议，iSCSI采用TCP&#x2F;IP协议。</li>
 </ul>
 
       

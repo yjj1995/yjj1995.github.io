@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>KVM | 记好笔记</title>
-  <meta name="keywords" content=" 虚拟化 ">
-  <meta name="description" content="KVM | 记好笔记">
+  <title>Elasticsearch | 记好笔记</title>
+  <meta name="keywords" content=" Elasticsearch ">
+  <meta name="description" content="Elasticsearch | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -463,9 +463,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-KVM" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-nosql" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">KVM</h1>
+        <h1 class="article-title">Elasticsearch</h1>
     
     <div class="article-meta">
         
@@ -475,14 +475,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">虚拟化</a>
+            <a class="color4">Elasticsearch</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-11 11:29:10'>2023-08-11 03:29</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-26 10:40:42'>2023-09-26 01:26</time>
         
     </div>
     <div class="article-meta">
@@ -504,7 +504,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Elasticsearch"><span class="toc-text">Elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-text">倒排索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">倒排索引的好处</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94MySQL%E6%9F%A5%E8%AF%A2%E5%BF%AB%EF%BC%9F"><span class="toc-text">搜索引擎为什么比MySQL查询快？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E5%99%A8"><span class="toc-text">分词器</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -520,7 +520,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><ul>
+<li><p>Elasticsearch(ES) 是一个基于lucene的开源搜索引擎，具有强大的全文搜索和分析能力。</p>
+<ul>
+<li>索引（Index）：索引是ES中最高级别的数据容器，它类似于<strong>数据库中的数据库。</strong>每个索引可以包含多个文档，并且可以定义不同类型的字段。</li>
+<li>类型（Type）: 类型是索引内的逻辑分组，他类似于数据库中的表。每个类型都有自己的映射，定义了文档中包含的字段和其数据类型。</li>
+<li>文档（Document）: 文档是ES中最小的数据单元。它是一个JSON格式的数据对象，类似于数据库中的一行记录。每个文档都有一个唯一的ID，用于标识和检索。</li>
+<li>字段（Field）：字段是文档中的数据项，可以是文本、数字、日期等类型。每个字段都有自己的数据类型、分析器和索引选项。</li>
+</ul>
+</li>
+<li><p>一般来说，ES集群架构通常采用多机房多节点的方式。每个节点都是一个单独的ES实例，它们可以分布在不同的物理服务器或虚拟机上。一个集群可以包含多个节点，每个节点都有自己唯一标识符和角色。</p>
+</li>
+<li><p>在一个ES集群中，索引被分为多个分片，每个分片是一个独立的，可被分配到不同节点上的数据单元。每个分片都有自己的副本，用于提高数据的可靠性和可用性，分片和副本的数量可以根据需求进行设置。</p>
+<ul>
+<li>分片和副本的数量可以根据需求进行设置，通常会将它们分配到不同的机房，以确保一旦某个机房宕机，数据不会丢失。</li>
+</ul>
+</li>
+<li><p>ES集群还有一个主节点，它负责协调集群中的各个节点，处理集群的管理和状态相关的任务。</p>
+<ul>
+<li>在应用中，ES常常与Logstash和Kibana组成ELK堆栈，用于实时的日志收集、存储和可视化。<strong>Logstash用于收集和处理日志数据（但通常会选择使用filebeat），将其发送到ES集群中进行索引和存储。Kibana则提供了一个直观的用户界面，用于查询和可视化ES中的数据。</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><ul>
+<li>倒排索引是一种用于快速检索的数据结构，常用于搜索引擎和数据库中。与传统的正排索引不同，倒排索引是根据关键词来建立索引，而不是根据文档ID。</li>
+<li>倒排索引的建立过程：（建立比MYSQL 复杂）<ul>
+<li><ol>
+<li>将每个文档（一般json形式）拆分成一系列的关键词或词项（分词器），然后建立一个词项到文档的映射。对于每个关键词，记录包含该关键词的列表。倒排索引的结构类似于一个此项-文档倒排表，可以快速定位包含特点关键词的文档。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="倒排索引的好处"><a href="#倒排索引的好处" class="headerlink" title="倒排索引的好处"></a>倒排索引的好处</h4><ul>
+<li>首先，它可以快速地定位到包含特定关键词的文档，提高检索效率。相比于正排索引，倒排索引不需要遍历整个文档集合，而是直接通过关键词索引到对应的文档列表，减少了搜索时间。</li>
+<li>其次，倒排索引可以支持复杂的查询操作。通过对多个关键词的组合查询，可以实现更精确的检索结果。倒排索引可以根据多个关键词的交集、并集或者其他逻辑关系来进行查询，提供更灵活的搜索功能。</li>
+</ul>
+<h5 id="搜索引擎为什么比MySQL查询快？"><a href="#搜索引擎为什么比MySQL查询快？" class="headerlink" title="搜索引擎为什么比MySQL查询快？"></a>搜索引擎为什么比MySQL查询快？</h5><ul>
+<li>倒排索引：搜索引擎使用倒排索引来构建索引，而MySQL使用正排索引。倒排索引是一种将关键词与文档进行映射的数据结构，能够快速定位包含特定关键词的文档。相比之下，正排索引需要遍历整个数据表才能找到匹配的记录。倒排索引的使用能够大大减少搜索时间，提高查询效率。</li>
+<li>分布式架构：搜索引擎往往采用分布式架构，将索引和数据分散存储在多个节点上。这种架构可以将查询请求并行处理，从而加快查询速度。相反，MySQL通常采用集中式架构，所有数据都存储在一个节点上，无法进行并行处理。</li>
+</ul>
+<h2 id="分词器"><a href="#分词器" class="headerlink" title="分词器"></a>分词器</h2><ul>
+<li>HanLP </li>
+<li>Jieba</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
     </div>
