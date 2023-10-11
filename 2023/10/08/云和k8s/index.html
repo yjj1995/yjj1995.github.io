@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Elasticsearch | 记好笔记</title>
-  <meta name="keywords" content=" Elasticsearch ">
-  <meta name="description" content="Elasticsearch | 记好笔记">
+  <title>云和k8s | 记好笔记</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="云和k8s | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -498,26 +498,19 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-nosql" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-云和k8s" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Elasticsearch</h1>
+        <h1 class="article-title">云和k8s</h1>
     
     <div class="article-meta">
         
         
         
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color4">Elasticsearch</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-27 11:08:43'>2023-09-26 01:26</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-10 14:02:26'>2023-10-08 01:57</time>
         
     </div>
     <div class="article-meta">
@@ -539,7 +532,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Elasticsearch"><span class="toc-text">Elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-%E5%92%8C-Mysql-%E5%AF%B9%E6%AF%94"><span class="toc-text">ES 和 Mysql 对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-text">倒排索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">倒排索引的好处</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94MySQL%E6%9F%A5%E8%AF%A2%E5%BF%AB%EF%BC%9F"><span class="toc-text">搜索引擎为什么比MySQL查询快？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E5%99%A8"><span class="toc-text">分词器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">云原生的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97"><span class="toc-text">云计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">微服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE"><span class="toc-text">云原生思维导图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BA%94%E7%94%A8%E5%BA%94%E5%85%B7%E6%9C%89%E4%BB%A5%E4%B8%8B%E7%89%B9%E6%80%A7"><span class="toc-text">云原生应用应具有以下特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-text">Kubernetes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#k8s-%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="toc-text">k8s 设计理念与分布式系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E5%88%B0k8s%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B"><span class="toc-text">镜像到k8s完整流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#K8s-%E5%AF%B9%E8%B1%A1"><span class="toc-text">K8s 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84spec%E5%92%8Cstatus"><span class="toc-text">对象的spec和status</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pod"><span class="toc-text">Pod</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pod-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">Pod 的使用方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pod-%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E5%AE%B9%E5%99%A8"><span class="toc-text">Pod 如何管理多个容器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8minikube-%E5%8D%95%E6%9C%BA%E9%83%A8%E7%BD%B2k8s"><span class="toc-text">利用minikube 单机部署k8s</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8Dminikube"><span class="toc-text">介绍minikube</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -555,52 +548,174 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><ul>
-<li><p>Elasticsearch(ES) 是一个基于lucene的开源搜索引擎，具有强大的全文搜索和分析能力。</p>
+        <h2 id="云原生的定义"><a href="#云原生的定义" class="headerlink" title="云原生的定义"></a>云原生的定义</h2><ul>
+<li>能够提高云上资源利用率和应用交付效率的行为或方式都是云原生的。</li>
+</ul>
+<h3 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h3><ul>
+<li>云计算就是一种配置资源的方式，根据资源配置方式的不同，我们可以把云计算分成<ul>
+<li>IAAS <ul>
+<li>这是为了想要建立自己的商业模式并进行自定义的客户，例如亚马逊的 EC2、S3 存储、Rackspace 虚拟机等都是 IaaS。</li>
+</ul>
+</li>
+<li>PAAS<ul>
+<li>工具和服务的集合，对于想用它来构建自己的应用程序或者想快速得将应用程序部署到生产环境而不必关心底层硬件的用户和开发者来说是特别有用的，比如 Cloud Foundry、Google App Engine、Heroku 等。</li>
+</ul>
+</li>
+<li>SAAS <ul>
+<li>终端用户可以直接使用的应用程序。这个就太多，我们生活中用到的很多软件都是 SaaS 服务，只要基于互联网来提供的服务基本都是 SaaS 服务，有的服务是免费的，比如 Google Docs，还有更多的是根据我们购买的 Plan 和使用量付费，比如 GitHub、各种云存储。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><ul>
+<li>微服务是一种分布式架构设计理念，为了推动细粒度服务的使用，这些服务要能协同工作，每个服务都有自己的生命周期。</li>
+<li>一个微服务就是一个 <strong>独立的实体</strong>， 可以独立的部署在PaaS平台上，也可以作为一个独立的进程在主机中运行。</li>
+<li>服务之间通过 API 访问，修改一个服务不会影响其它服务。</li>
+</ul>
+<h3 id="云原生思维导图"><a href="#云原生思维导图" class="headerlink" title="云原生思维导图"></a>云原生思维导图</h3><p><img src="2023-10-08T095136.png" alt="2023-10-08T095136"></p>
+<h3 id="云原生应用应具有以下特性"><a href="#云原生应用应具有以下特性" class="headerlink" title="云原生应用应具有以下特性"></a>云原生应用应具有以下特性</h3><ul>
+<li>敏捷</li>
+<li>可靠</li>
+<li>高弹性</li>
+<li>易扩展</li>
+<li>故障隔离保护<br>不中断业务持续更新</li>
+</ul>
+<h2 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h2><ul>
+<li><p>Kubernetes是 google基于borg开源的容器编排调度引擎，作为CNCF 最重要的组件之一</p>
 <ul>
-<li>索引（Index）：索引是ES中最高级别的数据容器，它类似于<strong>数据库中的数据库。</strong>每个索引可以包含多个文档，并且可以定义不同类型的字段。（ES7后变成表）</li>
-<li>类型（Type）: 类型是索引内的逻辑分组，他类似于数据库中的表。每个类型都有自己的映射，定义了文档中包含的字段和其数据类型。（ES7后已取消）</li>
-<li>文档（Document）: 文档是ES中最小的数据单元。它是一个JSON格式的数据对象，类似于数据库中的一行记录。每个文档都有一个唯一的ID，用于标识和检索。</li>
-<li>字段（Field）：字段是文档中的数据项，可以是文本、数字、日期等类型。每个字段都有自己的数据类型、分析器和索引选项。</li>
-<li>映射（mapping）: mapping 是处理数据的方式和规则方面做一些限制，如某个字段的数据类型，默认值，分析器，是否被索引等等，这些都是映射里面可以设置的，其它就是处理es里面数据的一些使用规则设置也叫做映射， 按着最优规则处理数据对性能提高很大，因此才需要建立映射，并且需要思考如何建立映射才能对性能更好。<strong>相当于mysql中的创建表的过程，设置主键外键等等</strong></li>
+<li>编排系统</li>
+<li>规范</li>
+<li>描述集群的架构，定义服务的最终状态，Kubernetes可以将系统自动的达到和维持最终状态。</li>
 </ul>
 </li>
-<li><p>一般来说，ES集群架构通常采用多机房多节点的方式。每个节点都是一个单独的ES实例，它们可以分布在不同的物理服务器或虚拟机上。一个集群可以包含多个节点，每个节点都有自己唯一标识符和角色。</p>
-</li>
-<li><p>在一个ES集群中，索引被分为多个分片，每个分片是一个独立的，可被分配到不同节点上的数据单元。每个分片都有自己的副本，用于提高数据的可靠性和可用性，分片和副本的数量可以根据需求进行设置。</p>
-<ul>
-<li>分片和副本的数量可以根据需求进行设置，通常会将它们分配到不同的机房，以确保一旦某个机房宕机，数据不会丢失。</li>
-</ul>
-</li>
-<li><p>ES集群还有一个主节点，它负责协调集群中的各个节点，处理集群的管理和状态相关的任务。</p>
-<ul>
-<li>在应用中，ES常常与Logstash和Kibana组成ELK堆栈，用于实时的日志收集、存储和可视化。<strong>Logstash用于收集和处理日志数据（但通常会选择使用filebeat），将其发送到ES集群中进行索引和存储。Kibana则提供了一个直观的用户界面，用于查询和可视化ES中的数据。</strong></li>
-</ul>
+<li><p><strong>K8S用户可以通过编写一个YAML或者json 格式的配置文件，也可以通过工具&#x2F;代码生成 或直接请求kubernetes api 创建应用</strong>，该配置文件中包含了用户想要应用程序保持的状态，不论整个 Kubernetes 集群中的个别主机发生什么问题，都不会影响应用程序的状态，你还可以通过改变该配置文件或请求 Kubernetes API 来改变应用程序的状态。</p>
 </li>
 </ul>
-<h3 id="ES-和-Mysql-对比"><a href="#ES-和-Mysql-对比" class="headerlink" title="ES 和 Mysql 对比"></a>ES 和 Mysql 对比</h3><p><img src="2023-09-26T141616.png" alt="2023-09-26T141616"></p>
-<p><img src="2023-09-26T141650.png" alt="2023-09-26T141650"></p>
-<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><ul>
-<li>倒排索引是一种用于快速检索的数据结构，常用于搜索引擎和数据库中。与传统的正排索引不同，倒排索引是根据关键词来建立索引，而不是根据文档ID。</li>
-<li>倒排索引的建立过程：（建立比MYSQL 复杂）<ul>
+<h3 id="k8s-设计理念与分布式系统"><a href="#k8s-设计理念与分布式系统" class="headerlink" title="k8s 设计理念与分布式系统"></a>k8s 设计理念与分布式系统</h3><ul>
+<li>分层架构<br><img src="2023-10-08T151512.png" alt="2023-10-08T151512"></li>
+</ul>
+<h3 id="镜像到k8s完整流程"><a href="#镜像到k8s完整流程" class="headerlink" title="镜像到k8s完整流程"></a>镜像到k8s完整流程</h3><ul>
 <li><ol>
-<li>将每个文档（一般json形式）拆分成一系列的关键词或词项（分词器），然后建立一个词项到文档的映射。对于每个关键词，记录包含该关键词的列表。倒排索引的结构类似于一个此项-文档倒排表，可以快速定位包含特点关键词的文档。</li>
+<li>首先打包我们的应用成 镜像</li>
 </ol>
 </li>
+<li><ol start="2">
+<li>通过yaml&#x2F;json 格式的文件 作为资源清单来 描述应用</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>可以用kuberctl 工具运行 资源文件</li>
+</ol>
+<ul>
+<li>kubectl 是直接操作 APIServer 的，所以就相当于把我们的清单提交给了 APIServer</li>
+<li>集群获取到清单描述的应用信息后存入到etcd数据库中</li>
+<li>kube-scheduler 组件发现这个时候有一个 Pod 还没有绑定到节点上，就会对这个 Pod 进行一系列的调度，把它调度到一个最合适的节点上，把这个节点和 Pod 绑定到一起（写回到 etcd）</li>
+<li>节点上的 kubelet 组件这个时候 watch 到有一个 Pod 被分配过来了，就去把这个 Pod 的信息拉取下来，然后根据描述通过<strong>容器运行时</strong>把容器创建出来，最后当然同样把 Pod 状态再写回到 etcd 中去，这样就完成了一整个的创建流程。</li>
 </ul>
 </li>
 </ul>
-<h4 id="倒排索引的好处"><a href="#倒排索引的好处" class="headerlink" title="倒排索引的好处"></a>倒排索引的好处</h4><ul>
-<li>首先，它可以快速地定位到包含特定关键词的文档，提高检索效率。相比于正排索引，倒排索引不需要遍历整个文档集合，而是直接通过关键词索引到对应的文档列表，减少了搜索时间。</li>
-<li>其次，倒排索引可以支持复杂的查询操作。通过对多个关键词的组合查询，可以实现更精确的检索结果。倒排索引可以根据多个关键词的交集、并集或者其他逻辑关系来进行查询，提供更灵活的搜索功能。</li>
+<h3 id="K8s-对象"><a href="#K8s-对象" class="headerlink" title="K8s 对象"></a>K8s 对象</h3><ul>
+<li>K8s对象指的是 K8s系统的持久化实体，所有这些对象合起来，代表了你集群的实际情况。</li>
+<li>Kubernetes将其数据以Kubernetes对象的形式通过 api server存储在 etcd 中</li>
+<li>Kubernetes对象）描述了：<ul>
+<li>集群中运行了哪些容器化应用程序（以及在哪个节点上运行）</li>
+<li>集群中对应用程序可用的资源</li>
+<li>应用程序相关的策略定义，例如，重启策略、升级策略、容错策略</li>
+<li>其他Kubernetes管理应用程序时所需要的信息</li>
 </ul>
-<h5 id="搜索引擎为什么比MySQL查询快？"><a href="#搜索引擎为什么比MySQL查询快？" class="headerlink" title="搜索引擎为什么比MySQL查询快？"></a>搜索引擎为什么比MySQL查询快？</h5><ul>
-<li>倒排索引：搜索引擎使用倒排索引来构建索引，而MySQL使用正排索引。倒排索引是一种将关键词与文档进行映射的数据结构，能够快速定位包含特定关键词的文档。相比之下，正排索引需要遍历整个数据表才能找到匹配的记录。倒排索引的使用能够大大减少搜索时间，提高查询效率。</li>
-<li>分布式架构：搜索引擎往往采用分布式架构，将索引和数据分散存储在多个节点上。这种架构可以将查询请求并行处理，从而加快查询速度。相反，MySQL通常采用集中式架构，所有数据都存储在一个节点上，无法进行并行处理。</li>
+</li>
+<li>一个Kubernetes对象代表着用户的一个意图（a record of intent），一旦您创建了一个Kubernetes对象，Kubernetes将持续工作，以尽量实现此用户的意图。</li>
 </ul>
-<h2 id="分词器"><a href="#分词器" class="headerlink" title="分词器"></a>分词器</h2><ul>
-<li>HanLP </li>
-<li>Jieba</li>
+<h4 id="对象的spec和status"><a href="#对象的spec和status" class="headerlink" title="对象的spec和status"></a>对象的spec和status</h4><ul>
+<li>每一个K8s对象都包含了两个重要的字段：<ul>
+<li>spec，用户提供，描述了对该对象所期望的目标状态</li>
+<li>status 只能由 Kubernetes 系统来修改，描述了该对象在 Kubernetes 系统中的 实际状态</li>
+</ul>
+</li>
+<li><strong>理解：k8s对象表示通过spec 创建的一个个实体，由kind 字段分类</strong></li>
+</ul>
+<h3 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h3><ul>
+<li>Pod 是kubernetes 中 可以 创建和部署的 最小和最简的单位。</li>
+<li>Pod 代表着集群中运行的进程。</li>
+<li>Pod中封装着应用的容器(也可能是好几个容器)，存储，独立的网络IP（每个容器都有ip+port），管理容器如何运行的策略选项。</li>
+<li>Pod代表着部署的一个单位: K8s中应用的一个实例，可能由一个或者多个容器组合在一个共享资源。 <ul>
+<li>Docker是kubernetes中最常用的容器运行时，但是Pod也支持其他容器运行时。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Pod-的使用方式"><a href="#Pod-的使用方式" class="headerlink" title="Pod 的使用方式"></a>Pod 的使用方式</h4><ul>
+<li>一个pod 中 运行一个容器。<ul>
+<li>“每个Pod中一个容器”的模式时最常见的用法，在这种方式中，可以把Pod看成单个容器的封装，k8s管理的是Pod，而不是之间管理容器。</li>
+</ul>
+</li>
+<li>在一个Pod中同时运行多个容器。<ul>
+<li>一个 Pod 中也可以同时封装几个需要紧密耦合互相协作的容器，它们之间共享资源。这些在同一个 Pod 中的容器可以互相协作成为一个 service 单位 —— 一个容器共享文件，另一个 “sidecar” 容器来更新这些文件。<strong>Pod 将这些容器的存储资源作为一个实体来管理。</strong></li>
+</ul>
+</li>
+<li>每一个 Pod 容器组都是用来运行某一特定应用程序的一个实例。</li>
+</ul>
+<h4 id="Pod-如何管理多个容器"><a href="#Pod-如何管理多个容器" class="headerlink" title="Pod 如何管理多个容器"></a>Pod 如何管理多个容器</h4><ul>
+<li><p>Pod 的设计目的是用来支持多个互相协同的容器，是的他们形成一个有意义的服务单元。一个 Pod 中的多个容器很自然就可以随 Pod 被一起调度到集群中的同一个物理机或虚拟机上。Pod 中的容器可以：</p>
+<ul>
+<li>共享资源、依赖</li>
+<li>互相通信</li>
+<li>相互协商何时以何种方式结束运行<br><img src="2023-10-08T154240.png" alt="2023-10-08T154240"></li>
+</ul>
+</li>
+<li><p>Pod 为其成员容器提供了两种类型的共享资源：网络和存储</p>
+<ul>
+<li>网络<ul>
+<li>每一个 Pod 被分配一个独立的 IP 地址。Pod 中的所有容器共享一个网络名称空间：<ul>
+<li>同一个Pod中的所有容器IP地址都相同</li>
+<li>同一个Pod中的不同容器不能使用相同的端口，否则会导致端口冲突</li>
+<li>同一个Pod中的不同容器可以通过localhost:port进行通信</li>
+<li>同一个Pod中的不同容器可以通过使用常规的进程通信手段，例如 SystemV semaphores 或者 POSIX 共享内存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>不同 Pod</strong> 上的两个容器如果要通信，必须使用对方 Pod 的 IP 地址 + 对方容器的端口号 进行网络通信</p>
+</blockquote>
+<ul>
+<li>存储<ul>
+<li>Pod 中可以定义一组共享的数据卷。Pod 中所有的容器都可以访问这些共享数据卷，以便共享数据。Pod 中数据卷的数据也可以存储持久化的数据，使得容器在重启后仍然可以访问到之前存入到数据卷中的数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="利用minikube-单机部署k8s"><a href="#利用minikube-单机部署k8s" class="headerlink" title="利用minikube 单机部署k8s"></a><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">利用minikube 单机部署k8s</a></h2><h3 id="介绍minikube"><a href="#介绍minikube" class="headerlink" title="介绍minikube"></a>介绍minikube</h3><ul>
+<li>minikube 支持多种不同的驱动来运行 Kubernetes 集群。根据资源环境选择合适的驱动：<ul>
+<li>HyperKit 驱动： HyperKit 是 macOS 平台上的开源的虚拟化技术，为轻量级虚拟机和容器部署进行了优化。</li>
+<li>Hyper-V 驱动： Hyper-V 是内置在现代版本 Microsoft Windows 中的虚拟化程序。</li>
+<li>KVM 驱动: KVM 基于内核的虚拟机 是一个基于 x86 硬件的 Linux 的全虚拟化解决方案，包含虚拟化扩展。</li>
+<li>Docker 驱动: Docker 驱动允许你将 Kubernetes 安装到现有的 Docker 服务中。在 Linux 系统中，这不需要启用虚拟化。</li>
+<li>none 驱动: 即 Minikube 不使用任何类型的驱动，直接使用当前操作系统来运行 Kubernetes 集群，也称为裸金属（bare-metal）。</li>
+<li>podman 驱动: 是一种可以代替 Docker 容器运行时的另外一种驱动。</li>
+<li>ssh 驱动: 程序允许高级 minikube 用户跳过虚拟机创建，允许 minikube 在用户提供的虚拟机上运行。</li>
+<li>Parallels 驱动: 对于拥有 Parallels Desktop for Mac 的用户特别有用，因为它不需要 VT-x 硬件支持。</li>
+<li>VirtualBox 驱动: 是 minikube 的早期支持驱动。它可能不能提供最快的启动时间，但它是 Microsoft Windows Home 用户可用的最稳定的驱动程序。</li>
+<li>vmware 驱动: 支持所有基于 vmware 的虚拟化环境。</li>
+</ul>
+</li>
+<li>驱动选择可以分为一下几类：<ul>
+<li>裸金属无驱动：none</li>
+<li>容器驱动：docker、podman</li>
+<li>远程主机驱动： ssh</li>
+<li>虚拟化虚拟机驱动 MacOS 平台：HyperKit、Parallels、VirtualBox、Vmware</li>
+<li>虚拟化虚拟机驱动 Windows 平台：Hyper-V、VirtualBox、Vmware</li>
+<li>虚拟化虚拟机驱动 Linux 平台：KVM、VirtualBox、Vmware<blockquote>
+<p>注：</p>
+<p>由于minikube复用了docker-machine，在其软件包中已经支持了相应的VirtualBox, VMware Fusion驱动</p>
+<p>VT-x&#x2F;AMD-v 虚拟化必须在 BIOS 中开启</p>
+<p>在Windows环境下，如果开启了Hyper-V，不支持VirtualBox方式</p>
+</blockquote>
+</li>
+</ul>
+</li>
 </ul>
 
       

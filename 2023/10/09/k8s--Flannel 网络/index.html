@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Elasticsearch | 记好笔记</title>
-  <meta name="keywords" content=" Elasticsearch ">
-  <meta name="description" content="Elasticsearch | 记好笔记">
+  <title>k8s网络 | 记好笔记</title>
+  <meta name="keywords" content=" k8s网络 ">
+  <meta name="description" content="k8s网络 | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -498,9 +498,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-nosql" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-k8s--Flannel 网络" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Elasticsearch</h1>
+        <h1 class="article-title">k8s网络</h1>
     
     <div class="article-meta">
         
@@ -510,14 +510,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">Elasticsearch</a>
+            <a class="color1">k8s网络</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-27 11:08:43'>2023-09-26 01:26</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-11 09:51:29'>2023-10-09 08:22</time>
         
     </div>
     <div class="article-meta">
@@ -539,7 +539,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Elasticsearch"><span class="toc-text">Elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-%E5%92%8C-Mysql-%E5%AF%B9%E6%AF%94"><span class="toc-text">ES 和 Mysql 对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-text">倒排索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">倒排索引的好处</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94MySQL%E6%9F%A5%E8%AF%A2%E5%BF%AB%EF%BC%9F"><span class="toc-text">搜索引擎为什么比MySQL查询快？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E5%99%A8"><span class="toc-text">分词器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#k8s%E7%BD%91%E7%BB%9C%E4%B9%8B%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-text">k8s网络之设计与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K8s%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1"><span class="toc-text">K8s网络设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#K8s%E7%BD%91%E7%BB%9C%E8%A6%81%E6%B1%82"><span class="toc-text">K8s网络要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#K8s%E7%BD%91%E7%BB%9C%E8%A7%84%E8%8C%83"><span class="toc-text">K8s网络规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#K8s%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0"><span class="toc-text">K8s网络实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#K8s-pod-%E7%9A%84%E7%BD%91%E7%BB%9C%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B"><span class="toc-text">K8s pod 的网络创建流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pod-%E5%86%85%E9%83%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0"><span class="toc-text">pod 内部网络实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes-%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6Flannel-x2F-Calico%E5%AF%B9%E6%AF%94%E4%BB%8B%E7%BB%8D"><span class="toc-text">Kubernetes 网络插件Flannel&#x2F;Calico对比介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flannel"><span class="toc-text">Flannel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-text">几种模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Calico-%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C"><span class="toc-text">Calico 容器网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E7%BB%84%E4%BB%B6"><span class="toc-text">主要工作组件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93"><span class="toc-text">网络传输</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -555,52 +555,144 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><ul>
-<li><p>Elasticsearch(ES) 是一个基于lucene的开源搜索引擎，具有强大的全文搜索和分析能力。</p>
-<ul>
-<li>索引（Index）：索引是ES中最高级别的数据容器，它类似于<strong>数据库中的数据库。</strong>每个索引可以包含多个文档，并且可以定义不同类型的字段。（ES7后变成表）</li>
-<li>类型（Type）: 类型是索引内的逻辑分组，他类似于数据库中的表。每个类型都有自己的映射，定义了文档中包含的字段和其数据类型。（ES7后已取消）</li>
-<li>文档（Document）: 文档是ES中最小的数据单元。它是一个JSON格式的数据对象，类似于数据库中的一行记录。每个文档都有一个唯一的ID，用于标识和检索。</li>
-<li>字段（Field）：字段是文档中的数据项，可以是文本、数字、日期等类型。每个字段都有自己的数据类型、分析器和索引选项。</li>
-<li>映射（mapping）: mapping 是处理数据的方式和规则方面做一些限制，如某个字段的数据类型，默认值，分析器，是否被索引等等，这些都是映射里面可以设置的，其它就是处理es里面数据的一些使用规则设置也叫做映射， 按着最优规则处理数据对性能提高很大，因此才需要建立映射，并且需要思考如何建立映射才能对性能更好。<strong>相当于mysql中的创建表的过程，设置主键外键等等</strong></li>
-</ul>
-</li>
-<li><p>一般来说，ES集群架构通常采用多机房多节点的方式。每个节点都是一个单独的ES实例，它们可以分布在不同的物理服务器或虚拟机上。一个集群可以包含多个节点，每个节点都有自己唯一标识符和角色。</p>
-</li>
-<li><p>在一个ES集群中，索引被分为多个分片，每个分片是一个独立的，可被分配到不同节点上的数据单元。每个分片都有自己的副本，用于提高数据的可靠性和可用性，分片和副本的数量可以根据需求进行设置。</p>
-<ul>
-<li>分片和副本的数量可以根据需求进行设置，通常会将它们分配到不同的机房，以确保一旦某个机房宕机，数据不会丢失。</li>
-</ul>
-</li>
-<li><p>ES集群还有一个主节点，它负责协调集群中的各个节点，处理集群的管理和状态相关的任务。</p>
-<ul>
-<li>在应用中，ES常常与Logstash和Kibana组成ELK堆栈，用于实时的日志收集、存储和可视化。<strong>Logstash用于收集和处理日志数据（但通常会选择使用filebeat），将其发送到ES集群中进行索引和存储。Kibana则提供了一个直观的用户界面，用于查询和可视化ES中的数据。</strong></li>
+        <h2 id="k8s网络之设计与实现"><a href="#k8s网络之设计与实现" class="headerlink" title="k8s网络之设计与实现"></a>k8s网络之设计与实现</h2><h3 id="K8s网络设计"><a href="#K8s网络设计" class="headerlink" title="K8s网络设计"></a>K8s网络设计</h3><ul>
+<li>每个pod都拥有一个独立IP地址，Pod内所有容器共享一个网络命名空间。</li>
+<li>集群内所有pod都在一个直接连通的扁平网络中，可通过IP直接访问。<ul>
+<li>所有容器之间 无需 NAT（地址转换）就可以之间互相访问</li>
+<li>所有Node和所有容器之间无需NAT就可以之间互相访问</li>
+<li>容器自己看到的IP跟其他容器看到的一样</li>
 </ul>
 </li>
 </ul>
-<h3 id="ES-和-Mysql-对比"><a href="#ES-和-Mysql-对比" class="headerlink" title="ES 和 Mysql 对比"></a>ES 和 Mysql 对比</h3><p><img src="2023-09-26T141616.png" alt="2023-09-26T141616"></p>
-<p><img src="2023-09-26T141650.png" alt="2023-09-26T141650"></p>
-<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><ul>
-<li>倒排索引是一种用于快速检索的数据结构，常用于搜索引擎和数据库中。与传统的正排索引不同，倒排索引是根据关键词来建立索引，而不是根据文档ID。</li>
-<li>倒排索引的建立过程：（建立比MYSQL 复杂）<ul>
+<h3 id="K8s网络要求"><a href="#K8s网络要求" class="headerlink" title="K8s网络要求"></a>K8s网络要求</h3><ul>
+<li>K8s对网络的要求总的来说 有两个：<ul>
+<li>要能够为每一个node上的pod分配互相不冲突的IP地址</li>
+<li>要所有Pod之间能够互相访问</li>
+</ul>
+</li>
+</ul>
+<h3 id="K8s网络规范"><a href="#K8s网络规范" class="headerlink" title="K8s网络规范"></a>K8s网络规范</h3><ul>
+<li>CNI是由CoreOS提出的一个容器网络规范。已采纳规范的包括Apache Mesos, Cloud Foundry, Kubernetes, Kurma 和 rkt。另外 Contiv Networking, Project Calico 和 Weave这些项目也为CNI提供插件。’<br><img src="2023-10-10T101945.png" alt="2023-10-10T101945"></li>
+</ul>
+<h3 id="K8s网络实现"><a href="#K8s网络实现" class="headerlink" title="K8s网络实现"></a>K8s网络实现</h3><ul>
+<li>隧道方案<ul>
+<li>隧道方案在IaaS层的网络中应用也比较多，将pod分布在一个大二层的网络规模下。网络拓扑简单，节点规模增加 会 使得 复杂度增加。<ul>
+<li>Weave：UDP广播，本机建立新的BR，通过PCAP互通</li>
+<li>Open vSwitch（OVS）：基于VxLan和GRE协议，但是性能方面损失比较严重</li>
+<li>Flannel：UDP广播，VxLan</li>
+<li>Racher：IPsec</li>
+<li>Calico: IPIP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>路由方案<ul>
+<li>路由方案一般是从3层或者2层实现隔离和跨主机容器互通的，出了问题也很容易排查。<ul>
+<li>Calico：基于BGP协议的路由方案，支持很细致的ACL控制，对混合云亲和度比较高。</li>
+<li>Macvlan：从逻辑和Kernel层来看隔离性和性能最优的方案，基于二层隔离，所以需要二层路由器支持，大多数云服务商不支持，所以混合云上比较难以实现。</li>
+<li>flannel :host-gw</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>二层的典型例子是以太网 Ethernet，三层是的典型例子是互联网 Internet。</p>
+</blockquote>
+<blockquote>
+<p>vxlan 是一种隧道技术，它在你的原始数据包外头包一层 UDP，只要 UDP 数据包能到达的地方，就可以把原始数据包带过去，然后再暴露出来，暴露出来之后可以再由所到主机上的设备进行处理，比如进行路由转发啊，或者其他什么操作。</p>
+</blockquote>
+<h3 id="K8s-pod-的网络创建流程"><a href="#K8s-pod-的网络创建流程" class="headerlink" title="K8s pod 的网络创建流程"></a>K8s pod 的网络创建流程</h3><ul>
 <li><ol>
-<li>将每个文档（一般json形式）拆分成一系列的关键词或词项（分词器），然后建立一个词项到文档的映射。对于每个关键词，记录包含该关键词的列表。倒排索引的结构类似于一个此项-文档倒排表，可以快速定位包含特点关键词的文档。</li>
+<li>每个Pod除了创建时指定的容器外，都有一个kubelet启动时指定的基础容器</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>kubelet创建基础容器，生成network namespace</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>kubelet调用网络CNI driver，由它根据配置调用具体的CNI 插件</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>CNI 插件给基础容器配置网络</li>
+</ol>
+</li>
+<li><ol start="5">
+<li><strong>Pod 中其他的容器共享使用基础容器的网络（pause）</strong></li>
 </ol>
 </li>
 </ul>
+<h2 id="pod-内部网络实现"><a href="#pod-内部网络实现" class="headerlink" title="pod 内部网络实现"></a>pod 内部网络实现</h2><p><img src="2023-10-10T105503.png" alt="2023-10-10T105503"></p>
+<ul>
+<li>多个容器共享同一个底层的网络命名空间 Net（网络设备、网络栈、端口等）</li>
+<li>同一Node中Pod的默认路由都是docker0的地址</li>
+</ul>
+<h2 id="Kubernetes-网络插件Flannel-x2F-Calico对比介绍"><a href="#Kubernetes-网络插件Flannel-x2F-Calico对比介绍" class="headerlink" title="Kubernetes 网络插件Flannel&#x2F;Calico对比介绍"></a>Kubernetes 网络插件Flannel&#x2F;Calico对比介绍</h2><h3 id="Flannel"><a href="#Flannel" class="headerlink" title="Flannel"></a>Flannel</h3><ul>
+<li>网络架构是Kubernetes中较为复杂，让很多用户头疼的方面之一，提起Kubernetes网络架构需要从CNI说起。CNI(Container NetworkInterface)意为容器网络接口，它是一种标准的设计，为了让用户在容器创建或销毁时都能够更容易地配置容器网络。由Google和CoreOS联合定制的网络标准，是Kubernetes网络插件的基础。基于CNI标准，有如下常见的CNI网络插件产品。</li>
+</ul>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ul>
+<li><p>Flannel 是coreOS 团队针对Kubernetes 设计的一个网络规划服务。</p>
+<ul>
+<li>让集群中的不同节点主机所创建的Docker容器都具有全集群唯一的虚拟IP地址。</li>
+<li>目的就是为集群中的所有节点重新规划IP地址的使用规则，从而使得不同节点上的容器能够获得 “同属一个内网” 且 “不重复的” IP地址，并且让属于不同节点上的容器能够直接通过内网IP通信。</li>
+</ul>
+</li>
+<li><p>本质是一种 “覆盖网络（overlaynetwork）” 也就是将TCP数据包装在另一种网络包里面进行路由转发和通信。</p>
+<ul>
+<li>已经支持udp、vxlan、host-gw、aws-vpc、gce和alloc路由等数据转发方式，默认的节点间数据通信方式是UDP转发。</li>
+</ul>
+</li>
+<li><p>Flannel配置第3层IPv4 Overlay网络。它会创建一个大型内部网络，跨越集群中每个节点。在此Overlay网络中，每个节点都有一个子网，用于在内部分配IP地址。</p>
+</li>
+<li><p>在配置Pod时，每个节点上的网桥接口都会为每个新容器分配一个地址。同一主机中的Pod可以使用网桥进行通信，而不同主机上的Pod会使用flanneld将其流量封装在UDP数据包中，以便路由到适当的目标。</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<p>默认的 Docker 网络配置中，每个节点上的Docker服务会分别负责所在节点容器的IP分配。（不同节点上容器可能出现IP冲突）</p>
+</blockquote>
+<h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><ul>
+<li>使集群中的不同Node主机创建的Docker 容器都有全集群唯一的虚拟IP地址。</li>
+<li>建立一个覆盖网络 （overlay network）,通过这个覆盖网络，将数据包原封不动的传递到目标容器。覆盖网络是建立在另一个网络之上并由其基础设施支持的虚拟网络。覆盖网络通过将一个分组封装在另一个分组内来将网络服务与底层基础设施分离。在将封装的数据包转发到端点后，将其解封装。</li>
+<li>创建一个新的虚拟网卡flannel0接收docker网桥的数据，通过维护路由表，对接收到的数据进行封包和转发（vxlan）。</li>
+<li>etcd保证了所有node上flanned所看到的配置是一致的。同时每个node上的flanned监听etcd上的数据变化，实时感知集群中node的变化。</li>
+</ul>
+<h5 id="几种模式"><a href="#几种模式" class="headerlink" title="几种模式"></a>几种模式</h5><ul>
+<li>Flannel通过在每一个节点上启动一个叫flannel的进程，负责为每一个节点上的子网划分，并将相关配置信息（如各节点的子网网段、外部IP等）保存到etcd中，而具体的网络报文转发交给backend实现。</li>
+<li>flanneld可以在启动时通过配置文件指定不同的backend进行网络通信，目前比较成熟的backend有UDP、VXLAN和host-gateway三种。目前，VXLAN是官方比较推崇的一种backend实现方式。</li>
+<li>UDP模式和VXLAN模式基于三层网络层即可实现，而host-gateway模式就必须要求集群所有机器在同一个广播域，也就是需要在二层网络同一个交换机下才能实现。</li>
+<li><strong>host-gateway一般用于对网络性能要求比较高的场景，但需要基础网络架构的支持；UDP则用于测试及一般比较老的不支持VXLAN的Linux内核。</strong></li>
+</ul>
+<blockquote>
+<p>为什么需要封装呢？</p>
+<ul>
+<li>因为没有路由，只通过容器IP无法直接发送到对应的容器ip，因此将其封装在node ip 中， 通过UDP的方式传输到目的node中（目的ip通过flannelld 存在etcd中）</li>
+</ul>
+</blockquote>
+<h3 id="Calico-容器网络"><a href="#Calico-容器网络" class="headerlink" title="Calico 容器网络"></a>Calico 容器网络</h3><ul>
+<li>路由方式：<ul>
+<li>BGP：<ul>
+<li>容器到网桥，网桥到node 网卡， node 与node 之间都有路由，一层层路由转发，就不需要进行封装。（目的IP和源IP不变，变得只是mac地址，通过路由器的时候，根据路由表，得到转发的端口（端口对应有一个吗地址），端口再到交换机（源mac+目的mac组成mac头），交换机需要目的地址mac, 因此在路由器上arp 获取 目的ip对应目的mac地址，将包通过交换机目的mac对应的端口发送给目的容器。）</li>
+</ul>
 </li>
 </ul>
-<h4 id="倒排索引的好处"><a href="#倒排索引的好处" class="headerlink" title="倒排索引的好处"></a>倒排索引的好处</h4><ul>
-<li>首先，它可以快速地定位到包含特定关键词的文档，提高检索效率。相比于正排索引，倒排索引不需要遍历整个文档集合，而是直接通过关键词索引到对应的文档列表，减少了搜索时间。</li>
-<li>其次，倒排索引可以支持复杂的查询操作。通过对多个关键词的组合查询，可以实现更精确的检索结果。倒排索引可以根据多个关键词的交集、并集或者其他逻辑关系来进行查询，提供更灵活的搜索功能。</li>
+</li>
 </ul>
-<h5 id="搜索引擎为什么比MySQL查询快？"><a href="#搜索引擎为什么比MySQL查询快？" class="headerlink" title="搜索引擎为什么比MySQL查询快？"></a>搜索引擎为什么比MySQL查询快？</h5><ul>
-<li>倒排索引：搜索引擎使用倒排索引来构建索引，而MySQL使用正排索引。倒排索引是一种将关键词与文档进行映射的数据结构，能够快速定位包含特定关键词的文档。相比之下，正排索引需要遍历整个数据表才能找到匹配的记录。倒排索引的使用能够大大减少搜索时间，提高查询效率。</li>
-<li>分布式架构：搜索引擎往往采用分布式架构，将索引和数据分散存储在多个节点上。这种架构可以将查询请求并行处理，从而加快查询速度。相反，MySQL通常采用集中式架构，所有数据都存储在一个节点上，无法进行并行处理。</li>
+<h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p><img src="2023-10-11T092924.png" alt="2023-10-11T092924"></p>
+<h5 id="主要工作组件"><a href="#主要工作组件" class="headerlink" title="主要工作组件"></a>主要工作组件</h5><ul>
+<li>Felix： calico的核心组件，运行在每个节点上。主要功能有接口管理，路由规则，ACL规则和状态报告。<ul>
+<li>Felix 会监听ECTD中心的存储，从它获取事件，比如说用户在这台机器上加了一个IP，或者是创建了一个容器等。</li>
+<li>用户创建pod后，Felix负责将<strong>其网卡，IP，MAC都设置好</strong>，然后在内核的路由表里面写一条，注明这个IP应该到这张网卡。同样如果用户制定了隔离策略，Felix同样会将该策略创建到ACL中，以实现隔离。</li>
 </ul>
-<h2 id="分词器"><a href="#分词器" class="headerlink" title="分词器"></a>分词器</h2><ul>
-<li>HanLP </li>
-<li>Jieba</li>
+</li>
+</ul>
+<h2 id="网络传输"><a href="#网络传输" class="headerlink" title="网络传输"></a>网络传输</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21546408">https://www.zhihu.com/question/21546408</a></p>
+<ul>
+<li>路由器每个口都有mac地址</li>
+<li>在ARP请求传输过程中，不变的是目的IP地址，要用它来找到目的主机，变的是目的mac，需要将数据发送到下一个目的位置</li>
+<li>路由器根据网络层的地址和路由器内部维护的路由表决定下一跳地址，分组到达路由时，更改链路层MAC帧的报头继续转发。</li>
 </ul>
 
       

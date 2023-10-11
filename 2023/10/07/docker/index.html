@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Elasticsearch | 记好笔记</title>
-  <meta name="keywords" content=" Elasticsearch ">
-  <meta name="description" content="Elasticsearch | 记好笔记">
+  <title>docker | 记好笔记</title>
+  <meta name="keywords" content=" docker ">
+  <meta name="description" content="docker | 记好笔记">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
 <meta property="og:type" content="website">
@@ -498,9 +498,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-nosql" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-docker" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Elasticsearch</h1>
+        <h1 class="article-title">docker</h1>
     
     <div class="article-meta">
         
@@ -510,14 +510,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">Elasticsearch</a>
+            <a class="color2">docker</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-27 11:08:43'>2023-09-26 01:26</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-08 09:12:19'>2023-10-07 01:19</time>
         
     </div>
     <div class="article-meta">
@@ -539,7 +539,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Elasticsearch"><span class="toc-text">Elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES-%E5%92%8C-Mysql-%E5%AF%B9%E6%AF%94"><span class="toc-text">ES 和 Mysql 对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-text">倒排索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">倒排索引的好处</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94MySQL%E6%9F%A5%E8%AF%A2%E5%BF%AB%EF%BC%9F"><span class="toc-text">搜索引擎为什么比MySQL查询快？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E8%AF%8D%E5%99%A8"><span class="toc-text">分词器</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8"><span class="toc-text">容器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%9F"><span class="toc-text">什么是容器运行时？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LXC"><span class="toc-text">LXC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">docker 基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%95%9C%E5%83%8F"><span class="toc-text">镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8-1"><span class="toc-text">容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Registry"><span class="toc-text">Registry</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -555,52 +555,68 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><ul>
-<li><p>Elasticsearch(ES) 是一个基于lucene的开源搜索引擎，具有强大的全文搜索和分析能力。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>Docker 使用 Google 公司推出的Go语言进行开发实现，基于Linux内核的cgroup, namespace, 以及AUFS 类的Union FS等技术，对进程进行封装隔离，属于操作系统层面的虚拟化技术。<ul>
+<li>由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。</li>
+<li>最初实现是基于LXC，0.7版本后使用libcontainer, <strong>1.11版本后</strong>，使用runC 和 containerd。</li>
+</ul>
+</li>
+</ul>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><ul>
+<li>在linux 内核中，容器不是一类对象。</li>
+<li>容器本质上是由几个底层的内核原语组成：namesapce (允许你跟谁交谈)，cgroups (允许使用的资源量)，和 LSMs （Linux 安全模块–允许你做的事情）。<ul>
+<li>这些凑在一起能够为我们的进程设置安全，隔离和可计量的执行环境。</li>
+<li>但是当我们要创建一个新的隔离进程时，手动执行所有的操作将很麻烦。</li>
+</ul>
+</li>
+<li>每次创建隔离进程时，都不需要手动隔离，自定义命令空间等，把这些组件捆绑在一起，我们称之为（容器）。我们称之为【容器运行时】的工具将这些部分组成一个隔离的，安全的执行环境变得很容器，来让我们可以以重复的方式部署。</li>
+</ul>
+<h4 id="什么是容器运行时？"><a href="#什么是容器运行时？" class="headerlink" title="什么是容器运行时？"></a>什么是容器运行时？</h4><ul>
+<li>运行时：指的是程序的生命周期阶段或者使用特定语言的执行程序。<ul>
+<li>容器运行时的功能类似于后者–它是一种软件用于允许和管理容器所需要的组件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="LXC"><a href="#LXC" class="headerlink" title="LXC"></a>LXC</h3><ul>
+<li><p>Linux 容器是与系统其他部分隔离开的一个或一组进程。运行这些进程所需的所有文件都由另一个特定镜像提供，意味着从开发到测试再到生产整个过程中，Linux 容器都是可移植且一致的。因此，相对于依赖重复传统测试环境的开发渠道，使用容器速度要快得多。容器比较普遍也易于使用，因此也成了IT安全方面的重要组成部分。</p>
+</li>
+<li><p>为什么需要Linux 容器</p>
 <ul>
-<li>索引（Index）：索引是ES中最高级别的数据容器，它类似于<strong>数据库中的数据库。</strong>每个索引可以包含多个文档，并且可以定义不同类型的字段。（ES7后变成表）</li>
-<li>类型（Type）: 类型是索引内的逻辑分组，他类似于数据库中的表。每个类型都有自己的映射，定义了文档中包含的字段和其数据类型。（ES7后已取消）</li>
-<li>文档（Document）: 文档是ES中最小的数据单元。它是一个JSON格式的数据对象，类似于数据库中的一行记录。每个文档都有一个唯一的ID，用于标识和检索。</li>
-<li>字段（Field）：字段是文档中的数据项，可以是文本、数字、日期等类型。每个字段都有自己的数据类型、分析器和索引选项。</li>
-<li>映射（mapping）: mapping 是处理数据的方式和规则方面做一些限制，如某个字段的数据类型，默认值，分析器，是否被索引等等，这些都是映射里面可以设置的，其它就是处理es里面数据的一些使用规则设置也叫做映射， 按着最优规则处理数据对性能提高很大，因此才需要建立映射，并且需要思考如何建立映射才能对性能更好。<strong>相当于mysql中的创建表的过程，设置主键外键等等</strong></li>
+<li>容器可以确保您的应用拥有必需的库、依赖项和文件，让您可以在生产中自如地迁移这些应用，无需担心会出现负面影响。实际上，您可以将容器镜像中的内容（使用 Buildah 等开源工具创建）视为 Linux 发行版的一个安装实例，因为其中完整包含 RPM 软件包、配置文件等内容。</li>
 </ul>
 </li>
-<li><p>一般来说，ES集群架构通常采用多机房多节点的方式。每个节点都是一个单独的ES实例，它们可以分布在不同的物理服务器或虚拟机上。一个集群可以包含多个节点，每个节点都有自己唯一标识符和角色。</p>
-</li>
-<li><p>在一个ES集群中，索引被分为多个分片，每个分片是一个独立的，可被分配到不同节点上的数据单元。每个分片都有自己的副本，用于提高数据的可靠性和可用性，分片和副本的数量可以根据需求进行设置。</p>
+<li><p>什么是LXC项目</p>
 <ul>
-<li>分片和副本的数量可以根据需求进行设置，通常会将它们分配到不同的机房，以确保一旦某个机房宕机，数据不会丢失。</li>
-</ul>
-</li>
-<li><p>ES集群还有一个主节点，它负责协调集群中的各个节点，处理集群的管理和状态相关的任务。</p>
-<ul>
-<li>在应用中，ES常常与Logstash和Kibana组成ELK堆栈，用于实时的日志收集、存储和可视化。<strong>Logstash用于收集和处理日志数据（但通常会选择使用filebeat），将其发送到ES集群中进行索引和存储。Kibana则提供了一个直观的用户界面，用于查询和可视化ES中的数据。</strong></li>
+<li>作为一个开源容器平台，Linux 容器项目(LXC) 提供了一组工具，模板，库和语言绑定。LXC 采用简单的命令行界面，可改善容器启动时的用户体验。</li>
+<li>LXC 提供了一个操作系统级的虚拟化环境，可在许多基于linux 的系统上安装。在 Linux 发行版中，可能会通过其软件包存储库来提供 LXC。</li>
 </ul>
 </li>
 </ul>
-<h3 id="ES-和-Mysql-对比"><a href="#ES-和-Mysql-对比" class="headerlink" title="ES 和 Mysql 对比"></a>ES 和 Mysql 对比</h3><p><img src="2023-09-26T141616.png" alt="2023-09-26T141616"></p>
-<p><img src="2023-09-26T141650.png" alt="2023-09-26T141650"></p>
-<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><ul>
-<li>倒排索引是一种用于快速检索的数据结构，常用于搜索引擎和数据库中。与传统的正排索引不同，倒排索引是根据关键词来建立索引，而不是根据文档ID。</li>
-<li>倒排索引的建立过程：（建立比MYSQL 复杂）<ul>
-<li><ol>
-<li>将每个文档（一般json形式）拆分成一系列的关键词或词项（分词器），然后建立一个词项到文档的映射。对于每个关键词，记录包含该关键词的列表。倒排索引的结构类似于一个此项-文档倒排表，可以快速定位包含特点关键词的文档。</li>
-</ol>
-</li>
+<h2 id="docker-基本概念"><a href="#docker-基本概念" class="headerlink" title="docker 基本概念"></a>docker 基本概念</h2><ul>
+<li>镜像 （Image）</li>
+<li>容器 （Container）</li>
+<li>仓库 （Repository）</li>
+</ul>
+<h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><ul>
+<li>docker镜像，相当于是一个root 文件系统。</li>
+<li>docker镜像是一个特殊的文件系统，除了提供容器运行时所需的程序，库，资源，配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷，环境变量，用户等）。</li>
+<li>镜像不包含任何动态数据，其内容在构建之后也不会被改变。</li>
+</ul>
+<h3 id="容器-1"><a href="#容器-1" class="headerlink" title="容器"></a>容器</h3><ul>
+<li>镜像 和 容器 的关系，类似于 类和 实例一样。<strong>镜像是静态的定义，容器时镜像运行时的实体</strong> 容器可以被创建，启动，停止，删除，暂停等。</li>
+<li><strong>容器的 实质是 进程</strong>， 但与直接在宿主执行的进程 不同，容器进程运行 于 属于自己的独立的命名空间。<ul>
+<li>因此容器可以拥有自己root文件系统，自己的网络配置，自己的进程空间，甚至自己的用户ID空间。</li>
 </ul>
 </li>
+<li>容器内的进程是运行在一个隔离的环境里。<ul>
+<li>更加安全</li>
 </ul>
-<h4 id="倒排索引的好处"><a href="#倒排索引的好处" class="headerlink" title="倒排索引的好处"></a>倒排索引的好处</h4><ul>
-<li>首先，它可以快速地定位到包含特定关键词的文档，提高检索效率。相比于正排索引，倒排索引不需要遍历整个文档集合，而是直接通过关键词索引到对应的文档列表，减少了搜索时间。</li>
-<li>其次，倒排索引可以支持复杂的查询操作。通过对多个关键词的组合查询，可以实现更精确的检索结果。倒排索引可以根据多个关键词的交集、并集或者其他逻辑关系来进行查询，提供更灵活的搜索功能。</li>
+</li>
 </ul>
-<h5 id="搜索引擎为什么比MySQL查询快？"><a href="#搜索引擎为什么比MySQL查询快？" class="headerlink" title="搜索引擎为什么比MySQL查询快？"></a>搜索引擎为什么比MySQL查询快？</h5><ul>
-<li>倒排索引：搜索引擎使用倒排索引来构建索引，而MySQL使用正排索引。倒排索引是一种将关键词与文档进行映射的数据结构，能够快速定位包含特定关键词的文档。相比之下，正排索引需要遍历整个数据表才能找到匹配的记录。倒排索引的使用能够大大减少搜索时间，提高查询效率。</li>
-<li>分布式架构：搜索引擎往往采用分布式架构，将索引和数据分散存储在多个节点上。这种架构可以将查询请求并行处理，从而加快查询速度。相反，MySQL通常采用集中式架构，所有数据都存储在一个节点上，无法进行并行处理。</li>
-</ul>
-<h2 id="分词器"><a href="#分词器" class="headerlink" title="分词器"></a>分词器</h2><ul>
-<li>HanLP </li>
-<li>Jieba</li>
+<h3 id="Registry"><a href="#Registry" class="headerlink" title="Registry"></a>Registry</h3><ul>
+<li>一个 Docker Registry 中可以包含多个仓库（ Repository ）；每个仓库可以包含多个标签 （ Tag ）；每个标签对应一个镜像。</li>
+<li>一般一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。</li>
+<li>可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给 出标签，将以 latest 作为默认标签。</li>
 </ul>
 
       
