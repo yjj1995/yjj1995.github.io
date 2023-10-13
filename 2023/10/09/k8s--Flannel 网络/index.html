@@ -517,7 +517,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-10-11 09:51:29'>2023-10-09 08:22</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-11 15:01:55'>2023-10-09 08:22</time>
         
     </div>
     <div class="article-meta">
@@ -682,10 +682,22 @@
 </ul>
 <h4 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h4><p><img src="2023-10-11T092924.png" alt="2023-10-11T092924"></p>
 <h5 id="主要工作组件"><a href="#主要工作组件" class="headerlink" title="主要工作组件"></a>主要工作组件</h5><ul>
-<li>Felix： calico的核心组件，运行在每个节点上。主要功能有接口管理，路由规则，ACL规则和状态报告。<ul>
+<li><p>Felix： calico的核心组件，运行在每个节点上。主要功能有接口管理，路由规则，ACL规则和状态报告。</p>
+<ul>
 <li>Felix 会监听ECTD中心的存储，从它获取事件，比如说用户在这台机器上加了一个IP，或者是创建了一个容器等。</li>
 <li>用户创建pod后，Felix负责将<strong>其网卡，IP，MAC都设置好</strong>，然后在内核的路由表里面写一条，注明这个IP应该到这张网卡。同样如果用户制定了隔离策略，Felix同样会将该策略创建到ACL中，以实现隔离。</li>
 </ul>
+</li>
+<li><p>etcd：分布式键值存储，主要负责网络元数据一致性，确保Calico 网络状态的准确性，可与kubernetes共用。</p>
+</li>
+<li><p>BGP Client(bird): Calico为每台host部署一个BGP Client，它的作用是将Felix的路由信息读入内核，并通过BGP协议在集群中分发。</p>
+<ul>
+<li>当Felix将路由插入到Linux内核FIB中时，BGP客户端将获取这些路由并将它们分发到部署中的其他节点。这可以确保在部署时有效地路由流量。</li>
+</ul>
+</li>
+<li><p>BGP Router Reflector: 大型网络仅仅使用BGP client形成mesh 全网互联的方案就会导致规模限制，所有节点需要N^2 个连接，为了解决这个规模问题，可以采用BGP的Router Reflector的方法，使得所有BGP Client仅与特定RR 节点互联并做路由同步，从而减少连接数。</p>
+</li>
+<li><p>Calicoctl：calico 命令行管理工具</p>
 </li>
 </ul>
 <h2 id="网络传输"><a href="#网络传输" class="headerlink" title="网络传输"></a>网络传输</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21546408">https://www.zhihu.com/question/21546408</a></p>
