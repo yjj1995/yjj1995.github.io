@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>常用虚拟化软件及其技术架构 | 记好笔记</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="常用虚拟化软件及其技术架构 | 记好笔记">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
+<meta property="og:type" content="website">
+<meta property="og:title" content="标题">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="记好笔记">
+<meta property="og:description" content="这里写关于页的正文，支持 Markdown, HTML">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-04T02:34:21.504Z">
+<meta property="article:modified_time" content="2023-06-02T09:05:10.272Z">
+<meta property="article:author" content="JoJo Yu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>JoJo Yu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yjj1995"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_26826331?type=blog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:1065016533@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(27)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="27">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://github.com/yjj1995">github</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件系统 ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>虚拟化</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph 存储</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph 对象 元数据</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Elasticsearch</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>k8s网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/27/nas%20%E4%B8%8E%20%E5%90%8C%E6%AD%A5/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="nas 与 同步">nas 与 同步</span>
+            <span class="post-date" title="2023-10-27 03:31:29">2023/10/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/27/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="网络虚拟化">网络虚拟化</span>
+            <span class="post-date" title="2023-10-27 01:17:54">2023/10/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/26/pxe/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="pxe">pxe</span>
+            <span class="post-date" title="2023-10-26 00:56:37">2023/10/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/25/kvm%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="kvm 虚拟机相关">kvm 虚拟机相关</span>
+            <span class="post-date" title="2023-10-25 01:45:27">2023/10/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/20/%E5%B8%B8%E7%94%A8%E8%99%9A%E6%8B%9F%E5%8C%96%E8%BD%AF%E4%BB%B6%E5%8F%8A%E5%85%B6%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="常用虚拟化软件及其技术架构">常用虚拟化软件及其技术架构</span>
+            <span class="post-date" title="2023-10-20 05:49:45">2023/10/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/17/Rgw%20Multisite%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB%E7%9A%84%E6%96%B9%E6%A1%88%E5%AE%9E%E8%B7%B5/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Rgw Multisite异地多活的方案实践">Rgw Multisite异地多活的方案实践</span>
+            <span class="post-date" title="2023-10-17 01:46:35">2023/10/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/16/K8s%20service%20%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="K8s service 服务暴露">K8s service 服务暴露</span>
+            <span class="post-date" title="2023-10-16 01:53:44">2023/10/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/09/k8s--Flannel%20%E7%BD%91%E7%BB%9C/"
+           data-tag="k8s网络"
+           data-author="" >
+            <span class="post-title" title="k8s网络">k8s网络</span>
+            <span class="post-date" title="2023-10-09 08:22:38">2023/10/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/08/%E4%BA%91%E5%92%8Ck8s/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="云和k8s">云和k8s</span>
+            <span class="post-date" title="2023-10-08 01:57:48">2023/10/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/07/docker/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker">docker</span>
+            <span class="post-date" title="2023-10-07 01:19:25">2023/10/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/26/nosql/"
+           data-tag="Elasticsearch"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch">Elasticsearch</span>
+            <span class="post-date" title="2023-09-26 01:26:06">2023/09/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/22/ceph%20%E5%AF%B9%E8%B1%A1%20%E4%B8%8E%20%E5%85%83%E6%95%B0%E6%8D%AE/"
+           data-tag="ceph 对象 元数据"
+           data-author="" >
+            <span class="post-title" title="ceph 对象 与 元数据">ceph 对象 与 元数据</span>
+            <span class="post-date" title="2023-09-22 01:28:58">2023/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/15/FC%20ISCSI%20%E5%8D%8F%E8%AE%AE/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="FC ISCSI 协议">FC ISCSI 协议</span>
+            <span class="post-date" title="2023-09-15 01:41:20">2023/09/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/07/%E5%AE%89%E8%A3%85ansible/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ansible">ansible</span>
+            <span class="post-date" title="2023-09-07 08:10:40">2023/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/07/centos%E7%9A%84repo%E6%96%87%E4%BB%B6/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="centos的 yum,repo,rpm ,dnf介绍">centos的 yum,repo,rpm ,dnf介绍</span>
+            <span class="post-date" title="2023-09-07 07:19:24">2023/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/01/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E4%B9%8BSMB/CIFS%E5%8D%8F%E8%AE%AE%E5%8F%8ASamba%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载"
+           data-author="" >
+            <span class="post-title" title="CIFS协议及Samba的使用">CIFS协议及Samba的使用</span>
+            <span class="post-date" title="2023-09-01 06:38:04">2023/09/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/30/ceph%20PGP,PG,CRUSH%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/"
+           data-tag="ceph"
+           data-author="" >
+            <span class="post-title" title="ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系">ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系</span>
+            <span class="post-date" title="2023-08-30 05:12:15">2023/08/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/30/ceph%20hash%20crush%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/"
+           data-tag="ceph"
+           data-author="" >
+            <span class="post-title" title="Ceph 的工作原理及流程,寻址过程，客户读取数据">Ceph 的工作原理及流程,寻址过程，客户读取数据</span>
+            <span class="post-date" title="2023-08-30 01:09:21">2023/08/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/28/Ceph%20%E5%9D%97%E5%AD%98%E5%82%A8%E5%92%8C%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="ceph 存储"
+           data-author="" >
+            <span class="post-title" title="Ceph 块存储和文件存储的使用">Ceph 块存储和文件存储的使用</span>
+            <span class="post-date" title="2023-08-28 01:06:52">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/25/%E7%94%A8%E6%88%B7%E6%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"
+           data-tag="文件系统 ceph"
+           data-author="" >
+            <span class="post-title" title="用户态文件系统">用户态文件系统</span>
+            <span class="post-date" title="2023-08-25 09:27:08">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/25/ceph%20%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ceph 集群的访问方式">ceph 集群的访问方式</span>
+            <span class="post-date" title="2023-08-25 06:48:21">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/21/%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="虚拟化">虚拟化</span>
+            <span class="post-date" title="2023-08-21 07:46:24">2023/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/18/%E7%BD%91%E5%8D%A1%E5%8A%9F%E8%83%BD/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网卡总结">网卡总结</span>
+            <span class="post-date" title="2023-08-18 07:19:12">2023/08/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/17/%E5%8D%97%E5%8C%97%E6%B5%81%E9%87%8F%E5%92%8C%E4%B8%9C%E8%A5%BF%E6%B5%81%E9%87%8F/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="南北流量和东西流量">南北流量和东西流量</span>
+            <span class="post-date" title="2023-08-17 03:08:37">2023/08/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/15/%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90%E6%9E%B6%E6%9E%84/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网络基本组成架构">网络基本组成架构</span>
+            <span class="post-date" title="2023-08-15 01:34:07">2023/08/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/KVM/"
+           data-tag="虚拟化"
+           data-author="" >
+            <span class="post-title" title="KVM">KVM</span>
+            <span class="post-date" title="2023-08-11 03:29:06">2023/08/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网络七层模型">网络七层模型</span>
+            <span class="post-date" title="2023-08-11 03:22:14">2023/08/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-常用虚拟化软件及其技术架构" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">常用虚拟化软件及其技术架构</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-10-27 17:47:42'>2023-10-20 05:49</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-text">虚拟化技术</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%99%9A%E6%8B%9F%E5%8C%96%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-text">安装虚拟化软件包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#virt-manager"><span class="toc-text">virt-manager</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFvirt-manager"><span class="toc-text">什么是virt-manager</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">创建虚拟机</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#virt-install"><span class="toc-text">virt-install</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-text">其它</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">安装虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#KickStart"><span class="toc-text">KickStart</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFkickstart"><span class="toc-text">什么是kickstart</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%8Akickstart%E6%96%87%E4%BB%B6%E5%8A%A0%E5%85%A5iso-%E9%87%8D%E6%96%B0%E5%88%B6%E4%BD%9C%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84iso"><span class="toc-text">把kickstart文件加入iso, 重新制作半自动化的iso</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PXE"><span class="toc-text">PXE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TFTP"><span class="toc-text">TFTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP"><span class="toc-text">DHCP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT"><span class="toc-text">NAT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E6%A8%A1%E5%BC%8F"><span class="toc-text">主机模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E7%BD%91%E5%8D%A1"><span class="toc-text">双网卡</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%89%E8%A3%85%EF%BC%88pxe-kickstart%EF%BC%89"><span class="toc-text">自动化安装（pxe+kickstart）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cat-x2F-var-x2F-lib-x2F-libvirt-x2F-dnsmasq-x2F-default-leases"><span class="toc-text">cat &#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;dnsmasq&#x2F;default.leases</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#grep-vmx-x2F-proc-x2F-cpuinfo%E5%A6%82%E6%9E%9C%E6%9C%89vmx%E4%BF%A1%E6%81%AF%E8%BE%93%E5%87%BA%EF%BC%8C%E5%B0%B1%E8%AF%B4%E6%98%8E%E6%94%AF%E6%8C%81VT-%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E7%9A%84%E8%BE%93%E5%87%BA%EF%BC%8C%E8%AF%B4%E6%98%8E%E4%BD%A0%E7%9A%84cpu%E4%B8%8D%E6%94%AF%E6%8C%81%EF%BC%8C%E5%B0%86%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8KVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%82-root-kevin-lsmod-grep-kvmkvm-intel-170086-0kvm-566340-1-kvm-intelirqbypass-13503-1-kvm"><span class="toc-text">grep vmx &#x2F;proc&#x2F;cpuinfo如果有vmx信息输出，就说明支持VT;如果没有任何的输出，说明你的cpu不支持，将无法使用KVM虚拟机。1- 确保BIOS里开启虚拟化功能，即查看是否加载KVM模块[root@kevin ~]# lsmod | grep kvmkvm_intel             170086  0kvm                   566340  1 kvm_intelirqbypass              13503  1 kvm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%8A%A0%E8%BD%BD%EF%BC%8C%E8%BF%90%E8%A1%8C%E4%BB%A5%E4%B8%8B%E5%91%BD%E4%BB%A4%EF%BC%9A-root-kevin-modprobe-kvm-root-kevin-modprobe-kvm-intel-root-kevin-lsmod-grep-kvmkvm-intel-170086-0kvm-566340-1-kvm-intelirqbypass-13503-1-kvm-root-kevin-ll-x2F-dev-x2F-kvmcrw-rw-rw-1-root-kvm-10-232-1%E6%9C%88-29-11-56-x2F-dev-x2F-kvm%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89brctl%E5%91%BD%E4%BB%A4%EF%BC%88%E7%94%A8%E6%9D%A5%E7%AE%A1%E7%90%86%E7%BD%91%E6%A1%A5%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%89%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85bridge-utils-%EF%BC%8C-root-kevin-apt-get-y-install-bridge-utils-96-96-96-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%BB%99%E7%BD%91%E6%A1%A5%E9%85%8D%E7%BD%AEIP-%EF%BC%9F"><span class="toc-text">如果没有加载，运行以下命令：[root@kevin ~]# modprobe kvm[root@kevin ~]# modprobe kvm-intel[root@kevin ~]# lsmod | grep kvmkvm_intel             170086  0kvm                   566340  1 kvm_intelirqbypass              13503  1 kvm12- 内核模块导出了一个名为&#x2F;dev&#x2F;kvm的设备，这个设备将虚拟机的的地址空间独立于内核或者任何应用程序的地址空间。[root@kevin ~]# ll &#x2F;dev&#x2F;kvmcrw-rw-rw-. 1 root kvm 10, 232 1月  29 11:56 &#x2F;dev&#x2F;kvm12### 网络相关- 桥接网络如果没有brctl命令（用来管理网桥的工具），则需要安装bridge-utils ，[root@kevin ~]# apt-get -y install bridge-utils&#96;&#96;&#96;- 为什么要给网桥配置IP ？</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="2023-10-20T134955.png" alt="2023-10-20T134955"></p>
+<h1 id="虚拟化技术"><a href="#虚拟化技术" class="headerlink" title="虚拟化技术"></a>虚拟化技术</h1><ul>
+<li>kvm相关安装包及其作用<ul>
+<li>qemu-kvm          主要的KVM程序包</li>
+<li>python-virtinst   创建虚拟机所需要的命令行工具和程序库</li>
+<li>virt-manager      GUI虚拟机管理工具</li>
+<li>virt-top          虚拟机统计命令</li>
+<li>virt-viewer       GUI连接程序，连接到已配置好的虚拟机</li>
+<li>libvirt           C语言工具包，提供libvirt服务</li>
+<li>libvirt-client    虚拟客户机提供的C语言工具包</li>
+<li>virt-install      基于libvirt服务的虚拟机创建命令</li>
+<li>bridge-utils      创建和管理桥接设备的工具</li>
+<li>virt-clone        用于克隆现有非活动访客的命令行工具。它复制磁盘映像，并定义使用新名称的配置，UUID和MAC地址指向复制的磁盘。</li>
+<li>virt-xml          编辑libvirt域XML的命令行工具。</li>
+<li>virt-convert      转换OVF和VMX VM配置、以便与libvirt一起运行的命令行工具。</li>
+<li>virt-bootstrap    为基于libvirt的容器设置根文件系统提供一种简易方法的命令工具。</li>
+</ul>
+</li>
+</ul>
+<h2 id="安装虚拟化软件包"><a href="#安装虚拟化软件包" class="headerlink" title="安装虚拟化软件包"></a>安装虚拟化软件包</h2><figure class="highlight plaintext"><figcaption><span>为例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># yum install qemu-kvm libvirt</span><br><span class="line"># yum install virt-install libvirt-python virt-manager virt-install libvirt-client</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="virt-manager"><a href="#virt-manager" class="headerlink" title="virt-manager"></a>virt-manager</h2><h3 id="什么是virt-manager"><a href="#什么是virt-manager" class="headerlink" title="什么是virt-manager"></a>什么是virt-manager</h3><ul>
+<li>Virt-manager的全称是虚拟机管理器，这种图形用户界面应用程序用于通过libvirt管理虚拟机。尽管它主要为KVM访客而创建，也可以管理XEN和LXC容器。它有嵌入式VNC和SPICE客户端查看应用程序，可查看运行中虚拟机的全屏控制台。</li>
+<li>虚拟机管理器允许用户执行以下操作：<ul>
+<li>创建、编辑、启动、挂起、恢复和停止虚拟机。</li>
+<li>查看和控制每个虚拟机的控制台。</li>
+<li>查看所有运行中的虚拟机和主机。</li>
+<li>查看每个虚拟机的性能和利用率统计信息。</li>
+<li>查看虚拟机和主机的实时性能和资源利用率统计信息。</li>
+<li>管理本地或远程运行的KVM、Xen或QEMU虚拟机。</li>
+<li>管理LXC容器。</li>
+</ul>
+</li>
+</ul>
+<h4 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h4><ol>
+<li>打开virt-manager<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 终端输入</span><br><span class="line">sudo virt-manager</span><br></pre></td></tr></table></figure></li>
+<li>开始创建新虚拟机，点击主窗口左上角的按钮：<br><img src="2023-10-27T093015.png" alt="2023-10-27T093015"></li>
+<li>选择安装模式，可以选择本地安装介质、网络引导&#x2F;安装或导入现有虚拟磁盘：<br><img src="2023-10-27T093145.png" alt="2023-10-27T093145"></li>
+<li>可以选择本地安装介质，后续选择ISO镜像路径：<br><img src="2023-10-27T093406.png" alt="2023-10-27T093406"></li>
+<li>随后的两个步骤调整新虚拟机的 CPU、内存和磁盘大小。网络可以选择桥接和NAT模式，默认选择NAT 与外部隔离。<br><img src="2023-10-27T093500.png" alt="2023-10-27T093500"></li>
+<li>重定向安装操作系统<br><img src="2023-10-27T093726.png" alt="2023-10-27T093726"></li>
+<li>安装完，即可进入操作系统</li>
+</ol>
+<h2 id="virt-install"><a href="#virt-install" class="headerlink" title="virt-install"></a>virt-install</h2><ul>
+<li>virt-install是一个使用“libvirt” hypervisor 管理库构建新虚拟机的命令行工具，能够为KVM、Xen或其它支持libvrit API的hypervisor创建虚拟机并完成GuestOS安装；此外，能够基于串行控制台、VNC或SDL支持文本或图形安装界面。安装过程可以使用本地的安装介质如CDROM，也可以通过网络方式如NFS、HTTP或FTP服务实现。对于通过网络安装的方式，virt-install可以自动加载必要的文件以启动安装过程而无须额外提供引导工具。virt-install也支持PXE方式的安装过程，也能够直接使用现有的磁盘映像直接启动安装过程。</li>
+</ul>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><p>一般选项</p>
+<ul>
+<li>指定虚拟机的名称、内存大小、VCPU个数及特性等；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-n NAME, --name=NAME：虚拟机名称，需全局惟一； </span><br><span class="line"></span><br><span class="line">-r MEMORY, --ram=MEMORY：虚拟机内在大小，单位为MB； </span><br><span class="line"></span><br><span class="line">--vcpus=VCPUS[,maxvcpus=MAX][,sockets=#][,cores=#][,threads=#]：VCPU个数及相关配置；</span><br><span class="line"></span><br><span class="line"> --cpu=CPU：CPU模式及特性，如coreduo等；可以使用qemu-kvm -cpu ?来获取支持的CPU模式；</span><br><span class="line"></span><br><span class="line">-c CDROM, --cdrom=CDROM：光盘安装介质；</span><br><span class="line"></span><br><span class="line"> -l LOCATION, --location=LOCATION：安装源URL，支持FTP、HTTP及NFS等，如ftp://172.16.0.1/pub； </span><br><span class="line"></span><br><span class="line">--pxe：基于PXE完成安装； --livecd: 把光盘当作LiveCD； </span><br><span class="line"></span><br><span class="line">--os-type=DISTRO_TYPE：操作系统类型，如Linux、unix或windows等； </span><br><span class="line"></span><br><span class="line">--os-variant=DISTRO_VARIANT：某类型操作系统的变体，如rhel5、fedora8等； </span><br><span class="line"></span><br><span class="line">-x EXTRA, --extra-args=EXTRA：根据--location指定的方式安装GuestOS时，用于传递给内核的额外选项，例如指定kickstart文件的位置，</span><br><span class="line"></span><br><span class="line">--extra-args &quot;ks=http://172.16.0.1/class.cfg&quot; </span><br><span class="line"></span><br><span class="line">--boot=BOOTOPTS：指定安装过程完成后的配置选项，如指定引导设备次序、使用指定的而非安装的kernel/initrd来引导系统启动等 ；例如： --boot cdrom,hd,network：指定引导次序； </span><br><span class="line"></span><br><span class="line">--boot kernel=KERNEL,initrd=INITRD,kernel_args=”console=/dev/ttyS0”：指定启动系统的内核及initrd文件；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>安装方法</p>
+<ul>
+<li>指定安装方法、GuestOS类型等；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-c CDROM, --cdrom=CDROM：光盘安装介质；</span><br><span class="line">-l LOCATION, --location=LOCATION：安装源URL，支持FTP、HTTP及NFS等，如ftp://172.16.0.1/pub；</span><br><span class="line">--pxe：基于PXE完成安装；</span><br><span class="line">--livecd: 把光盘当作LiveCD；</span><br><span class="line">--os-type=DISTRO_TYPE：操作系统类型，如linux、unix或windows等；</span><br><span class="line">--os-variant=DISTRO_VARIANT：某类型操作系统的变体，如rhel5、fedora8等；</span><br><span class="line">-x EXTRA, --extra-args=EXTRA：根据--location指定的方式安装GuestOS时，用于传递给内核的额外选项，例如指定kickstart文件的位置，--extra-args &quot;ks=http://172.16.0.1/class.cfg&quot;</span><br><span class="line">--boot=BOOTOPTS：指定安装过程完成后的配置选项，如指定引导设备次序、使用指定的而非安装的kernel/initrd来引导系统启动等 ；例如：</span><br><span class="line">--boot  cdrom,hd,network：指定引导次序；</span><br><span class="line">--boot kernel=KERNEL,initrd=INITRD,kernel_args=”console=/dev/ttyS0”：指定启动系统的内核及initrd文件；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>存储配置</p>
+<ul>
+<li>指定存储类型、位置及属性等；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--disk=DISKOPTS：指定存储设备及其属性；格式为--disk /some/storage/path,opt1=val1，opt2=val2等；</span><br><span class="line">常用的选项有： </span><br><span class="line">device：设备类型，如cdrom、disk或floppy等，默认为disk； </span><br><span class="line">bus：磁盘总结类型，其值可以为ide、scsi、usb、virtio或xen； </span><br><span class="line">perms：访问权限，如rw、ro或sh（共享的可读写），默认为rw； </span><br><span class="line">size：新建磁盘映像的大小，单位为GB； </span><br><span class="line">cache：缓存模型，其值有none、writethrouth（缓存读）及writeback（缓存读写）； </span><br><span class="line">format：磁盘映像格式，如raw、qcow2、vmdk等； </span><br><span class="line">sparse：磁盘映像使用稀疏格式，即不立即分配指定大小的空间； </span><br><span class="line">--nodisks：不使用本地磁盘，在LiveCD模式中常用；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>网络</p>
+<ul>
+<li>指定网络接口的网络类型及接口属性如MAC地址、驱动模式等；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-w NETWORK, --network=NETWORK,opt1=val1,opt2=val2：将虚拟机连入宿主机的网络中，其中NETWORK可以为： </span><br><span class="line">bridge=BRIDGE：连接至名为“BRIDEG”的桥设备； </span><br><span class="line">network=NAME：连接至名为“NAME”的网络； Virtual network &#x27;default&#x27;: NAT</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>其他常用选项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model：GuestOS中看到的网络设备型号，如e1000、rtl8139或virtio等；</span><br><span class="line">mac：固定的MAC地址；省略此选项时将使用随机地址，但无论何种方式，对于KVM来说，其前三段必须为52:54:00；</span><br><span class="line">--nonetworks：虚拟机不使用网络功能；</span><br></pre></td></tr></table></figure></li>
+<li><p>图形配置</p>
+<ul>
+<li>定义虚拟机显示功能相关的配置，如VNC相关配置；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--graphics TYPE,opt1=val1,opt2=val2：指定图形显示相关的配置，此选项不会配置任何显示硬件（如显卡），而是仅指定虚拟机启动后对其进行访问的接口；</span><br><span class="line">TYPE：指定显示类型，可以为vnc、sdl、spice或none等，默认为vnc；</span><br><span class="line">port：TYPE为vnc或spice时其监听的端口；</span><br><span class="line">listen：TYPE为vnc或spice时所监听的IP地址，默认为127.0.0.1，可以通过修改/etc/libvirt/qemu.conf定义新的默认值；</span><br><span class="line">password：TYPE为vnc或spice时，为远程访问监听的服务进指定认证密码；</span><br><span class="line">--noautoconsole：禁止自动连接至虚拟机的控制台；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>设备选项</p>
+<ul>
+<li>指定文本控制台、声音设备、串行接口、并行接口、显示接口等；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--serial=CHAROPTS：附加一个串行设备至当前虚拟机，根据设备类型的不同，可以使用不同的选项，格式为“--serial type,opt1=val1,opt2=val2,...”，例如：</span><br><span class="line">--serial pty：创建伪终端；</span><br><span class="line">--serial dev,path=HOSTPATH：附加主机设备至此虚拟机；</span><br><span class="line">--video=VIDEO：指定显卡设备模型，可用取值为cirrus、vga、qxl或vmvga；</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>虚拟化平台选项</p>
+<ul>
+<li>虚拟化模型（hvm或paravirt）、模拟的CPU平台类型、模拟的主机类型、hypervisor类型（如kvm、xen或qemu等）以及当前虚拟机的UUID等；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-v, --hvm：当物理机同时支持完全虚拟化和半虚拟化时，指定使用完全虚拟化；</span><br><span class="line"></span><br><span class="line"> -p, --paravirt：指定使用半虚拟化；</span><br><span class="line"></span><br><span class="line"> --virt-type：使用的hypervisor，如kvm、qemu、xen等；所有可用值可以使用’virsh capabilities’命令获取；</span><br><span class="line">图像</span><br><span class="line"></span><br><span class="line">--graphics TYPE,opt1=val1,opt2=val2：指定图形显示相关的配置，此选项不会配置任何显示硬件（如显卡），而是仅指定虚拟机启动后对其进行访问的接口； </span><br><span class="line"></span><br><span class="line">TYPE：指定显示类型，可以为vnc、sdl、spice或none等，默认为vnc； port：</span><br><span class="line"></span><br><span class="line">TYPE为vnc或spice时其监听的端口； listen：TYPE为vnc或spice时所监听的IP地址，默认为127.0.0.1，可以通过修改/etc/libvirt/qemu.conf定义新的默认值； password：TYPE为vnc或spice时，为远程访问监听的服务进指定认证密码； --noautoconsole：禁止自动连接至虚拟机的控制台；</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>其他</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--autostart：指定虚拟机是否在物理启动后自动启动；</span><br><span class="line">--print-xml：如果虚拟机不需要安装过程(--import、--boot)，则显示生成的XML而不是创建此虚拟机；默认情况下，此选项仍会创建磁盘映像；</span><br><span class="line">--force：禁止命令进入交互式模式，如果有需要回答yes或no选项，则自动回答为yes；</span><br><span class="line">--dry-run：执行创建虚拟机的整个过程，但不真正创建虚拟机、改变主机上的设备配置信息及将其创建的需求通知给libvirt；</span><br><span class="line">-d, --debug：显示debug信息；</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>尽管virt-install命令有着类似上述的众多选项，但实际使用中，其必须提供的选项仅包括–name、–ram、–disk（也可是–nodisks）及安装过程相关的选项。此外，有时还需要使用括 <strong>–connect&#x3D;CONNCT选项来指定连接至一个非默认的hypervisor。</strong></p>
+</blockquote>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p><a target="_blank" rel="noopener" href="https://wyde.github.io/2017/10/15/How-to-Install-VM-on-Linux-KVM-Virtualization-Host-using-Kickstart-File/">参考1</a></p>
+<ul>
+<li>重要：<ul>
+<li>–initrd-inject 和 –extrs-args 裡 ks file 的寫法，前者要寫完整的路徑(和檔名)，後者只要寫檔名</li>
+<li>用–extra-args 之後，如果 iso 位置前面的參數是 –cdrom 的話會報錯，必須用 –location</li>
+<li>–extra-args    #当执行从”–location”选项指定位置的客户机安装时，附加内核命令行参数到安装程序。例如：”ks&#x3D;<a target="_blank" rel="noopener" href="http://172.25.254.116/ks.cfg%22%E6%8C%87%E5%AE%9A%E8%87%AA%E5%8A%A8%E5%BA%94%E7%AD%94%E6%96%87%E4%BB%B6">http://172.25.254.116/ks.cfg&quot;指定自动应答文件</a><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">virt-install \</span><br><span class="line">    --name $NAME \</span><br><span class="line">    --vcpus 1 \</span><br><span class="line">    --ram 1024 \</span><br><span class="line">    --disk path=$DISKPATH,size=$DISKSIZE \</span><br><span class="line">    --os-variant rhel7 \</span><br><span class="line">    --network=bridge:$BR1 \</span><br><span class="line">    --network=bridge:$BR2 \</span><br><span class="line">    --nographics \</span><br><span class="line">    --initrd-inject $KSPATH \</span><br><span class="line">    --extra-args &quot;ks=file:/$KSNAME console=tty0 console=ttyS0,115200n8&quot; \</span><br><span class="line">    --location=$ISOPATH \</span><br><span class="line">    --autostart \</span><br><span class="line">    --noautoconsole # without connect to console automatically</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--initrd-inject：指定ks.cfg文件路径</span><br><span class="line">--extra-args：根据location指定的方式安装系统时，用于给内核传递额外的选项</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--initrd-inject ks-1.cfg   # 自动部署的配置文件（可含路径）</span><br><span class="line">--extra-args=&quot;ks=file:/ks-1.cfg&quot;   # 注入vm后的文件名，不要含路径</span><br></pre></td></tr></table></figure>
+<p><img src="2023-10-26T092618.png" alt="2023-10-26T092618"><br><img src="2023-10-26T092621.png" alt="2023-10-26T092621"><br><img src="2023-10-26T092626.png" alt="2023-10-26T092626"><br><img src="2023-10-26T092634.png" alt="2023-10-26T092634"></p>
+<h1 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h1><h2 id="KickStart"><a href="#KickStart" class="headerlink" title="KickStart"></a>KickStart</h2><h3 id="什么是kickstart"><a href="#什么是kickstart" class="headerlink" title="什么是kickstart"></a>什么是kickstart</h3><ul>
+<li>kickstart是一种无人值守的安装方式。它的工作原理是在安装过程中记录典型的需要人工干预填写的各种参数，并生成一个配置文件（ks.cfg），在安装过程中，安装程序首先会去查找ks配置文件，如果找到合适的参数，就采用所找到的参数；如果没有找到合适的参数，便需要安装者手动设定。所以，如果kickstart文件涵盖了安装过程中需要设定的所有参数，安装者只需要告诉安装程序从何处取ks.cfg文件，就能实现系统安装的自动化。</li>
+<li>kickstart 安装提供一个安装过程自动化的方法，可以是部分自动化，也可以是完全自动化。</li>
+</ul>
+<h3 id="把kickstart文件加入iso-重新制作半自动化的iso"><a href="#把kickstart文件加入iso-重新制作半自动化的iso" class="headerlink" title="把kickstart文件加入iso, 重新制作半自动化的iso"></a>把kickstart文件加入iso, 重新制作半自动化的iso</h3><ul>
+<li>机器读取到iso文件后自动完成操作系统的安装</li>
+</ul>
+<ol>
+<li>将待制作的centos iso文件挂载到&#x2F;mnt&#x2F;目录<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/myiso</span><br><span class="line">mount CentOS-7-x86_64-Minimal-1810.iso /mnt/myiso      </span><br></pre></td></tr></table></figure></li>
+<li>将&#x2F;mnt&#x2F;myiso下的所有文件复制到新的目录&#x2F;tmp&#x2F;mycentos<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/mycentos/</span><br><span class="line">cp -r /mnt/myiso /tmp/mycentos/</span><br></pre></td></tr></table></figure></li>
+<li>创建kickstart文件</li>
+</ol>
+<ul>
+<li><ol>
+<li>可以直接复制之前安装好的centos &#x2F;home目录下的 anaconda-ks.cfg 文件作为配置文件。</li>
+</ol>
+<ul>
+<li>将anaconda-ks.cfg 重命名为ks.cfg</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>也可以利用system-config-kickstart 进行生成ks.cfg文件 <a target="_blank" rel="noopener" href="https://blog.csdn.net/zyqash/article/details/129928447">参考</a></li>
+</ol>
+</li>
+</ul>
+<ol start="4">
+<li><p>将配置好的kickstart文件保存到&#x2F;tmp&#x2F;mycentos，文件内容如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#version=DEVEL</span><br><span class="line"># System authorization information</span><br><span class="line">auth --enableshadow --passalgo=sha512</span><br><span class="line"># License agreement</span><br><span class="line">eula --agreed</span><br><span class="line"># Use CDROM installation media</span><br><span class="line">cdrom</span><br><span class="line"># Use text mode install</span><br><span class="line">text</span><br><span class="line"># Firewall configuration</span><br><span class="line">firewall --enabled --port=https:tcp,ipp:tcp --service=http,ssh,ftp</span><br><span class="line">firstboot --disable</span><br><span class="line">ignoredisk --only-use=vda</span><br><span class="line"># Keyboard layouts</span><br><span class="line">keyboard --vckeymap=us --xlayouts=&#x27;us&#x27;</span><br><span class="line"># System language</span><br><span class="line">lang en_US.UTF-8</span><br><span class="line"></span><br><span class="line"># Network information</span><br><span class="line">network  --bootproto=dhcp --device=eth0 --noipv6 --activate</span><br><span class="line">network  --bootproto=dhcp --hostname=yjj_centos-7</span><br><span class="line"># Reboot after installation</span><br><span class="line">reboot</span><br><span class="line"># Root password</span><br><span class="line">rootpw --plaintext king</span><br><span class="line"># SELinux configuration</span><br><span class="line">selinux --disabled</span><br><span class="line"># System services</span><br><span class="line">services --enabled=&quot;chronyd&quot;</span><br><span class="line"># Do not configure the X Window System</span><br><span class="line">skipx</span><br><span class="line"># System timezone</span><br><span class="line">timezone Asia/Shanghai --isUtc</span><br><span class="line"># System bootloader configuration</span><br><span class="line">bootloader --append=&quot; crashkernel=auto&quot; --location=mbr --boot-drive=vda</span><br><span class="line">autopart --type=lvm</span><br><span class="line"># Clear the Master Boot Record</span><br><span class="line">zerombr</span><br><span class="line"># Partition clearing information</span><br><span class="line">clearpart --none --initlabel</span><br><span class="line"></span><br><span class="line">%packages --nobase --ignoremissing</span><br><span class="line">@base</span><br><span class="line">@core</span><br><span class="line">bash-completion</span><br><span class="line">chrony</span><br><span class="line">kexec-tools</span><br><span class="line">vim</span><br><span class="line"></span><br><span class="line">%end</span><br><span class="line"></span><br><span class="line">%addon com_redhat_kdump --enable --reserve-mb=&#x27;auto&#x27;</span><br><span class="line"></span><br><span class="line">%end</span><br></pre></td></tr></table></figure></li>
+<li><p>修改启动文件</p>
+<ul>
+<li>进入&#x2F;tmp&#x2F;mycentos 目录</li>
+<li>打开 isolinux&#x2F;isolinux.cfg原文件中的内容<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat isolinux/isolinux.cfg </span><br><span class="line">...</span><br><span class="line">label linux</span><br><span class="line">  menu label ^Install CentOS 7</span><br><span class="line">  kernel vmlinuz</span><br><span class="line">  append initrd=initrd.img inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 quiet</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
+<li>修改为<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">label linux</span><br><span class="line">  menu label ^Install CentOS 7</span><br><span class="line">  kernel vmlinuz</span><br><span class="line">  append initrd=initrd.img inst.stage2=hd:LABEL=MYCENTOS inst.ks=hd:LABEL=MYCENTOS:/ks.cfg quiet</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> “MYCENTOS”可以任意命名，后面mkisofs时候保持一致就好</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>重新制作ISO文件</p>
+</li>
+</ol>
+<ul>
+<li><ol>
+<li>genisoimage 软件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install genisoimage</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>制作ISO文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp/mycentos</span><br><span class="line"></span><br><span class="line">mkisofs -o mycentos.iso -input-charset utf-8 -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -v -T -joliet-long -V MYCENTOS /tmp/mycentos/</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<ol start="7">
+<li>制作完成</li>
+</ol>
+<ul>
+<li>用新制作的iso文件 mycentos.iso 安装系统</li>
+</ul>
+<h2 id="PXE"><a href="#PXE" class="headerlink" title="PXE"></a>PXE</h2><p>PXE（Pre-boot Execution Environment，预启动执行环境），工作于Client&#x2F;Server的网络模式，支持PXE的客户端在启动过程中，能够从DHCP服务器获取IP，结合TFTP（trivial file transfer protocol）等协议可以实现客户端的网络引导和安装。</p>
+<h3 id="TFTP"><a href="#TFTP" class="headerlink" title="TFTP"></a>TFTP</h3><p>TFTP（Trivial File Transfer Protocol，简单文件传输协议），该协议用来实现客户机与服务器之间的简单文件传输，它提供不复杂、开销不大的文件传输服务。</p>
+<h3 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h3><ul>
+<li>dhcp服务器和客户端 都连接到 宿主机的 网络上（nat模式，但是没有开启自动分配ip，虚拟dhcp服务关闭），需要在虚拟机上的dhcp服务器来分配  宿主机nat 模式的 网络的ip （和dhcp服务器所在的ip在一个网络）</li>
+<li>都需要关闭宿主机的虚拟DHCP服务</li>
+<li>kvm <ul>
+<li>Dnsmasq 提供 DNS 缓存和 DHCP 服务功能。作为域名解析服务器(DNS)，dnsmasq可以通过缓存 DNS 请求来提高对访问过的网址的连接速度。作为DHCP 服务器，dnsmasq 可以用于为局域网电脑分配内网ip地址和提供路由。DNS和DHCP两个功能可以同时或分别单独实现。dnsmasq轻量且易配置，适用于个人用户或少于50台主机的网络。此外它还自带了一个 PXE 服务器。</li>
+<li>dnsmasq（ DNS和DHCP）服务<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liugp/p/16412649.html">https://www.cnblogs.com/liugp/p/16412649.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.houjiyi.com/2018/01/07/dnsmasq%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/">https://www.houjiyi.com/2018/01/07/dnsmasq%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1174717">https://cloud.tencent.com/developer/article/1174717</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014175785/article/details/118801076">https://blog.csdn.net/u014175785/article/details/118801076</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h4><h4 id="主机模式"><a href="#主机模式" class="headerlink" title="主机模式"></a>主机模式</h4><h4 id="双网卡"><a href="#双网卡" class="headerlink" title="双网卡"></a>双网卡</h4><h2 id="自动化安装（pxe-kickstart）"><a href="#自动化安装（pxe-kickstart）" class="headerlink" title="自动化安装（pxe+kickstart）"></a>自动化安装（pxe+kickstart）</h2><ul>
+<li>参考<ul>
+<li><ol>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/286539">https://cloud.tencent.com/developer/news/286539</a></li>
+</ol>
+</li>
+<li><ol start="2">
+<li><a target="_blank" rel="noopener" href="https://xstarcd.github.io/wiki/Cloud/XStar_libvirt_kvm_2013.html">https://xstarcd.github.io/wiki/Cloud/XStar_libvirt_kvm_2013.html</a></li>
+</ol>
+</li>
+<li><ol start="3">
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wujuntian/p/16295818.html">https://www.cnblogs.com/wujuntian/p/16295818.html</a> 配置文件</li>
+</ol>
+</li>
+<li><ol start="4">
+<li><a target="_blank" rel="noopener" href="https://www.feiyiblog.com/2021/04/15/kvm%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/">https://www.feiyiblog.com/2021/04/15/kvm%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/</a> 网络</li>
+</ol>
+</li>
+<li><img src="2023-10-27T135124.png" alt="2023-10-27T135124"></li>
+<li>&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F; 用于配置主机的物理网络接口，<ul>
+<li>对于机器本身的网络（外部不可见）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li>而 &#x2F;etc&#x2F;libvirt&#x2F;qemu&#x2F;networks 用于配置虚拟化环境中的虚拟网络。您根据您的需求和环境来选择修改哪个目录下的配置文件。<ul>
+<li>虚拟的网络配置</li>
+<li>Ubuntu　是　&#x2F;etc&#x2F;network 里面的 interfaces 文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>vmnet0，实际上就是一个虚拟的网桥<br>vmnet0，实际上就是一个虚拟的网桥，这个网桥有很若干个端口，一个端口用于连接你的Host，一个端口用于连接你的虚拟机，他们的位置是对等的，谁也不是谁的网关。所以在Bridged模式下，你可以让虚拟机成为一台和你的Host相同地位的机器。</p>
+<p>vmnet1，这是一个Host-Only网络模式<br>vmnet1，这是一个Host-Only网络模式，这是用于建立一个与世隔绝的网络环境所用到的，其中vmnet1也是一个虚拟的交换机，交换机的一个 端口连接到你的Host上，另外一个端口连接到虚拟的DHCP服务器上（实际上是vmware的一个组件），另外剩下的端口就是连虚拟机了。虚拟网卡 “VMWare Virtual Ethernet Adapter for VMnet1”作为虚拟机的网关接口，为虚拟机提供服务。在虚拟机启动之后，如果你用ipconfig命令，你会很清楚的看到，你的默认网关就是指向 “VMWare Virtual Ethernet Adapter for VMnet1”网卡的地址的。（实际上它并不能提供路由，这是VMware设计使然，它是干了除了提供路由之外的一些事情——实际上是我也不知道它干了什 么事情），这里没有提供路由主要表现在没有提供NAT服务，使得虚拟机不可以访问Host-Only模式所指定的网段之外的地址。</p>
+<p>vmnet8，这是一个NAT方式，最简单的组网方式了<br>vmnet8，这是一个NAT方式，最简单的组网方式了，从主机的“VMWare Virtual Ethernet Adapter for VMnet8”虚拟网卡出来，连接到vmnet8虚拟交换机，虚拟交换机的另外的口连接到虚拟的NAT服务器（这也是一个Vmware组件），还有一个口 连接到虚拟DHCP服务器，其他的口连虚拟机，虚拟机的网关即是“VMWare Virtual Ethernet Adapter for VMnet8”网卡所在的机器，废话，这肯定就是你的Host机器啦。同样，用ipconfig也可以看出来，你的虚拟机的默认网关也指向了你的 “VMWare Virtual Ethernet Adapter for VMnet8”虚拟网卡地址。相比之下，可以看出来，NAT组网方式和Host-Only方式，区别就在于是否多了一个NAT服务。</p>
+<p>host-only与wmnet1虚拟网卡进行通信<br>NAT模式与VMnet8虚拟网卡进行通信<br>桥接使用的是你机器的真实网卡进行上网</p>
+<p>用命令来配host-only模式下的网卡:ifconfig eth0 192.168.86.0<br>ifconfig eth0 ip(要和虚拟网络编辑器里面的VMnet1的ip一致)，配完这个虚拟网卡的ip后你就可以通过在cmd命令里面ping 此ip看是否能ping通，这样没有网线也能实现网络通信了<br>那么在有网线（意思是有网络的情况下）选择NAT模式，如何配这个VM的ip来实现通信呢<br>找到真实机器的ip地址后，可以在网络中心或者通过cmd里面的ipconfig来获得当前真实机器的ip地址后，用如下的命令来设置VM的ip:ifconfig eth0 192.168.1.156(假设真实机器的ip是192.168.1.155),要永久生效则需要写入配置文件</p>
+<blockquote>
+<p>区分于 virbr0 是 KVM 默认创建的一个 Bridge，其作用是为连接其上的虚机网卡提供 NAT 访问外网的功能。</p>
+</blockquote>
+<p>virbr0 默认分配了一个IP 192.168.122.1，并为连接其上的其他虚拟网卡提供 DHCP 服务。<br>virbr0 使用 dnsmasq 提供 DHCP 服务，可以在宿主机中查看该进程信息<br>ps -elf|grep dnsmasq</p>
+<p>在 &#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;dnsmasq&#x2F; 目录下有一个 default.leases 文件，当 VM1 成功获得 DHCP 的 IP 后，可以在该文件中查看到相应的信息</p>
+<h1 id="cat-x2F-var-x2F-lib-x2F-libvirt-x2F-dnsmasq-x2F-default-leases"><a href="#cat-x2F-var-x2F-lib-x2F-libvirt-x2F-dnsmasq-x2F-default-leases" class="headerlink" title="cat &#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;dnsmasq&#x2F;default.leases"></a>cat &#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;dnsmasq&#x2F;default.leases</h1><p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/311650">https://developer.aliyun.com/article/311650</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">## 虚拟设备和物理设备的区别</span><br><span class="line">- Linux 内核有一个网络设备管理层，处于网络设备驱动和协议栈之间，负责衔接它们之间的数据交互。驱动不需要了解协议栈的细节，协议栈也不需要了解设备驱动的细节。</span><br><span class="line">- 对于一个网络设备来说，就像一个管道（pipe）一样，有两端，从其中任意一端收到的数据将从另一端发送出去。</span><br><span class="line">  - 对于物理网卡eth0,它的两端分别是内核协议栈（通过内核网络设备管理模块间接的通信）和外面的物理网络，从物理网络收到的数据，会转发给内核协议栈，而应用程序从协议栈发过来的数据将会通过物理网络发送出去。</span><br><span class="line">  - 虚拟设备， 对于Linux内核网络设备管理模块来说，虚拟设备和物理设备没有区别</span><br><span class="line">    - 虚拟网络设备的一端也是协议栈，而另一端是什么取决于虚拟网络设备的驱动实现。</span><br><span class="line">    - 虚拟网卡则可以看作是用户空间的网卡，就像用户空间的文件系统(fuse)一样。</span><br><span class="line">    - 用户空间的程序是无法对数据包做任何封装和解封操作的，所有的封装和解封都只能由内核的网络协议栈来完成。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 物理网卡 和 虚拟网卡</span><br><span class="line">- 物理网卡是一个硬件设备，硬件设备要在系统上工作，需要有对应的驱动程序。</span><br><span class="line">  - 物理网卡的驱动程序向操作系统内核注册该网卡设备，从而让内核识别该物理网卡。</span><br><span class="line">  - IP地址、网关等网卡配置信息，都属于内核。等信息都配置在内核中，都是网卡接口的属性，而不是网卡本身的属性。</span><br><span class="line">  - MAC地址才是网卡自带的硬件属性。</span><br><span class="line">  - 网卡工作在OSI七层模型的**最底层(物理层)**。它最基本的功能是以比特流的方式接收和发送数据(可以通过介质传输)，这是硬件自身的功能。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 虚拟网卡</span><br><span class="line">- 目前主流的虚拟网卡方案有tun/tap和veth 两种。</span><br><span class="line"></span><br><span class="line">#### veth-pair</span><br><span class="line">- veth-pair 就是一对的虚拟设备接口，和 tap/tun 设备不同的是，它都是成对出现的。一端连着协议栈，一端彼此相连着。</span><br><span class="line">![2023-10-24T090313](2023-10-24T090313.png)</span><br><span class="line">- Docker 中的 Bridge 模式就是依靠 veth-pair 连接到 docker0 网桥上与宿主机乃至外界的其他机器通信的。</span><br><span class="line">![2023-10-24T094533](2023-10-24T094533.png)</span><br><span class="line"></span><br><span class="line">#### tun/tap</span><br><span class="line">- tun 和 tap 是两个相对独立的虚拟网络设备，它们作为虚拟网卡，除了不具备物理网卡的硬件功能外，它们和物理网卡的功能是一样的，此外tun/tap负责在内核网络协议栈和用户空间之间传输数据。</span><br><span class="line">  - tun 设备是一个三层网络层设备，从 /dev/net/tun 字符设备上读取的是 IP 数据包，写入的也只能是 IP 数据包，因此常用于一些点对点IP隧道，例如OpenVPN，IPSec等；</span><br><span class="line">  - tap 设备是二层链路层设备，等同于一个以太网设备，从 /dev/tap0 字符设备上读取 MAC 层数据帧，写入的也只能是 MAC 层数据帧，因此常用来作为虚拟机模拟网卡使用；</span><br><span class="line"></span><br><span class="line">![2023-10-24T094657](2023-10-24T094657.png)</span><br><span class="line">- 主要区别是因为它们作用在不同的网络协议层，换句话说 tap设备是一个二层设备所以通常接入到 Bridge上作为局域网的一个节点，tun设备是一个三层设备通常用来实现 vpn。</span><br><span class="line"></span><br><span class="line">#### IP与 网卡</span><br><span class="line">- 网卡（链路层）-驱动-网卡接口-（网络层以上）协议栈（内核）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 检查KVM 是否开启 </span><br><span class="line">- 检查CPU是否支持虚拟化</span><br></pre></td></tr></table></figure>
+<h1 id="grep-vmx-x2F-proc-x2F-cpuinfo如果有vmx信息输出，就说明支持VT-如果没有任何的输出，说明你的cpu不支持，将无法使用KVM虚拟机。-root-kevin-lsmod-grep-kvmkvm-intel-170086-0kvm-566340-1-kvm-intelirqbypass-13503-1-kvm"><a href="#grep-vmx-x2F-proc-x2F-cpuinfo如果有vmx信息输出，就说明支持VT-如果没有任何的输出，说明你的cpu不支持，将无法使用KVM虚拟机。-root-kevin-lsmod-grep-kvmkvm-intel-170086-0kvm-566340-1-kvm-intelirqbypass-13503-1-kvm" class="headerlink" title="grep vmx &#x2F;proc&#x2F;cpuinfo如果有vmx信息输出，就说明支持VT;如果没有任何的输出，说明你的cpu不支持，将无法使用KVM虚拟机。[root@kevin ~]# lsmod | grep kvmkvm_intel             170086  0kvm                   566340  1 kvm_intelirqbypass              13503  1 kvm"></a>grep vmx &#x2F;proc&#x2F;cpuinfo<br>如果有vmx信息输出，就说明支持VT;如果没有任何的输出，说明你的cpu不支持，将无法使用KVM虚拟机。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 确保BIOS里开启虚拟化功能，即查看是否加载KVM模块</span><br></pre></td></tr></table></figure><br>[root@kevin ~]# lsmod | grep kvm<br>kvm_intel             170086  0<br>kvm                   566340  1 kvm_intel<br>irqbypass              13503  1 kvm</h1><h2 id="如果没有加载，运行以下命令：-root-kevin-modprobe-kvm-root-kevin-modprobe-kvm-intel-root-kevin-lsmod-grep-kvmkvm-intel-170086-0kvm-566340-1-kvm-intelirqbypass-13503-1-kvm-root-kevin-ll-x2F-dev-x2F-kvmcrw-rw-rw-1-root-kvm-10-232-1月-29-11-56-x2F-dev-x2F-kvm如果没有brctl命令（用来管理网桥的工具），则需要安装bridge-utils-，-root-kevin-apt-get-y-install-bridge-utils-96-96-96-为什么要给网桥配置IP-？"><a href="#如果没有加载，运行以下命令：-root-kevin-modprobe-kvm-root-kevin-modprobe-kvm-intel-root-kevin-lsmod-grep-kvmkvm-intel-170086-0kvm-566340-1-kvm-intelirqbypass-13503-1-kvm-root-kevin-ll-x2F-dev-x2F-kvmcrw-rw-rw-1-root-kvm-10-232-1月-29-11-56-x2F-dev-x2F-kvm如果没有brctl命令（用来管理网桥的工具），则需要安装bridge-utils-，-root-kevin-apt-get-y-install-bridge-utils-96-96-96-为什么要给网桥配置IP-？" class="headerlink" title="如果没有加载，运行以下命令：[root@kevin ~]# modprobe kvm[root@kevin ~]# modprobe kvm-intel[root@kevin ~]# lsmod | grep kvmkvm_intel             170086  0kvm                   566340  1 kvm_intelirqbypass              13503  1 kvm[root@kevin ~]# ll &#x2F;dev&#x2F;kvmcrw-rw-rw-. 1 root kvm 10, 232 1月  29 11:56 &#x2F;dev&#x2F;kvm如果没有brctl命令（用来管理网桥的工具），则需要安装bridge-utils ，[root@kevin ~]# apt-get -y install bridge-utils&#96;&#96;&#96;- 为什么要给网桥配置IP ？"></a>如果没有加载，运行以下命令：<br>[root@kevin ~]# modprobe kvm<br>[root@kevin ~]# modprobe kvm-intel<br>[root@kevin ~]# lsmod | grep kvm<br>kvm_intel             170086  0<br>kvm                   566340  1 kvm_intel<br>irqbypass              13503  1 kvm<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 内核模块导出了一个名为/dev/kvm的设备，这个设备将虚拟机的的地址空间独立于内核或者任何应用程序的地址空间。</span><br></pre></td></tr></table></figure><br>[root@kevin ~]# ll &#x2F;dev&#x2F;kvm<br>crw-rw-rw-. 1 root kvm 10, 232 1月  29 11:56 &#x2F;dev&#x2F;kvm<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">### 网络相关</span><br><span class="line">- 桥接网络</span><br></pre></td></tr></table></figure><br>如果没有brctl命令（用来管理网桥的工具），则需要安装bridge-utils ，<br>[root@kevin ~]# apt-get -y install bridge-utils<br>&#96;&#96;&#96;<br><img src="2023-10-24T112152.png" alt="2023-10-24T112152"><br>- 为什么要给网桥配置IP ？</h2><ul>
+<li><p>为什么把接口连到网桥上，网桥的mac 就变成了接口的mac地址?</p>
+<ul>
+<li>与交换机的端口和mac 绑定类似。</li>
+</ul>
+</li>
+<li><p>L2交换机出于管理需求配置了MAC地址，但实际转发数据和MAC地址无关。</p>
+</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2023 YJJ
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

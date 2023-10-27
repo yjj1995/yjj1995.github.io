@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rgw Multisite异地多活的方案实践 | 记好笔记</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="Rgw Multisite异地多活的方案实践 | 记好笔记">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="这里写关于页的正文，支持 Markdown, HTML">
+<meta property="og:type" content="website">
+<meta property="og:title" content="标题">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="记好笔记">
+<meta property="og:description" content="这里写关于页的正文，支持 Markdown, HTML">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-04T02:34:21.504Z">
+<meta property="article:modified_time" content="2023-06-02T09:05:10.272Z">
+<meta property="article:author" content="JoJo Yu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>JoJo Yu</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yjj1995"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_26826331?type=blog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:1065016533@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(27)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="27">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://github.com/yjj1995">github</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件系统 ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>虚拟化</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph 存储</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ceph 对象 元数据</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Elasticsearch</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>k8s网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/27/nas%20%E4%B8%8E%20%E5%90%8C%E6%AD%A5/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="nas 与 同步">nas 与 同步</span>
+            <span class="post-date" title="2023-10-27 03:31:29">2023/10/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/27/%E7%BD%91%E7%BB%9C%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="网络虚拟化">网络虚拟化</span>
+            <span class="post-date" title="2023-10-27 01:17:54">2023/10/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/26/pxe/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="pxe">pxe</span>
+            <span class="post-date" title="2023-10-26 00:56:37">2023/10/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/25/kvm%20%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9B%B8%E5%85%B3/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="kvm 虚拟机相关">kvm 虚拟机相关</span>
+            <span class="post-date" title="2023-10-25 01:45:27">2023/10/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/20/%E5%B8%B8%E7%94%A8%E8%99%9A%E6%8B%9F%E5%8C%96%E8%BD%AF%E4%BB%B6%E5%8F%8A%E5%85%B6%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="常用虚拟化软件及其技术架构">常用虚拟化软件及其技术架构</span>
+            <span class="post-date" title="2023-10-20 05:49:45">2023/10/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/17/Rgw%20Multisite%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB%E7%9A%84%E6%96%B9%E6%A1%88%E5%AE%9E%E8%B7%B5/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Rgw Multisite异地多活的方案实践">Rgw Multisite异地多活的方案实践</span>
+            <span class="post-date" title="2023-10-17 01:46:35">2023/10/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/16/K8s%20service%20%E6%9C%8D%E5%8A%A1%E6%9A%B4%E9%9C%B2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="K8s service 服务暴露">K8s service 服务暴露</span>
+            <span class="post-date" title="2023-10-16 01:53:44">2023/10/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/09/k8s--Flannel%20%E7%BD%91%E7%BB%9C/"
+           data-tag="k8s网络"
+           data-author="" >
+            <span class="post-title" title="k8s网络">k8s网络</span>
+            <span class="post-date" title="2023-10-09 08:22:38">2023/10/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/08/%E4%BA%91%E5%92%8Ck8s/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="云和k8s">云和k8s</span>
+            <span class="post-date" title="2023-10-08 01:57:48">2023/10/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/10/07/docker/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker">docker</span>
+            <span class="post-date" title="2023-10-07 01:19:25">2023/10/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/26/nosql/"
+           data-tag="Elasticsearch"
+           data-author="" >
+            <span class="post-title" title="Elasticsearch">Elasticsearch</span>
+            <span class="post-date" title="2023-09-26 01:26:06">2023/09/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/22/ceph%20%E5%AF%B9%E8%B1%A1%20%E4%B8%8E%20%E5%85%83%E6%95%B0%E6%8D%AE/"
+           data-tag="ceph 对象 元数据"
+           data-author="" >
+            <span class="post-title" title="ceph 对象 与 元数据">ceph 对象 与 元数据</span>
+            <span class="post-date" title="2023-09-22 01:28:58">2023/09/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/15/FC%20ISCSI%20%E5%8D%8F%E8%AE%AE/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="FC ISCSI 协议">FC ISCSI 协议</span>
+            <span class="post-date" title="2023-09-15 01:41:20">2023/09/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/07/%E5%AE%89%E8%A3%85ansible/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ansible">ansible</span>
+            <span class="post-date" title="2023-09-07 08:10:40">2023/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/07/centos%E7%9A%84repo%E6%96%87%E4%BB%B6/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="centos的 yum,repo,rpm ,dnf介绍">centos的 yum,repo,rpm ,dnf介绍</span>
+            <span class="post-date" title="2023-09-07 07:19:24">2023/09/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/01/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E4%B9%8BSMB/CIFS%E5%8D%8F%E8%AE%AE%E5%8F%8ASamba%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="linux系统 smb/cifs协议 samba 文件共享 smb多用户挂载"
+           data-author="" >
+            <span class="post-title" title="CIFS协议及Samba的使用">CIFS协议及Samba的使用</span>
+            <span class="post-date" title="2023-09-01 06:38:04">2023/09/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/30/ceph%20PGP,PG,CRUSH%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/"
+           data-tag="ceph"
+           data-author="" >
+            <span class="post-title" title="ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系">ceph POOL,PG,PGP,OBJECT,CRUSH之间的关系</span>
+            <span class="post-date" title="2023-08-30 05:12:15">2023/08/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/30/ceph%20hash%20crush%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/"
+           data-tag="ceph"
+           data-author="" >
+            <span class="post-title" title="Ceph 的工作原理及流程,寻址过程，客户读取数据">Ceph 的工作原理及流程,寻址过程，客户读取数据</span>
+            <span class="post-date" title="2023-08-30 01:09:21">2023/08/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/28/Ceph%20%E5%9D%97%E5%AD%98%E5%82%A8%E5%92%8C%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%9A%84%E4%BD%BF%E7%94%A8/"
+           data-tag="ceph 存储"
+           data-author="" >
+            <span class="post-title" title="Ceph 块存储和文件存储的使用">Ceph 块存储和文件存储的使用</span>
+            <span class="post-date" title="2023-08-28 01:06:52">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/25/%E7%94%A8%E6%88%B7%E6%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"
+           data-tag="文件系统 ceph"
+           data-author="" >
+            <span class="post-title" title="用户态文件系统">用户态文件系统</span>
+            <span class="post-date" title="2023-08-25 09:27:08">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/25/ceph%20%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ceph 集群的访问方式">ceph 集群的访问方式</span>
+            <span class="post-date" title="2023-08-25 06:48:21">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/21/%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="虚拟化">虚拟化</span>
+            <span class="post-date" title="2023-08-21 07:46:24">2023/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/18/%E7%BD%91%E5%8D%A1%E5%8A%9F%E8%83%BD/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网卡总结">网卡总结</span>
+            <span class="post-date" title="2023-08-18 07:19:12">2023/08/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/17/%E5%8D%97%E5%8C%97%E6%B5%81%E9%87%8F%E5%92%8C%E4%B8%9C%E8%A5%BF%E6%B5%81%E9%87%8F/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="南北流量和东西流量">南北流量和东西流量</span>
+            <span class="post-date" title="2023-08-17 03:08:37">2023/08/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/15/%E7%BD%91%E7%BB%9C%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90%E6%9E%B6%E6%9E%84/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网络基本组成架构">网络基本组成架构</span>
+            <span class="post-date" title="2023-08-15 01:34:07">2023/08/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/KVM/"
+           data-tag="虚拟化"
+           data-author="" >
+            <span class="post-title" title="KVM">KVM</span>
+            <span class="post-date" title="2023-08-11 03:29:06">2023/08/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/11/%E7%BD%91%E7%BB%9C%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B/"
+           data-tag="网络"
+           data-author="" >
+            <span class="post-title" title="网络七层模型">网络七层模型</span>
+            <span class="post-date" title="2023-08-11 03:22:14">2023/08/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Rgw Multisite异地多活的方案实践" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Rgw Multisite异地多活的方案实践</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-10-18 14:16:40'>2023-10-17 01:46</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB"><span class="toc-text">什么是异地多活?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ceph-%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8-%E5%A4%9A%E7%AB%99%E7%82%B9%E6%9C%8D%E5%8A%A1"><span class="toc-text">ceph 对象存储 多站点服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ceph-multisite-%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">ceph multisite 的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ceph-%E5%8F%8C%E6%B4%BB%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="toc-text">ceph 双活站点架构图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E4%B8%A4%E4%B8%AACeph-%E9%9B%86%E7%BE%A4%E4%B8%8A%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%B1%A1%E7%BD%91%E5%85%B3"><span class="toc-text">在两个Ceph 集群上配置对象网关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8master-zone%E9%9B%86%E7%BE%A4"><span class="toc-text">在master zone集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8master-zone-%E9%9B%86%E7%BE%A4%E4%B8%AD%E5%88%9B%E5%BB%BArealm-zonegroup%E5%92%8Cmaster-zone"><span class="toc-text">在master zone 集群中创建realm, zonegroup和master zone</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8second-zone%E9%9B%86%E7%BE%A4%E4%B8%8A"><span class="toc-text">在second zone集群上</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE"><span class="toc-text">查看配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAbucket-%E9%94%99%E8%AF%AF"><span class="toc-text">创建bucket 错误</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="什么是异地多活"><a href="#什么是异地多活" class="headerlink" title="什么是异地多活?"></a>什么是异地多活?</h1><ul>
+<li>异地多活指分布在异地的多个站点同时对外提供服务的业务场景。</li>
+</ul>
+<h1 id="ceph-对象存储-多站点服务"><a href="#ceph-对象存储-多站点服务" class="headerlink" title="ceph 对象存储 多站点服务"></a>ceph 对象存储 多站点服务</h1><h2 id="ceph-multisite-的结构"><a href="#ceph-multisite-的结构" class="headerlink" title="ceph multisite 的结构"></a>ceph multisite 的结构</h2><ul>
+<li>zone: <ul>
+<li>zone定义了由一个或多个ceph对象网关实例组成的逻辑组.每个zone由自身的ceph集群支撑，在一个zonegroup中，多zone可以提供容灾能力。</li>
+</ul>
+</li>
+<li>zonegroup：<ul>
+<li>zonegroup包含一个或多个zone，必须指定一个zone 为master zone。rgw 多活方式是在同一zonegroup的多个zone之间进行的，即同一zonegroup中多个zone之间的数据完全一致，用户可以通过任意zone读写用一份数据。但是，对元数据的操作，比如创建桶，创建用户，仍然只能在master zone上进行。对数据的操作，比如创建桶中的对象，访问对象等，可以在任意zone中处理。slave zone可以接受bucket和user操作请求，然后将请求重定向到master zone,如果master zonr出现故障，slave zone将会被提升为master zone</li>
+</ul>
+</li>
+<li>realm: <ul>
+<li>realm代表了全局唯一的命名空间，这个命名空间由一个或多个zonegroup组成, 必须指定一个 zonegroup 为 master zonegroup</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>整体结构如下<br><img src="2023-10-17T100602.png" alt="2023-10-17T100602"></p>
+</blockquote>
+<ul>
+<li>master zone 和 secondly zone 有两种模式：active-active 和 active-passive。active-active 模式下master和slave 都可以读写，数据会自动同步， active-passive 下，只能在master 写入。</li>
+<li>同一个域下多 Zone之间的数据为多主模式，可以同时写；元数据为主从模式，由主Zone写入并同步到从Zone，保证元数据一致性。</li>
+</ul>
+<h2 id="ceph-双活站点架构图"><a href="#ceph-双活站点架构图" class="headerlink" title="ceph 双活站点架构图"></a>ceph 双活站点架构图</h2><ul>
+<li>在本文的环境中，我们将在两个Ceph 集群上搭建1个relam ，1个 zonegroup, 2个zone（master slave）的双活架构。</li>
+<li>双活架构为：<br><img src="2023-10-18T100459.png" alt="2023-10-18T100459"></li>
+</ul>
+<h2 id="在两个Ceph-集群上配置对象网关"><a href="#在两个Ceph-集群上配置对象网关" class="headerlink" title="在两个Ceph 集群上配置对象网关"></a>在两个Ceph 集群上配置对象网关</h2><ul>
+<li><p>在两个集群上，都要操作一次</p>
+</li>
+<li><ol>
+<li>登录集群cluster1的节点（以192.168.148.141为例）</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>创建rgw服务证书<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo ceph-authtool \</span><br><span class="line">--create-keyring /etc/ceph/ceph.client.radosgw.&lt;your_rgw_name&gt;.keyring \</span><br><span class="line">-n client.radosgw.&lt;your_rgw_name&gt; \</span><br><span class="line">--cap osd &#x27;allow rwx&#x27; \</span><br><span class="line">--cap mon &#x27;allow rwx&#x27; \</span><br><span class="line">--gen-key</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>说明：rgw属于client类型服务，为了清晰表明是rgw client服务，rgw服务证书名称部分通常又包含两段，例如<code>client.radosgw.node1</code>或者<code>client.rgw.node1</code>，<code>&lt;your_rgw_name&gt;</code>即是最后一段。</li>
+</ul>
+</li>
+<li><ol start="3">
+<li>更改rgw 证书文件所属为ceph 集群<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown ceph:ceph /etc/ceph/ceph.client.radosgw.&lt;your_rgw_name&gt;.keyring</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="4">
+<li>添加rgw证书到ceph 集群证书管理<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ceph auth add client.radosgw.&lt;your_rgw_name&gt; -i /etc/ceph/ceph.client.radosgw.&lt;your_rgw_name&gt;.keyring</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="5">
+<li>编辑集群配置文件</li>
+</ol>
+<ul>
+<li>将rgw配置部分添加到ceph集群配置文件<code>/etc/ceph/ceph.conf</code>中，添加内容如下：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[client.radosgw.&lt;your_rgw_name&gt;]</span><br><span class="line">host=node1</span><br><span class="line">keyring=/etc/ceph/ceph.client.radosgw.&lt;your_rgw_name&gt;.keyring</span><br><span class="line">log file=/var/log/radosgw/client.radosgw.&lt;your_rgw_name&gt;.log</span><br><span class="line">rgw frontends = &quot;beast endpoint=&lt;radosgw_node_ip&gt;:&lt;radowgw_service_port&gt;&quot;</span><br><span class="line"></span><br><span class="line">/* 例如</span><br><span class="line">[client.radosgw.rgw1]</span><br><span class="line">host=node3</span><br><span class="line">keyring=/etc/ceph/ceph.client.radosgw.rgw1.keyring</span><br><span class="line">log file=/var/log/radosgw/client.radosgw.rgw1.log</span><br><span class="line">rgw frontends = beast endpoint=192.168.148.141:7480</span><br><span class="line">*/</span><br></pre></td></tr></table></figure></li>
+<li>参数说明： <ul>
+<li>rgw_frontends：配置 HTTP 前端。<code>beast endpoint=address[:port] 格式设置监听地址</code><ul>
+<li>用来提供HTTP服务请求的监听，并根据请求的相关信息，封装参数、转换请求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ol start="6">
+<li>创建日志目录 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /var/log/radosgw  </span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="7">
+<li>使配置文件生效<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ceph config assimilate-conf -i /etc/ceph/ceph.conf</span><br><span class="line">#查看配置dump信息</span><br><span class="line">sudo ceph config dump</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="8">
+<li>启动rgw服务</li>
+</ol>
+<ul>
+<li><p>注意，rgw服务有一些必要的pool，若集群中没有，则可以在启动rgw服务前先行创建，也可以让rgw在启动时自行创建(按默认值创建，如pg_num)，本例采用自行创建pool的方式：</p>
+</li>
+<li><p>关闭自动pool自动伸缩模式，因为该模式下默认新建pool的pg_num&#x3D;1,小于默认pgp_num<br><code>sudo ceph config set mon osd_pool_default_pg_autoscale_mode off</code></p>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start ceph-radosgw@radosgw.&lt;your_rgw_name&gt;.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启开机启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable ceph-radosgw@radosgw.&lt;your_rgw_name&gt;.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>等待几秒，因为启动服务需要一些时间，然后检查服务启动状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status ceph-radosgw@radosgw.rgw1.service</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>若rgw服务启动失败，可能是自动创建pool失败了，可能的原因是osd资源紧张，pg数量超出阈值，系统不允许创建更多pool，解决办法可以是：增加更多的osd、删除不用的pool、调高osd的pg数量阈值：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前阈值</span><br><span class="line">sudo ceph config get mon mon_max_pg_per_osd</span><br><span class="line"># 设置新的阈值</span><br><span class="line">sudo ceph config set mon mon_max_pg_per_osd &lt;num&gt;</span><br><span class="line">// 例如 sudo ceph config set mon mon_max_pg_per_osd 2048</span><br><span class="line"># 立即生效</span><br><span class="line">sudo systemctl restart ceph.target</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="在master-zone集群"><a href="#在master-zone集群" class="headerlink" title="在master zone集群"></a>在master zone集群</h2><ul>
+<li>整个集群的架构<br><img src="2023-10-17T172131.png" alt="2023-10-17T172131"></li>
+</ul>
+<h3 id="在master-zone-集群中创建realm-zonegroup和master-zone"><a href="#在master-zone-集群中创建realm-zonegroup和master-zone" class="headerlink" title="在master zone 集群中创建realm, zonegroup和master zone"></a>在master zone 集群中创建realm, zonegroup和master zone</h3><ul>
+<li><ol>
+<li>创建realm<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ~]# radosgw-admin realm create --rgw-realm=realm_demo --default</span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;2d40b603-356c-4730-a5f8-336260e3ed4c&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;realm_demo&quot;,</span><br><span class="line">    &quot;current_period&quot;: &quot;aecbda84-ee4f-4ffe-b1aa-efabb9d342c3&quot;,</span><br><span class="line">    &quot;epoch&quot;: 2</span><br><span class="line">&#125;</span><br><span class="line"># Ceph 为 realm 生成唯一 ID，允许在需要时重命名域。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 需要设置为 default</p>
+<p> 如果指定了 –default，radosgw-admin 将默认使用此域。如果没有指定 –default，添加 zone-groups 和区域需要指定 –rgw-realm 标志或 –realm -id 标志，以便在添加 zone group 和 zone 时标识域。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>创建master zonegroup <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ~]# radosgw-admin zonegroup create --rgw-zonegroup=gz1 --endpoints=http://192.168.148.141:7480 --rgw-realm=realm_demo --master --default</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;3f4b9246-be0d-4e4e-913a-9edf77d96f8d&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;gz1&quot;,</span><br><span class="line">    &quot;api_name&quot;: &quot;gz1&quot;,</span><br><span class="line">    &quot;is_master&quot;: &quot;true&quot;,</span><br><span class="line">    &quot;endpoints&quot;: [</span><br><span class="line">        &quot;http://192.168.148.141:7480&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;hostnames&quot;: [],</span><br><span class="line">    &quot;hostnames_s3website&quot;: [],</span><br><span class="line">    &quot;master_zone&quot;: &quot;71e02920-7412-44ea-adba-5426c9058397&quot;,</span><br><span class="line">    &quot;zones&quot;: [],</span><br><span class="line">    &quot;placement_targets&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;default-placement&quot;,</span><br><span class="line">            &quot;tags&quot;: []</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;default_placement&quot;: &quot;default-placement&quot;,</span><br><span class="line">    &quot;realm_id&quot;: &quot;2d40b603-356c-4730-a5f8-336260e3ed4c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要设置为default，master, 并指定realm</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>创建master zone<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ~]# radosgw-admin zone create --rgw-zonegroup=gz1 --rgw-zone=gz1-zone1 --master --default --endpoints=http://192.168.148.141:7480</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>必须在位于 区域内的 Ceph 对象网关节点上创建区域。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>删除默认的Default zone Group 和 zone</li>
+</ol>
+<ul>
+<li>删除 default区域（如果存在）。 确保将其首先从默认区域组中移除。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># radosgw-admin zonegroup remove --rgw-zonegroup=default --rgw-zone=default</span><br><span class="line"># radosgw-admin period update --commit</span><br><span class="line"># radosgw-admin zone rm --rgw-zone=default</span><br><span class="line"># radosgw-admin period update --commit</span><br><span class="line"># radosgw-admin zonegroup delete --rgw-zonegroup=default</span><br><span class="line"># radosgw-admin period update --commit</span><br></pre></td></tr></table></figure></li>
+<li>删除 Ceph 存储集群中 default 区域的池，如果它们存在。<ul>
+<li>重要：如果已经在使用它来存储数据，可以不删除这个default区域组。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ceph osd pool delete default.rgw.control default.rgw.control --yes-i-really-really-mean-it</span><br><span class="line"># ceph osd pool delete default.rgw.data.root default.rgw.data.root --yes-i-really-really-mean-it</span><br><span class="line"># ceph osd pool delete default.rgw.gc default.rgw.gc --yes-i-really-really-mean-it</span><br><span class="line"># ceph osd pool delete default.rgw.log default.rgw.log --yes-i-really-really-mean-it</span><br><span class="line"># ceph osd pool delete default.rgw.users.uid default.rgw.users.uid --yes-i-really-really-mean-it</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>删除可能失败</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>报错1：<strong>ceph you must unset nodelete flag for the pool first</strong></p>
+<p>解决：<code>ceph osd pool set [pool-name] nodelete 0</code></p>
+</blockquote>
+<blockquote>
+<p>报错2：<strong>you must first set the mon_allow_pool_delete config option to true before you can destroy a pool</strong></p>
+<p>解决：<code>ceph config set mon mon_allow_pool_delete true</code></p>
+</blockquote>
+<ul>
+<li><ol start="5">
+<li>创建同步使用的system用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ~]# radosgw-admin user create --uid=&quot;sync-admin&quot; --display-name=&quot;sync-admin&quot; --system</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>查看用户<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo radosgw-admin user list</span><br></pre></td></tr></table></figure></li>
+<li>查看sync-admin 用户的具体信息，记录<code>access_key</code>和<code>secret_key</code>的值.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo radosgw-admin user info --uid=sync-admin</span><br></pre></td></tr></table></figure></li>
+<li>将系统用户添加到master 区域<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ~]# radosgw-admin zone modify --rgw-zone=gz1-zone1 --access-key=9T48IMD6PDUXCYAB30VL --secret=nR2TaFsZfnRF0ltcvZv7TkaxLE6x07hbuF7KoBa3</span><br><span class="line"></span><br><span class="line">[root@node3 ~]# # radosgw-admin period update --commit</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ol start="6">
+<li>更新ceph.conf rgw1的配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 在/etc/ceph/ceph.conf文件中[client.radosgw.rgw1]下面添加</span><br><span class="line">rgw_zone = gz1-zone1</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="7">
+<li>重启网关<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart ceph-radosgw@rgw.`hostname -s`</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h2 id="在second-zone集群上"><a href="#在second-zone集群上" class="headerlink" title="在second zone集群上"></a>在second zone集群上</h2><ul>
+<li><p>zone group 中的区域复制所有数据，以确保每个 zone 有相同的数据。</p>
+</li>
+<li><ol>
+<li>从master zone 拉取realm 配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@df-vm-05 ~]# radosgw-admin realm pull --url=http://192.168.148.141:7480 --access-key=DEMZT6Y26CCAIU9GMVWQ --secret=EkillNdrDiCWcbff7qUKMm0LH1TWJ9NrNCZcAzOB --rgw-realm=realm_demo</span><br><span class="line"># 这里的access 跟 secret 就是同步用户的key</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>如果此 realm 是默认域或唯一的域，请将 realm 设为默认域。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># radosgw-admin realm default --rgw-realm=realm_demo</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ol start="2">
+<li>拉取Period</li>
+</ol>
+<ul>
+<li>使用 master zone group 中 master zone 的 URL 路径、access key 和 secret，将 period 拉取到主机。</li>
+<li>Period 可以理解为realm的版本，带有多个epoch的时间“period”，用于跟踪配置更改<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@df-vm-05 ~]# radosgw-admin period pull --url=http://192.168.148.141:7480 --access-key=DEMZT6Y26CCAIU9GMVWQ --secret=EkillNdrDiCWcbff7qUKMm0LH1TWJ9NrNCZcAzOB --rgw-realm=realm_demo</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ol start="3">
+<li>创建secondly zone</li>
+</ol>
+<ul>
+<li>必须在位于区域内的 Ceph 对象网关节点上创建区域。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@df-vm-05 ~]# radosgw-admin zone create --rgw-zonegroup=gz1 --rgw-zone=gz1-zone2  --access-key=DEMZT6Y26CCAIU9GMVWQ --secret=EkillNdrDiCWcbff7qUKMm0LH1TWJ9NrNCZcAzOB --endpoints=http://192.168.148.138:7480 </span><br><span class="line"># 这里的access 跟 secret 就是同步用户的key</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><ol start="4">
+<li>删除默认区域 （同master的步骤）</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>更新 Period<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">radosgw-admin period update --commit</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="6">
+<li>更新 Ceph 配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 在/etc/ceph/ceph.conf文件中[client.radosgw.rgwa]下面添加</span><br><span class="line">rgw_zone = gz1-zone2</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="7">
+<li>重启网关<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart ceph-radosgw@rgw.`hostname -s`</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h2 id="查看配置"><a href="#查看配置" class="headerlink" title="查看配置"></a>查看配置</h2><ul>
+<li><ol>
+<li>zonegroup的配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">[root@node3 ceph]# radosgw-admin zonegroup get --rgw-zonegroup=gz1</span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;f162c7f2-2ada-4b97-a86a-14be960805be&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;gz1&quot;,</span><br><span class="line">    &quot;api_name&quot;: &quot;gz1&quot;,</span><br><span class="line">    &quot;is_master&quot;: &quot;true&quot;,</span><br><span class="line">    &quot;endpoints&quot;: [</span><br><span class="line">        &quot;http://192.168.148.141:7480&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;hostnames&quot;: [],</span><br><span class="line">    &quot;hostnames_s3website&quot;: [],</span><br><span class="line">    &quot;master_zone&quot;: &quot;cd58b17f-3021-46b5-9f1d-a3e284e26f1e&quot;,</span><br><span class="line">    &quot;zones&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;id&quot;: &quot;cd58b17f-3021-46b5-9f1d-a3e284e26f1e&quot;,</span><br><span class="line">            &quot;name&quot;: &quot;gz1-zone1&quot;,</span><br><span class="line">            &quot;endpoints&quot;: [</span><br><span class="line">                &quot;http://192.168.148.141:7480&quot;</span><br><span class="line">            ],</span><br><span class="line">            &quot;log_meta&quot;: &quot;false&quot;,</span><br><span class="line">            &quot;log_data&quot;: &quot;true&quot;,</span><br><span class="line">            &quot;bucket_index_max_shards&quot;: 11,</span><br><span class="line">            &quot;read_only&quot;: &quot;false&quot;,</span><br><span class="line">            &quot;tier_type&quot;: &quot;&quot;,</span><br><span class="line">            &quot;sync_from_all&quot;: &quot;true&quot;,</span><br><span class="line">            &quot;sync_from&quot;: [],</span><br><span class="line">            &quot;redirect_zone&quot;: &quot;&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;id&quot;: &quot;f0fe3987-d8cb-48bb-aa1d-87c76e26aac6&quot;,</span><br><span class="line">            &quot;name&quot;: &quot;gz1-zone2&quot;,</span><br><span class="line">            &quot;endpoints&quot;: [</span><br><span class="line">                &quot;http://192.168.148.138:7480&quot;</span><br><span class="line">            ],</span><br><span class="line">            &quot;log_meta&quot;: &quot;false&quot;,</span><br><span class="line">            &quot;log_data&quot;: &quot;true&quot;,</span><br><span class="line">            &quot;bucket_index_max_shards&quot;: 11,</span><br><span class="line">            &quot;read_only&quot;: &quot;false&quot;,</span><br><span class="line">            &quot;tier_type&quot;: &quot;&quot;,</span><br><span class="line">            &quot;sync_from_all&quot;: &quot;true&quot;,</span><br><span class="line">            &quot;sync_from&quot;: [],</span><br><span class="line">            &quot;redirect_zone&quot;: &quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;placement_targets&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;default-placement&quot;,</span><br><span class="line">            &quot;tags&quot;: [],</span><br><span class="line">            &quot;storage_classes&quot;: [</span><br><span class="line">                &quot;STANDARD&quot;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;default_placement&quot;: &quot;default-placement&quot;,</span><br><span class="line">    &quot;realm_id&quot;: &quot;fb3fa097-eda4-4432-a1b2-e0951582112c&quot;,</span><br><span class="line">    &quot;sync_policy&quot;: &#123;</span><br><span class="line">        &quot;groups&quot;: []</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># 可以看到zone2 的信息会同步到master zone1</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><ol start="2">
+<li>查看sync的状态<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># master zone的状态</span><br><span class="line">[root@node3 ceph]# radosgw-admin sync status</span><br><span class="line">          realm fb3fa097-eda4-4432-a1b2-e0951582112c (realm_demo)</span><br><span class="line">      zonegroup f162c7f2-2ada-4b97-a86a-14be960805be (gz1)</span><br><span class="line">           zone cd58b17f-3021-46b5-9f1d-a3e284e26f1e (gz1-zone1)</span><br><span class="line">  metadata sync no sync (zone is master)</span><br><span class="line">      data sync source: f0fe3987-d8cb-48bb-aa1d-87c76e26aac6 (gz1-zone2)</span><br><span class="line">                        syncing</span><br><span class="line">                        full sync: 0/128 shards</span><br><span class="line">                        incremental sync: 128/128 shards</span><br><span class="line">                        data is caught up with source</span><br><span class="line"></span><br><span class="line"># second zone的状态</span><br><span class="line">[user@node3 ~]$ radosgw-admin sync status</span><br><span class="line">          realm fb3fa097-eda4-4432-a1b2-e0951582112c (realm_demo)</span><br><span class="line">      zonegroup f162c7f2-2ada-4b97-a86a-14be960805be (gz1)</span><br><span class="line">           zone f0fe3987-d8cb-48bb-aa1d-87c76e26aac6 (gz1-zone2)</span><br><span class="line">  metadata sync syncing</span><br><span class="line">                full sync: 0/64 shards</span><br><span class="line">                incremental sync: 64/64 shards</span><br><span class="line">                metadata is caught up with master</span><br><span class="line">      data sync source: cd58b17f-3021-46b5-9f1d-a3e284e26f1e (gz1-zone1)</span><br><span class="line">                        syncing</span><br><span class="line">                        full sync: 0/128 shards</span><br><span class="line">                        incremental sync: 128/128 shards</span><br><span class="line">                        data is caught up with source</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>data is caught up with source: 表示数据一致</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="创建bucket-错误"><a href="#创建bucket-错误" class="headerlink" title="创建bucket 错误"></a>创建bucket 错误</h2><ul>
+<li><code>sudo ceph config set mon mon_max_pg_per_osd &lt;num&gt;</code> (增大pg 上限数量)</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1065016533@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2023 YJJ
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
