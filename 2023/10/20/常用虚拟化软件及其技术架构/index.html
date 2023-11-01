@@ -564,7 +564,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-10-27 17:47:42'>2023-10-20 05:49</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-31 13:05:47'>2023-10-20 05:49</time>
         
     </div>
     <div class="article-meta">
@@ -635,15 +635,18 @@
 </ul>
 </li>
 </ul>
-<h4 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h4><ol>
-<li>打开virt-manager<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 终端输入</span><br><span class="line">sudo virt-manager</span><br></pre></td></tr></table></figure></li>
-<li>开始创建新虚拟机，点击主窗口左上角的按钮：<br><img src="2023-10-27T093015.png" alt="2023-10-27T093015"></li>
-<li>选择安装模式，可以选择本地安装介质、网络引导&#x2F;安装或导入现有虚拟磁盘：<br><img src="2023-10-27T093145.png" alt="2023-10-27T093145"></li>
-<li>可以选择本地安装介质，后续选择ISO镜像路径：<br><img src="2023-10-27T093406.png" alt="2023-10-27T093406"></li>
-<li>随后的两个步骤调整新虚拟机的 CPU、内存和磁盘大小。网络可以选择桥接和NAT模式，默认选择NAT 与外部隔离。<br><img src="2023-10-27T093500.png" alt="2023-10-27T093500"></li>
-<li>重定向安装操作系统<br><img src="2023-10-27T093726.png" alt="2023-10-27T093726"></li>
-<li>安装完，即可进入操作系统</li>
-</ol>
+<h4 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h4><p> 打开virt-manager</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 终端输入</span><br><span class="line">sudo virt-manager</span><br></pre></td></tr></table></figure>
+<p> 开始创建新虚拟机，点击主窗口左上角的按钮：</p>
+<p><img src="2023-10-27T093015.png" alt="2023-10-27T093015"></p>
+<p>选择安装模式，可以选择本地安装介质、网络引导&#x2F;安装或导入现有虚拟磁盘：</p>
+<p><img src="2023-10-27T093145.png" alt="2023-10-27T093145"></p>
+<p>可以选择本地安装介质，后续选择ISO镜像路径：</p>
+<p><img src="2023-10-27T093406.png" alt="2023-10-27T093406"></p>
+<p> 随后的两个步骤调整新虚拟机的 CPU、内存和磁盘大小。网络可以选择桥接和NAT模式，默认选择NAT 与外部隔离。</p>
+<p><img src="2023-10-27T093500.png" alt="2023-10-27T093500"></p>
+<p>重定向安装操作系统</p>
+<p><img src="2023-10-27T093726.png" alt="2023-10-27T093726"><br>安装完，即可进入操作系统</p>
 <h2 id="virt-install"><a href="#virt-install" class="headerlink" title="virt-install"></a>virt-install</h2><ul>
 <li>virt-install是一个使用“libvirt” hypervisor 管理库构建新虚拟机的命令行工具，能够为KVM、Xen或其它支持libvrit API的hypervisor创建虚拟机并完成GuestOS安装；此外，能够基于串行控制台、VNC或SDL支持文本或图形安装界面。安装过程可以使用本地的安装介质如CDROM，也可以通过网络方式如NFS、HTTP或FTP服务实现。对于通过网络安装的方式，virt-install可以自动加载必要的文件以启动安装过程而无须额外提供引导工具。virt-install也支持PXE方式的安装过程，也能够直接使用现有的磁盘映像直接启动安装过程。</li>
 </ul>
@@ -778,7 +781,18 @@
 </ul>
 </li>
 </ul>
-<h4 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h4><h4 id="主机模式"><a href="#主机模式" class="headerlink" title="主机模式"></a>主机模式</h4><h4 id="双网卡"><a href="#双网卡" class="headerlink" title="双网卡"></a>双网卡</h4><h2 id="自动化安装（pxe-kickstart）"><a href="#自动化安装（pxe-kickstart）" class="headerlink" title="自动化安装（pxe+kickstart）"></a>自动化安装（pxe+kickstart）</h2><ul>
+<h4 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h4><h4 id="主机模式"><a href="#主机模式" class="headerlink" title="主机模式"></a>主机模式</h4><h4 id="双网卡"><a href="#双网卡" class="headerlink" title="双网卡"></a>双网卡</h4><h2 id="自动化安装（pxe-kickstart）"><a href="#自动化安装（pxe-kickstart）" class="headerlink" title="自动化安装（pxe+kickstart）"></a>自动化安装（pxe+kickstart）</h2><p>–network network&#x3D;default      配置网络使用默认，NAT 方式</p>
+<p>dnsmasq 服务</p>
+<p>libvirt默认使用了一个名为default的nat网络，这个网络默认使用virbr0作为桥接接口，使用dnsmasq来为使用nat网络的虚拟机提供dns及dhcp服务，dnsmasq生效后的配置文件默认保存在以下路径：</p>
+<p>&#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;dnsmasq&#x2F;default.hostsfile   mac&amp;&amp;ip绑定的配置文件</p>
+<p>&#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;dnsmasq&#x2F;default.leases  dhcp分配到虚拟机的ip地址列表</p>
+<p>&#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;network&#x2F;default.xml  default网络的配置文件</p>
+<p>dnsmasq服务的启动脚本在&#x2F;etc&#x2F;init.d&#x2F;dnsmasq ，但是我们如果手动使用此脚本来启动服务将会导致dnsmasq读取其自己的配置文件来启动此服务，因此这么做是不推荐的，因为这个服务完全由libvirtd在接管，</p>
+<p>当libvirtd服务启动的时候，它会将它管理的被标记为autostart的network一并启动起来，而启动network的时候就会自动调用dnsmasq并赋予其适宜的配置文件来运行服务。</p>
+<p>使用libvirt管理的网络都会用到dnsmasq来产生相应的配置，比如定义了一个名为route110的network，那么这个route110将使用一个新的桥接接口virbr1来接入网络，并使用dnsmasq产生名为route110.hostsfile和route110.leases的配置文件。</p>
+<p>其实这里提到的virbr0和virbr1都是libvirt产生的虚拟网卡，其作用就相当于一个虚拟交换机，为虚拟机提供网络转发服务。<br>————————————————<br>版权声明：本文为CSDN博主「Tom Ma.」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/mshxuyi/article/details/105837671">https://blog.csdn.net/mshxuyi/article/details/105837671</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zsythink.net/archives/4272">https://www.zsythink.net/archives/4272</a> &#x2F;&#x2F; 虚机网络</p>
+<ul>
 <li>参考<ul>
 <li><ol>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/286539">https://cloud.tencent.com/developer/news/286539</a></li>
