@@ -51,6 +51,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://example.com/tags/wireguard-VPN/</loc>
+    <lastmod>2023-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
 </urlset>
