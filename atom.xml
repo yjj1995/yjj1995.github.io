@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-17T01:40:22.654Z</updated>
+  <updated>2023-11-17T01:50:40.442Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,13 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>wireguard 介绍</title>
+    <link href="http://example.com/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://example.com/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/</id>
+    <published>2023-11-17T01:49:09.000Z</published>
+    <updated>2023-11-17T01:50:40.442Z</updated>
+    
+    
+    
+    
+    
+    <category term="wireguard VPN" scheme="http://example.com/tags/wireguard-VPN/"/>
+    
+  </entry>
+  
+  <entry>
     <title>博客介绍</title>
     <link href="http://example.com/2023/11/16/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/"/>
     <id>http://example.com/2023/11/16/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/</id>
     <published>2023-11-16T07:49:45.000Z</published>
-    <updated>2023-11-17T01:40:22.654Z</updated>
+    <updated>2023-11-17T01:41:53.202Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="欢迎来到-你的名字-的个人知识博客！"><a href="#欢迎来到-你的名字-的个人知识博客！" class="headerlink" title="欢迎来到 [你的名字] 的个人知识博客！"></a>欢迎来到 [你的名字] 的个人知识博客！</h1><h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>嗨，大家好！我是Fish JJ，一个对计算机充满热情的人。通过这个博客，我希望与大家分享我的学习和思考，探讨 计算机领域的各种话题。</p><h2 id="为什么我要写这个博客？"><a href="#为什么我要写这个博客？" class="headerlink" title="为什么我要写这个博客？"></a>为什么我要写这个博客？</h2><p>我创建这个博客的初衷是为了建立一个记录自己学习的平台。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="欢迎来到-你的名字-的个人知识博客！"><a href="#欢迎来到-你的名字-的个人知识博客！" class="headerlink" title="欢迎来到 [你的名字] 的个人知识博客！"></a>欢迎来到 [你的名字] 的个人知识博客！</h1><h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>嗨，大家好！我是Fisher JJ，一个对计算机充满热情的人。通过这个博客，我希望与大家分享我的学习和思考，探讨 计算机领域的各种话题。</p><h2 id="为什么我要写这个博客？"><a href="#为什么我要写这个博客？" class="headerlink" title="为什么我要写这个博客？"></a>为什么我要写这个博客？</h2><p>我创建这个博客的初衷是为了建立一个记录自己学习的平台。</p>]]></content>
     
     
       
