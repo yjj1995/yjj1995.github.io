@@ -4,7 +4,16 @@
   <url>
     <loc>http://example.com/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/</loc>
     
-    <lastmod>2023-11-17</lastmod>
+    <lastmod>2023-11-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2023/11/20/esxi/</loc>
+    
+    <lastmod>2023-11-20</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +40,7 @@
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2023-11-17</lastmod>
+    <lastmod>2023-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -39,21 +48,21 @@
   
   <url>
     <loc>http://example.com/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/</loc>
-    <lastmod>2023-11-17</lastmod>
+    <lastmod>2023-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/wireguard-VPN/</loc>
-    <lastmod>2023-11-17</lastmod>
+    <lastmod>2023-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/wireguard-VPN/</loc>
-    <lastmod>2023-11-17</lastmod>
+    <lastmod>2023-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
