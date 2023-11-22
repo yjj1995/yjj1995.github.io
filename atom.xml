@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-21T06:40:34.082Z</updated>
+  <updated>2023-11-22T10:37:26.163Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ESXI 网络</title>
+    <link href="http://example.com/2023/11/22/ESXI-%E7%BD%91%E7%BB%9C/"/>
+    <id>http://example.com/2023/11/22/ESXI-%E7%BD%91%E7%BB%9C/</id>
+    <published>2023-11-22T08:45:52.000Z</published>
+    <updated>2023-11-22T10:37:26.163Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="VMware-vSphere网络、vSwitch、端口组"><a href="#VMware-vSphere网络、vSwitch、端口组" class="headerlink" title="VMware vSphere网络、vSwitch、端口组"></a>VMware vSphere网络、vSwitch、端口组</h2><h3 id="ESXI-网络"><a href="#ESXI-网络" class="headerlink" title="ESXI 网络"></a>ESXI 网络</h3><ul><li><p>目的</p><ul><li>相互交流（想想 vMotion）</li><li>与 vCenter 通信（想想 HA）</li><li>与他们依赖的外部资源进行通信，例如存储阵列或 Active Directory</li><li>允许它们的常驻虚拟机与它们可能依赖的其他虚拟机和外部资源进行通信</li></ul></li><li><p>配置</p><ul><li>ESXI 主机上的虚拟交换机</li><li>虚拟交换机上的端口组</li></ul></li></ul><h3 id="ECXI主机上的虚拟交换机"><a href="#ECXI主机上的虚拟交换机" class="headerlink" title="ECXI主机上的虚拟交换机"></a>ECXI主机上的虚拟交换机</h3><ul><li><p>将 ESXi 主机上的虚拟交换机视为您之前可能遇到的任何其他交换机，当涉及到网络层时，ESXi 中的虚拟交换机是为我们的 ESXi 主机提供连接、冗余和负载平衡的方式。</p></li><li><p>有两种类型的开关，尽管您可能会听到它们各自使用几个不同的名称。</p><ul><li>vSphere 标准交换机</li><li>vSphere 分布式交换机（需要vSphere Enterprise Plus 许可）</li></ul></li></ul><h4 id="vSphere-标准交换机-标准-vSwitch-vSwitch"><a href="#vSphere-标准交换机-标准-vSwitch-vSwitch" class="headerlink" title="vSphere 标准交换机 &#x2F; 标准 vSwitch&#x2F; vSwitch"></a>vSphere 标准交换机 &#x2F; 标准 vSwitch&#x2F; vSwitch</h4><ul><li>基本虚拟交换机。</li><li>标准 vSwitch 驻留在 ESXi 主机上，必须在每个主机上单独配置<ul><li>可以通过PowerCLI或主机配置文件简化配置</li></ul></li></ul><p><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_171510.png"></p><ul><li><p>网络交换机（物理）连接到ESXI主机中的 网卡（一般是指的是物理网卡）</p></li><li><p>ESXI主机中的 网卡（一般是指的是物理网卡）连接到ESXI中的虚拟交换机</p></li><li><p>ESXI可以有多个vSwitch.</p></li></ul><h4 id="vSphere-分布式交换机-分布式虚拟交换机-dvSwitch"><a href="#vSphere-分布式交换机-分布式虚拟交换机-dvSwitch" class="headerlink" title="vSphere 分布式交换机&#x2F;分布式虚拟交换机&#x2F;dvSwitch"></a>vSphere 分布式交换机&#x2F;分布式虚拟交换机&#x2F;dvSwitch</h4><ul><li>标准虚拟交换机和分布式虚拟交换机之间没有太大区别。</li><li>仍然以冗余方式将 ESXi 主机中的网卡连接到网络交换机，改变的是虚拟层，以及 VMware vSphere 本身内的交换机。<br><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_172134.png"></li><li>交换机配置本身位于 vCenter 服务器而不是 ESXi 主机上</li><li>每个 ESXi 主机上都有分布式虚拟交换机配置的副本，正如您在每个主机上的亮蓝色交换机中看到的那样，这样，如果 vCenter 发生问题，我们的虚拟机就不会受到影响。<br><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_172242.png"></li><li>每个vmnic(ESXI主机的网卡)都连接到分布式虚拟交换机上的相应dvUplink端口。</li><li>通过cCenter 服务器管理分布式虚拟交换机<ul><li>分布式虚拟交换机配置在每个 ESXi 主机上的设计都是相同的。</li></ul></li><li>与标准 vSwitch 类似，可以使用 vSphere Client、PowerCLI 或主机配置文件管理分布式 vSwitch。这里的区别在于，您在 vCenter 服务器上配置单个分布式虚拟交换机，而不是 ESXi 主机上的单个虚拟交换机。</li></ul><blockquote><p>vSphere Distributed Switch 确实需要VMware Enterprise Plus 许可。</p></blockquote><h3 id="VMware-中的-NIC-成组策略"><a href="#VMware-中的-NIC-成组策略" class="headerlink" title="VMware 中的 NIC 成组策略"></a>VMware 中的 NIC 成组策略</h3><ul><li>多个物理网卡可以连接到虚拟交换机上形成冗余，实现负载均衡以及故障恢复。</li></ul><h3 id="虚拟交换机上的-端口组"><a href="#虚拟交换机上的-端口组" class="headerlink" title="虚拟交换机上的  端口组"></a>虚拟交换机上的  端口组</h3><ul><li>虚拟交换机上的一组虚拟端口（接口）</li><li>分类<ul><li>虚拟机端口组<ul><li>虚拟机端口组是我们连接虚拟机的方式。例如，我可能有一个带有单个 VLAN、多个 VLAN（VLAN 中继）的端口组，或者在分布式虚拟交换机的情况下是专用 VLAN。</li></ul></li><li>VMkernel 端口组</li></ul></li></ul><h4 id="VMkernel-端口组"><a href="#VMkernel-端口组" class="headerlink" title="VMkernel 端口组"></a>VMkernel 端口组</h4><ul><li>VMkernel 端口用于 VMware vSphere 中的非虚拟机流量</li><li>每个 ESXi 主机都有一个 VMkernel 端口用于主机管理。<ul><li>如果它是 vSphere 集群的成员，它还将有一个用于 vMotion 的 VMkernel 端口。</li><li>如果群集是 vSAN 群集，则将有一个用于 vSAN 的 VMkernel 端口。</li><li>网络存储服务，容错都有vmkernel端口</li></ul></li><li>每个 VMkernel 端口都有自己唯一的 IP 地址，您还可以更改 VMkernel 端口上的默认 MTU 1500。</li><li>端口组的作用是可以想象成虚拟交换机的下行端口，所以才能针对不同的业务进行VLAN以及流量的控制，将各业务流量进行逻辑隔离。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;VMware-vSphere网络、vSwitch、端口组&quot;&gt;&lt;a href=&quot;#VMware-vSphere网络、vSwitch、端口组&quot; class=&quot;headerlink&quot; title=&quot;VMware vSphere网络、vSwitch、端口组&quot;&gt;&lt;/a&gt;VM</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>tun/tap 虚拟网络设备与VPN隧道原理</title>
