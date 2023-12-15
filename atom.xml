@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-12-14T07:22:20.504Z</updated>
+  <updated>2023-12-15T08:04:50.751Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PCIE速率</title>
+    <link href="http://example.com/2023/12/15/PCIE%E9%80%9F%E7%8E%87/"/>
+    <id>http://example.com/2023/12/15/PCIE%E9%80%9F%E7%8E%87/</id>
+    <published>2023-12-15T08:03:13.000Z</published>
+    <updated>2023-12-15T08:04:50.751Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>PCIE的规格一般有 PCIE2.0&#x2F;PCIE3.0&#x2F;PCIE4.0&#x2F;PCIE5.0</p></blockquote><h3 id="PCIE-相关概念"><a href="#PCIE-相关概念" class="headerlink" title="PCIE 相关概念"></a>PCIE 相关概念</h3><ul><li>传输速率为每秒传输量GT&#x2F;s, 而不是每秒位数Gbps, 因为传输率包括不提供额外吞吐量的开销位；比如PCIe 1.x 和 PCIe 2.x 使用8b&#x2F;10b 编码方案。导致占用了20%（2&#x2F;10）的原始信道带宽。</li><li>GT&#x2F;s ——Giga transation per second （千兆传输&#x2F;秒），即每一秒内传输的次数。重点在于描述物理层通信协议的速率属性，可以不和链路宽度等关联。</li><li>Gbps —— Giga Bits Per Second （千兆位&#x2F;秒）。原始速率</li><li>GT&#x2F;s 与Gbps 之间不存在成比例的换算关系。有效的带宽（乘以了比例）<br><img src="/../images/PCIE%E9%80%9F%E7%8E%87_160441.png"></li></ul><h3 id="PCIE带宽计算"><a href="#PCIE带宽计算" class="headerlink" title="PCIE带宽计算"></a>PCIE带宽计算</h3><ul><li>PCIe 吞吐量（可用带宽）计算方法：吞吐量 &#x3D; 传输速率 *  编码方案<ul><li>GT(Gigatransfer) x Lane的数量 x 编码方案效率</li><li>PCI-e2.0 协议支持 5.0 GT&#x2F;s，即每一条Lane 上支持每秒钟内传输 5G个Bit；但这并不意味着 PCIe 2.0协议的每一条Lane支持 5Gbps 的速率。为什么这么说呢？因为PCIe 2.0 的物理层协议中使用的是8b&#x2F;10b的编码方案。 即每传输8个Bit，需要发送10个Bit；这多出的2个Bit并不是对上层有意义的信息。那么， PCIe 2.0协议的每一条Lane支持 5 * 8 &#x2F; 10 &#x3D; 4 Gbps &#x3D; 500 MB&#x2F;s 的速率。以一个PCIe 2.0 x8的通道为例，x8的可用带宽为 4 * 8 &#x3D; 32 Gbps &#x3D; 4 GB&#x2F;s。同理，PCI-e3.0 协议支持 8.0 GT&#x2F;s, 即每一条Lane 上支持每秒钟内传输 8G个Bit。而PCIe 3.0 的物理层协议中使用的是 128b&#x2F;130b 的编码方案。 即每传输128个Bit，需要发送130个Bit。那么， PCIe 3.0协议的每一条Lane支持 8 * 128 &#x2F; 130 &#x3D; 7.877 Gbps &#x3D; 984.6 MB&#x2F;s 的速率。一个PCIe 3.0 x16的通道，x16 的可用带宽为7.877* 16 &#x3D; 126.031Gbps &#x3D; 15.754 GB&#x2F;s。<ul><li>PCIE速率<br><img src="/../images/PCIE%E9%80%9F%E7%8E%87_160449.png"></li></ul></li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;PCIE的规格一般有 PCIE2.0&amp;#x2F;PCIE3.0&amp;#x2F;PCIE4.0&amp;#x2F;PCIE5.0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;PCIE-相关概念&quot;&gt;&lt;a href=&quot;#PCIE-相关概念&quot; class=&quot;h</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>nfs服务用户身份映射</title>
