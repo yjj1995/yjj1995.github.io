@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LDAP | Blog of Fisher JJ</title><meta name="author" content="Fisher JJ"><meta name="copyright" content="Fisher JJ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="LDAP 概念 LDAP 是轻量目录访问协议，基于x.500标准，可以定制。 LDAP 支持TCP&#x2F;IP, 这是访问internet 必须的。 LDAP是一个得到关于人或资源的集中，静态数据的快速方式。 LDAP是一个用来发布目录信息到许多不同资源的协议。  目录树概念 目录树 在一个目录服务系统中，整个目录信息集可以表示为一个目录信息树，树中的每个节点是一个条目（Entry）。   条目（Ent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LDAP">
+<meta property="og:url" content="http://example.com/2023/12/18/LDAP/index.html">
+<meta property="og:site_name" content="Blog of Fisher JJ">
+<meta property="og:description" content="LDAP 概念 LDAP 是轻量目录访问协议，基于x.500标准，可以定制。 LDAP 支持TCP&#x2F;IP, 这是访问internet 必须的。 LDAP是一个得到关于人或资源的集中，静态数据的快速方式。 LDAP是一个用来发布目录信息到许多不同资源的协议。  目录树概念 目录树 在一个目录服务系统中，整个目录信息集可以表示为一个目录信息树，树中的每个节点是一个条目（Entry）。   条目（Ent">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-12-18T10:35:13.000Z">
+<meta property="article:modified_time" content="2023-12-20T11:26:44.277Z">
+<meta property="article:author" content="Fisher JJ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/12/18/LDAP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LDAP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-20 19:26:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LDAP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-18T10:35:13.000Z" title="Created 2023-12-18 18:35:13">2023-12-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-20T11:26:44.277Z" title="Updated 2023-12-20 19:26:44">2023-12-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="LDAP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="LDAP-概念"><a href="#LDAP-概念" class="headerlink" title="LDAP 概念"></a>LDAP 概念</h2><ul>
+<li>LDAP 是轻量目录访问协议，基于x.500标准，可以定制。</li>
+<li>LDAP 支持<code>TCP/IP</code>, 这是访问internet 必须的。</li>
+<li>LDAP是一个得到关于人或资源的集中，静态数据的快速方式。</li>
+<li>LDAP是一个用来发布目录信息到许多不同资源的协议。</li>
+</ul>
+<h3 id="目录树概念"><a href="#目录树概念" class="headerlink" title="目录树概念"></a>目录树概念</h3><ul>
+<li>目录树<ul>
+<li>在一个目录服务系统中，整个目录信息集可以表示为一个目录信息树，树中的每个节点是一个条目（Entry）。</li>
+</ul>
+</li>
+<li>条目（Entry）<ul>
+<li>条目，也叫记录项，是LDAP中最基本的颗粒，就像字典中的词条，或者是数据库中的记录。</li>
+<li>通过对LDAP的添加，删除，更改，检索都是以条目为基本对象的。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>LDAP 目录的条目 (entry) 由属性 (attribute) 的一个聚集组成，并由一个唯一性的名字引用，即专有名称（distinguished name，DN）。例如。DN 可以是：<br><code>&quot;cn=group,dc=eryajf,dc=net&quot;</code></p>
+</blockquote>
+<h4 id="对象类（ObjectClass）"><a href="#对象类（ObjectClass）" class="headerlink" title="对象类（ObjectClass）"></a>对象类（ObjectClass）</h4><ul>
+<li><p>LDAP中，一个条目必须包含一个objectClass,且需要赋予至少一个值，每一个值将用作一条LDAP条目进行数据存储的模板。</p>
+<ul>
+<li>例如成员A条目，需要一个属性（是什么类的属性，例如penson类）</li>
+</ul>
+</li>
+<li><p><strong>模板中包含了一个条目必须被赋值的属性和可选的属性</strong></p>
+</li>
+<li><p>objectClass有着严格的等级之分,最顶层是top和alias.例如,organizationalPerson这个objectClass就隶属于person,而person又隶属于top.</p>
+</li>
+<li><p>objectClass可分为以下3类:</p>
+<ul>
+<li><p>结构型(Structural):如person和organizationUnit；</p>
+</li>
+<li><p>辅助型(Auxiliary):如extensibeObject；</p>
+</li>
+<li><p>抽象型(Abstract):如top,抽象型的objectClass不能直接使用.</p>
+</li>
+<li><p>对象类是属性的集合，LDAP预想了很多人员组织中常见的对象，并将其封装成对象类。</p>
+<ul>
+<li>人员(person) 含有 含有姓（sn）、名（cn）、电话(telephoneNumber)、密码(userPassword)等属性。</li>
+<li>单位职工(organizationalPerson)是人员(person)的继承类，除了上述属性之外还含有职务（title）、邮政编码（postalCode）、通信地址(postalAddress)等属性。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="属性-Attribute"><a href="#属性-Attribute" class="headerlink" title="属性 (Attribute)"></a>属性 (Attribute)</h4><ul>
+<li>属性(Attribute)类似于程序设计中的变量,可以被赋值.在OpenLDAP中声明了许多常用的Attribute(用户也可自己定义Attribute).</li>
+<li>每个条目都可以有很多属性（Attribute）,比如常见的人都有姓名，地址，电话等属性。每个属性都有名称及对应的值，属性值可以有单个、多个。</li>
+<li>属性不是随便定义的,需要符合一定的规则,而这个规则可以通过schema制定.比如,如果一个entry没有包含在 inetorgperson 这个 schema 中的objectClass: inetOrgPerson,那么就不能为它指定employeeNumber属性,因为employeeNumber是在inetOrgPerson中定义的.</li>
+<li>常见的属性和别名<br><img src="/../images/LDAP_192439.png"></li>
+</ul>
+<blockquote>
+<p>温馨提示:objectClass是一种特殊的Attribute,它包含其他用到的Attribute以及其自身.</p>
+</blockquote>
+<ul>
+<li><p>对于不同的objectClass,通常具有一些必设属性值和一些可选属性值.例如,可使用person这个objectClass来表示系统中一个用户的条目,对于系统中用户通常需要有这样一些信息:姓名、电话、密码、描述等.如下图所示,对于person,通过cn和sn设置用户的名和姓,这是必须设置的,而其他属性则是可选的.</p>
+</li>
+<li><p>下面列出部分常用objectClass要求必设的属性.</p>
+<ul>
+<li>account:userid.</li>
+<li>organization:o.</li>
+<li>person:cn和sn.</li>
+<li>organizationalPerson:与person相同.</li>
+<li>organizationalRole:cn.</li>
+<li>organizationUnit:ou.</li>
+<li>posixGroup:cn、gidNumber.</li>
+<li>posixAccount:cn、gidNumber、homeDirectory、uid、uidNumber.</li>
+</ul>
+</li>
+</ul>
+<h3 id="LDAP的基本模型"><a href="#LDAP的基本模型" class="headerlink" title="LDAP的基本模型"></a>LDAP的基本模型</h3><ul>
+<li><p>LDAP的基本模型是建立在”条目“ 的基础上，一个条目是一个或多个属性的集合，并且具有一个全局唯一的”可区分名称（用dn表示）“，与关系型数据（数据库）类比，一个条目相当于数据库中的一条记录，而DN相当于数据库中记录的关键字，属性相当于数据库中的字段。</p>
+<ul>
+<li>一个条目是一些属性的集合，并且具有一个全局唯一的 ”可区分的名称“，为DN.<ul>
+<li>一个条目可以通过DN来引用。</li>
+<li>每一个条目的属性具有一个类型和一个或者多个值，类型通常是容易记忆的名称,比如”cn”是通用名称(common name),或者”mail”是电子邮件地址.</li>
+<li>条目的值的语法取决于属性类型.比如,cn属性可能具有一个值”Babs Jensen” .一个mail属性可能包含”<a href="mailto:&#98;&#98;&#115;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#98;&#98;&#115;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a>” .一个jpegphoto属性可能包含一幅JPEG(二进制)格式的图片.<blockquote>
+<p>温馨提示:dn必须是全局唯一的.<br><img src="/../images/LDAP_190708.png"></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>LDAP中，将数据组织成为一个树形结构。</p>
+</li>
+<li><p>,树的根结点是一个组织的域名(example.com),其下分为3个部分,分别是managers、people和group,可将这3个组看作组织中的3个部门:如managers用来管理所有管理人员,people用来管理登录系统的用户,group用来管理系统中的用户组.当然,在该图中还可继续增加其他分支.</p>
+</li>
+<li><p>若使用目录来保存该图中的数据,则更直观.图中每个结点用一个条目来保存,不同类型的结点需要保存的数据可能不同,<strong>在LDAP中通过一个称为objectClass的类型来控制不同结点需要的数据(称为属性).</strong></p>
+</li>
+<li><p>对于目录中的数据怎样进行引用呢?前面提到过,每一个条目都有一个dn,因为dn是唯一的,因此就可找到需要结点的数据.dn的构造方式如下:</p>
+<ul>
+<li>首先得到条目自己的名称(rdn,称为相对dn),然后开始向上逐级查找父结点,一直到根项为止.例如,对于图1-1中最右下方的结点,其dn为:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dn: cn=ldap,ou=group,o=dlw.com</span><br></pre></td></tr></table></figure></li>
+<li>通过这样的方式,即可唯一标识每一个结点.在现实生活中,有很多这种树形结构的数据,如计算机文件系统的目录结构、Internet中的域名等.这些类型的数据,只要不需要频繁的更新,都适合用目录来保存.</li>
+</ul>
+</li>
+<li><p>LDAP主要的简称含义:</p>
+<ul>
+<li><p>o-&gt;　organization(组织-公司)</p>
+</li>
+<li><p>ou-&gt;　organization unit(组织单元-部门)</p>
+</li>
+<li><p>c-&gt;　countryName(国家)</p>
+</li>
+<li><p>dc-&gt; domainComponent(域名)</p>
+</li>
+<li><p>sn-&gt; suer name(真实名称)</p>
+</li>
+<li><p>cn-&gt; common name(常用名称)</p>
+</li>
+<li><p><strong>Base DN:LDAP目录树的最顶部就是根,也就是所谓的“Base DN”,如”dc&#x3D;example,dc&#x3D;com”.</strong></p>
+</li>
+</ul>
+</li>
+<li><p>在LDAP中,schema用来指定一个目录中所包含的对象(objects)的类型(objectClass),以及每一个类型(objectClass)中必须提供的属性(Atrribute)和可选的属性.可将schema理解为面向对象程序设计中的类,通过类定义一个具体的对象.LDIF中的数据条目可理解为是一个具体的对象,是通过schema来规划创建的.因此,schema是一个数据模型,用来决定数据按什么方式存储,并定义存储在不同的条目(Entry)下的数据之间的关系.schema需要在主配置文件slapd.conf中指定,以用来决定在目录中可以使用哪些objectClass.</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.  LDAP中每个条目必须属于某个或多个对象类（Object Class）</span><br><span class="line"></span><br><span class="line">2.  每个Object Class由多个属性类型组成，每个属性类型有所对应的语法和匹配规则；每个条目创建时，必须定义所属的对象类，必须提供对象类中的必选属性类型的属性值</span><br><span class="line"></span><br><span class="line">3. 例如：mail是一个属性，一个mail属性可以包括多个邮件地址，属性值是ASCII码方式的字符串，不区分大小写.</span><br><span class="line">    实际应用中一般是ldap对用户进行认证，因此对象类=person。</span><br><span class="line">    用户名属性表示用户账号的属性类型，用户名属性可以是cn或uid。</span><br><span class="line"></span><br><span class="line">4. 如果把DN看做对象的全路径，那么RDN就是其中的每一段路径。</span><br><span class="line">   通过DN的层次型语法结构，可以方便地表示出条目在LDAP树中的位置。有时在不一致引起歧义的情况下，RDN也特指DN中最靠前的一段，而剩余的部分称为父标识（Parent DN,PDN）。此处不再举例。RDN本身也可以由多个值构成，比如OU=Tech+CN=doubao,dc=shuyun,dc=com中的RDN为OU=Tech+CN=doubao，由2个值OU=Tech和CN=doubao组成，他们之间由加好隔开。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="属性详解"><a href="#属性详解" class="headerlink" title="属性详解"></a>属性详解</h4><ul>
+<li>每个条目都可以有很多属性（Attribute）, 比如常见的人都有姓名，地址，电话等属性。</li>
+<li>每个属性都可以名称及对应的值，属性值可以有单个，多个。</li>
+</ul>
+<h5 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h5><ul>
+<li>dc (Domian componet)<ul>
+<li>域名的部分，其格式是将完整的域名分成几部分，如域名为<code>eryajf.net</code> 变成<code>dc=eryajf,dc=net</code></li>
+</ul>
+</li>
+<li>ou(organization Unit)<ul>
+<li>组织单位，组织单位可以包含其他各种对象（包括其他组织单元）</li>
+</ul>
+</li>
+<li>cn (common name)<ul>
+<li>常用名称，可用作分组的名字，或者用户的全名。</li>
+</ul>
+</li>
+<li>dn （Distinguished Name）<ul>
+<li>每一个条目都有一个唯一的标识名，dn 在 ldap 中全局唯一，相当于该条目的唯一 ID，如上边示例中的：cn&#x3D;group,dc&#x3D;eryajf,dc&#x3D;net就是该条目的 dn。</li>
+</ul>
+</li>
+<li>rdn （Relative dn）<ul>
+<li>一般指 dn 逗号最左边的部分，如cn&#x3D;group,dc&#x3D;eryajf,dc&#x3D;net的 rdn 就是 cn&#x3D;group。</li>
+</ul>
+</li>
+<li>Base DN<ul>
+<li>LDAP 目录树的最顶部就是根，比如上边示例中的 base dn 为 dc&#x3D;eryajf,dc&#x3D;net</li>
+</ul>
+</li>
+<li>description<ul>
+<li>在不同类别中，对应不同类别的说明信息，比如用户的说明信息，分组的说明信息。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../images/LDAP_161915.png"></p>
+<h3 id="LDAP目录结构"><a href="#LDAP目录结构" class="headerlink" title="LDAP目录结构"></a>LDAP目录结构</h3><ul>
+<li><p>LDAP 目录以树状的层次结构来存储数据。每个目录记录有标记名（Distinguished Name，简称DN），用来读取单个记录。</p>
+</li>
+<li><ol>
+<li>base dn: LDAP目录树的最顶部，也就是树的根，是上面的dc&#x3D;test,dc&#x3D;com部分，一般使用公司的域名，也可以写做o&#x3D;test.com，前者更灵活一些；</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>dc: domain component， 域名部分；</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>ou: Organization Unit，组织单位，用于将数据区分开；</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>cn：Common Name，<strong>一般使用用户名</strong>；</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>uid: 用户id，与cn的作用类型</li>
+</ol>
+</li>
+<li><ol start="6">
+<li>sn: surname，姓</li>
+</ol>
+</li>
+<li><ol start="7">
+<li>rdn：Relative dn，相对辨别名，类似于文件系统中的相对路径，它是与目录树结构无关的部分，如“uid&#x3D;tom”或“cn&#x3D; Thomas Johansson”（RDN之间用“逗号”隔开，它是一个键值对）</li>
+</ol>
+</li>
+</ul>
+<h3 id="LDAP属性数据库"><a href="#LDAP属性数据库" class="headerlink" title="LDAP属性数据库"></a>LDAP属性数据库</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. dn ：一条记录的详细位置 </span><br><span class="line">2. dc ：一条记录所属区域(哪一颗树)</span><br><span class="line">3. ou ：一条记录所属组织（哪一个分支）</span><br><span class="line">4. cn/uid：一条记录的名字/ID（哪一个果实）</span><br><span class="line">5. LDAP目录树的最顶部就是根，也就是所谓的“基准DN&quot;。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Fisher JJ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2023/12/18/LDAP/">http://example.com/2023/12/18/LDAP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/" title="容器，docker"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">容器，docker</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/15/PCIE%E9%80%9F%E7%8E%87/" title="PCIE速率"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">PCIE速率</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LDAP-%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">LDAP 概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E6%A0%91%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">目录树概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%EF%BC%88ObjectClass%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">对象类（ObjectClass）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7-Attribute"><span class="toc-number">1.1.2.</span> <span class="toc-text">属性 (Attribute)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LDAP%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">LDAP的基本模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.2.1.</span> <span class="toc-text">属性详解</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">常用属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LDAP%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.</span> <span class="toc-text">LDAP目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LDAP%E5%B1%9E%E6%80%A7%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">LDAP属性数据库</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/" title="容器，docker">容器，docker</a><time datetime="2023-12-20T08:58:21.000Z" title="Created 2023-12-20 16:58:21">2023-12-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/18/LDAP/" title="LDAP">LDAP</a><time datetime="2023-12-18T10:35:13.000Z" title="Created 2023-12-18 18:35:13">2023-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/15/PCIE%E9%80%9F%E7%8E%87/" title="PCIE速率">PCIE速率</a><time datetime="2023-12-15T08:03:13.000Z" title="Created 2023-12-15 16:03:13">2023-12-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/14/nfs%E6%9C%8D%E5%8A%A1%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E6%98%A0%E5%B0%84/" title="nfs服务用户身份映射">nfs服务用户身份映射</a><time datetime="2023-12-14T05:42:26.000Z" title="Created 2023-12-14 13:42:26">2023-12-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/05/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" title="时序数据库">时序数据库</a><time datetime="2023-12-05T09:28:39.000Z" title="Created 2023-12-05 17:28:39">2023-12-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
