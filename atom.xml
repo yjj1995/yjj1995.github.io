@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-12-20T08:58:21.857Z</updated>
+  <updated>2024-03-14T08:37:03.987Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,272 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>内核传输数据弊端和解决方案</title>
+    <link href="http://example.com/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://example.com/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2024-03-14T05:40:35.000Z</published>
+    <updated>2024-03-14T08:37:03.987Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://ctimbai.github.io/tags/UIO/">DPDK 入门最佳指南</a></p><h2 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h2><ul><li><ol><li>中断处理：当网络中大量数据包到来时，会产生频繁的硬件中断请求，这些硬件中断可以打断之前较低优先级的软中断或者系统调用的执行过程，如果这种打断频繁的话，将会产生较高的性能开销。</li></ol></li><li><ol start="2"><li>内存拷贝：正常情况下，一个网络数据包从网卡到应用程序需要经过如下的过程：数据从网卡通过dma等方式传到内核开辟的缓冲区，然后从内核空间拷贝到用户态空间，在linux内核协议中，这个耗时操作甚至占到了数据包整个处理流程的57.1%</li></ol></li><li><ol start="3"><li>上下文切换：频繁到达的硬件中断和软中断都可能随时抢占系统调用的运行，这会产生大量的上下文切换开销，另外，在基于多线程的服务器设计框架中，线程间的调度也会产生频繁的上下文切换开销，锁竞争的耗能也是十分严重的问题。</li></ol></li><li><ol start="4"><li>局部性失效：如今主流的处理器都是多个核心的，这意味着一个数据包的处理可能跨多个cpu核心，比如一个数据包可能终端在cpu0，内核态处理在 cpu1，用户态处理在 cpu2，这样跨多个核心，容易造成 CPU 缓存失效，造成局部性失效。如果是 NUMA 架构，更会造成跨 NUMA 访问内存，性能受到很大影响。</li></ol></li><li><ol start="5"><li>内存管理：传统服务器内存页为4k，为了提高内存的访问速度，避免 cache miss，可以增加 cache 中映射表的条目，但这又会影响 CPU 的检索效率。</li></ol></li></ul><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ul><li><p>1、控制层和数据层分离： 将数据包处理、内存管理、处理器调度等任务转移到用户空间去完成，而内核仅仅负责部分控制指令的处理。这样就不存在上述所说的系统中断、上下文切换、系统调用、系统调度等等问题。</p></li><li><p>2、多核技术： 使用多核编程技术代替多线程技术，并设置 CPU 的亲和性，将线程和 CPU 核进行一比一绑定，减少彼此之间调度切换。</p></li><li><p>3、NUMA 亲和性： 针对 NUMA 系统，尽量使 CPU 核使用所在 NUMA 节点的内存，避免跨内存访问。</p></li><li><p>4、大页内存： 使用大页内存代替普通的内存，减少 cache-miss。</p></li><li><p>5、无锁技术： 采用无锁技术解决资源竞争问题。</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://ctimbai.github.io/tags/UIO/&quot;&gt;DPDK 入门最佳指南&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;弊端&quot;&gt;&lt;a href=&quot;#弊端&quot; class=&quot;headerlink&quot; title=&quot;弊端&quot;&gt;&lt;/a&gt;弊端&lt;/h2&gt;&lt;ul&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>uio</title>
+    <link href="http://example.com/2024/03/14/uio/"/>
+    <id>http://example.com/2024/03/14/uio/</id>
+    <published>2024-03-14T01:33:02.000Z</published>
+    <updated>2024-03-14T05:37:11.319Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="UIO是什么？"><a href="#UIO是什么？" class="headerlink" title="UIO是什么？"></a>UIO是什么？</h2><ul><li>UIO（Userspace i&#x2F;o）是linux 内核中的一个轻量级驱动框架，它允许用户空间程序直接访问物理设备资源，如内存，中断和DMA通道等。UIO的主要目标是提供一种简单而灵活的方式，让用户空间程序能够直接与硬件设备进行交互，而无需通过内核空间的传统驱动程序。这种模型特别适用于哪些需要高性能，低延迟或特殊硬件访问需求的场景。</li></ul><h2 id="UIO的软件架构介绍"><a href="#UIO的软件架构介绍" class="headerlink" title="UIO的软件架构介绍"></a>UIO的软件架构介绍</h2><ul><li>UIO驱动模型由内核空间的UIO核心代码和用户空间的库组成。内核空间的UIO核心代码负责设备的注册，内存映射，中断管理等操作，而用户空间的库则提供了访问这些功能模块的接口。<br><img src="/../images/uio_095113.png"></li></ul><h3 id="内核空间部分"><a href="#内核空间部分" class="headerlink" title="内核空间部分"></a>内核空间部分</h3><ul><li>UIO核心代码：这是uio驱动模型的核心，辅助设备驱动的注册和注销，内存映射的管理，中断处理等。关键函数uio_register_device()</li><li>UIO设备：UIO设备是UIO核心代码与物理设备之间的抽象层。每个UIO设备都有一个与之关联的设备文件，用户空间程序可以通过这个设备文件与设备进行通信。</li></ul><h3 id="用户空间部分："><a href="#用户空间部分：" class="headerlink" title="用户空间部分："></a>用户空间部分：</h3><ul><li>UIO用户空间库：这个库提供了一系列的API，允许用户空间程序与UIO设备进行交互，如打开设备，映射内存，处理中断等。</li><li>用户空间应用程序：这些程序使用UIO用户空间库提供的API，直接与硬件设备进行通信和控制，</li></ul><h2 id="为什么需要UIO"><a href="#为什么需要UIO" class="headerlink" title="为什么需要UIO"></a>为什么需要UIO</h2><ul><li>性能：传统linux驱动模型通常需要在内核空间和用户空间之间进行频繁的数据拷贝和上下文切换，这会导致性能下降。UIO允许用户空间程序直接访问设备资源，从而减少了内核和用户空间之间的数据拷贝和上下文切换次数，提高了性能。</li><li>灵活性：UIO驱动模型的设计非常灵活，允许开发者根据实际需求编写用户空间的驱动程序。这种灵活性使得开发者能够更容易地适应不同的硬件平台和设备需求。</li><li>简化驱动开发：UIO核心代码提供了许多通用的功能，如内存映射，中断管理等。</li></ul><h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ul><li>UIO分成两个部分：<ul><li>内核部分：主要实现硬件寄存器的内存映射（stuct uio_info -&gt; struct uio_mem）及读写操作</li><li>用户空间部分：将uio设备的uio_mem映射到本地（mmap），这样就可以实现在用户空间访问硬件设备寄存器的目的，再通过设备的控制逻辑，就可以实现硬件设备的驱动。</li></ul></li></ul><h3 id="内核部分实现原理："><a href="#内核部分实现原理：" class="headerlink" title="内核部分实现原理："></a>内核部分实现原理：</h3><ul><li>设备注册：UIO驱动首先需要在内核中注册，包括分配设备号，初始化设备结构等，</li><li>内存映射：UIO驱动通过<code>mmap</code>系统调用将物理设备 <strong>内存映射</strong> 到用户空间的虚拟地址空间。</li><li>中断管理：UIO驱动可以处理设备的中断请求，并将中断事件通知给用户空间程序。</li></ul><h3 id="用户空间部分实现原理："><a href="#用户空间部分实现原理：" class="headerlink" title="用户空间部分实现原理："></a>用户空间部分实现原理：</h3><ul><li>设备打开：用户空间程序通过打开设备文件与UIO设备建立连接。</li><li>内存映射：用户空间程序使用mmap系统调用将设备内存映射到进程的虚拟地址空间。</li><li>数据交互：用户空间程序通过读写虚拟地址的方式与设备进行数据交互。</li><li>中断处理：用户空间程序可以设置中断处理函数，以响应设备的中断事件。</li></ul><h3 id="UIO设备驱动的主要任务有两个："><a href="#UIO设备驱动的主要任务有两个：" class="headerlink" title="UIO设备驱动的主要任务有两个："></a>UIO设备驱动的主要任务有两个：</h3><ul><li>存取设备的内存uio核心实现了mmap()可以处理物理内存(physical memory)，逻辑内存（logical memory）,虚拟内存（virtual memory）.UIO驱动的编写时，就不需要再考虑这些繁琐的细节。<strong>如果有些设备的总线不是pci总线，那么仍然需要做相关处理</strong></li><li>处理设备产生的中断，对于设备中断的应答必须在内核空间进行，所以在内核空间有一小部分代码，用来应答中断和禁止中断，但是其余的工作全部给用户空间处理。</li><li>如果用户空间要等待一个设备中断，则只需要简单的阻塞在对&#x2F;dev&#x2F;uioX的操作上，当设备产生中断时，read()操作立即返回。UIO 也实现了poll()系统调用，你可以使用  select()来等待中断的发生。select()有一个超时参数可以用来实现有限时间内等待中断。   对设备的控制还可以通过&#x2F;sys&#x2F;class&#x2F;uio下的各个文件的读写来完成。你注册的uio设备将会出现在该目录下。假如你的uio设备是uio0那么映射的设备内存文件出现在 &#x2F;sys&#x2F;class&#x2F;uio&#x2F;uio0&#x2F;maps&#x2F;mapX，对该文件的读写就是对设备内存的读写。<br><img src="/../images/uio_133557.png"></li></ul><blockquote><p>UIO不是通用驱动程序接口。已经被其他内核子系统（例如网络，串行或USB）良好处理的设备不适合使用UIO驱动程序。最适合UIO驱动程序的硬件满足以下所有条件：</p><ul><li>设备具有可以映射的内存。通过写入该存储器可以完全控制该设备。</li><li>设备通常会产生中断。</li><li>该设备不适合标准内核子系统之一。</li></ul></blockquote><h2 id="UIO是怎么进行工作？"><a href="#UIO是怎么进行工作？" class="headerlink" title="UIO是怎么进行工作？"></a>UIO是怎么进行工作？</h2><ul><li><p>当使用UIO设备时，可以通过设备文件和sysfs属性文件进行访问。</p><ul><li><p>设备文件：每个UIO设备都有一个设备文件，用于访问设备的寄存器或RAM位置。第一个设备的设备文件路径是”&#x2F;dev&#x2F;uio0”，后续设备的路径依次为”&#x2F;dev&#x2F;uio1”、”&#x2F;dev&#x2F;uio2”等等。通过打开设备文件，可以使用read()和write()函数来读取和写入设备的寄存器或RAM。</p></li><li><p>sysfs属性文件：UIO设备还提供了一组sysfs属性文件，用于访问设备的状态和配置信息。这些属性文件位于”&#x2F;sys&#x2F;class&#x2F;uio&#x2F;uioX”目录下，其中X表示设备的编号。以下是一些常见的sysfs属性文件：</p></li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;UIO是什么？&quot;&gt;&lt;a href=&quot;#UIO是什么？&quot; class=&quot;headerlink&quot; title=&quot;UIO是什么？&quot;&gt;&lt;/a&gt;UIO是什么？&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;UIO（Userspace i&amp;#x2F;o）是linux 内核中的一个轻量级驱动框架，</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>磁盘性能</title>
+    <link href="http://example.com/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/"/>
+    <id>http://example.com/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/</id>
+    <published>2024-03-11T08:00:15.000Z</published>
+    <updated>2024-03-11T11:09:04.240Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="磁盘性能指标说明"><a href="#磁盘性能指标说明" class="headerlink" title="磁盘性能指标说明"></a>磁盘性能指标说明</h2><ul><li>衡量磁盘性能常见的指标有：使用率，饱和度，iops，吞吐量以及响应时间，具体说明：<ul><li>使用率，是指磁盘处理I&#x2F;O的时间百分比。过高的使用率（比如超过80%），通常意味着磁盘I&#x2F;O存在性能瓶颈。</li><li>饱和度，是指磁盘处理I&#x2F;O的繁忙程度。过高的饱和度，意味着磁盘有严重的性能瓶颈。当饱和度为100%时，磁盘无法接受新的I&#x2F;O请求。</li><li>IOPS，<strong>是指每秒的I&#x2F;O请求数。</strong></li><li>吞吐量，是指每秒的I&#x2F;O请求大小，即每秒磁盘I&#x2F;O的流量，磁盘写入加上读出数据的大小。单位为bps。</li></ul></li></ul><blockquote><p>bps （bits per second）是数据传输速率的常用单位，意思是比特率，比特&#x2F;秒，位&#x2F;秒，每秒传的位数。<br>bps：(ps指的是&#x2F;s，即每秒)每秒钟传送多少位的信息。</p></blockquote><ul><li>响应时间，是指I&#x2F;O请求从发出到收到响应的间隔时间。</li></ul><h3 id="IOPS与吞吐量的关系"><a href="#IOPS与吞吐量的关系" class="headerlink" title="IOPS与吞吐量的关系"></a>IOPS与吞吐量的关系</h3><ul><li><p>每秒 I&#x2F;O 吞吐量＝ IOPS * 平均 I&#x2F;O SIZE。从公式可以看出： I&#x2F;O SIZE 越大，IOPS 越高，那么每秒 I&#x2F;O 的吞吐量就越高。因此，我们会认为 IOPS 和吞吐量的数值越高越好。实际上，对于一个磁盘来讲，这两个参数均有其最大值，而且这两个参数也存在着一定的关系。</p></li><li><p>吞吐量 &#x3D; IOPS * I&#x2F;O大小</p></li><li><p>从上述公式可以看出，磁盘I&#x2F;O越大，IOPS越高，那么磁盘那么每秒I&#x2F;O的吞吐量就越高，云服务器吧认为IOPS和吞吐量的数值越高越好，实际上磁盘IOPS和吞吐量两个参数是有其最大值的。</p></li><li><p>当应用的I&#x2F;O大小较大，例如离线分析、数据仓库等应用，建议您选择吞吐量更大的大数据型实例规格族。<br>当应用的I&#x2F;O对时延较为敏感，比较随机且I&#x2F;O大小相对较小，例如OLTP事务型数据库、企业级应用，如SAP等应用，建议您选择IOPS更高的ESSD云盘、SSD云盘。</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;磁盘性能指标说明&quot;&gt;&lt;a href=&quot;#磁盘性能指标说明&quot; class=&quot;headerlink&quot; title=&quot;磁盘性能指标说明&quot;&gt;&lt;/a&gt;磁盘性能指标说明&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;衡量磁盘性能常见的指标有：使用率，饱和度，iops，吞吐量以及响应时间，具体说明</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux uio</title>
+    <link href="http://example.com/2024/03/07/linux-uio/"/>
+    <id>http://example.com/2024/03/07/linux-uio/</id>
+    <published>2024-03-07T02:20:54.000Z</published>
+    <updated>2024-03-08T03:23:54.653Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>UIO就是userspace IO，用户空间输入输出。开发者只需要在内核中写非常少量的代码（几十行），把需要哪些寄存器告诉UIO框架，UIO就会生成一个设备文件，&#x2F;dev&#x2F;uio0，然后我们只需要在用户空间打开这个文件，mmap（映射文件到内存空间），就可以直接操作寄存器了！ <strong>这样一来，即使你需要给一个复杂设备（比如摄像头）写驱动，你也可以在用户空间来反复修改、迭代你的驱动代码，根本不需要重新编译内核。非常方便。</strong></li><li>UIO的原理是，把硬件寄存器的地址用ioremap函数给映射到用户态的虚拟地址。这个过程需要修改page table，但是uio框架把这件事做好了，所以我们只需要告诉UIO我们需要哪些寄存器就好。在用户空间，我们的程序访问虚拟地址的时候，page table会把我们引导到真正的硬件的物理地址，我们就可以操纵硬件了。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;UIO就是userspace IO，用户空间输入输出。开发者只需要在内核中写非常少量的代码（几十行），把需要哪些寄存器告诉UIO框架，UIO就会生成一个设备文件，&amp;#x2F;dev&amp;#x2F;uio0，然后我们只需要在用户空间打开这个文件，mmap（映射文件到内</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>文件系统</title>
+    <link href="http://example.com/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://example.com/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</id>
+    <published>2024-03-04T06:56:42.000Z</published>
+    <updated>2024-03-14T01:30:01.667Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="文件系统的基本组成"><a href="#文件系统的基本组成" class="headerlink" title="文件系统的基本组成"></a>文件系统的基本组成</h2><blockquote><p><a href="https://www.cnblogs.com/flashsun/p/14501625.html">文件系统</a></p></blockquote><ul><li>文件系统是操作系统中负责管理持久数据的子系统<ul><li>负责把用户的文件存到磁盘硬件中。</li></ul></li><li>文件系统的基本数据单位是文件，目的是对磁盘上的文件进行组件管理，组织的方式不同，就会形成不同的文件系统。</li><li>linux中 ，一切皆文件。</li><li>linux 文件系统会为每个文件分配数据结构：索引节点（index node）和目录项（directory entry）,它们主要用来记录文件的元数据和目录层次结构。<ul><li>索引节点：也就是inode，用来记录文件的元信息，比如inode编号，文件大小，访问权限，创建时间，修改时间，<strong>数据在磁盘的位置</strong>等。索引节点是文件的唯一标识，它们之间一一对应，也同样都会被存储在硬盘中，所以<strong>索引节点同样占用磁盘空间</strong></li><li>目录项，也就是dentry, 用来记录文件的名字，索引节点指针以及与其他目录项的层级关联关系。多个目录项关联起来，就会形成目录结构，但它与索引节点不同的是，<strong>目录项是由内核维护的一个数据结构，不存放于磁盘，而是缓存在内存。</strong></li></ul></li><li>索引节点唯一标识一个文件，而目录项记录着文件的名，所以目录项和索引节点的关系是多对一，也就是说，<strong>一个文件可以有多个别字。比如，硬链接的实现就是多个目录项中的索引节点指向同一个文件。</strong></li><li><strong>目录也是文件，也是用索引节点唯一标识，和普通文件不同的是，普通文件在磁盘里面保存的是文件数据，而目录文件在磁盘里面保存子目录或文件。</strong><ul><li>目录项和目录一个东西？<ul><li>目录是一个文件，持久化存储在内存</li><li>目录项是内核一个数据结构，缓存在内存。<br><img src="/../images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_163912.png"></li></ul></li></ul></li><li>注意：块位图是管理可用的块，每一位代表一个块的使用与否。inode 位图管理的是一条一条的 inode，并不是 inode 所占用的块，比如上图中有 8 条 inode，则 inode 位图中就有 8 位是管理他们的使用与否。<br><img src="/../images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_170935.png"></li></ul><h2 id="文件的查找和读取。"><a href="#文件的查找和读取。" class="headerlink" title="文件的查找和读取。"></a>文件的查找和读取。</h2><p>1 我们要先根据文件路径找到文件对应的inode节点。假设是个绝对路径。文件路径是&#x2F;a&#x2F;b&#x2F;c.txt。<strong>系统初始化的时候我们已经拿到了根目录对应的inode。从inode的结构体结构中，我们知道inode有一个字段保存了文件的内容。所以这时候就把根目录文件的文件内容读进来，是一系列的dir_entry结构体。然后逐个遍历，比较文件名是不是等于a，最后得到一个目录a对应的dir_entry。</strong><br>2 根据dir_entry结构体我们知道，里面不仅保存了文件名，还保存了对应的inode号。我们根据inode号把a目录文件的内容也读取进来。以此类推。最后得到c对应的dir_entry。<br>3 再根据c对应的dir_entry的inode号，从硬盘把inode的内容读进来。发现他是一个普通文件。至此，我们找到了这个文件对应的inode节点。完成fd-&gt;file结构体-&gt;inode结构体的赋值。<br>4 然后我们开始读取文件的内容。根据fd我们找到对应的inode节点。根据file结构体的pos字段，我们知道需要读取的数据在文件中的偏移。根据这个偏移，可以算出应该取i_zone[9]字段的哪个索引，文件的前7块对应索引0-6，前7到7+512对应索引7等。得到索引后，读取i_zone数组在该索引的值，即我们要读取的数据在硬盘的数据块。然后把这个数据块从硬盘读取进来。返回给用户。<br>5 至此，完成了文件的查找和读取。</p><h2 id="从Linux文件系统看文件读写过程"><a href="#从Linux文件系统看文件读写过程" class="headerlink" title="从Linux文件系统看文件读写过程"></a>从Linux文件系统看文件读写过程</h2><ul><li>提问： 在一个 txt 文件中，修改其中一个字，然后保存，这期间计算机内部到底发生了什么？<ul><li>答案：文件读写基本流程</li></ul></li></ul><h3 id="读文件"><a href="#读文件" class="headerlink" title="读文件"></a>读文件</h3><ul><li><p>进程调用库函数向内核发起读文件请求；</p></li><li><p>内核通过检查进程的文件描述符定位到虚拟文件系统的已打开文件列表表项；</p></li><li><p>调用该文件可用的系统调用函数read()</p></li><li><p>read()函数通过文件表项链接到目录项模块，根据传入的文件路径，在目录项模块中检索，找到该文件的inode；</p></li><li><p>在inode中，通过文件内容偏移量计算出要读取的页；</p></li><li><p>通过inode找到文件对应的address_space；</p></li><li><p>在address_space中访问该文件的页缓存树，查找对应的页缓存结点：</p></li><li><p>如果页缓存命中，那么直接返回文件内容；</p></li><li><p>如果页缓存缺失，那么产生一个页缺失异常，创建一个页缓存页，同时通过inode找到文件该页的磁盘地址，读取相应的页填充该缓存页；重新进行第6步查找页缓存；</p></li><li><p>文件内容读取成功。</p></li></ul><h3 id="写文件"><a href="#写文件" class="headerlink" title="写文件"></a>写文件</h3><ul><li><p>前6步和读文件一致，在address_space中查询对应页的页缓存是否存在：</p></li><li><p>如果页缓存命中，直接把文件内容修改更新在页缓存的页中。写文件就结束了。这时候文件修改位于页缓存，并没有写回到磁盘文件中去。</p></li><li><p>如果页缓存缺失，那么产生一个页缺失异常，创建一个页缓存页，同时通过inode找到文件该页的磁盘地址，读取相应的页填充该缓存页。此时缓存页命中，进行第6步。</p></li><li><p>一个页缓存中的页如果被修改，那么会被标记成脏页。脏页需要写回到磁盘中的文件块。有两种方式可以把脏页写回磁盘：</p></li><li><p>手动调用sync()或者fsync()系统调用把脏页写回<br>pdflush进程会定时把脏页写回到磁盘</p></li><li><p>同时注意，脏页不能被置换出内存，如果脏页正在被写回，那么会被设置写回标记，这时候该页就被上锁，其他写请求被阻塞直到锁释放。</p></li></ul><blockquote><p><a href="https://github.com/justtreee/blog/issues/18">从Linux文件系统看文件读写过程 </a></p></blockquote><ul><li>Linux IO 栈<br><img src="/../images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_103452.png"><blockquote><p><a href="https://zhuanlan.zhihu.com/p/371574406">深度理解 Linux 读取文件过程！</a></p></blockquote></li></ul><h2 id="用户文件系统-FUSE"><a href="#用户文件系统-FUSE" class="headerlink" title="用户文件系统 FUSE"></a>用户文件系统 FUSE</h2><ul><li>FUSE 是filesystem in userspace的缩写，也就是用户态文件系统</li><li>FUSE 是一个用户空间文件系统的框架，这套框架包含3个组件：<ul><li>内核模块 fuser.ko: 用来接收vfs传递下来的io请求，并且把这个io封装之后，通过管道发送到用户态。</li><li>用户态lib库libfuse：解析内核态转发出来的协议包，拆解成常规的io请求</li><li>mount工具，fusemount</li></ul></li></ul><h3 id="为何需要fuse"><a href="#为何需要fuse" class="headerlink" title="为何需要fuse"></a>为何需要fuse</h3><ul><li><p>文件系统一般是实现在内核里面的，比如，Ext4、Fat32、NTFS(Kernel原生版)等常见的文件系统，其代码都在内核中，内核开发的难点在于调试和排查故障，而<strong>FUSE特殊之处就是，其文件系统的核心逻辑是在用户空间实现的。</strong></p></li><li><p>其优点是：开发调试效率高，不会出现内核态那种出现bug很容易就导致OS重启的情况。</p></li><li><p>缺点是：<strong>会损失性能</strong></p></li><li><p>fuse本质上（数据处理时）是处于现有文件系统之上的（具体实现是和现有文件系统处于同一个层次的），fuse不参与底层磁盘数据的存取，只负责处理对读取和写入的数据在逻辑上的操作而已。</p></li></ul><h3 id="FUSE流程"><a href="#FUSE流程" class="headerlink" title="FUSE流程"></a>FUSE流程</h3><ul><li>应用程序在挂载的 Fuse 的文件系统上面进行操作。</li><li>VFS 会将操作转发到 Fuse 的 kernel driver 上面。</li><li>Fuse 的 kernel driver 分配一个 request，并且将这个 request 提交到 Fuse 的 queue 上面。</li><li>Fuse 的用户态 daemon 会从 queue 里面通过读取 &#x2F;dev&#x2F;fuse 将这个 request 取出来并且处理。这里需要注意，处理 request 的时候仍然可能进入 kernel，譬如可能将 request 发到 Ext4 去实际处理。</li><li>当请求处理完毕，Daemon 会将结果写回到 &#x2F;dev&#x2F;fuse。</li><li>Fuse 的 kernel 标记这个 request 结束，然后唤醒用户应用程序。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;文件系统的基本组成&quot;&gt;&lt;a href=&quot;#文件系统的基本组成&quot; class=&quot;headerlink&quot; title=&quot;文件系统的基本组成&quot;&gt;&lt;/a&gt;文件系统的基本组成&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>二叉树，b树，b+树</title>
+    <link href="http://example.com/2024/03/04/%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cb%E6%A0%91%EF%BC%8Cb-%E6%A0%91/"/>
+    <id>http://example.com/2024/03/04/%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cb%E6%A0%91%EF%BC%8Cb-%E6%A0%91/</id>
+    <published>2024-03-04T05:58:49.000Z</published>
+    <updated>2024-03-04T05:58:49.857Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>分布式并行文件系统</title>
+    <link href="http://example.com/2024/03/04/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://example.com/2024/03/04/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</id>
+    <published>2024-03-04T01:49:52.000Z</published>
+    <updated>2024-03-05T02:11:32.896Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h2><ul><li>“分布式”是重点，它是相对于本地文件系统而言的，分布式文件系统通常指C&#x2F;S架构或网络文件系统，用户数据没有直接连接到本地主机，而是存储到远程存储服务器上。<ul><li>需要请求forwarding</li></ul></li></ul><h2 id="并行文件系统"><a href="#并行文件系统" class="headerlink" title="并行文件系统"></a>并行文件系统</h2><ul><li>支持并行应用。在并行文件系统环境下，所有客户端可以在同一时间并发读写同一个文件。<ul><li>并行文件系统，是客户端知道数据在哪一个节点上直接去对应节点获取数据，没有forwarding这个过程。</li><li>通常并行系统都是携带私有客户端</li></ul></li><li></li></ul><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul><li><p><strong>并行文件系统是分布式文件系统的一种</strong>。分布式文件系统和并行文件系统都可以将数据分布在多个存储服务器上，可横向扩展从而容纳PB级数据，并支持高带宽。</p></li><li><p>分布式文件系统通常也像并行文件系统一样，支持共享的全局名称空间。<strong>但是对于分布式文件系统而言，即使部分文件数据被分配和放置在不同服务器上，客户端在访问数据或元数据时，仍然需要通过指定的协议服务器来完成，协议服务器可能会成为 IO 路由的瓶颈。</strong>现在市场上主流的分布式文件存储为了解决这个协议服务器瓶颈的问题，使用 DNS 技术将不同的客户端连接至多个协议服务器，实现一定程度的负载均衡，但即使通过负载分发，也只是将不同客户端的 IO 拆分至多个协议服务器，<strong>协议服务器仍然需要进行一次 IO 转发</strong>，从而带来一定程度的性能损耗。<strong>使用并行文件系统，客户端系统可以直接访问所有存储节点以进行数据传输，而不必通过协议服务器。</strong></p></li><li><p>其他区别还包括：</p><ul><li>分布式文件系统通常使用标准的网络文件访问协议（例如 NFS 或 SMB ）来访问存储服务器。并行文件系统通常需要安装基于客户端的软件驱动程序（甚至推出基于 Windows 的客户端程序，例如 YRCloudFile、Panasas 等），通过以太网或 InfiniBand 等高速网络访问共享存储，因为只有基于这些客户端程序，才能实现区别于 NFS 的多 IO 路径访问。</li><li><strong>部分分布式文件系统将单个文件存储在单个存储节点上，而并行文件系统通常将文件分解并跨多个存储节点对数据块进行条带化。</strong></li><li>分布式文件系统倾向于带宽型或归档型应用程序。并行文件系统专注于高并发、高IOPS、海量数据的高性能工作负载。</li><li><strong>分布式文件系统通常使用诸如三副本或纠删码等技术来提供数据可靠性</strong>，而许多并行文件系统还支持后端挂载磁盘阵列（例如 Lustre、Spectrum Scale、YRCloudFile 等）。</li></ul></li><li><p>非本地直接连接，通过网络连接的，是分布式文件系统</p></li><li><p>支持并行应用的，为并行文件系统</p><ul><li>这两个概念之间具有重叠之处，比如Lustre，它既是分布式文件系统，也是并行文件系统。</li></ul></li></ul><p><a href="https://www.yanrongyun.com/zh-cn/blogs/parallel-vs-distributed-nfs-file-storage">https://www.yanrongyun.com/zh-cn/blogs/parallel-vs-distributed-nfs-file-storage</a></p><h2 id="常见的并行文件系统"><a href="#常见的并行文件系统" class="headerlink" title="常见的并行文件系统"></a>常见的并行文件系统</h2><h3 id="lustre"><a href="#lustre" class="headerlink" title="lustre"></a>lustre</h3><h4 id="lustre-是什么"><a href="#lustre-是什么" class="headerlink" title="lustre 是什么"></a>lustre 是什么</h4><ul><li>lustre 基于GNU GPL协议开源的分布式并行文件系统，主要是ddn维护。</li><li>lustre是通过内核的 lustre客户端来访问文件对象。</li></ul><h4 id="lustre-提供哪些功能"><a href="#lustre-提供哪些功能" class="headerlink" title="lustre 提供哪些功能"></a>lustre 提供哪些功能</h4><ul><li>lustre设计中最重要的是扩展性和性能。提高lustre的容量和文件系统带宽可以通过扩展更多的服务器到文件系统，通过增加lustre客户端增加并行访问lustre文件系统的性能。</li><li>lustre 文件系统提供如下的功能：<ul><li>标准的posix语义实现，lustre分布式文件系统支持ldiskfs和zfs两种文件系统<blockquote><p>当应用程序调用posix标准的接口时，posix接口会调用系统调用，此时装有lustre文件系统的操作系统会捕获这些调用，并通过Lustre文件系统的内部实现来处理这些请求。虽然从应用程序的角度看，它仍然是在调用标准的POSIX接口，但实际的底层操作是由Lustre文件系统来完成的。也就是说，Lustre作为一个兼容POSIX标准的文件系统，其目标是在不影响应用程序编程接口的前提下，优化并扩展对大规模存储系统的访问能力。应用程序无需了解或直接调用Lustre特定的接口，而是继续使用通用的POSIX系统调用接口，即可享受到Lustre带来的高性能和高可扩展性优势。</p></blockquote></li><li>自定义文件布局控制，文件系统布局决定了数据放到哪些lustre的后端服务器，文件布局可以通过lfs setstripe 来进行设置，<strong>默认的情况数据会在单个lustre后端服务器上，如果设置stripe大于1的情况，数据会被分片到多个lustre后端服务器上。</strong><ul><li>正常的文件布局是由stripe count和stripe size决定。stripe count决定使用多少个ost存储这些文件分片(stripe)，stripe size决定往下一个ost开始写之前应该往当前ost写入的数据量.</li></ul></li><li>支持高性能和大规模网络,lustre可以借助于RDMA、IB、OmniPath技术在TCP纸上提供低时延的高质量网络。<br><img src="/../images/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_135516.png"></li></ul></li></ul><h5 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h5><p><img src="/../images/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_135609.png"><br><img src="/../images/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_135625.png"><br><img src="/../images/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_135631.png"><br><img src="/../images/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F_135635.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;分布式文件系统&quot;&gt;&lt;a href=&quot;#分布式文件系统&quot; class=&quot;headerlink&quot; title=&quot;分布式文件系统&quot;&gt;&lt;/a&gt;分布式文件系统&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;“分布式”是重点，它是相对于本地文件系统而言的，分布式文件系统通常指C&amp;#x2F;S架构</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>seastar</title>
+    <link href="http://example.com/2024/02/29/seastar/"/>
+    <id>http://example.com/2024/02/29/seastar/</id>
+    <published>2024-02-29T08:26:16.000Z</published>
+    <updated>2024-02-29T11:21:32.254Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="并发范式-share-nothing"><a href="#并发范式-share-nothing" class="headerlink" title="并发范式 share nothing"></a>并发范式 share nothing</h2><ul><li>Seastar引入了一层非常薄的抽象：它会在每个核上创建一个线程，并将此线程绑定在其上。不同核（线程）之间禁共享数据，只能通过消息队列来传递数据。</li></ul><h2 id="用户态操作系统-seastar"><a href="#用户态操作系统-seastar" class="headerlink" title="用户态操作系统 seastar"></a>用户态操作系统 seastar</h2><ul><li>Seastar 是一个应用框架，它几乎将操作系统所提供的抽象完整地搬移到了用户态中，以减少操作系统的抽象开销，实现软硬件一体化。</li></ul><h2 id="Seastar之执行流抽象"><a href="#Seastar之执行流抽象" class="headerlink" title="Seastar之执行流抽象"></a>Seastar之执行流抽象</h2><ul><li>可以将seastar想象成一个支持多核的操作系统，每个核上运行着许多的“进程”</li><li>Seastar将每个核抽象成一台单核计算机，每个单核计算机上运行着许多执行流，一个单核计算机上的多个执行流可以共享数据，不同单核计算机上的执行流只能通过消息来共享数据。</li><li>执行流：从头到尾只能在一个核上运行，并且位于不同核上执行流之间，只能通过跨核消息来通信。</li><li>Seastar在每个用户态CPU上运行一个调度器，来调度一系列的微任务。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;并发范式-share-nothing&quot;&gt;&lt;a href=&quot;#并发范式-share-nothing&quot; class=&quot;headerlink&quot; title=&quot;并发范式 share nothing&quot;&gt;&lt;/a&gt;并发范式 share nothing&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>posix</title>
+    <link href="http://example.com/2024/02/29/posix/"/>
+    <id>http://example.com/2024/02/29/posix/</id>
+    <published>2024-02-29T02:49:25.000Z</published>
+    <updated>2024-02-29T06:53:15.197Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="posxi-简介"><a href="#posxi-简介" class="headerlink" title="posxi 简介"></a>posxi 简介</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul><li>POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX）,缩写为POSIX</li></ul><h3 id="发布-IEEE"><a href="#发布-IEEE" class="headerlink" title="发布-IEEE"></a>发布-IEEE</h3><h3 id="系统调用，posix-C库，系统命令和内核函数"><a href="#系统调用，posix-C库，系统命令和内核函数" class="headerlink" title="系统调用，posix, C库，系统命令和内核函数"></a>系统调用，posix, C库，系统命令和内核函数</h3><ul><li><p>linux三种接口</p><ul><li>linux提供了用户接口（shell）,库函数接口（c语言程序调用库），系统调用接口三种接口。</li></ul></li><li><p>系统调用</p><ul><li>操作系统是不能运行进程之间操作硬件资源，进程如果要想访问这些资源，必须向操作系统申请。进程向系统申请的入口就是系统调用（system call）,它由操作系统提供。</li><li>在linux中系统调用是用户空间访问内核的唯一手段，除异常和陷入外，系统调用是内核唯一的合法入口。</li></ul></li><li><p>系统调用和posix</p><ul><li>系统调用虽然是内核和用户应用程序之间的沟通桥梁，是用户应用程序访问内核的入口点。但通常，应用程序是通过操作系统提供的应用编程接口API，而不是之间通过系统调用来编程。<ul><li>应用程序可以直接调用系统调用接口，但大多数都是通过应用编程接口api。</li></ul></li><li>操作系统api 的主要功能就是把操作系统的功能完全展示出来，提供给应用程序，基于该操作系统，与文件、内存、时钟、网络、图形、各种外设等互操作的能力。此外，操作系统API通常还提供许多工具类的功能，比如操纵字符串、各种数据类型、时间日期等。 在UNIX世界里，最通用的操作系统API基于POSIX（Portable Operating System Interface of UNIX，可移植操作系统接口）标准。 </li><li>POSIX是一套操作系统接口的标准，POSIX标准定义了”POSIX兼容”的操作系统所必须提供的服务，提供了根据POSIX而定义的API 函数。这些API函数和系统调用之间有着直接的关系，<strong>一个API函数可以由一个系统调用实现，也可以通过调用多个系统调用来实现，还可以完全不使用任何系统调用。</strong></li></ul></li><li><p>系统调用和C库</p><ul><li>是 Portable Operating System Interface(可移植操作系统接口) 的缩写，X表示UNIX，它是 ISO C 的延伸，明定了一个可移植的操作系统所应具备的种种条件，其范围不只有系统函数库而已。POSIX库 就是C POSIX library。C POSIX library是C语言的POSIX系统下的标准库。包含了一些在C语言标准库之外的函数。为了OS之间的可移植性，POSIX标准规定了一些标准的接口。而这些接口标准的集合就是POSIX库。</li><li>操作系统API 通过都以c库的方式提供，linux也是如此。</li><li>C库提供了posix的绝大部分api，同时，内核提供的每个系统调用在c库中都具有相应的封装函数。</li><li>系统调用与其c库封装函数的名称常常相同，例如，read系统调用在c库中的封装函数即为read函数。</li><li>从用户的角度看，系统调用和C库之间的区别并不重要，他们只需通过C库函数完成所需功能。相反，从内核的角度看，需要考虑的则是提供哪些针对确定目的的系统调用，并不需要关注它们如何被使用。</li></ul></li><li><p>系统调用与系统命令</p><ul><li>系统命令位于C库的更上层，是利用c库实现的的可执行程序，比如最为常用的ls，cd等。</li></ul></li><li><p>系统调用和内核函数</p><ul><li>内核函数与C库函数的区别仅仅是内核函数在内核实现，因此必须遵守内核编程的规则。</li><li>系统调用最终必须具有明确的操作。</li><li>用户应用程序通过系统调用进入内核后，会执行各个系统调用对应的内核函数，</li><li>系统调用说的是操作系统提供给用户程序调用的一组“特殊”接口。用户程序可以通过这组“特殊”接口来获得操作系统内核提供的服务，比如用户可以通过文件系统相关的调用请求系统打开文件、关闭文件或读写文件，可以通过时钟相关的系统调用获得系统时间或设置系统时间等。</li><li>从逻辑上来说，系统调用可被看成是一个内核与用户空间程序交互的接口——它好比一个中间人，把用户进程的请求传达给内核，待内核把请求处理完毕后再将处理结果送回给用户空间</li><li>系统调用是用户进程进入内核的接口层，它本身并非内核函数</li><li>就像系统调用本身在应用程序和内核间的桥梁作用一样</li><li>内核提供的这组系统调用通常也被称之为系统调用接口层。系统调用接口层作为内核和用户应用程序之间的中间层，扮演了一个桥梁，或者说中间人的角色。系统调用把应用程序的请求传达给内核，待内核处理完请求后再将处理结果返回给应用程序。</li></ul></li></ul><p><img src="/../images/posix_142857.png"><br><img src="/../images/posix_142713.png"><br><img src="/../images/posix_135654.png"><br>内核函数-》系统调用函数-》C库（应用编程api posix）-》应用程序</p><h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul><li><a href="https://www.cnblogs.com/invisible2/p/6871841.html">系统调用、库函数、内核函数区别</a></li><li><a href="https://blog.csdn.net/u012294613/article/details/124635425">系统调用、POSIX、C库、系统命令和内核函数</a></li><li><a href="https://www.cnblogs.com/xkfz007/articles/2176983.html">系统调用、POSIX、C库、系统命令和内核函数</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;posxi-简介&quot;&gt;&lt;a href=&quot;#posxi-简介&quot; class=&quot;headerlink&quot; title=&quot;posxi 简介&quot;&gt;&lt;/a&gt;posxi 简介&lt;/h2&gt;&lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>bluestore</title>
+    <link href="http://example.com/2024/02/29/bluestore/"/>
+    <id>http://example.com/2024/02/29/bluestore/</id>
+    <published>2024-02-29T02:17:07.000Z</published>
+    <updated>2024-03-06T00:56:31.532Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="blueStore架构"><a href="#blueStore架构" class="headerlink" title="blueStore架构"></a>blueStore架构</h3><p><img src="/../images/bluestore_151131.png"></p><h3 id="BlueStore工作原理"><a href="#BlueStore工作原理" class="headerlink" title="BlueStore工作原理"></a>BlueStore工作原理</h3><ul><li><p>Ceph OSD执行两个功能</p><ul><li>在网络中和其他osd之间复制数据（多副本），</li><li>在本地存储设备上存储数据。</li></ul></li><li><p>传统的ceph osd是将数据存储到现有的文件存储模块，例如xfs文件系统，性能开销比较大，因为需要实现ceph数据到posix的转换。<br><img src="/../images/bluestore_162452.png"></p><ul><li>RocksDB：存储 WAL 、对象元数据、对象扩展属性 Omap、磁盘分配器元数据。</li><li>BlueRocksEnv：抛弃了传统文件系统，封装 RocksDB 文件操作的接口。</li><li>BlueFS：小型的 Append 文件系统，实现了 RocksDB::Env 接口，给 RocksDB 用。</li><li>Allocator：磁盘分配器，负责高效的分配磁盘空间。</li><li>根据上图，可以很直观的了解到：BlueStore 把数据分成两条路径。一条是 data 直接通过 Allocator（磁盘空间分配器）分配磁盘空间，然后写入 BlockDevice。另一条是 metadata 先写入 RocksDB（内存数据库），通过 BlueFs（BlueStore 专用文件系统）来管理 RocksDB 数据，经过 Allocator 分配磁盘空间后落入 BlockDevice。</li><li>先树立第一层的概念：BlueStore 把元数据和对象数据分开写，对象数据直接写入硬盘，而元数据则先写入超级高速的内存数据库，后续再写入稳定的硬盘设备，这个写入过程由 BlueFS 来控制。</li></ul></li></ul><h3 id="BlueStore和zns"><a href="#BlueStore和zns" class="headerlink" title="BlueStore和zns"></a>BlueStore和zns</h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;blueStore架构&quot;&gt;&lt;a href=&quot;#blueStore架构&quot; class=&quot;headerlink&quot; title=&quot;blueStore架构&quot;&gt;&lt;/a&gt;blueStore架构&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/../images/bluestore_151</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>go基础</title>
+    <link href="http://example.com/2024/02/19/go%E5%9F%BA%E7%A1%80/"/>
+    <id>http://example.com/2024/02/19/go%E5%9F%BA%E7%A1%80/</id>
+    <published>2024-02-19T05:16:31.000Z</published>
+    <updated>2024-02-22T05:53:00.734Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><p>数据类型</p><ul><li>数据类型的出现是为了把数据分成所需内存大小的不同的数据。<ul><li>布尔型（bool）: 值只可以是常量true或者false</li><li>数字类型：整型int和浮点型float,支持复数，位的运算采用补码。</li><li>字符串类型（string）: 使用UTF-8编码标识Unicode文本。</li><li>其他：指针，数组，结构体（struct），联合体（union不常用），函数，切片，接口（interface）,map,channel</li></ul></li></ul></li><li><p>循环</p><ul><li>循环过程中新添加的元素是没办法遍历到的。</li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;数据类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据类型的出现是为了把数据分成所需内存大小的不同的数据。&lt;ul&gt;
+&lt;li&gt;布尔型（bool）: 值只可以是常量true或者false&lt;/li&gt;
+&lt;li&gt;数字类型：整型int和浮点型float,支持复数，位的运算采用补码。</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>k8s</title>
+    <link href="http://example.com/2024/01/29/k8s/"/>
+    <id>http://example.com/2024/01/29/k8s/</id>
+    <published>2024-01-29T07:33:08.000Z</published>
+    <updated>2024-02-21T08:24:00.913Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="K8s简介"><a href="#K8s简介" class="headerlink" title="K8s简介"></a>K8s简介</h2><ul><li><p>k8s 是一个开放的开发平台。不局限于任何语言和任何编程接口。只要是正常的服务，都可以映射成kubernetes的Service,并通过标准的TCP通信协议进行交互。</p></li><li><p>k8s是一个完备的分布式系统支撑平台。k8s具有完备的集群管理能力，包括多层次的安全防护和准入机制，多租户应用支撑能力，透明的服务注册和服务发现机制，内建智能负载均衡器，强大的的故障发现和自我修复能力，服务滚动升级和在线扩容能力，可扩展的资源自动调度机制，以及多粒度的资源配额管理能力。</p></li><li><p>Service 服务，是分布式集群架构的核心</p><ul><li>拥有一个唯一指定的名字</li><li>拥有一个虚拟ip（ClusterIP,Service IP,或vip（虚拟ip））和端口号</li><li>能够提供某种远程服务能力</li><li>被映射到了提供这种服务能力的一组容器应用上。</li></ul></li></ul><h2 id="基本概念和术语"><a href="#基本概念和术语" class="headerlink" title="基本概念和术语"></a>基本概念和术语</h2><ul><li><p>Node, Pod, Replication Controller, Service 等概念都可以看作一种资源对象，通过kubernetes提供的kubectl工具或者API调用进行操作，并保存在etcd中。 </p></li><li><p>Node节点是kubernetes集群中相对于Master而言的工作主机</p></li><li><p>Node可以是一台物理主机，也可以是一台虚拟机（VM）。在每个Node 上运行用于启动和管理Pod的服务-kubelet, 并能够被master管理。</p></li><li><p>Node上运行的服务进程包括kubelet,kube-proxy和docker daemon</p></li><li><p>Node的信息如下：</p><ul><li>Node地址：主机的IP地址，或者Node ID</li><li>Node运行状态：包括Pending, Runnig, Terminated三种状态。</li><li>Node Condition（条件）: 描述Running 状态node的运行条件，目前只有一种条件–Ready.<ul><li>Ready表示Node处于健康状态，可以接收从master发来的创建pod的指令。</li></ul></li><li>Node系统容量：描述Node可用的系统资源，包括cpu，内存数量，最大可调度pod的数量等。</li><li>其他：Node的其他信息，包括实例的内核版本号，kubernetes版本号，Docker版本号，操作系统名称。</li></ul></li><li><p>Node的管理</p><ul><li>Node通常是物理机，虚拟机或者云服务商提供的资源</li></ul></li><li><h2 id="使用node-controller-对node进行管理"><a href="#使用node-controller-对node进行管理" class="headerlink" title="使用node controller 对node进行管理"></a>使用node controller 对node进行管理</h2></li></ul><h3 id="pod"><a href="#pod" class="headerlink" title="pod"></a>pod</h3><ul><li>pod 是kubernetes的最基本的操作单元，<strong>包含一个或多个紧密相关的容器</strong>。</li><li>一个pod可以被一个容器化的环境看作应用层的”逻辑宿主机（logical host）”</li><li>一个pod中的多个容器应用通常是紧耦合的。</li><li>pod在node上被创建，启动或者销毁。</li><li>为什么需要pod呢？<ul><li>docker容器之间的通信受到docker网络机制的限制，在docker的世界中，一个容器需要通过link方式才能访问另一个容器提供的服务（端口），大量容器之间的link将是一件非常繁重的工作。</li><li>通过pod的概念将多个容器组合在一个虚拟机的主机内，可以实现容器之间仅需通过localhost就能相互通信了。<br><img src="/../images/k8s_155411.png"></li></ul></li><li>一个pod中的应用容器共享同一组资源，</li></ul><h2 id="基本概念和术语-1"><a href="#基本概念和术语-1" class="headerlink" title="基本概念和术语"></a>基本概念和术语</h2><h3 id="Node-（节点）"><a href="#Node-（节点）" class="headerlink" title="Node （节点）"></a>Node （节点）</h3><ul><li><p>Node（节点）是Kubernetes集群中相对于Master而言的工作主机。</p></li><li><p>Node可以是一台物理主机，也可以是一台虚拟机（VM）。</p></li><li><p>每个Node上运行用于启动和管理Pod的服务-kubelet,并能够被Master管理。</p></li><li><p><strong>在Node上运行的服务进程包括kubelet,kube-proxy和docker daemon.</strong></p></li><li><p>Node的信息：</p><ul><li>Node地址：主机的IP地址，或者Node ID</li><li>Node运行状态：包括pending, Running, Terminated三种状态</li><li>Node Condition(条件)：描述Running状态Node的运行条件，目前只有一种条件——Ready.<ul><li>Ready 表示node处于健康状态，可以接收从master发出的创建pod指令。</li></ul></li><li>Node系统容量：描述Node可用的系统资源，包括CPU，内存数量，最大可调度Pod数量等，</li><li>其他：Node的其他信息，包括实例的内核版本号，kubernetes版本号，Docker版本号，操作系统名称等，</li></ul></li><li><p>Node的管理</p><ul><li>Node通常是物理机，虚拟机或者云服务上提供的资源，并不是由kubernetes创建的。</li><li>Node Controller 对Node进行管理</li><li>Node Controller 是Kubernetes Master的一个组件，用于管理Node对象。<ul><li><ol><li>集群范围内的Node信息同步</li></ol><ul><li>可以通过启动参数设置同步的时间周期。</li></ul></li><li><ol start="2"><li>单个Node的生命周期管理</li></ol></li></ul></li></ul></li><li><p>Node的自注册</p><ul><li>当kubelet的–register-node 参数被设置为true（默认值为true）,kubelet会向apiserver注册自己。<ul><li>kubelet进行自注册的启动参数如下：<ul><li>–apiservers&#x3D;:apiserver的地址</li><li>–kubeconfig&#x3D;: 登录apiserver所需凭据&#x2F;证书的目录</li><li><ul><li></li></ul></li></ul></li></ul></li></ul></li></ul><h3 id="Pod"><a href="#Pod" class="headerlink" title="Pod"></a>Pod</h3><ul><li><p>Pod 是kubernetes的最基本的操作单元，包含一个或对个紧密相关的容器，类似于豌豆荚的概念。</p><ul><li>这些容器可以是不同类型的容器</li></ul></li><li><p>一个Pod可以被一个容器化的环境看作应用层的“逻辑宿主机”（logical host）. 一个pod中的多个容器应用通常是紧耦合的。Pod在Node上被创建，启动或者销毁。</p></li><li><p>为什么使用Pod？</p><ul><li>一个很重要的原因是：<ul><li>Docker容器之间的通信收到docker网络机制的限制，在docker的世界中，一个容器需要通过link方式才能访问另一个容器提供的服务（端口）。</li><li>大量容器之间的link将是一件非常繁重的工作。</li><li>通过pod的概念将多个容器组合在一个虚拟的“主机”内，实现了容器之间通过localhost就互相通信了。</li></ul></li></ul></li><li><p>pod, 容器，与Node之间的关系<br><img src="/../images/k8s_161508.png"></p></li><li><p>一个Pod中的应用容器共享同一组资源，如下所示：</p><ul><li>PID命令空间：Pod中的不同应用程序可以看到其他应用程序的进程ID。</li><li>网络命令空间：Pod中的多个容器能够访问同一个ip和端口范围。</li><li>IPC命令空间：Pod中的多个容器能够使用SystemV IPC 或 POSIX消息队列进行通信。</li><li>UTS命令空间：Pod中的多个容器共享一个主机名。</li><li>Volumes（共享存储卷）：Pod中的各个容器可以访问在Pod级别定义的Volumes. <ul><li>不建议在一个pod内运行相同应用的多个实例</li></ul></li></ul></li></ul><h3 id="Label"><a href="#Label" class="headerlink" title="Label"></a>Label</h3><ul><li><p>Replication Controller 通过lable selector 来选择要管理的pod。</p></li><li><p>在RC定义中，Pod部分的template.metadata.lables定义了Pod的label，即name&#x3D;redis-slave</p></li><li><p>在RC定义中，spec.selector中 指定name&#x3D;redis-slave,表示将所有包含该label的pod进行管理。</p></li><li><p>使用Label可以给对象创建多组标签，Service，RC等组件则通过label selector来选择对象范围，label和label selector 共同构成了kubernetes系统中最核心的应用模型，使得被管理对象能够被精细地分组管理，同时实现了整个集群的高可用性。</p></li></ul><h3 id="RC"><a href="#RC" class="headerlink" title="RC"></a>RC</h3><ul><li>Replication Cpntroller 是kubernetes 系统中的核心概念，用于定义pod副本的数量。</li><li>在master 内，controller manager 进程通过rc的定义来完成pod的创建，监控，启停等操作。</li><li>通过修改RC的副本数量，来实现Pod的动态缩放（scaling）</li></ul><h3 id="Sevice"><a href="#Sevice" class="headerlink" title="Sevice"></a>Sevice</h3><blockquote><p><a href="https://blog.csdn.net/cui_song_lin/article/details/123694590">k8s pod container node cluster 之间的关系</a></p></blockquote><h4 id="port-nodeport-targetport"><a href="#port-nodeport-targetport" class="headerlink" title="port nodeport targetport"></a>port nodeport targetport</h4><ul><li>port 是k8s 集群内部访问service的端口，即通过clusterIP:port 可以访问到某个service，仅限于集群节点内互相访问，外部无法访问。</li><li>nodeport是外部访问k8集群中service的端口，通过nodeip：nodeport可以从外部访问到某个service。</li><li>targetport 是pod的端口，从port和nodeport来的流量经过kube-proxy流入到后端pod的targetport,最后进入到容器。</li><li>containerPort<ul><li>targetPort和containerPort必须一致。</li><li>一个pod内的Container都是共享同一个Pause的命名空间的。<br><img src="/../images/k8s_151917.png"></li></ul></li></ul><h3 id="Volume-存储卷"><a href="#Volume-存储卷" class="headerlink" title="Volume (存储卷)"></a>Volume (存储卷)</h3><ul><li>Volume 是pod中能够被多个容器访问的共享目录。</li><li>k8s的volume概念与docker的volume比较类似，但不完全相同。</li><li>k8s中的volume与pod生命周期相同，但是与容器的生命周期不相关。</li><li>当容器终止或者重启时，Volume中的数据也不会丢失</li><li>k8s支持多种类型的volume，并且一个pod可以同时使用任意多个volume.</li></ul><h3 id="namespace-命名空间"><a href="#namespace-命名空间" class="headerlink" title="namespace 命名空间"></a>namespace 命名空间</h3><ul><li>namespace（命名空间）是k8s系统中的另一个非常重要的概念。<ul><li>通过将系统内部的对象“分配”到不同的namespace中，形成逻辑上分组的不同项目，小组或用户组，便于不同的分组在共享使用整个集群的资源的同时还能被分别管理。</li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;K8s简介&quot;&gt;&lt;a href=&quot;#K8s简介&quot; class=&quot;headerlink&quot; title=&quot;K8s简介&quot;&gt;&lt;/a&gt;K8s简介&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;k8s 是一个开放的开发平台。不局限于任何语言和任何编程接口。只要是正常的服务，都可以映射成kub</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu 的dns 配置</title>
+    <link href="http://example.com/2023/12/28/linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/"/>
+    <id>http://example.com/2023/12/28/linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</id>
+    <published>2023-12-28T08:54:47.000Z</published>
+    <updated>2024-03-01T09:40:12.541Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="etc-resolv-conf-etc-systemd-resolved-conf-run-systemd-resolve-stub-resolv-conf-三个配置文件的区别"><a href="#etc-resolv-conf-etc-systemd-resolved-conf-run-systemd-resolve-stub-resolv-conf-三个配置文件的区别" class="headerlink" title="&#x2F;etc&#x2F;resolv.conf &#x2F;etc&#x2F;systemd&#x2F;resolved.conf &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 三个配置文件的区别"></a>&#x2F;etc&#x2F;resolv.conf &#x2F;etc&#x2F;systemd&#x2F;resolved.conf &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 三个配置文件的区别</h2><ul><li>&#x2F;etc&#x2F;resolv.conf 文件的传统用途是存储dns客户端的名称服务器和其他dns相关配置，如搜索域和域名缓存TTL等。然后在引入systemd-resolved服务后，DNS配置的管理发生了一些改变。<ul><li><ol><li>&#x2F;etc&#x2F;resolv.conf:</li></ol><ul><li>在未使用systemd-resolved的传统系统或已配置为直接操作此文件的系统，这是实际的dns配置文件，其中通常包含nameserver行来指定dns服务器地址</li><li>如果启用了systemd-resolved服务，&#x2F;etc&#x2F;resolv.conf往往会作为一个符号链接指向stub-resolv.conf或由systemd-resolved动态管理的虚拟文件，以确保对dns设置的更改不会被守护进程覆盖。</li></ul></li><li><ol start="2"><li>&#x2F;etc&#x2F;systemd&#x2F;resolved.conf:</li></ol><ul><li>这是 systemd-resolved 服务的配置文件，它允许用户定义持久化的 DNS 配置，包括 DNS 服务器、DNS 搜索域等参数。</li><li>修改这个文件的设置后，需要重新启动 systemd-resolved 服务以使更改生效，并且这些更改将体现在 systemd-resolved 提供给系统的 DNS 解析服务中。</li></ul></li><li><ol start="3"><li>&#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf:\</li></ol><ul><li>当启用 systemd-resolved 并采用其 DNS 解析功能时，它会在 &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 中生成一个简化版的 DNS 配置文件（即所谓的 “stub resolver” 配置）。</li><li>&#x2F;etc&#x2F;resolv.conf 可能会指向这个文件，使得系统中的其他程序通过读取 &#x2F;etc&#x2F;resolv.conf 能够与 systemd-resolved 交互并利用其提供的 DNS 解析服务。</li><li>此文件仅包含用于连接到本地运行的 systemd-resolved 的基本信息，而具体的 DNS 服务器设置等内容则存储在 resolved.conf 中。</li></ul></li></ul></li><li>&#x2F;etc&#x2F;resolv.conf 是传统的 DNS 客户端配置入口点，但在某些系统中可能作为指向实际配置的符号链接。</li><li>&#x2F;etc&#x2F;systemd&#x2F;resolved.conf 用于配置 systemd-resolved 服务本身的全局 DNS 设置。</li><li>&#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 由 systemd-resolved 生成，提供了一个轻量级的 DNS 客户端配置，当系统集成 systemd-resolved 时，实际的 DNS 查询工作由该服务处理。</li></ul><h3 id="系统读取顺序"><a href="#系统读取顺序" class="headerlink" title="系统读取顺序"></a>系统读取顺序</h3><ul><li><p>在启用了 systemd-resolved 的系统中，系统并不直接读取 &#x2F;etc&#x2F;systemd&#x2F;resolved.conf 和 &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 来获取 DNS 设置。而是：</p><ul><li>systemd 初始化时会启动 systemd-resolved 服务，并加载 &#x2F;etc&#x2F;systemd&#x2F;resolved.conf 的配置，根据这里的配置设置 DNS 服务器、DNS 搜索域等参数。</li><li>systemd-resolved 依据其配置文件的内容运行，并可能会生成 &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 文件，作为本地 DNS 解析器的配置。</li><li>系统进程 寻找 DNS 配置时，通常会首先读取 &#x2F;etc&#x2F;resolv.conf 文件。当 systemd-resolved 启用时，&#x2F;etc&#x2F;resolv.conf 通常是通过符号链接指向 &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf，这样所有需要 DNS 信息的进程都会间接使用到 systemd-resolved 提供的服务和配置。</li></ul></li><li><p>因此，从进程的角度看，它们<strong>读取的是 &#x2F;etc&#x2F;resolv.conf</strong>；而在<strong>系统初始化和服务管理层面，先读取的是 &#x2F;etc&#x2F;systemd&#x2F;resolved.conf</strong>。整个过程实际上是通过系统层级的服务管理和配置重定向来实现 DNS 配置的集中化和动态管理。</p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul><li><p>在启用 systemd-resolved 的系统中：</p><ul><li>系统首先读取 &#x2F;etc&#x2F;systemd&#x2F;resolved.conf，根据其中的配置设置 DNS 参数。</li><li>systemd-resolved 根据上述配置运行，并生成一个简化的 DNS 配置文件，例如 &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf。</li><li>为了让所有程序使用 systemd-resolved 的 DNS 服务，理想情况下应将 &#x2F;etc&#x2F;resolv.conf 设置为指向 &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf（或其他 systemd-resolved 维护的配置文件）。</li></ul></li><li><p>如果没有做这个符号链接，程序将直接读取 &#x2F;etc&#x2F;resolv.conf 中的静态 DNS 配置，而不是 systemd-resolved 的动态配置。为解决这个问题，应创建正确的符号链接，确保所有程序都通过 &#x2F;etc&#x2F;resolv.conf 使用 systemd-resolved 的 DNS 设置。</p></li></ul><h3 id="systemd-resolved"><a href="#systemd-resolved" class="headerlink" title="systemd-resolved"></a>systemd-resolved</h3><ul><li>ubuntu中systemd-resolved服务为本地应用程序提供了网络名字解析服务，系统通过它对外进行dns请求。</li><li>系统使用systemd-resolved进行dns请求的时候，出来一些localhost等特殊域名，它需要去外部dns服务器寻找答案，这个外部dns的地址可以手动配置或者自动配置。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;etc-resolv-conf-etc-systemd-resolved-conf-run-systemd-resolve-stub-resolv-conf-三个配置文件的区别&quot;&gt;&lt;a href=&quot;#etc-resolv-conf-etc-systemd-reso</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>容器，docker</title>
@@ -56,17 +322,15 @@
     <link href="http://example.com/2023/12/15/PCIE%E9%80%9F%E7%8E%87/"/>
     <id>http://example.com/2023/12/15/PCIE%E9%80%9F%E7%8E%87/</id>
     <published>2023-12-15T08:03:13.000Z</published>
-    <updated>2023-12-15T08:04:50.751Z</updated>
+    <updated>2024-03-11T09:32:32.269Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>PCIE的规格一般有 PCIE2.0&#x2F;PCIE3.0&#x2F;PCIE4.0&#x2F;PCIE5.0</p></blockquote><h3 id="PCIE-相关概念"><a href="#PCIE-相关概念" class="headerlink" title="PCIE 相关概念"></a>PCIE 相关概念</h3><ul><li>传输速率为每秒传输量GT&#x2F;s, 而不是每秒位数Gbps, 因为传输率包括不提供额外吞吐量的开销位；比如PCIe 1.x 和 PCIe 2.x 使用8b&#x2F;10b 编码方案。导致占用了20%（2&#x2F;10）的原始信道带宽。</li><li>GT&#x2F;s ——Giga transation per second （千兆传输&#x2F;秒），即每一秒内传输的次数。重点在于描述物理层通信协议的速率属性，可以不和链路宽度等关联。</li><li>Gbps —— Giga Bits Per Second （千兆位&#x2F;秒）。原始速率</li><li>GT&#x2F;s 与Gbps 之间不存在成比例的换算关系。有效的带宽（乘以了比例）<br><img src="/../images/PCIE%E9%80%9F%E7%8E%87_160441.png"></li></ul><h3 id="PCIE带宽计算"><a href="#PCIE带宽计算" class="headerlink" title="PCIE带宽计算"></a>PCIE带宽计算</h3><ul><li>PCIe 吞吐量（可用带宽）计算方法：吞吐量 &#x3D; 传输速率 *  编码方案<ul><li>GT(Gigatransfer) x Lane的数量 x 编码方案效率</li><li>PCI-e2.0 协议支持 5.0 GT&#x2F;s，即每一条Lane 上支持每秒钟内传输 5G个Bit；但这并不意味着 PCIe 2.0协议的每一条Lane支持 5Gbps 的速率。为什么这么说呢？因为PCIe 2.0 的物理层协议中使用的是8b&#x2F;10b的编码方案。 即每传输8个Bit，需要发送10个Bit；这多出的2个Bit并不是对上层有意义的信息。那么， PCIe 2.0协议的每一条Lane支持 5 * 8 &#x2F; 10 &#x3D; 4 Gbps &#x3D; 500 MB&#x2F;s 的速率。以一个PCIe 2.0 x8的通道为例，x8的可用带宽为 4 * 8 &#x3D; 32 Gbps &#x3D; 4 GB&#x2F;s。同理，PCI-e3.0 协议支持 8.0 GT&#x2F;s, 即每一条Lane 上支持每秒钟内传输 8G个Bit。而PCIe 3.0 的物理层协议中使用的是 128b&#x2F;130b 的编码方案。 即每传输128个Bit，需要发送130个Bit。那么， PCIe 3.0协议的每一条Lane支持 8 * 128 &#x2F; 130 &#x3D; 7.877 Gbps &#x3D; 984.6 MB&#x2F;s 的速率。一个PCIe 3.0 x16的通道，x16 的可用带宽为7.877* 16 &#x3D; 126.031Gbps &#x3D; 15.754 GB&#x2F;s。<ul><li>PCIE速率<br><img src="/../images/PCIE%E9%80%9F%E7%8E%87_160449.png"></li></ul></li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>PCIE的规格一般有 PCIE2.0&#x2F;PCIE3.0&#x2F;PCIE4.0&#x2F;PCIE5.0<br><a href="https://decodezp.github.io/2019/02/22/quickwords18-pcie-gtps-gbps/">几句话说清楚18：PCIE带宽单位GT&#x2F;s到Gbps转换方法</a></p></blockquote><h3 id="PCIE-相关概念"><a href="#PCIE-相关概念" class="headerlink" title="PCIE 相关概念"></a>PCIE 相关概念</h3><ul><li>传输速率为每秒传输量GT&#x2F;s, 而不是每秒位数Gbps, 因为传输率包括不提供额外吞吐量的开销位；比如PCIe 1.x 和 PCIe 2.x 使用8b&#x2F;10b 编码方案。导致占用了20%（2&#x2F;10）的原始信道带宽。</li><li>GT&#x2F;s ——Giga transation per second （千兆传输&#x2F;秒），即每一秒内传输的次数。重点在于描述物理层通信协议的速率属性，可以不和链路宽度等关联。</li><li>Gbps —— Giga Bits Per Second （千兆位&#x2F;秒）。原始速率</li><li>GT&#x2F;s 与Gbps 之间不存在成比例的换算关系。有效的带宽（乘以了比例）<br><img src="/../images/PCIE%E9%80%9F%E7%8E%87_160441.png"></li></ul><h3 id="PCIE带宽计算"><a href="#PCIE带宽计算" class="headerlink" title="PCIE带宽计算"></a>PCIE带宽计算</h3><ul><li>PCIe 吞吐量（可用带宽）计算方法：吞吐量 &#x3D; 传输速率 *  编码方案<ul><li>GT(Gigatransfer) x Lane的数量 x 编码方案效率</li><li>PCI-e2.0 协议支持 5.0 GT&#x2F;s，即每一条Lane 上支持每秒钟内传输 5G个Bit；但这并不意味着 PCIe 2.0协议的每一条Lane支持 5Gbps 的速率。为什么这么说呢？因为PCIe 2.0 的物理层协议中使用的是8b&#x2F;10b的编码方案。 即每传输8个Bit，需要发送10个Bit；这多出的2个Bit并不是对上层有意义的信息。那么， PCIe 2.0协议的每一条Lane支持 5 * 8 &#x2F; 10 &#x3D; 4 Gbps &#x3D; 500 MB&#x2F;s 的速率。以一个PCIe 2.0 x8的通道为例，x8的可用带宽为 4 * 8 &#x3D; 32 Gbps &#x3D; 4 GB&#x2F;s。同理，PCI-e3.0 协议支持 8.0 GT&#x2F;s, 即每一条Lane 上支持每秒钟内传输 8G个Bit。而PCIe 3.0 的物理层协议中使用的是 128b&#x2F;130b 的编码方案。 即每传输128个Bit，需要发送130个Bit。那么， PCIe 3.0协议的每一条Lane支持 8 * 128 &#x2F; 130 &#x3D; 7.877 Gbps &#x3D; 984.6 MB&#x2F;s 的速率。一个PCIe 3.0 x16的通道，x16 的可用带宽为7.877* 16 &#x3D; 126.031Gbps &#x3D; 15.754 GB&#x2F;s。<ul><li>PCIE速率<br><img src="/../images/PCIE%E9%80%9F%E7%8E%87_160449.png"></li></ul></li></ul></li></ul>]]></content>
     
     
       
       
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;PCIE的规格一般有 PCIE2.0&amp;#x2F;PCIE3.0&amp;#x2F;PCIE4.0&amp;#x2F;PCIE5.0&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;PCIE-相关概念&quot;&gt;&lt;a href=&quot;#PCIE-相关概念&quot; class=&quot;h</summary>
+&lt;p&gt;PCIE的规格一般有 PCIE2.0&amp;#x2F;PCIE3.0&amp;#x2F;PCIE4.0&amp;#x2F;PCIE5.0&lt;br&gt;&lt;a href=&quot;https://decodezp.github.io/2019/02/22/quickwords18-pci</summary>
       
     
     
@@ -154,112 +418,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>数据中心网络架构</title>
-    <link href="http://example.com/2023/11/27/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/"/>
-    <id>http://example.com/2023/11/27/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/</id>
-    <published>2023-11-27T09:23:40.000Z</published>
-    <updated>2023-12-15T06:11:18.881Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="传统数据中心网络架构"><a href="#传统数据中心网络架构" class="headerlink" title="传统数据中心网络架构"></a>传统数据中心网络架构</h2><ul><li><p>传统的大型数据中心，网络一般分为三层：分级的互联网络模型。</p><ul><li><p>Access Layer （接入层）：</p><ul><li>Edge Layer， 接入层交换机通常位于机架顶部，因此也被称为ToR (Top of Rack)交换机，它们物理连接服务器。</li></ul></li><li><p>Aggregation Layer （汇聚层）：</p><ul><li>Distribution Layer， 汇聚交换机连接Access交换机，同时提供其他的服务，例如防火墙，SSL offload，入侵检测，网络分析等。</li></ul></li><li><p>Core Layer (核心层)：</p><ul><li>核心交换机为进出数据中心的包提供高速的转发，为多个汇聚层提供连接性，核心交换机为通常为整个网络提供一个弹性的L3路由网络。</li></ul></li></ul></li><li><p>三层网络架构：<br><img src="/../images/%E5%8F%B6%E8%84%8A%E7%BD%91%E7%BB%9C_094346.png"></p><ul><li><p>汇聚交换机是L2和L3网络的分界点，汇聚交换机以下的是L2网络，以上是L3网络。</p><ul><li>L2网络代表都是通过mac地址通信。不需要ip（可以视为一个交换机上）</li><li>L3网络代表的是通过ip通信，需要经过路由器的转发。（一般分为不同的子网（不同的ip段））</li></ul></li><li><p><strong>每组汇聚交换机</strong> 管理一个pod(Point of Delivery)（图中为两个汇聚层交换机）, 每个pod内都是独立的Vlan网络（VLAN（Virtual Local Area Network）即虚拟局域网）。</p></li><li><p>服务器在pod内迁移不必修改ip地址和默认网关。</p><ul><li>因为一个pod对应一个L2广播域。</li></ul></li><li><p>汇聚交换机和接入交换机之间通常使用STP（spanning tree protocol）.</p></li><li><p><strong>stp使得对于一个vlan网络只有一个汇聚层交换可用</strong>，其他汇聚层交换机在出现故障时才被使用。汇聚层是一个 active-passive的HA模式。因此汇聚层做不到水平扩展。</p></li></ul></li><li><p>大二层网络</p><ul><li><p>随着云计算的发展，计算资源被池化，为了使得 <strong>计算资源</strong> 可以任意分配，需要一个大二层的的 网络架构。</p></li><li><p>整个数据中心网络都是一个L2广播域，服务器可以任意地点创建，迁移，而不需要对IP地址或者默认网关做修改。</p></li><li><p>大二层网络架构，L2&#x2F;L3分界在核心交换机。</p><ul><li>核心交换机以下了，整个数据中心都是L2网络。（当然，可以包含多个VLAN，VLAN之间通过核心交换机做路由进行连通）</li><li>也就是全部可以只用mac地址就可以进行互通<br><img src="/../images/%E5%8F%B6%E8%84%8A%E7%BD%91%E7%BB%9C_112046.png"></li></ul></li><li><p>大二层网络架构虽然使得虚机网络能够灵活创建，但是带来的问题也是明显的。共享的L2广播域带来的BUM（Broadcast·，Unknown Unicast，Multicast）风暴随着网络规模的增加而明显增加，最终将影响正常的网络流量。</p></li><li><p>大二层网络更像一种逻辑上的概念，表示将原来的不同的地域的vlan变成一个vlan，实现二层上相同，便于虚拟机的大范围迁移</p><ul><li>主要技术有<ul><li><ol><li>网卡设备虚拟化技术（逻辑上合并成一个节点，聚合）</li></ol><ul><li>堆叠技术（框盒），网络规模小，不兼容</li></ul></li><li><ol start="2"><li>路由转发技术（封装包，增加包头）</li></ol><ul><li>参考三层逻辑破环技术</li><li>新技术，需要新设备</li></ul></li><li><ol start="3"><li>vxlan nvgre (隧道封装)</li></ol><ul><li>虚拟机了一个大型的交换机</li><li>支持sdn</li><li>运维相对于复杂</li></ul></li></ul></li></ul></li></ul></li><li><p><a href="https://www.zhihu.com/question/312012730/answer/692082210">如何理解大二层网络？ - 肖宏辉的回答 - 知乎</a></p></li><li><p><a href="https://zhuanlan.zhihu.com/p/598278560">大二层网络概述</a></p></li></ul><h3 id="技术发展对网络架构的影响"><a href="#技术发展对网络架构的影响" class="headerlink" title="技术发展对网络架构的影响"></a>技术发展对网络架构的影响</h3><ul><li>数据中心是为了数据服务。随着技术的发展，数据的内容和形式也发生了变化。<ul><li>虚拟化的流行。传统的数据中心中，服务器的利用率并不高，采用三层网络架构配合一定的超占比（oversubscription），能够有效的共享利用核心交换机和一些其他网络设备的性能。但是虚拟化的流行使得服务器的利用率变高，一个物理服务器可以虚拟出多个虚拟机，分别运行各自的任务，走自己的网络路径。因此，高的服务器利用率要求更小的超占比。Gartner的一份报告：Forecast: x86 Server Virtualization, Worldwide, 2012-2018, 2014 Update指出，在2018年，82%的服务器将是虚拟服务器。虚拟化对数据中心网络架构的影响是巨大的。</li><li>软件架构的解耦。传统的软件架构，采用专用模式进行部署，软件系统通常跑在一个物理服务器，与其他的系统做物理隔离。但是，模块化，分层的软件架构设计已经成为了现在的主流。一个系统的多个组件通常分布在多个虚机&#x2F;容器中。最典型的就是三层WEB应用，包含了Client&#x2F;Application&#x2F;DB。一次请求，不再是由一个虚机&#x2F;物理机完成，而是由多个服务器协同完成。这对网络的影响是，东西向流量变多了。</li><li>新的应用的兴起。传统数据中心是为.com应用设计的，这些流量大多是客户端和服务器之间的通信。而分布式计算，大数据渐渐兴起，这些应用会在数据中心的服务器之间产生大量的流量。例如Hadoop，将数据分布在数据中心中成百上千个服务器中，进行并行计算。据说Facebook的一个Hadoop集群有着超过100 petabytes的数据。可见对于某些应用，数据中心的东西向流量是巨大的。</li><li>软件定义数据中心（SDDC，Software Defined Data Center）的提出。SDDC提出软件定义的数据中心，这要求数据中心的计算存储网络都是可以软件定义的。对应于网络，就是SDN。传统的三层网络架构在设计之初并没有考虑SDN。</li></ul></li><li>总结起来，<strong>技术发展要求新的数据中心有更小的超占比，甚至没有超占比；更高的东西向流量带宽；支持SDN。</strong> （件定义网络（SDN））</li></ul><h4 id="流量走向"><a href="#流量走向" class="headerlink" title="流量走向"></a>流量走向</h4><ul><li><p>数据中心的流量总的来说可以分为以下几种：</p><ul><li>南北向流量：数据中心之外的客户端到数据中心服务器之间的流量，或者数据中心服务器访问互联网的流量。</li><li>东西向流量：数据中心内的服务器之间的流量。</li><li>跨数据中心流量：跨数据中心的流量，例如数据中心之间的灾备，私有云和公有云之间的通讯。</li></ul></li><li><p>传统三层架构下的东西向流量</p><ul><li>东西向流量分为L2和L3流量。<ul><li>东西向的L2流量，如果源和目的主机都在同一个接入层交换机下，那么可以达到全速，因为接入交换机就能完成转发。</li><li>如果需要跨机架，但仍然是在一个汇聚层POD内，则需要通过汇聚层交换机进行转发，带宽取决于汇聚层交换机的转发速率，端口带宽和同时有多少个接入层交换机共享汇聚层交换机。前面说过汇聚层和接入层之间一般使用STP，这使得一个汇聚层POD只能有一个汇聚层交换机在工作。为了满足跨机架的L2转发，汇聚层交换机的性能，例如带宽，转发速率必然要大于接入层交换机。</li><li>如果L2流量需要跨汇聚层POD（大二层架构），那必须经过核心交换机。同样的问题仍然存在，对核心交换机的要求会更高。（核心层以下都是L2）</li><li>东西向的L3流量，不论是不是在一个接入层交换机下，都需要走到具有L3功能的核心交换机才能完成转发。如下图所示：</li></ul></li></ul></li></ul><h2 id="Clos-网络架构"><a href="#Clos-网络架构" class="headerlink" title="Clos 网络架构"></a>Clos 网络架构</h2><ul><li><p>简单的clos架构是一个三级互连架构，包含了输入级，中间级，输出级，<br><img src="/../images/%E5%8F%B6%E8%84%8A%E7%BD%91%E7%BB%9C_134838.png"></p></li><li><p>Clos架构的核心思想是：用多个小规模、低成本的单元构建复杂，大规模的架构。上图中，m是每个子模块的输入端口数，n是每个子模块的输出端口数，r是每一级的子模块数，经过合理的重排，只要满足r2≥max(m1,n3)，那么，对于任意的输入到输出，总是能找到一条无阻塞的通路。</p></li><li><p>现在流行的Clos网络架构是一个二层的spine&#x2F;leaf架构。</p></li></ul><h3 id="spine-leaf-网络"><a href="#spine-leaf-网络" class="headerlink" title="spine-leaf 网络"></a>spine-leaf 网络</h3><ul><li><p>更好的实现了大二层网络，和较强的网络拓展能力<br><img src="/../images/%E5%8F%B6%E8%84%8A%E7%BD%91%E7%BB%9C_132108.png"><br><img src="/../images/%E5%8F%B6%E8%84%8A%E7%BD%91%E7%BB%9C_135238.png"></p></li><li><p>spine交换机之间或者leaf交换机之间不需要链接同步数据（不像三层网络架构中的汇聚层交换机之间需要同步数据）。</p></li><li><p><strong>每个leaf交换机的上行链路等于spine交换机数量，同样的每个spine交换机的下行链路数等于leaf交换机的数量</strong></p></li><li><p>spine交换机和leaf交换机是以full-mesh方式连接。</p></li><li><p>三级Clos架构沿着中间层对折，就得到了二层spine&#x2F;leaf网络架构。由于这种网络架构来源于交换机内部的Switch Fabric，因此这种网络架构也被称为Fabric网络架构。</p></li><li><p>Spine&#x2F;Leaf网络架构中，L2&#x2F;L3的分隔通常在Leaf交换机。也就是说每个Leaf交换机下面都是个独立的L2广播域。<strong>如果说两个Leaf交换机下的服务器需要通讯，需要通过L3路由，经由Spine交换机转发。</strong></p></li><li><p>leaf switch</p><ul><li>相当于传统三层架构中的接入交换机，作为TOR（Top Of Rack）直接连接物理服务器。与接入交换机的区别在于，<strong>L2&#x2F;L3网络的分界点现在在leaf交换机上了。leaf交换机之上是三层网络</strong></li></ul></li><li><p>spine switch</p><ul><li><p>相当于核心交换机。spine和leaf交换机之间通过ECMP（Equal Cost Multi Path）动态选择多条路径。区别在于，spine交换机现在只是为leaf交换机提供一个弹性的L3路由网络，<strong>数据中心的南北流量可以不用直接从spine交换机发出，一般来说，南北流量可以从与leaf交换机并行的交换机（edge switch）再接到WAN router出去。</strong><br><img src="/../images/%E5%8F%B6%E8%84%8A%E7%BD%91%E7%BB%9C_140555.png"></p></li><li><p>与传统三层网络架构类似，这样的设计，能分隔L2广播域，适用的网络规模更大。但是对应的问题就是，服务器的部署不能在数据中心的任意位置。传统的三层网络架构是垂直的结构，而spine&#x2F;leaf网络架构是扁平的结构，从结构上看，spine&#x2F;leaf架构更易于水平扩展。(需要结合overlay等技术)</p></li></ul></li><li><p>一个叶脊拓扑网络主机可以通过叶支交换机（leaf）和另一个叶支交换机上的主机进行通信，而且是独立的通道。这种叶脊拓扑网络可以大大提高网络的效率，特别是高性能计算集群或高频流量通信设备。</p></li><li><p><strong>叶脊拓扑网络结构提供了解决横向网络连接的传输瓶颈，而且叶脊拓扑网络提供了高度的扩展性，叶脊拓扑网络几乎能适应所有大中小型数据中心。</strong></p></li><li><p>叶脊拓扑网络不是完美的。其中一个缺点就是，叶脊拓扑网络交换机的增多使得网络规模变大。叶脊拓扑网络的数据中心需要按客户端的数量，叶脊拓扑网络相应比例的增加交换机和网络设备。随着主机的增加，需要大量的叶交换机（leaf）上行连接到脊交换机（spine）。</p></li></ul><blockquote><p>参考</p><p><a href="https://www.cnblogs.com/nihaizong/p/9261104.html">数据中心网络架构浅谈</a></p><p><a href="https://www.infoobs.com/article/20190304/30663.html">一文读懂数据中心为啥需要大二层网络</a></p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;传统数据中心网络架构&quot;&gt;&lt;a href=&quot;#传统数据中心网络架构&quot; class=&quot;headerlink&quot; title=&quot;传统数据中心网络架构&quot;&gt;&lt;/a&gt;传统数据中心网络架构&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;传统的大型数据中心，网络一般分为三层：分级的互联网络模型。</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ESXI</title>
-    <link href="http://example.com/2023/11/22/ESXI/"/>
-    <id>http://example.com/2023/11/22/ESXI/</id>
-    <published>2023-11-22T08:45:52.000Z</published>
-    <updated>2023-11-29T10:47:16.346Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="VMware-vSphere网络、vSwitch、端口组"><a href="#VMware-vSphere网络、vSwitch、端口组" class="headerlink" title="VMware vSphere网络、vSwitch、端口组"></a>VMware vSphere网络、vSwitch、端口组</h2><h3 id="ESXI-网络"><a href="#ESXI-网络" class="headerlink" title="ESXI 网络"></a>ESXI 网络</h3><ul><li><p>目的</p><ul><li>相互交流（想想 vMotion）</li><li>与 vCenter 通信（想想 HA）</li><li>与他们依赖的外部资源进行通信，例如存储阵列或 Active Directory</li><li>允许它们的常驻虚拟机与它们可能依赖的其他虚拟机和外部资源进行通信</li></ul></li><li><p>配置</p><ul><li>ESXI 主机上的虚拟交换机</li><li>虚拟交换机上的端口组</li></ul></li></ul><h3 id="ECXI主机上的虚拟交换机"><a href="#ECXI主机上的虚拟交换机" class="headerlink" title="ECXI主机上的虚拟交换机"></a>ECXI主机上的虚拟交换机</h3><ul><li><p>ESXI中的虚拟交换机都是三层交换机</p><ul><li>三层交换机能实现不同网段的服务器之间的通信。</li></ul></li><li><p>三层交换机中：</p><ul><li>端口也有2层端口 和 三层端口之分。</li></ul></li><li><p>二层端口和三层端口区分：二层端口不能配置ip，三层端口可以配置ip</p></li><li><p>默认虚拟交换机的端口都是 <strong>二层端口</strong>。</p></li><li><p>将 ESXi 主机上的虚拟交换机视为您之前可能遇到的任何其他交换机，当涉及到网络层时，ESXi 中的虚拟交换机是为我们的 ESXi 主机提供连接、冗余和负载平衡的方式。</p></li><li><p>有两种类型的开关，尽管您可能会听到它们各自使用几个不同的名称。</p><ul><li>vSphere 标准交换机</li><li>vSphere 分布式交换机（需要vSphere Enterprise Plus 许可）</li></ul></li></ul><h4 id="vSphere-标准交换机-标准-vSwitch-vSwitch"><a href="#vSphere-标准交换机-标准-vSwitch-vSwitch" class="headerlink" title="vSphere 标准交换机 &#x2F; 标准 vSwitch&#x2F; vSwitch"></a>vSphere 标准交换机 &#x2F; 标准 vSwitch&#x2F; vSwitch</h4><ul><li>基本虚拟交换机。</li><li>标准 vSwitch 驻留在 ESXi 主机上，必须在每个主机上单独配置<ul><li>可以通过PowerCLI或主机配置文件简化配置</li></ul></li></ul><p><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_171510.png"></p><ul><li>网络交换机（物理）连接到ESXI主机中的 网卡（一般是指的是物理网卡）</li><li>ESXI主机中的 网卡（一般是指的是物理网卡）连接到ESXI中的虚拟交换机</li><li>ESXI可以有多个vSwitch.</li></ul><h4 id="vSphere-分布式交换机-分布式虚拟交换机-dvSwitch"><a href="#vSphere-分布式交换机-分布式虚拟交换机-dvSwitch" class="headerlink" title="vSphere 分布式交换机&#x2F;分布式虚拟交换机&#x2F;dvSwitch"></a>vSphere 分布式交换机&#x2F;分布式虚拟交换机&#x2F;dvSwitch</h4><ul><li>标准虚拟交换机和分布式虚拟交换机之间没有太大区别。</li><li>仍然以冗余方式将 ESXi 主机中的网卡连接到网络交换机，改变的是虚拟层，以及 VMware vSphere 本身内的交换机。<br><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_172134.png"></li><li>交换机配置本身位于 vCenter 服务器而不是 ESXi 主机上</li><li>每个 ESXi 主机上都有分布式虚拟交换机配置的副本，正如您在每个主机上的亮蓝色交换机中看到的那样，这样，如果 vCenter 发生问题，我们的虚拟机就不会受到影响。<br><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_172242.png"></li><li>每个vmnic(ESXI主机的网卡)都连接到分布式虚拟交换机上的相应dvUplink端口。</li><li>通过cCenter 服务器管理分布式虚拟交换机<ul><li>分布式虚拟交换机配置在每个 ESXi 主机上的设计都是相同的。</li></ul></li><li>与标准 vSwitch 类似，可以使用 vSphere Client、PowerCLI 或主机配置文件管理分布式 vSwitch。这里的区别在于，您在 vCenter 服务器上配置单个分布式虚拟交换机，而不是 ESXi 主机上的单个虚拟交换机。</li></ul><blockquote><p>vSphere Distributed Switch 确实需要VMware Enterprise Plus 许可。</p></blockquote><h3 id="VMware-中的-NIC-成组策略"><a href="#VMware-中的-NIC-成组策略" class="headerlink" title="VMware 中的 NIC 成组策略"></a>VMware 中的 NIC 成组策略</h3><ul><li>多个物理网卡可以连接到虚拟交换机上形成冗余，实现负载均衡以及故障恢复。</li></ul><h3 id="虚拟交换机上的-端口组"><a href="#虚拟交换机上的-端口组" class="headerlink" title="虚拟交换机上的  端口组"></a>虚拟交换机上的  端口组</h3><p><img src="/../images/ESXI-%E7%BD%91%E7%BB%9C_113015.png"></p><ul><li>虚拟交换机上的一组虚拟端口（接口）</li><li>分类<ul><li>虚拟机端口组<ul><li>虚拟机端口组是我们连接虚拟机的方式。例如，我可能有一个带有单个 VLAN、多个 VLAN（VLAN 中继）的端口组，或者在分布式虚拟交换机的情况下是专用 VLAN。</li></ul></li><li>VMkernel 端口组</li></ul></li></ul><h4 id="VMkernel-端口组"><a href="#VMkernel-端口组" class="headerlink" title="VMkernel 端口组"></a>VMkernel 端口组</h4><ul><li>Management Network 端口组<ul><li>三层端口</li></ul></li><li>VMK端口不是提供给虚拟机使用的，只提供给ESXI服务器主机使用。<ul><li>vmk0就是ESXI的管理网络。</li></ul></li><li>VMkernel 端口用于 VMware vSphere 中的非虚拟机流量</li><li>每个 ESXi 主机都有一个 VMkernel 端口用于主机管理。<ul><li>如果它是 vSphere 集群的成员，它还将有一个用于 vMotion 的 VMkernel 端口。</li><li>如果群集是 vSAN 群集，则将有一个用于 vSAN 的 VMkernel 端口。</li><li>网络存储服务，容错都有vmkernel端口</li></ul></li><li>每个 VMkernel 端口都有自己唯一的 IP 地址，您还可以更改 VMkernel 端口上的默认 MTU 1500。</li><li>端口组的作用是可以想象成虚拟交换机的下行端口，所以才能针对不同的业务进行VLAN以及流量的控制，将各业务流量进行逻辑隔离。</li></ul><h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><ul><li>同一网段下实现隔离。</li><li>划分不同的局域网</li><li>就是同一个交换机下，在二层（链路层）划分成若干个独立的部分（广播域）。</li><li>VLAN 模型，基于端口的 VLAN 划分（port-based）：</li></ul><h3 id="ACCESS接口"><a href="#ACCESS接口" class="headerlink" title="ACCESS接口"></a>ACCESS接口</h3><ul><li>交换机和PC之间连接需要用ACCESS接口。</li><li>如果一个接口划分给了某个vlan，并且这个接口一端连接了服务器（PC），那这个接口就是ACCESS接口，ACCESS接口属于2层接口，不可配置IP。</li><li>特点：进ACCESS接口需要打tag，出ACCESS接口需要剥离tag</li></ul><h2 id="ESXI-用户角色"><a href="#ESXI-用户角色" class="headerlink" title="ESXI 用户角色"></a>ESXI 用户角色</h2><h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><ul><li>角色是一组预定义的特权（权限的组合）<ul><li>特权定义了执行操作和读取属性所需的权限。<ul><li>例如管理员的角色（拥有所有的权限）<ul><li>虚拟机管理员角色允许用户读取和更改虚拟机属性。</li></ul></li><li>访客的角色（只可读）</li></ul></li></ul></li><li>各种角色定义了对此角色可操作的细节的权限组合。</li><li>分配权限时，可将用户或组与角色配对，并且将该配对与清单对象关联。<ul><li>对于清单中的不同对象，单个用户或组可能有不同角色。</li></ul></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 添加角色 选择特权 </span><br><span class="line">// 特权解释</span><br><span class="line">TrustedAdmin（受信任的管理员）： 这可能是vSphere环境中角色或权限级别的一个表示，指示具有某些受信任特权的管理员。</span><br><span class="line"></span><br><span class="line">Global（全局）： 这可能指的是具有全局范围并影响整个vSphere环境的设置、配置或对象。</span><br><span class="line"></span><br><span class="line">Folder（文件夹）： 在vSphere中，文件夹是一种组织和分组相关对象（如虚拟机或主机）的方法。</span><br><span class="line"></span><br><span class="line">Datacenter（数据中心）： 表示vSphere环境中资源组（主机、集群、存储等）的逻辑容器。</span><br><span class="line"></span><br><span class="line">Datastore（数据存储）： 存储虚拟机文件和其他数据的存储位置。</span><br><span class="line"></span><br><span class="line">Network（网络）： 涉及虚拟化环境中的网络组件和配置。</span><br><span class="line"></span><br><span class="line">DVSwitch（分布式虚拟交换机）： 跨多个主机的虚拟交换机，提供vSphere环境中的集中网络管理。</span><br><span class="line"></span><br><span class="line">DVPortgroup（分布式虚拟端口组）： 分布式虚拟交换机上端口的逻辑分组。</span><br><span class="line"></span><br><span class="line">Host（主机）： 运行ESXi虚拟化程序的物理服务器，用于托管虚拟机。</span><br><span class="line"></span><br><span class="line">VirtualMachine（虚拟机）： 表示在主机上运行的操作系统的虚拟化实例。</span><br><span class="line"></span><br><span class="line">Resource（资源）： 通常是指vSphere环境中的计算资源，如CPU、内存和存储。</span><br><span class="line"></span><br><span class="line">Alarm（警报）： 用于监视特定事件或条件并基于预定义规则触发操作的机制。</span><br><span class="line"></span><br><span class="line">Task（任务）： 表示在vSphere对象上执行的特定操作或操作。</span><br><span class="line"></span><br><span class="line">ScheduledTask（定时任务）： 预定在特定时间或定期运行的任务。</span><br><span class="line"></span><br><span class="line">Sessions（会话）： 表示vSphere环境中的用户会话。</span><br><span class="line"></span><br><span class="line">Performance（性能）： 涉及监控和管理vSphere环境中各个组件的性能。</span><br><span class="line"></span><br><span class="line">Authorization（授权）： 处理vSphere基础设施内的权限和访问控制。</span><br><span class="line"></span><br><span class="line">Extension（扩展）： 允许将附加功能或插件集成到vSphere环境中。</span><br><span class="line"></span><br><span class="line">VApp（虚拟应用程序）： 表示封装和分发软件应用程序以及其配置和依赖关系的软件包。</span><br><span class="line"></span><br><span class="line">Profile（配置文件）： 通常指主机配置文件，用于标准化和自动化ESXi主机的配置。</span><br><span class="line"></span><br><span class="line">EAM（ESXi代理管理器）： 管理ESXi主机上的软件组件。</span><br><span class="line"></span><br><span class="line">StoragePod（存储资源池）： 一种在存储资源中组织和管理资源的方式。</span><br><span class="line"></span><br><span class="line">Certificate（证书）： 处理用于安全通信的SSL证书的管理。</span><br><span class="line"></span><br><span class="line">HealthUpdateProvider（健康更新提供者）： 提供健康相关信息和更新。</span><br><span class="line"></span><br><span class="line">ExternalStatsProvider（外部统计信息提供者）： 涉及外部来源提供统计信息。</span><br><span class="line"></span><br><span class="line">Cryptographer（加密专家）： 处理vSphere环境中的加密操作。</span><br><span class="line"></span><br><span class="line">TenantManager（租户管理器）： 在虚拟化环境中管理多租户方面的组件。</span><br><span class="line"></span><br><span class="line">GuestDataPublisher（客户数据发布者）： 涉及在虚拟机的客户操作系统中发布或管理数据。</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;VMware-vSphere网络、vSwitch、端口组&quot;&gt;&lt;a href=&quot;#VMware-vSphere网络、vSwitch、端口组&quot; class=&quot;headerlink&quot; title=&quot;VMware vSphere网络、vSwitch、端口组&quot;&gt;&lt;/a&gt;VM</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>tun/tap 虚拟网络设备与VPN隧道原理</title>
-    <link href="http://example.com/2023/11/21/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86/"/>
-    <id>http://example.com/2023/11/21/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86/</id>
-    <published>2023-11-21T02:22:01.000Z</published>
-    <updated>2023-11-21T06:40:34.082Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/../images/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86_102730.png"></p><h2 id="什么是Tun-Tap"><a href="#什么是Tun-Tap" class="headerlink" title="什么是Tun&#x2F;Tap"></a>什么是Tun&#x2F;Tap</h2><ul><li><p>TUN 和 TAP是操作系统内核中的虚拟网络设备。</p></li><li><p>全部靠软件实现</p></li><li><p>向运行在操作系统上的软件提供 与硬件的网络设备完全相同的功能。</p></li><li><p>TAP等同于一个以太网设备，它操作第二层数据包如以太网数据帧。</p></li><li><p>TUN模拟了网络层设备，操作第三层数据包，比如IP数据封包。</p></li><li><p>操作系统通过TUN&#x2F;TAP设备向绑定该设备的用户空间的程序发送数据（写入&#x2F;dev&#x2F;xx 字符设备）</p></li><li><p>用户空间的程序也能像操作系统硬件网络设备那样，通过TUN&#x2F;TAP发送数据。</p><ul><li>TUN&#x2F;TAP设备向操作系统的网络栈投递数据包。从而模拟从外部接收数据的过程。</li></ul></li></ul><h3 id="应用程序操作Tun-Tap"><a href="#应用程序操作Tun-Tap" class="headerlink" title="应用程序操作Tun&#x2F;Tap"></a>应用程序操作Tun&#x2F;Tap</h3><ul><li><p>Linux TUN&#x2F;TAP 驱动程序为应用程序提供了两种交互方式：</p><ul><li>虚拟网络接口和字符设备&#x2F;dev&#x2F;net&#x2F;tun<ul><li>写入字符设备&#x2F;dev&#x2F;net&#x2F;tun的数据会发送到虚拟网络接口中；发送到虚拟网络接口中的数据也会出现在该字符设备上。</li></ul></li></ul></li><li><p>应用程序可以通过标准的socket api向tun&#x2F;tap 接口发送ip数据包，就像对一个真实网卡操作一样。</p></li><li><p>操作系统也会根据TCP&#x2F;IP 协议栈的处理向TUN&#x2F;TAP接口发送IP数据包或者以太网数据，如arp&#x2F;icmp 包。</p></li><li><p>Tun&#x2F;Tap驱动程序会将Tun&#x2F;Tap接口收到的数据包原样写入到&#x2F;dev&#x2F;net&#x2F;tun字符设备上，处理Tun&#x2F;Tap数据的应用程序如<strong>VPN程序可以从该设备上读取到数据包，以进行相应处理。</strong></p><blockquote><p>这个vpn 程序在 用户空间。WireGuard 可以在内核中运行。</p></blockquote></li><li><p>应用程序也可以通过&#x2F;dev&#x2F;net&#x2F;tun字符设备写入数据包，这种情况下该字符设备上写入的数据包会被发送到Tun&#x2F;Tap虚拟接口上，进入操作系统的TCP&#x2F;IP协议栈进行相应处理，就像从物理网卡进入操作系统的数据一样。<br><img src="/../images/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86_132529.png"></p></li></ul><h3 id="使用TUN-TAP创建点对点隧道"><a href="#使用TUN-TAP创建点对点隧道" class="headerlink" title="使用TUN&#x2F;TAP创建点对点隧道"></a>使用TUN&#x2F;TAP创建点对点隧道</h3><p><img src="/../images/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86_132743.png"></p><ul><li><p>左边主机上的应用程序 通过 socket api，协议栈发送到tun 虚拟设备上的ip数据包（路由+iptables 到tun）的ip数据包被VPN程序通过字符设备接收，然后再通过一个TCP或者UDP隧道（加密原来的ip包，使之成为udp的普通数据）发送到右端的VPN服务器上，VPN服务器将隧道负载中的原始IP数据包（解密成原来的ip包）写入字符设备，这些IP包就会出现在右侧的Tun虚拟设备上，最后通过操作系统协议栈和socket接口发送到右侧的应用程序上。</p></li><li><p>隧道也可以采用tap虚拟设备实现。使用Tap的话，隧道的负载将是以太数据帧而不是IP数据包，而且还会传递ARP等广播数据包。</p></li></ul><p><img src="/../images/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86_135204.png"></p><h3 id="物理网卡和虚拟网卡"><a href="#物理网卡和虚拟网卡" class="headerlink" title="物理网卡和虚拟网卡"></a>物理网卡和虚拟网卡</h3><ul><li>绝不可能通过虚拟网卡向外界发送数据，外界数据也不可能直接发送到虚拟网卡上。能够直接收发外界数据的，只能是物理设备。<ul><li>可以将数据传输到本机的另一个网卡(虚拟网卡或物理网卡)或其它虚拟设备(如虚拟交换机)上</li><li>可以在用户空间运行一个可读写虚拟网卡的程序，该程序可将流经虚拟网卡的数据包进行处理，这个用户程序就像是物理网卡的硬件功能一样，可以收发数据(可将物理网卡的硬件功能看作是嵌入在网卡上的程序)，比如OpenVPN就是这样的工具<blockquote><p>用户空间的程序是无法对数据包做任何封装和解封操作的，所有的封装和解封都只能由内核的网络协议栈来完成。<br>在不绕过内核的情况下，网络数据的封装和解封由内核负责，用户空间的程序无法对数据进行封装和解封。<br><img src="/../images/wireguard-%E4%BB%8B%E7%BB%8D_101237.png"></p></blockquote></li></ul></li></ul><blockquote><p>写虚拟网卡的用户空间程序仅充当了一个特殊的【转发】程序：要么转发四层tcp&#x2F;udp数据，要么转发三层数据包，要么转发二层数据帧。</p></blockquote><p>假如物理网卡eth0从外界网络接收了这么一段特殊的ping请求数据：<br><img src="/../images/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86_140400.png"><br>这份数据会从物理网卡传输到内核网络协议栈，网络协议栈会对其解封，解封的内容只能是tcp&#x2F;ip协议栈中的内容，即只能解封帧头部、IP头部以及端口头部，网络协议栈解封后还剩下一段包含了内层IP头部(tun的IP)以及icmp请求的数据。</p><p>内核会根据刚才解封的端口号找到对应的服务进程，并将解封剩下的数据传输给该进程，即传输给用户空间的程序。</p><p>用户空间的程序不做任何修改地将读取到的包含了内层IP头部和ICMP请求的数据原封不动地写入虚拟网卡设备，内核从虚拟网卡接收到数据后，将数据进行解封，解封得到最终的icmp请求数据，于是内核开始构建用于响应ping请求的数据。</p><ul><li>参考<br><a href="https://www.junmajinlong.com/virtual/network/all_about_tun_tap/index.html">理解Linux虚拟网卡设备tun&#x2F;tap的一切</a><br><a href="https://blog.csdn.net/zhou307/article/details/102806500">tun&#x2F;tap虚拟网卡收发机制解析</a><br><a href="https://www.luozhiyun.com/archives/684">云原生虚拟网络 tun&#x2F;tap &amp; veth-pair</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/../images/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86_10273</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>wireguard 介绍</title>
-    <link href="http://example.com/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://example.com/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/</id>
-    <published>2023-11-17T01:49:09.000Z</published>
-    <updated>2023-12-04T02:40:42.366Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="WireGuard-简介"><a href="#WireGuard-简介" class="headerlink" title="WireGuard 简介"></a>WireGuard 简介</h2><ul><li>Wireguard 是一个安全的网络通道<ul><li>wireguard是一种VPN协议</li></ul></li><li>wireguard 工作在第三层<ul><li>工作在X层代表可以解析第X层的数据包。</li><li>比如交换机是工作在第二层的设备，是指其可以解析第二层的以太帧帧头；路由器是工作第三层的设备是指其可以解析第三层的IP包包头），</li><li>其可以解析数据包的源目的IP。</li></ul></li><li>实现形式为linux内核中的一个虚拟网络网卡(注：实际上目前Wireguard协议不仅仅是linux内核实现，还有golang实现)</li><li>只需要一轮交互就可以完成密钥交换</li></ul><h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p><img src="/../images/wireguard-%E4%BB%8B%E7%BB%8D_132501.png"><br><img src="/../images/wireguard-%E4%BB%8B%E7%BB%8D_093217.png"></p><ul><li><p>WireGuard 以 UDP 实现，但是运行在第三层 —— IP 层。每个 Peer 都会生成一个 wg0 虚拟网卡，同时服务端会在物理网卡上监听 UDP 51820 端口。应用程序的包发送到内核以后，如果地址是虚拟专用网内部的，那么就会交给 wg0 设备，WireGuard 就会把这个 IP 包封装成 WireGuard 的包，然后在 UDP 中发送出去，对方的 Peer 的内核收到这个 UDP 包后再反向操作，解包成为 IP 包，然后交给对应的应用程序。</p></li><li><p>WireGuard 实现方式是内核模块，所以上面所说的解包封包转发等操作都是在内核实现的，基本不需要什么复制。相对而言，OpenXXX 这种在用户层实现的协议就需要在内核和用户空间之间拷贝来拷贝去，对性能是硬伤。</p></li></ul><h2 id="路由最长匹配原则-静态路由表-和-默认路由"><a href="#路由最长匹配原则-静态路由表-和-默认路由" class="headerlink" title="路由最长匹配原则(静态路由表) 和 默认路由"></a>路由最长匹配原则(静态路由表) 和 默认路由</h2><h3 id="静态路由表"><a href="#静态路由表" class="headerlink" title="静态路由表"></a>静态路由表</h3><p><img src="/../images/wireguard-%E4%BB%8B%E7%BB%8D_150923.png"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. NETworK:目的地址/前缀长度</span><br><span class="line">2. Mask: 掩码</span><br><span class="line">3. Next Hop: 下一跳</span><br></pre></td></tr></table></figure><h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><ul><li><ol><li>路由器收到分组，解包取出目的ip地址；</li></ol></li><li><ol start="2"><li>在路由表中匹配表项：目的ip地址和路由表项中的Mask掩码相与，用得到的网络地址和Network比较；</li></ol><ul><li>找到相同的，继续查找，根据最长匹配原则获取匹配长度最长的路由项。最后按最优的路由表项的Next Hop进行转发；</li><li>找不到相同的，有默认路由按默认路由的Next Hop进行转发；若没有默认路由，弃帧；</li></ul></li></ul><h3 id="默认路由"><a href="#默认路由" class="headerlink" title="默认路由"></a>默认路由</h3><ul><li>默认路由表项的Network和Mask 都是0.0.0.0</li><li>当普通静态路由表项没有匹配的表项，路由器就会选择默认路由<ul><li><ol><li>Mask0.0.0.0和收到分组的目的ip地址相与，得到的网络地址就是0.0.0.0，和默认路由表项的Network相同，也是匹配的；</li></ol></li><li><ol start="2"><li>Network0.0.0.0相当于是最短的前缀。普通静态路由表项的前缀一定比默认路由表项的前缀长，那么如果普通路由表项能匹配，必定不需要选择默认路由表项，这也是符合路由最长匹配原则。</li></ol></li></ul></li></ul><h2 id="wireguard-路由详解"><a href="#wireguard-路由详解" class="headerlink" title="wireguard 路由详解"></a>wireguard 路由详解</h2><h3 id="main-路由表"><a href="#main-路由表" class="headerlink" title="main 路由表"></a>main 路由表</h3><ul><li><p><code>ip route</code> 查看</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">default via 192.168.100.254 dev eth0 proto dhcp src 192.168.100.63 metric 100 </span><br><span class="line">192.168.100.0/24 dev eth0 proto kernel scope link src 192.168.100.63 </span><br><span class="line">192.168.100.254 dev eth0 proto dhcp scope link src 192.168.100.63 metric 100</span><br></pre></td></tr></table></figure><blockquote><p>第一条：表示 默认路由规则。任何目标不在本地子网（局域网）内的数据包将通过 eth0 网络接口发送到网关 192.168.100.254，该网关是通过 DHCP 协议获取的。源IP地址将被设置为 192.168.100.63。度量值 100 表示这是一个比较优先的路由规则。<br>第二条：表示 <strong>本地子网路由规则</strong>。表示 192.168.100.0&#x2F;24 网段是直接连接到 eth0 网络接口的本地子网。这是一个由内核自动生成的本地链路路由规则，用于直接通信到本地子网，无需经过网关。</p></blockquote></li><li><p><code>scope link</code> 表示本地子网范围 </p><blockquote><p>第三条：表示 网关路由规则。指定了网关 192.168.100.254 是通过 DHCP 协议获取的，并且它是通过 eth0 网络接口连接的。与默认路由规则相比，这个规则更加详细，它是一个到网关的直接链路路由规则。度量值 100 表示这是一个比较优先的路由规则。</p></blockquote></li><li><p>从路由表中可以看出，所有的流量都是从物理网卡出去的，并没有通过WireGuard虚拟网络接口。</p></li></ul><h4 id="路由表"><a href="#路由表" class="headerlink" title="路由表"></a>路由表</h4><ul><li><p>从linux2.2的版本开始，内核中就有多个路由表，并且还有一套规则，这套规则告诉内核 <strong>这套规则会告诉内核如何为每个数据包选择正确的路由表。</strong></p></li><li><p>执行 <code>ip route</code>时，看到的是特定的路由表main。除了main之外还有其他的路由表存在。路由表一般用整数来标识，也可以通过文本对其命名，这些命名都保存在文件 &#x2F;etc&#x2F;iproute2&#x2F;rt_tables</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/iproute2/rt_tables</span><br><span class="line">#</span><br><span class="line"># reserved values</span><br><span class="line">#</span><br><span class="line">255     local</span><br><span class="line">254     main</span><br><span class="line">253     default</span><br><span class="line">0       unspec</span><br><span class="line">#</span><br><span class="line"># local</span><br><span class="line">#</span><br><span class="line">#1      inr.ruhep</span><br></pre></td></tr></table></figure></li><li><p>linux 系统中，可以自定义从 <code>1-252</code>个路由表。linux系统默认维护了4个路由表：</p><ul><li>0: 系统保留表</li><li>253：default table. 没特别指定的默认路由都放在该表。</li><li>254：main table. 没指明路由表的所有路由放在该表。</li><li>255：local table. 保存本地接口地址，广播地址，NAT地址，由系统维护，用户不得更改。</li></ul></li><li><p>路由表的查看</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ip route show table table_number</span><br><span class="line"> </span><br><span class="line">$ ip route show table table_name</span><br></pre></td></tr></table></figure><blockquote><p>路由表决定 <strong>如何传输数据包</strong><br>iptables决定 <strong>是否传输数据包</strong></p></blockquote></li></ul><h3 id="路由策略"><a href="#路由策略" class="headerlink" title="路由策略"></a>路由策略</h3><ul><li><p>内核是如何知道哪个数据包应该使用哪个路由表呢？</p></li><li><p>系统中有一套规则会告诉内核如何为每个数据包选择正确的路由表，这套规则就是路由策略数据库。这个数据库由 ip rule 命令来管理，如果不加任何参数，将会打印所有的路由规则：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0:      from all lookup local</span><br><span class="line">32766:  from all lookup main</span><br><span class="line">32767:  from all lookup default</span><br></pre></td></tr></table></figure></li><li><p>左边的数字（0,32764,…..）表示规则的优先级：</p><ul><li><strong>数值越小的规则，优先级越高</strong></li><li>数值较小的规则会被优先处理。<blockquote><p>“路由规则的数值范围: 1~2^23−1”</p></blockquote></li></ul></li><li><p>除了优先级外，每个规则还有一个选择器(selector)和对应的执行策略(action).</p><ul><li>选择器会判断<strong>该规则是否适用于当前的数据包</strong>，如果适用，就执行对应的策略。最常见的执行策略就是查询一个特定的路由表（参考上一节内容）。如果该路由表包含了当前数据包的路由，那么就执行该路由；<strong>否则就会跳过当前路由表，继续匹配下一个路由规则。</strong></li></ul></li><li><p>在 Linux 系统启动时，内核会为路由策略数据库配置三条缺省的规则：</p><ul><li>0：匹配任何条件，查询路由表 local (ID 255)，该表 local 是一个特殊的路由表，包含对于本地和广播地址的优先级控制路由。rule 0 非常特殊，不能被删除或者覆盖。</li><li>32766：匹配任何条件，查询路由表 main (ID 254)，该表是一个常规的表，包含所有的无策略路由。系统管理员可以删除或者使用另外的规则覆盖这条规则。</li><li>32767：匹配任何条件，查询路由表 default (ID 253)，该表是一个空表，它是后续处理保留。对于前面的策略没有匹配到的数据包，系统使用这个策略进行处理，这个规则也可以删除。</li></ul></li><li><p>在默认情况下进行路由时，首先会根据规则 0 在本地路由表里寻找路由，如果目的地址是本网络，或是广播地址的话，在这里就可以找到合适的路由；如果路由失败，就会匹配下一个不空的规则，在这里只有 32766 规则，在这里将会在主路由表里寻找路由；如果失败，就会匹配 32767 规则，即寻找默认路由表。如果失败，路由将失败。从这里可以看出，策略性路由是往前兼容的。</p></li></ul><h3 id="WireGuard-全局路由策略"><a href="#WireGuard-全局路由策略" class="headerlink" title="WireGuard 全局路由策略"></a>WireGuard 全局路由策略</h3><ul><li>本质：添加了新的规则和表来实现特定路由（wg0出去，修改数据包（iptables））</li><li>wg-quick 这种做法的巧妙之处在于，它不会扰乱你的主路由表，而是通过规则匹配新创建的路由表。断开连接时只需删除这两条路由规则，默认路由就会被重新激活。</li></ul><blockquote><p><a href="https://cloud.tencent.com/developer/article/2153889">参考</a></p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;WireGuard-简介&quot;&gt;&lt;a href=&quot;#WireGuard-简介&quot; class=&quot;headerlink&quot; title=&quot;WireGuard 简介&quot;&gt;&lt;/a&gt;WireGuard 简介&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Wireguard 是一个安全的网络通道&lt;ul&gt;</summary>
-      
-    
-    
-    
-    
-    <category term="wireguard,VPN" scheme="http://example.com/tags/wireguard-VPN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>博客介绍</title>
-    <link href="http://example.com/2023/11/16/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://example.com/2023/11/16/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/</id>
-    <published>2023-11-16T07:49:45.000Z</published>
-    <updated>2023-11-17T01:41:53.202Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="欢迎来到-你的名字-的个人知识博客！"><a href="#欢迎来到-你的名字-的个人知识博客！" class="headerlink" title="欢迎来到 [你的名字] 的个人知识博客！"></a>欢迎来到 [你的名字] 的个人知识博客！</h1><h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>嗨，大家好！我是Fisher JJ，一个对计算机充满热情的人。通过这个博客，我希望与大家分享我的学习和思考，探讨 计算机领域的各种话题。</p><h2 id="为什么我要写这个博客？"><a href="#为什么我要写这个博客？" class="headerlink" title="为什么我要写这个博客？"></a>为什么我要写这个博客？</h2><p>我创建这个博客的初衷是为了建立一个记录自己学习的平台。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;欢迎来到-你的名字-的个人知识博客！&quot;&gt;&lt;a href=&quot;#欢迎来到-你的名字-的个人知识博客！&quot; class=&quot;headerlink&quot; title=&quot;欢迎来到 [你的名字] 的个人知识博客！&quot;&gt;&lt;/a&gt;欢迎来到 [你的名字] 的个人知识博客！&lt;/h1&gt;&lt;h2 i</summary>
-      
-    
-    
-    
-    
-    <category term="个人介绍" scheme="http://example.com/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/"/>
     
   </entry>
   

@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>posix | Blog of Fisher JJ</title><meta name="author" content="Fisher JJ"><meta name="copyright" content="Fisher JJ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="posxi 简介概念 POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX）,缩写为POSIX  发布-IEEE系统调用，posix, C库，系统命令和内核函数 linux三种接口  linux提供了用户接口（shell）,库函数接口（c语言程序调用库），系统调用接口三种接口。   系统调用  操作系统是不能运行进程之间操作硬件资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="posix">
+<meta property="og:url" content="http://example.com/2024/02/29/posix/index.html">
+<meta property="og:site_name" content="Blog of Fisher JJ">
+<meta property="og:description" content="posxi 简介概念 POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX）,缩写为POSIX  发布-IEEE系统调用，posix, C库，系统命令和内核函数 linux三种接口  linux提供了用户接口（shell）,库函数接口（c语言程序调用库），系统调用接口三种接口。   系统调用  操作系统是不能运行进程之间操作硬件资源">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-02-29T02:49:25.000Z">
+<meta property="article:modified_time" content="2024-02-29T06:53:15.197Z">
+<meta property="article:author" content="Fisher JJ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/02/29/posix/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'posix',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-29 14:53:15'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">posix</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-29T02:49:25.000Z" title="Created 2024-02-29 10:49:25">2024-02-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-29T06:53:15.197Z" title="Updated 2024-02-29 14:53:15">2024-02-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="posix"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="posxi-简介"><a href="#posxi-简介" class="headerlink" title="posxi 简介"></a>posxi 简介</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX）,缩写为POSIX</li>
+</ul>
+<h3 id="发布-IEEE"><a href="#发布-IEEE" class="headerlink" title="发布-IEEE"></a>发布-IEEE</h3><h3 id="系统调用，posix-C库，系统命令和内核函数"><a href="#系统调用，posix-C库，系统命令和内核函数" class="headerlink" title="系统调用，posix, C库，系统命令和内核函数"></a>系统调用，posix, C库，系统命令和内核函数</h3><ul>
+<li><p>linux三种接口</p>
+<ul>
+<li>linux提供了用户接口（shell）,库函数接口（c语言程序调用库），系统调用接口三种接口。</li>
+</ul>
+</li>
+<li><p>系统调用</p>
+<ul>
+<li>操作系统是不能运行进程之间操作硬件资源，进程如果要想访问这些资源，必须向操作系统申请。进程向系统申请的入口就是系统调用（system call）,它由操作系统提供。</li>
+<li>在linux中系统调用是用户空间访问内核的唯一手段，除异常和陷入外，系统调用是内核唯一的合法入口。</li>
+</ul>
+</li>
+<li><p>系统调用和posix</p>
+<ul>
+<li>系统调用虽然是内核和用户应用程序之间的沟通桥梁，是用户应用程序访问内核的入口点。但通常，应用程序是通过操作系统提供的应用编程接口API，而不是之间通过系统调用来编程。<ul>
+<li>应用程序可以直接调用系统调用接口，但大多数都是通过应用编程接口api。</li>
+</ul>
+</li>
+<li>操作系统api 的主要功能就是把操作系统的功能完全展示出来，提供给应用程序，基于该操作系统，与文件、内存、时钟、网络、图形、各种外设等互操作的能力。此外，操作系统API通常还提供许多工具类的功能，比如操纵字符串、各种数据类型、时间日期等。 在UNIX世界里，最通用的操作系统API基于POSIX（Portable Operating System Interface of UNIX，可移植操作系统接口）标准。 </li>
+<li>POSIX是一套操作系统接口的标准，POSIX标准定义了”POSIX兼容”的操作系统所必须提供的服务，提供了根据POSIX而定义的API 函数。这些API函数和系统调用之间有着直接的关系，<strong>一个API函数可以由一个系统调用实现，也可以通过调用多个系统调用来实现，还可以完全不使用任何系统调用。</strong></li>
+</ul>
+</li>
+<li><p>系统调用和C库</p>
+<ul>
+<li>是 Portable Operating System Interface(可移植操作系统接口) 的缩写，X表示UNIX，它是 ISO C 的延伸，明定了一个可移植的操作系统所应具备的种种条件，其范围不只有系统函数库而已。POSIX库 就是C POSIX library。C POSIX library是C语言的POSIX系统下的标准库。包含了一些在C语言标准库之外的函数。为了OS之间的可移植性，POSIX标准规定了一些标准的接口。而这些接口标准的集合就是POSIX库。</li>
+<li>操作系统API 通过都以c库的方式提供，linux也是如此。</li>
+<li>C库提供了posix的绝大部分api，同时，内核提供的每个系统调用在c库中都具有相应的封装函数。</li>
+<li>系统调用与其c库封装函数的名称常常相同，例如，read系统调用在c库中的封装函数即为read函数。</li>
+<li>从用户的角度看，系统调用和C库之间的区别并不重要，他们只需通过C库函数完成所需功能。相反，从内核的角度看，需要考虑的则是提供哪些针对确定目的的系统调用，并不需要关注它们如何被使用。</li>
+</ul>
+</li>
+<li><p>系统调用与系统命令</p>
+<ul>
+<li>系统命令位于C库的更上层，是利用c库实现的的可执行程序，比如最为常用的ls，cd等。</li>
+</ul>
+</li>
+<li><p>系统调用和内核函数</p>
+<ul>
+<li>内核函数与C库函数的区别仅仅是内核函数在内核实现，因此必须遵守内核编程的规则。</li>
+<li>系统调用最终必须具有明确的操作。</li>
+<li>用户应用程序通过系统调用进入内核后，会执行各个系统调用对应的内核函数，</li>
+<li>系统调用说的是操作系统提供给用户程序调用的一组“特殊”接口。用户程序可以通过这组“特殊”接口来获得操作系统内核提供的服务，比如用户可以通过文件系统相关的调用请求系统打开文件、关闭文件或读写文件，可以通过时钟相关的系统调用获得系统时间或设置系统时间等。</li>
+<li>从逻辑上来说，系统调用可被看成是一个内核与用户空间程序交互的接口——它好比一个中间人，把用户进程的请求传达给内核，待内核把请求处理完毕后再将处理结果送回给用户空间</li>
+<li>系统调用是用户进程进入内核的接口层，它本身并非内核函数</li>
+<li>就像系统调用本身在应用程序和内核间的桥梁作用一样</li>
+<li>内核提供的这组系统调用通常也被称之为系统调用接口层。系统调用接口层作为内核和用户应用程序之间的中间层，扮演了一个桥梁，或者说中间人的角色。系统调用把应用程序的请求传达给内核，待内核处理完请求后再将处理结果返回给应用程序。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../images/posix_142857.png"><br><img src="/../images/posix_142713.png"><br><img src="/../images/posix_135654.png"><br>内核函数-》系统调用函数-》C库（应用编程api posix）-》应用程序</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/invisible2/p/6871841.html">系统调用、库函数、内核函数区别</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012294613/article/details/124635425">系统调用、POSIX、C库、系统命令和内核函数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xkfz007/articles/2176983.html">系统调用、POSIX、C库、系统命令和内核函数</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Fisher JJ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/02/29/posix/">http://example.com/2024/02/29/posix/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/29/seastar/" title="seastar"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">seastar</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/29/bluestore/" title="bluestore"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">bluestore</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#posxi-%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">posxi 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83-IEEE"><span class="toc-number">1.2.</span> <span class="toc-text">发布-IEEE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%EF%BC%8Cposix-C%E5%BA%93%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E5%92%8C%E5%86%85%E6%A0%B8%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">系统调用，posix, C库，系统命令和内核函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.1.</span> <span class="toc-text">参考</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="内核传输数据弊端和解决方案">内核传输数据弊端和解决方案</a><time datetime="2024-03-14T05:40:35.000Z" title="Created 2024-03-14 13:40:35">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/uio/" title="uio">uio</a><time datetime="2024-03-14T01:33:02.000Z" title="Created 2024-03-14 09:33:02">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/" title="磁盘性能">磁盘性能</a><time datetime="2024-03-11T08:00:15.000Z" title="Created 2024-03-11 16:00:15">2024-03-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/07/linux-uio/" title="linux uio">linux uio</a><time datetime="2024-03-07T02:20:54.000Z" title="Created 2024-03-07 10:20:54">2024-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统">文件系统</a><time datetime="2024-03-04T06:56:42.000Z" title="Created 2024-03-04 14:56:42">2024-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

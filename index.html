@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-12-20 19:26:59'
+  postUpdate: '2024-03-15 11:33:07'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -149,187 +149,133 @@
       }
       detectApple()
     })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Blog of Fisher JJ</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/" title="容器，docker">容器，docker</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-20T08:58:21.000Z" title="Created 2023-12-20 16:58:21">2023-12-20</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/18/LDAP/" title="LDAP">LDAP</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-18T10:35:13.000Z" title="Created 2023-12-18 18:35:13">2023-12-18</time></span></div><div class="content">LDAP 概念
-LDAP 是轻量目录访问协议，基于x.500标准，可以定制。
-LDAP 支持TCP/IP, 这是访问internet 必须的。
-LDAP是一个得到关于人或资源的集中，静态数据的快速方式。
-LDAP是一个用来发布目录信息到许多不同资源的协议。
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Blog of Fisher JJ</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="内核传输数据弊端和解决方案">内核传输数据弊端和解决方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-14T05:40:35.000Z" title="Created 2024-03-14 13:40:35">2024-03-14</time></span></div><div class="content">DPDK 入门最佳指南
+弊端
 
-目录树概念
-目录树
-在一个目录服务系统中，整个目录信息集可以表示为一个目录信息树，树中的每个节点是一个条目（Entry）。
+中断处理：当网络中大量数据包到来时，会产生频繁的硬件中断请求，这些硬件中断可以打断之前较低优先级的软中断或者系统调用的执行过程，如果这种打断频繁的话，将会产生较高的性能开销。
 
 
-条目（Entry）
-条目，也叫记录项，是LDAP中最基本的颗粒，就像字典中的词条，或者是数据库中的记录。
-通过对LDAP的添加，删除，更改，检索都是以条目为基本对象的。
 
+内存拷贝：正常情况下，一个网络数据包从网卡到应用程序需要经过如下的过程：数据从网卡通过dma等方式传到内核开辟的缓冲区，然后从内核空间拷贝到用户态空间，在linux内核协议中，这个耗时操作甚至占到了数据包整个处理流程的57.1%
 
 
 
-LDAP 目录的条目 (entry) 由属性 (attribute) 的一个聚集组成，并由一个唯一性的名字引用，即专有名称（distinguished name，DN）。例如。DN 可以是：&quot;cn=group,dc=eryajf,dc=net&quot;
+上下文切换：频繁到达的硬件中断和软中断都可能随时抢占系统调用的运行，这会产生大量的上下文切换开销，另外，在基于多线程的服务器设计框架中，线程间的调度也会产生频繁的上下文切换开销，锁竞争的耗能也是十分严重的问题。
 
-对象类（ObjectClass）
-LDAP中，一个条目必须包含一个objectClass,且需要赋予至少一个值，每一个值将用作一条LDAP条目进行数据存储的模板。
 
- ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/15/PCIE%E9%80%9F%E7%8E%87/" title="PCIE速率">PCIE速率</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-15T08:03:13.000Z" title="Created 2023-12-15 16:03:13">2023-12-15</time></span></div><div class="content">
-PCIE的规格一般有 PCIE2.0&#x2F;PCIE3.0&#x2F;PCIE4.0&#x2F;PCIE5.0
 
-PCIE 相关概念
-传输速率为每秒传输量GT&#x2F;s, 而不是每秒位数Gbps, 因为传输率包括不提供额外吞吐量的开销位；比如PCIe 1.x 和 PCIe 2.x 使用8b&#x2F;10b 编码方案。导致占用了20%（2&#x2F;10）的原始信道带宽。
-GT&#x2F;s ——Giga transation per second （千兆传输&#x2F;秒），即每一秒内传输的次数。重点在于描述物理层通信协议的速率属性，可以不和链路宽度等关联。
-Gbps —— Giga Bits Per Second （千兆位&#x2F;秒）。原始速率
-GT&#x2F;s 与Gbps 之间不存在成比例的换算关系。有效的带宽（乘以了比例）
+局部性失效：如今主流的处理器都是多个核心的，这意味着一个数据包的处理可能跨多个cpu核心，比如一个数据包可能终端在cpu0，内核态处理在 cpu1，用户态处理在 cpu2，这样跨多个核心，容易造成 CPU 缓存失效，造成局部性失效。如果是 NUMA 架构，更会造成跨 NUMA 访问内存，性能受到很大影响。
 
-PCIE带宽计算
-PCIe 吞吐量（可用带宽）计算方法：吞吐量 &#x3D; 传输速率 *  编码方案
-GT(Gigatransfer) x Lane的数量 x 编码方案效率
-PCI-e2.0 协议支持 5.0 GT&#x2F;s，即每一条 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/14/nfs%E6%9C%8D%E5%8A%A1%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E6%98%A0%E5%B0%84/" title="nfs服务用户身份映射">nfs服务用户身份映射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-14T05:42:26.000Z" title="Created 2023-12-14 13:42:26">2023-12-14</time></span></div><div class="content">NFS 介绍
-NFS（network file system, 网络文件系统）是一种广泛的文件共享服务（企业内部网络），主要用于linux以及类unix系统之间的文件共享。
-采用C&#x2F;S工作模式。在nfs服务器上将某个目录设置为共享目录，客户端可以将这个目录挂载到本地。
-NFS服务本身比较简单，尤其是在权限设置方面功能比较弱。
 
-用户身份映射
-NFS服务本身并不具备身份验证功能，仅支持基于客户端IP进行认证。
-我们在对NFS服务进行权限设置时，不能针对用户来分配权限，而只能针对客户端IP进行权限分配。（指的是客户端的用户，如果是truenas，则可以利用目录的权限来控制）
-要实现对共享目录的写入操作，必须要保证在NFS服务和操作系统两个层面全部都具有写入权限才可以。如何使得客户端可以在操作系统层面对共享目录具有写入权限，这就要涉及到用户身份映射问题。
 
-原理
-nfs提供了一种身份映射的机制来对用户身份进行管理。
+内存管理：传统服务 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/14/uio/" title="uio">uio</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-14T01:33:02.000Z" title="Created 2024-03-14 09:33:02">2024-03-14</time></span></div><div class="content">UIO是什么？
+UIO（Userspace i&#x2F;o）是linux 内核中的一个轻量级驱动框架，它允许用户空间程序直接访问物理设备资源，如内存，中断和DMA通道等。UIO的主要目标是提供一种简单而灵活的方式，让用户空间程序能够直接与硬件设备进行交互，而无需通过内核空间的传统驱动程序。这种模型特别适用于哪些需要高性能，低延迟或特殊硬件访问需求的场景。
 
-当客户端访问nfs服务时，服务器会根据情况将客户端用户的身份映射成nfs匿名用户nfsnobody。nfsnobody是由nfs服务在系统中自动创建的一个程序用户账号 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/05/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" title="时序数据库">时序数据库</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-05T09:28:39.000Z" title="Created 2023-12-05 17:28:39">2023-12-05</time></span></div><div class="content">时序数据库时序数据库中存储的时序数据
-每条数据都会带有时间戳属性。
+UIO的软件架构介绍
+UIO驱动模型由内核空间的UIO核心代码和用户空间的库组成。内核空间的UIO核心代码负责设备的注册，内存映射，中断管理等操作，而用户空间的库则提供了访问这些功能模块的接口。
 
-采集时序数据的目的是监测数据的前后差异，然后做出响应。
+内核空间部分
+UIO核心代码：这是uio驱动模型的核心，辅助设备驱动的注册和注销，内存映射的管理，中断处理等。关键函数uio_register_device()
+UIO设备：UIO设备是UIO核心代码与物理设备之间的抽象层。每个UIO设备都有一个与之关联的设备文件，用户空间程序可以通过这个设备文件与设备进行通信。
 
-时序数据库就是把时间作为一个默认纬度罢了 一般靠谱点的话也应该以时间纬度来设计存储引擎
+用户空间部分：
+UIO用户空间库：这个库提供了一系列的API，允许用户空间程序与UIO设备进行交互，如打开设备，映射内存， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/" title="磁盘性能">磁盘性能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-11T08:00:15.000Z" title="Created 2024-03-11 16:00:15">2024-03-11</time></span></div><div class="content">磁盘性能指标说明
+衡量磁盘性能常见的指标有：使用率，饱和度，iops，吞吐量以及响应时间，具体说明：
+使用率，是指磁盘处理I&#x2F;O的时间百分比。过高的使用率（比如超过80%），通常意味着磁盘I&#x2F;O存在性能瓶颈。
+饱和度，是指磁盘处理I&#x2F;O的繁忙程度。过高的饱和度，意味着磁盘有严重的性能瓶颈。当饱和度为100%时，磁盘无法接受新的I&#x2F;O请求。
+IOPS，是指每秒的I&#x2F;O请求数。
+吞吐量，是指每秒的I&#x2F;O请求大小，即每秒磁盘I&#x2F;O的流量，磁盘写入加上读出数据的大小。单位为bps。
 
-如果数据采集频率少，数据量不大的话，使用关系&#x2F;非关系型数据库代替时序数据库是完全没有问题的。
 
 
-TDengine
-TDengine是一个高效的存储、查询、分析时序大数据的平台，专为物联网、车联网、工业互联网、运维监测等优化而设计。可以像使用关系型数据库MySQL一样来使用它，简单又方便。
-TDengine迅速定位了自己要做的产品，那就是物联网大数据平台，要把时序数据库、缓存、消息订阅、流式计算等系列功能融合在一起，一站式的解决物联网大数据问题，这样才能将系统研发、维护的复杂度与成本大幅降低。
 
-物联网数据特点
-数据是时序的，一定带有时间戳。
-数据是结构化的
-数据极少有更新或删除操作
-相对互联网应用，写多读少
-用户关注的是一段时间的趋势，而不是某一特点时间点的值
-数据是有保留期限的
-数据的查询分析一定是基于时间段和地理区域的。
-除存储查询外，还往往需要各种统计和 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/01/rsync/" title="rsync">rsync</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-01T06:10:57.000Z" title="Created 2023-12-01 14:10:57">2023-12-01</time></span></div><div class="content">shell 命令行同步ssh 同步
-push端需要安装 rsync 服务
-接收端（服务端）只需要开启 ssh服务12rsync -av -e &quot;ssh -p 22&quot; /mnt/tmp/ root@10.128.118.104:/mnt/tmp
+bps （bits per second）是数据传输速率的常用单位，意思是比特率，比特&#x2F;秒，位&#x2F;秒，每秒传的位数。bps：(ps指的是&#x2F;s，即每秒)每秒钟传送多少位的信息。
 
-模组形式使用Rsync进行文件的同步与备份Rsync数据同步及同步方式
 
-需要在服务端配置conf文件
+响应时间，是指I&#x2F;O请求从发出到收到响应的间隔时间。
 
-一般位于 &#x2F;etc&#x2F;rsync.conf&#x2F;&#x2F; 一般加上 uid &#x3D;root    gid &#x3D;root    代表对同步目录的权限
+IOPS与吞吐量的关系
+每秒 I&#x2F;O 吞吐量＝ IOPS * 平均 I&#x2F;O SIZE。从公式可以看出： I&#x2F;O SIZE 越大，IOPS  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/07/linux-uio/" title="linux uio">linux uio</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-07T02:20:54.000Z" title="Created 2024-03-07 10:20:54">2024-03-07</time></span></div><div class="content">
+UIO就是userspace IO，用户空间输入输出。开发者只需要在内核中写非常少量的代码（几十行），把需要哪些寄存器告诉UIO框架，UIO就会生成一个设备文件，&#x2F;dev&#x2F;uio0，然后我们只需要在用户空间打开这个文件，mmap（映射文件到内存空间），就可以直接操作寄存器了！ 这样一来，即使你需要给一个复杂设备（比如摄像头）写驱动，你也可以在用户空间来反复修改、迭代你的驱动代码，根本不需要重新编译内核。非常方便。
+UIO的原理是，把硬件寄存器的地址用ioremap函数给映射到用户态的虚拟地址。这个过程需要修改page table，但是uio框架把这件事做好了，所以我们只需要告诉UIO我们需要哪些寄存器就好。在用户空间，我们的程序访问虚拟地址的时候，page table会把我们引导到真正的硬件的物理地址，我们就可以操纵硬件了。
 
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统">文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-04T06:56:42.000Z" title="Created 2024-03-04 14:56:42">2024-03-04</time></span></div><div class="content">文件系统的基本组成
+文件系统
 
-修改配置文件rsync --daemon --config=/tmp/rsyncd.conf 
 
-推拉命令
-1234# 拉文件rsync -av 10.128.118.229::test_bckup/ /tmp/a# 推文件rsync -av  /tmp/a/ 10.128.118.229::test_bckup/
+文件系统是操作系统中负责管理持久数据的子系统
+负责把用户的文件存到磁盘硬件中。
 
-truenas rsync 设置
-架构
-truenas1 -&gt; (push) -&gt; truenas2
- ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/29/ubuntu-%E9%85%8D%E7%BD%AE/" title="ubuntu 配置">ubuntu 配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-29T08:57:27.000Z" title="Created 2023-11-29 16:57:27">2023-11-29</time></span></div><div class="content">Ubuntu SSH Server参考
-12345678910111213141516171819202122232425262728293031- 1. Ubuntu apt source configuration: root@ubuntu22:/mnt/nfs_dir# cat  /etc/apt/sources.list#deb cdrom:[Ubuntu 22.04.3 LTS _Jammy Jellyfish_ - Release amd64 (20230807.2)]/ jammy main restricted# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to# newer versions of the distribution.deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted# deb-src http://cn.archive.ubuntu.com/ubuntu/ jammy ma ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/27/%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84/" title="数据中心网络架构">数据中心网络架构</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-27T09:23:40.000Z" title="Created 2023-11-27 17:23:40">2023-11-27</time></span></div><div class="content">传统数据中心网络架构
-传统的大型数据中心，网络一般分为三层：分级的互联网络模型。
 
-Access Layer （接入层）：
+文件系统的基本数据单位是文件，目的是对磁盘上的文件进行组件管理，组织的方式不同，就会形成不同的文件系统。
+linux中 ，一切皆文件。
+linux 文件系统会为每个文件分配数据结构：索引节点（index node）和目录项（directory entry）,它们主要用来记录文件的元数据和目录层次结构。
+索引节点：也就是inode，用来记录文件的元信息，比如inode编号，文件大小，访问权限，创建时间，修改时间，数据在磁盘的位置等。索引节点是文件的唯一标识，它们之间一一对应，也同样都会被存储在硬盘中，所以索引节点同样占用磁盘空间
+目录项，也就是dentry, 用来记录文件的名字，索引节点指针以及与其他目录项的层级关联关系。多个目录项关联起来，就会形成目录结构，但它与索引节点不同的是，目录项是由内核维护的一个数据结构，不存放于磁盘，而是缓存在内存。
 
-Edge Layer， 接入层交换机通常位于机架顶部，因此也被称为ToR (Top of Rack)交换机，它们物理连接服务器。
 
+索引节点唯一标识一个文件，而目录项记录着文件的名，所以目录项和索引节点的关系是多对一，也就是说，一个文件可以有多个别字。比 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cb%E6%A0%91%EF%BC%8Cb-%E6%A0%91/" title="二叉树，b树，b+树">二叉树，b树，b+树</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-04T05:58:49.000Z" title="Created 2024-03-04 13:58:49">2024-03-04</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="分布式并行文件系统">分布式并行文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-04T01:49:52.000Z" title="Created 2024-03-04 09:49:52">2024-03-04</time></span></div><div class="content">分布式文件系统
+“分布式”是重点，它是相对于本地文件系统而言的，分布式文件系统通常指C&#x2F;S架构或网络文件系统，用户数据没有直接连接到本地主机，而是存储到远程存储服务器上。
+需要请求forwarding
 
-Aggregation Layer （汇聚层）：
 
-Distribution Layer， 汇聚交换机连接Access交换机，同时提供其他的服务，例如防火墙，SSL offload，入侵检测，网络分析等。
 
+并行文件系统
+支持并行应用。在并行文件系统环境下，所有客户端可以在同一时间并发读写同一个文件。
+并行文件系统，是客户端知道数据在哪一个节点上直接去对应节点获取数据，没有forwarding这个过程。
+通常并行系统都是携带私有客户端
 
-Core Layer (核心层)：
 
-核心交换机为进出数据中心的包提供高速的转发，为多个汇聚层提供连接性，核心交换机为通常为整个网络提供一个弹性的L3路由网络。
 
 
+区别
+并行文件系统是分布式文件系统的一种。分布式文件系统和并行文件系统都可以将数据分布在多个存储服务器上，可横向扩展从而容纳PB级数据，并支持高带宽。
 
+分布式文件系统通常也像并行文件系统一样，支持共享的全局名称空间。但是对于分布式文件系统而言，即使部分文件数据被分配和放置在不同服务器上，客户端在访问数据或元数据时，仍然需要通过指定的协议服务器来完成，协议服务器可能会成为 IO 路由的瓶颈。现在市场上主流的分布式文件存储为了解决这个协议服务器瓶颈的问题，使用 DNS 技术将不同的客户端连接至多个协议服务器，实现一定程度的负载均衡，但即使 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/29/seastar/" title="seastar">seastar</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T08:26:16.000Z" title="Created 2024-02-29 16:26:16">2024-02-29</time></span></div><div class="content">并发范式 share nothing
+Seastar引入了一层非常薄的抽象：它会在每个核上创建一个线程，并将此线程绑定在其上。不同核（线程）之间禁共享数据，只能通过消息队列来传递数据。
 
-三层网络架构：
+用户态操作系统 seastar
+Seastar 是一个应用框架，它几乎将操作系统所提供的抽象完整地搬移到了用户态中，以减少操作系统的抽象开销，实现软硬件一体化。
 
-汇聚交换机是L2和L3网络的分界点，汇聚交换机以下的是L2网络，以上是L3网络。
+Seastar之执行流抽象
+可以将seastar想象成一个支持多核的操作系统，每个核上运行着许多的“进程”
+Seastar将每个核抽象成一台单核计算机，每个单核计算机上运行着许多执行流，一个单核计算机上的多个执行流可以共享数据，不同单核计算机上的执行流只能通过消息来共享数据。
+执行流：从头到尾只能在一个核上运行，并且位于不同核上执行流之间，只能通过跨核消息来通信。
+Seastar在每个用户态CPU上运行一个调度器，来调度一系列的微任务。
 
-L2网络代表都是通过mac地址通信。不需要ip（可以视为一个交换机上）
-L3网络代表的是通过ip通信，需要经过路由器的转发。（一般分为不同的子网（不同的ip段））
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/29/posix/" title="posix">posix</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T02:49:25.000Z" title="Created 2024-02-29 10:49:25">2024-02-29</time></span></div><div class="content">posxi 简介概念
+POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX）,缩写为POSIX
 
+发布-IEEE系统调用，posix, C库，系统命令和内核函数
+linux三种接口
 
-每组汇聚交换机 管理一个pod(Point of Delivery)（图中为两个汇聚层交换 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/22/ESXI/" title="ESXI">ESXI</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-22T08:45:52.000Z" title="Created 2023-11-22 16:45:52">2023-11-22</time></span></div><div class="content">VMware vSphere网络、vSwitch、端口组ESXI 网络
-目的
+linux提供了用户接口（shell）,库函数接口（c语言程序调用库），系统调用接口三种接口。
 
-相互交流（想想 vMotion）
-与 vCenter 通信（想想 HA）
-与他们依赖的外部资源进行通信，例如存储阵列或 Active Directory
-允许它们的常驻虚拟机与它们可能依赖的其他虚拟机和外部资源进行通信
 
+系统调用
 
-配置
+操作系统是不能运行进程之间操作硬件资源，进程如果要想访问这些资源，必须向操作系统申请。进程向系统申请的入口就是系统调用（system call）,它由操作系统提供。
+在linux中系统调用是用户空间访问内核的唯一手段，除异常和陷入外，系统调用是内核唯一的合法入口。
 
-ESXI 主机上的虚拟交换机
-虚拟交换机上的端口组
 
+系统调用和posix
 
+系统调用虽然是内核和用户应用程序之间的沟通桥梁，是用户应用程序访问内核的入口点。但通常，应用程序是通过操作系统提供的应用编程接口API，而不是之间通过系统调用来编程。
+应用程序可以直接调用系统调用接口，但大多数都是通过应用编程接口api。
 
-ECXI主机上的虚拟交换机
-ESXI中的虚拟交换机都是三层交换机
 
-三层交换机能实现不同网段的服务器之间的通信。
+操作系统api 的主要功能就是把操作系统的功能完全展示出来，提供给应用程序，基于该操作系统，与文件、 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/29/bluestore/" title="bluestore">bluestore</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T02:17:07.000Z" title="Created 2024-02-29 10:17:07">2024-02-29</time></span></div><div class="content">blueStore架构
+BlueStore工作原理
+Ceph OSD执行两个功能
 
+在网络中和其他osd之间复制数据（多副本），
+在本地存储设备上存储数据。
 
-三层交换机中：
 
-端口也有2层端口 和 三层端口之分。
+传统的ceph osd是将数据存储到现有的文件存储模块，例如xfs文件系统，性能开销比较大，因为需要实现ceph数据到posix的转换。
 
-
-二层端口和三层端口区分：二层端口不能配置ip，三层端口可以配置ip
-
-默认虚拟交换机的端口都是 二层端口。
-
-将 ESXi 主机上的虚拟交换机视为您之前可能遇到的任何其他交换机，当涉及到网络层时，ESXi 中的虚拟交换机是为我们的 ESXi 主机提供连接、冗余和负载平衡的方式。
-
-有两种类型的开关，尽管您可能会听到它们各自使用几个不同的名称。
-
-vSphere 标准交换机
-vSphere 分布式交换机（需要vSphere Enterprise Pl ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/21/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86/" title="tun/tap 虚拟网络设备与VPN隧道原理">tun/tap 虚拟网络设备与VPN隧道原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-21T02:22:01.000Z" title="Created 2023-11-21 10:22:01">2023-11-21</time></span></div><div class="content">
-什么是Tun&#x2F;Tap
-TUN 和 TAP是操作系统内核中的虚拟网络设备。
-
-全部靠软件实现
-
-向运行在操作系统上的软件提供 与硬件的网络设备完全相同的功能。
-
-TAP等同于一个以太网设备，它操作第二层数据包如以太网数据帧。
-
-TUN模拟了网络层设备，操作第三层数据包，比如IP数据封包。
-
-操作系统通过TUN&#x2F;TAP设备向绑定该设备的用户空间的程序发送数据（写入&#x2F;dev&#x2F;xx 字符设备）
-
-用户空间的程序也能像操作系统硬件网络设备那样，通过TUN&#x2F;TAP发送数据。
-
-TUN&#x2F;TAP设备向操作系统的网络栈投递数据包。从而模拟从外部接收数据的过程。
-
-
-
-应用程序操作Tun&#x2F;Tap
-Linux TUN&#x2F;TAP 驱动程序为应用程序提供了两种交互方式：
-
-虚拟网络接口和字符设备&#x2F;dev&#x2F;net&#x2F;tun
-写入字符设备&#x2F;dev&#x2F;net&#x2F;tun的数据会发送到虚拟网络接口中；发送到虚拟网络接口中的数据也会出现在该字符设备上。
-
-
-
-
-应用程序可以通过标准的sock ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/" title="容器，docker">容器，docker</a><time datetime="2023-12-20T08:58:21.000Z" title="Created 2023-12-20 16:58:21">2023-12-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/18/LDAP/" title="LDAP">LDAP</a><time datetime="2023-12-18T10:35:13.000Z" title="Created 2023-12-18 18:35:13">2023-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/15/PCIE%E9%80%9F%E7%8E%87/" title="PCIE速率">PCIE速率</a><time datetime="2023-12-15T08:03:13.000Z" title="Created 2023-12-15 16:03:13">2023-12-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/14/nfs%E6%9C%8D%E5%8A%A1%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E6%98%A0%E5%B0%84/" title="nfs服务用户身份映射">nfs服务用户身份映射</a><time datetime="2023-12-14T05:42:26.000Z" title="Created 2023-12-14 13:42:26">2023-12-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/05/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" title="时序数据库">时序数据库</a><time datetime="2023-12-05T09:28:39.000Z" title="Created 2023-12-05 17:28:39">2023-12-05</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/true-nas-rsync/" style="font-size: 1.5em; color: #99a9bf">true nas, rsync</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.1em; color: #999">wireguard VPN</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" style="font-size: 1.5em; color: #99a9bf">个人介绍</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.5em; color: #99a9bf">wireguard,VPN</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">December 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">12</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-12-20T11:26:59.202Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+RocksDB：存储 WAL 、对象元数据、对象扩展属性 Omap、磁盘分配器元数据。
+BlueRocksEnv：抛弃了传统文件系统，封装 RocksDB 文件操作的接口。
+BlueFS：小型的 Append 文件系统，实现了 RocksDB::Env 接口，给 RocksDB 用。
+Allocator：磁盘分配器，负责高效的分配磁盘空间。
+根据上图，可以很直观的了解到：BlueStore 把数据分成两条路径。一条是 data 直接通过 Allocator（磁盘空间分配器）分配磁盘空间，然后写入 BlockDevice。另一条是 metadata 先写入 RocksDB（内存数据库），通过 BlueFs（BlueStore 专用文件系统）来管理 RocksDB 数据，经过 Allocato ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="内核传输数据弊端和解决方案">内核传输数据弊端和解决方案</a><time datetime="2024-03-14T05:40:35.000Z" title="Created 2024-03-14 13:40:35">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/uio/" title="uio">uio</a><time datetime="2024-03-14T01:33:02.000Z" title="Created 2024-03-14 09:33:02">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/" title="磁盘性能">磁盘性能</a><time datetime="2024-03-11T08:00:15.000Z" title="Created 2024-03-11 16:00:15">2024-03-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/07/linux-uio/" title="linux uio">linux uio</a><time datetime="2024-03-07T02:20:54.000Z" title="Created 2024-03-07 10:20:54">2024-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统">文件系统</a><time datetime="2024-03-04T06:56:42.000Z" title="Created 2024-03-04 14:56:42">2024-03-04</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/true-nas-rsync/" style="font-size: 1.5em; color: #99a9bf">true nas, rsync</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.5em; color: #99a9bf">wireguard,VPN</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" style="font-size: 1.5em; color: #99a9bf">个人介绍</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.1em; color: #999">wireguard VPN</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">January 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">December 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">25</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-15T03:33:07.091Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

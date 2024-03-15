@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-12-20 19:26:59'
+  postUpdate: '2024-03-15 11:33:07'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -149,24 +149,139 @@
       }
       detectApple()
     })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Blog of Fisher JJ</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/" title="wireguard 介绍">wireguard 介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-17T01:49:09.000Z" title="Created 2023-11-17 09:49:09">2023-11-17</time></span></div><div class="content">WireGuard 简介
-Wireguard 是一个安全的网络通道
-wireguard是一种VPN协议
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Blog of Fisher JJ</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/19/go%E5%9F%BA%E7%A1%80/" title="go基础">go基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-19T05:16:31.000Z" title="Created 2024-02-19 13:16:31">2024-02-19</time></span></div><div class="content">
+数据类型
+
+数据类型的出现是为了把数据分成所需内存大小的不同的数据。
+布尔型（bool）: 值只可以是常量true或者false
+数字类型：整型int和浮点型float,支持复数，位的运算采用补码。
+字符串类型（string）: 使用UTF-8编码标识Unicode文本。
+其他：指针，数组，结构体（struct），联合体（union不常用），函数，切片，接口（interface）,map,channel
 
 
-wireguard 工作在第三层
-工作在X层代表可以解析第X层的数据包。
-比如交换机是工作在第二层的设备，是指其可以解析第二层的以太帧帧头；路由器是工作第三层的设备是指其可以解析第三层的IP包包头），
-其可以解析数据包的源目的IP。
 
 
-实现形式为linux内核中的一个虚拟网络网卡(注：实际上目前Wireguard协议不仅仅是linux内核实现，还有golang实现)
-只需要一轮交互就可以完成密钥交换
+循环
 
-流程
+循环过程中新添加的元素是没办法遍历到的。
 
-WireGuard 以 UDP 实现，但是运行在第三层 —— IP 层。每个 Peer 都会生成一个 wg0 虚拟网卡，同时服务端会在物理网卡上监听 UDP 51820 端口。应用程序的包发送到内核以后，如果地址是虚拟专用网内部的，那么就会交给 wg0 设备，WireGuard 就会把这个 IP 包封装成 WireGuard 的包，然后在 UDP 中发送出去，对方的 Peer 的内核收到这个 UDP 包后再反向操作，解包成为 IP 包，然后交给对应的应用程序。
 
-Wire ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/16/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/" title="博客介绍">博客介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-16T07:49:45.000Z" title="Created 2023-11-16 15:49:45">2023-11-16</time></span></div><div class="content">欢迎来到 [你的名字] 的个人知识博客！关于我嗨，大家好！我是Fisher JJ，一个对计算机充满热情的人。通过这个博客，我希望与大家分享我的学习和思考，探讨 计算机领域的各种话题。
-为什么我要写这个博客？我创建这个博客的初衷是为了建立一个记录自己学习的平台。
-</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/" title="容器，docker">容器，docker</a><time datetime="2023-12-20T08:58:21.000Z" title="Created 2023-12-20 16:58:21">2023-12-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/18/LDAP/" title="LDAP">LDAP</a><time datetime="2023-12-18T10:35:13.000Z" title="Created 2023-12-18 18:35:13">2023-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/15/PCIE%E9%80%9F%E7%8E%87/" title="PCIE速率">PCIE速率</a><time datetime="2023-12-15T08:03:13.000Z" title="Created 2023-12-15 16:03:13">2023-12-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/14/nfs%E6%9C%8D%E5%8A%A1%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E6%98%A0%E5%B0%84/" title="nfs服务用户身份映射">nfs服务用户身份映射</a><time datetime="2023-12-14T05:42:26.000Z" title="Created 2023-12-14 13:42:26">2023-12-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/05/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" title="时序数据库">时序数据库</a><time datetime="2023-12-05T09:28:39.000Z" title="Created 2023-12-05 17:28:39">2023-12-05</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/true-nas-rsync/" style="font-size: 1.5em; color: #99a9bf">true nas, rsync</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.1em; color: #999">wireguard VPN</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" style="font-size: 1.5em; color: #99a9bf">个人介绍</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.5em; color: #99a9bf">wireguard,VPN</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">December 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">12</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-12-20T11:26:59.202Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/01/29/k8s/" title="k8s">k8s</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-01-29T07:33:08.000Z" title="Created 2024-01-29 15:33:08">2024-01-29</time></span></div><div class="content">K8s简介
+k8s 是一个开放的开发平台。不局限于任何语言和任何编程接口。只要是正常的服务，都可以映射成kubernetes的Service,并通过标准的TCP通信协议进行交互。
+
+k8s是一个完备的分布式系统支撑平台。k8s具有完备的集群管理能力，包括多层次的安全防护和准入机制，多租户应用支撑能力，透明的服务注册和服务发现机制，内建智能负载均衡器，强大的的故障发现和自我修复能力，服务滚动升级和在线扩容能力，可扩展的资源自动调度机制，以及多粒度的资源配额管理能力。
+
+Service 服务，是分布式集群架构的核心
+
+拥有一个唯一指定的名字
+拥有一个虚拟ip（ClusterIP,Service IP,或vip（虚拟ip））和端口号
+能够提供某种远程服务能力
+被映射到了提供这种服务能力的一组容器应用上。
+
+
+
+基本概念和术语
+Node, Pod, Replication Controller, Service 等概念都可以看作一种资源对象，通过kubernetes提供的kubectl工具或者API调用进行操作，并保存在etcd中。 
+
+Node节点是kubernetes集群中相对于Maste ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/28/linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" title="ubuntu 的dns 配置">ubuntu 的dns 配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-28T08:54:47.000Z" title="Created 2023-12-28 16:54:47">2023-12-28</time></span></div><div class="content">&#x2F;etc&#x2F;resolv.conf &#x2F;etc&#x2F;systemd&#x2F;resolved.conf &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;stub-resolv.conf 三个配置文件的区别
+&#x2F;etc&#x2F;resolv.conf 文件的传统用途是存储dns客户端的名称服务器和其他dns相关配置，如搜索域和域名缓存TTL等。然后在引入systemd-resolved服务后，DNS配置的管理发生了一些改变。
+
+&#x2F;etc&#x2F;resolv.conf:
+
+
+在未使用systemd-resolved的传统系统或已配置为直接操作此文件的系统，这是实际的dns配置文件，其中通常包含nameserver行来指定dns服务器地址
+如果启用了systemd-resolved服务，&#x2F;etc&#x2F;resolv.conf往往会作为一个符号链接指向stub-resolv.conf或由systemd-resolved动态管理的虚拟文件，以确保对dns设置的更改不会被守护进程覆盖。
+
+
+
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/" title="容器，docker">容器，docker</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-20T08:58:21.000Z" title="Created 2023-12-20 16:58:21">2023-12-20</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/18/LDAP/" title="LDAP">LDAP</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-18T10:35:13.000Z" title="Created 2023-12-18 18:35:13">2023-12-18</time></span></div><div class="content">LDAP 概念
+LDAP 是轻量目录访问协议，基于x.500标准，可以定制。
+LDAP 支持TCP/IP, 这是访问internet 必须的。
+LDAP是一个得到关于人或资源的集中，静态数据的快速方式。
+LDAP是一个用来发布目录信息到许多不同资源的协议。
+
+目录树概念
+目录树
+在一个目录服务系统中，整个目录信息集可以表示为一个目录信息树，树中的每个节点是一个条目（Entry）。
+
+
+条目（Entry）
+条目，也叫记录项，是LDAP中最基本的颗粒，就像字典中的词条，或者是数据库中的记录。
+通过对LDAP的添加，删除，更改，检索都是以条目为基本对象的。
+
+
+
+
+LDAP 目录的条目 (entry) 由属性 (attribute) 的一个聚集组成，并由一个唯一性的名字引用，即专有名称（distinguished name，DN）。例如。DN 可以是：&quot;cn=group,dc=eryajf,dc=net&quot;
+
+对象类（ObjectClass）
+LDAP中，一个条目必须包含一个objectClass,且需要赋予至少一个值，每一个值将用作一条LDAP条目进行数据存储的模板。
+
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/15/PCIE%E9%80%9F%E7%8E%87/" title="PCIE速率">PCIE速率</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-15T08:03:13.000Z" title="Created 2023-12-15 16:03:13">2023-12-15</time></span></div><div class="content">
+PCIE的规格一般有 PCIE2.0&#x2F;PCIE3.0&#x2F;PCIE4.0&#x2F;PCIE5.0几句话说清楚18：PCIE带宽单位GT&#x2F;s到Gbps转换方法
+
+PCIE 相关概念
+传输速率为每秒传输量GT&#x2F;s, 而不是每秒位数Gbps, 因为传输率包括不提供额外吞吐量的开销位；比如PCIe 1.x 和 PCIe 2.x 使用8b&#x2F;10b 编码方案。导致占用了20%（2&#x2F;10）的原始信道带宽。
+GT&#x2F;s ——Giga transation per second （千兆传输&#x2F;秒），即每一秒内传输的次数。重点在于描述物理层通信协议的速率属性，可以不和链路宽度等关联。
+Gbps —— Giga Bits Per Second （千兆位&#x2F;秒）。原始速率
+GT&#x2F;s 与Gbps 之间不存在成比例的换算关系。有效的带宽（乘以了比例）
+
+PCIE带宽计算
+PCIe 吞吐量（可用带宽）计算方法：吞吐量 &#x3D; 传输速率 *  编码方案
+GT(Gigatransfer) x Lane的数量 x 编码方案 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/14/nfs%E6%9C%8D%E5%8A%A1%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E6%98%A0%E5%B0%84/" title="nfs服务用户身份映射">nfs服务用户身份映射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-14T05:42:26.000Z" title="Created 2023-12-14 13:42:26">2023-12-14</time></span></div><div class="content">NFS 介绍
+NFS（network file system, 网络文件系统）是一种广泛的文件共享服务（企业内部网络），主要用于linux以及类unix系统之间的文件共享。
+采用C&#x2F;S工作模式。在nfs服务器上将某个目录设置为共享目录，客户端可以将这个目录挂载到本地。
+NFS服务本身比较简单，尤其是在权限设置方面功能比较弱。
+
+用户身份映射
+NFS服务本身并不具备身份验证功能，仅支持基于客户端IP进行认证。
+我们在对NFS服务进行权限设置时，不能针对用户来分配权限，而只能针对客户端IP进行权限分配。（指的是客户端的用户，如果是truenas，则可以利用目录的权限来控制）
+要实现对共享目录的写入操作，必须要保证在NFS服务和操作系统两个层面全部都具有写入权限才可以。如何使得客户端可以在操作系统层面对共享目录具有写入权限，这就要涉及到用户身份映射问题。
+
+原理
+nfs提供了一种身份映射的机制来对用户身份进行管理。
+
+当客户端访问nfs服务时，服务器会根据情况将客户端用户的身份映射成nfs匿名用户nfsnobody。nfsnobody是由nfs服务在系统中自动创建的一个程序用户账号 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/05/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" title="时序数据库">时序数据库</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-05T09:28:39.000Z" title="Created 2023-12-05 17:28:39">2023-12-05</time></span></div><div class="content">时序数据库时序数据库中存储的时序数据
+每条数据都会带有时间戳属性。
+
+采集时序数据的目的是监测数据的前后差异，然后做出响应。
+
+时序数据库就是把时间作为一个默认纬度罢了 一般靠谱点的话也应该以时间纬度来设计存储引擎
+
+如果数据采集频率少，数据量不大的话，使用关系&#x2F;非关系型数据库代替时序数据库是完全没有问题的。
+
+
+TDengine
+TDengine是一个高效的存储、查询、分析时序大数据的平台，专为物联网、车联网、工业互联网、运维监测等优化而设计。可以像使用关系型数据库MySQL一样来使用它，简单又方便。
+TDengine迅速定位了自己要做的产品，那就是物联网大数据平台，要把时序数据库、缓存、消息订阅、流式计算等系列功能融合在一起，一站式的解决物联网大数据问题，这样才能将系统研发、维护的复杂度与成本大幅降低。
+
+物联网数据特点
+数据是时序的，一定带有时间戳。
+数据是结构化的
+数据极少有更新或删除操作
+相对互联网应用，写多读少
+用户关注的是一段时间的趋势，而不是某一特点时间点的值
+数据是有保留期限的
+数据的查询分析一定是基于时间段和地理区域的。
+除存储查询外，还往往需要各种统计和 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/12/01/rsync/" title="rsync">rsync</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-12-01T06:10:57.000Z" title="Created 2023-12-01 14:10:57">2023-12-01</time></span></div><div class="content">shell 命令行同步ssh 同步
+push端需要安装 rsync 服务
+接收端（服务端）只需要开启 ssh服务12rsync -av -e &quot;ssh -p 22&quot; /mnt/tmp/ root@10.128.118.104:/mnt/tmp
+
+模组形式使用Rsync进行文件的同步与备份Rsync数据同步及同步方式
+
+需要在服务端配置conf文件
+
+一般位于 &#x2F;etc&#x2F;rsync.conf&#x2F;&#x2F; 一般加上 uid &#x3D;root    gid &#x3D;root    代表对同步目录的权限
+
+
+修改配置文件rsync --daemon --config=/tmp/rsyncd.conf 
+
+推拉命令
+1234# 拉文件rsync -av 10.128.118.229::test_bckup/ /tmp/a# 推文件rsync -av  /tmp/a/ 10.128.118.229::test_bckup/
+
+truenas rsync 设置
+架构
+truenas1 -&gt; (push) -&gt; truenas2
+ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/11/29/ubuntu-%E9%85%8D%E7%BD%AE/" title="ubuntu 配置">ubuntu 配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-29T08:57:27.000Z" title="Created 2023-11-29 16:57:27">2023-11-29</time></span></div><div class="content">Ubuntu SSH Server参考
+12345678910111213141516171819202122232425262728293031- 1. Ubuntu apt source configuration: root@ubuntu22:/mnt/nfs_dir# cat  /etc/apt/sources.list#deb cdrom:[Ubuntu 22.04.3 LTS _Jammy Jellyfish_ - Release amd64 (20230807.2)]/ jammy main restricted# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to# newer versions of the distribution.deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted# deb-src http://cn.archive.ubuntu.com/ubuntu/ jammy ma ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="内核传输数据弊端和解决方案">内核传输数据弊端和解决方案</a><time datetime="2024-03-14T05:40:35.000Z" title="Created 2024-03-14 13:40:35">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/uio/" title="uio">uio</a><time datetime="2024-03-14T01:33:02.000Z" title="Created 2024-03-14 09:33:02">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/" title="磁盘性能">磁盘性能</a><time datetime="2024-03-11T08:00:15.000Z" title="Created 2024-03-11 16:00:15">2024-03-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/07/linux-uio/" title="linux uio">linux uio</a><time datetime="2024-03-07T02:20:54.000Z" title="Created 2024-03-07 10:20:54">2024-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统">文件系统</a><time datetime="2024-03-04T06:56:42.000Z" title="Created 2024-03-04 14:56:42">2024-03-04</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/true-nas-rsync/" style="font-size: 1.5em; color: #99a9bf">true nas, rsync</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.5em; color: #99a9bf">wireguard,VPN</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" style="font-size: 1.5em; color: #99a9bf">个人介绍</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.1em; color: #999">wireguard VPN</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">January 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">December 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">25</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-15T03:33:07.091Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
