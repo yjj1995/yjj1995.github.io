@@ -51,7 +51,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-03-15 11:33:07'
+  postUpdate: '2024-08-06 17:34:32'
 }</script><script>(win=>{
       win.saveToLocal = {
         set: (key, value, ttl) => {
@@ -149,133 +149,106 @@
       }
       detectApple()
     })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Blog of Fisher JJ</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="内核传输数据弊端和解决方案">内核传输数据弊端和解决方案</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-14T05:40:35.000Z" title="Created 2024-03-14 13:40:35">2024-03-14</time></span></div><div class="content">DPDK 入门最佳指南
-弊端
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Blog of Fisher JJ</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/08/06/linux-%E6%8D%A2%E6%BA%90-ssh-%E7%BD%91%E7%BB%9C/" title="linux 换源&amp;ssh&amp;网络">linux 换源&amp;ssh&amp;网络</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-08-06T09:28:32.000Z" title="Created 2024-08-06 17:28:32">2024-08-06</time></span></div><div class="content">Ubuntu换源22.04 源1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak   清华大学镜像复制以下命令即可一键切换到清华大学ubuntu 22.04镜像：sudo bash -c &quot;cat &lt;&lt; EOF &gt; /etc/apt/sources.list &amp;&amp; apt update deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiversedeb https://mirrors.t ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/03/rag/" title="rag">rag</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-07-03T02:28:20.000Z" title="Created 2024-07-03 10:28:20">2024-07-03</time></span></div><div class="content">RAG (Retrieval-Augmented Generation)
+技术原理图
 
-中断处理：当网络中大量数据包到来时，会产生频繁的硬件中断请求，这些硬件中断可以打断之前较低优先级的软中断或者系统调用的执行过程，如果这种打断频繁的话，将会产生较高的性能开销。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/07/02/embedding/" title="Embedding">Embedding</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-07-02T05:30:41.000Z" title="Created 2024-07-02 13:30:41">2024-07-02</time></span></div><div class="content">Embedding 是什么
+嵌入(Embedding)是用向量表示一个物体，这里所说的物体可以是人，是实体，是虚拟物品，比如：一个单词、一条语句、一个序列、一件商品、一个动作、一本书、一部电影、一个人等等。
+Embedding就是从原始数据提取出来的Feature，也就是那个通过神经网络映射之后的低维向量。深度学习中，embedding如何理解？
 
+背景发展
+Embedding起源于Word Embedding，经过多年的发展，已取得长足进步。从横向发展来看，由原来单纯的Word Embedding，发展成现在的Item Embedding、Entity Embedding、Graph Embedding、Position Embedding、Segment Embedding等；从纵向发展来看，由原来静态的Word Embedding发展成动态的预训练模型，如ELMo、BERT、GPT、GPT-2、GPT-3、ALBERT、XLNet等，这些预训练模型可以通过微调服务下游任务。Embedding不再固定不变，从而使这些预训练模型可以学习到新的语义环境下的语义，高效完成下游的各种任务， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/15/FC-Fibrechannel-fiber-channel/" title="FC,Fibre channel,Fiber channel">FC,Fibre channel,Fiber channel</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-05-15T10:02:24.000Z" title="Created 2024-05-15 18:02:24">2024-05-15</time></span></div><div class="content">
+Fibre Channel 也就是 “网状通道”的意思，简称FC。
 
-
-内存拷贝：正常情况下，一个网络数据包从网卡到应用程序需要经过如下的过程：数据从网卡通过dma等方式传到内核开辟的缓冲区，然后从内核空间拷贝到用户态空间，在linux内核协议中，这个耗时操作甚至占到了数据包整个处理流程的57.1%
-
-
-
-上下文切换：频繁到达的硬件中断和软中断都可能随时抢占系统调用的运行，这会产生大量的上下文切换开销，另外，在基于多线程的服务器设计框架中，线程间的调度也会产生频繁的上下文切换开销，锁竞争的耗能也是十分严重的问题。
-
-
-
-局部性失效：如今主流的处理器都是多个核心的，这意味着一个数据包的处理可能跨多个cpu核心，比如一个数据包可能终端在cpu0，内核态处理在 cpu1，用户态处理在 cpu2，这样跨多个核心，容易造成 CPU 缓存失效，造成局部性失效。如果是 NUMA 架构，更会造成跨 NUMA 访问内存，性能受到很大影响。
+FC（Fibre Channel）协议时一套完全独立的网络协议，比以太网要复杂得多。FC自1988年出现以来，已经发展成为一项非常复杂、高速的网络技术。Fibre Channel可以称其为FC协议或者FC网络，像TCP&#x2F;IP一样，FC协议集同样具备TCP&#x2F;IP协议集以及以太网中的很多概念，比如FC交换、FC交换机、FC路由、SPF路由算法等。
 
 
+FC只代表Fibre Channel,而不是Fiber Channel
 
-内存管理：传统服务 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/14/uio/" title="uio">uio</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-14T01:33:02.000Z" title="Created 2024-03-14 09:33:02">2024-03-14</time></span></div><div class="content">UIO是什么？
-UIO（Userspace i&#x2F;o）是linux 内核中的一个轻量级驱动框架，它允许用户空间程序直接访问物理设备资源，如内存，中断和DMA通道等。UIO的主要目标是提供一种简单而灵活的方式，让用户空间程序能够直接与硬件设备进行交互，而无需通过内核空间的传统驱动程序。这种模型特别适用于哪些需要高性能，低延迟或特殊硬件访问需求的场景。
+FC和光纤没有必然的联系
 
-UIO的软件架构介绍
-UIO驱动模型由内核空间的UIO核心代码和用户空间的库组成。内核空间的UIO核心代码负责设备的注册，内存映射，中断管理等操作，而用户空间的库则提供了访问这些功能模块的接口。
-
-内核空间部分
-UIO核心代码：这是uio驱动模型的核心，辅助设备驱动的注册和注销，内存映射的管理，中断处理等。关键函数uio_register_device()
-UIO设备：UIO设备是UIO核心代码与物理设备之间的抽象层。每个UIO设备都有一个与之关联的设备文件，用户空间程序可以通过这个设备文件与设备进行通信。
-
-用户空间部分：
-UIO用户空间库：这个库提供了一系列的API，允许用户空间程序与UIO设备进行交互，如打开设备，映射内存， ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/" title="磁盘性能">磁盘性能</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-11T08:00:15.000Z" title="Created 2024-03-11 16:00:15">2024-03-11</time></span></div><div class="content">磁盘性能指标说明
-衡量磁盘性能常见的指标有：使用率，饱和度，iops，吞吐量以及响应时间，具体说明：
-使用率，是指磁盘处理I&#x2F;O的时间百分比。过高的使用率（比如超过80%），通常意味着磁盘I&#x2F;O存在性能瓶颈。
-饱和度，是指磁盘处理I&#x2F;O的繁忙程度。过高的饱和度，意味着磁盘有严重的性能瓶颈。当饱和度为100%时，磁盘无法接受新的I&#x2F;O请求。
-IOPS，是指每秒的I&#x2F;O请求数。
-吞吐量，是指每秒的I&#x2F;O请求大小，即每秒磁盘I&#x2F;O的流量，磁盘写入加上读出数据的大小。单位为bps。
+Fibre Channel 可以称为FC 协议，FC网络，FC互联。FC协议集同样具备TCP&#x2F;IP协议集以及以太网中的很多概念，比如FC交换、FC交换机、FC路由、FC路由器，SPF路由算法等。我们完全可以类比地看待TCP&#x2F;IP协议以及FC协议，因为它们都遵循OSI的模型。
 
 
 
-
-bps （bits per second）是数据传输速率的常用单位，意思是比特率，比特&#x2F;秒，位&#x2F;秒，每秒传的位数。bps：(ps指的是&#x2F;s，即每秒)每秒钟传送多少位的信息。
-
-
-响应时间，是指I&#x2F;O请求从发出到收到响应的间隔时间。
-
-IOPS与吞吐量的关系
-每秒 I&#x2F;O 吞吐量＝ IOPS * 平均 I&#x2F;O SIZE。从公式可以看出： I&#x2F;O SIZE 越大，IOPS  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/07/linux-uio/" title="linux uio">linux uio</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-07T02:20:54.000Z" title="Created 2024-03-07 10:20:54">2024-03-07</time></span></div><div class="content">
-UIO就是userspace IO，用户空间输入输出。开发者只需要在内核中写非常少量的代码（几十行），把需要哪些寄存器告诉UIO框架，UIO就会生成一个设备文件，&#x2F;dev&#x2F;uio0，然后我们只需要在用户空间打开这个文件，mmap（映射文件到内存空间），就可以直接操作寄存器了！ 这样一来，即使你需要给一个复杂设备（比如摄像头）写驱动，你也可以在用户空间来反复修改、迭代你的驱动代码，根本不需要重新编译内核。非常方便。
-UIO的原理是，把硬件寄存器的地址用ioremap函数给映射到用户态的虚拟地址。这个过程需要修改page table，但是uio框架把这件事做好了，所以我们只需要告诉UIO我们需要哪些寄存器就好。在用户空间，我们的程序访问虚拟地址的时候，page table会把我们引导到真正的硬件的物理地址，我们就可以操纵硬件了。
-
-</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统">文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-04T06:56:42.000Z" title="Created 2024-03-04 14:56:42">2024-03-04</time></span></div><div class="content">文件系统的基本组成
-文件系统
-
-
-文件系统是操作系统中负责管理持久数据的子系统
-负责把用户的文件存到磁盘硬件中。
-
-
-文件系统的基本数据单位是文件，目的是对磁盘上的文件进行组件管理，组织的方式不同，就会形成不同的文件系统。
-linux中 ，一切皆文件。
-linux 文件系统会为每个文件分配数据结构：索引节点（index node）和目录项（directory entry）,它们主要用来记录文件的元数据和目录层次结构。
-索引节点：也就是inode，用来记录文件的元信息，比如inode编号，文件大小，访问权限，创建时间，修改时间，数据在磁盘的位置等。索引节点是文件的唯一标识，它们之间一一对应，也同样都会被存储在硬盘中，所以索引节点同样占用磁盘空间
-目录项，也就是dentry, 用来记录文件的名字，索引节点指针以及与其他目录项的层级关联关系。多个目录项关联起来，就会形成目录结构，但它与索引节点不同的是，目录项是由内核维护的一个数据结构，不存放于磁盘，而是缓存在内存。
-
-
-索引节点唯一标识一个文件，而目录项记录着文件的名，所以目录项和索引节点的关系是多对一，也就是说，一个文件可以有多个别字。比 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cb%E6%A0%91%EF%BC%8Cb-%E6%A0%91/" title="二叉树，b树，b+树">二叉树，b树，b+树</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-04T05:58:49.000Z" title="Created 2024-03-04 13:58:49">2024-03-04</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/03/04/%E5%88%86%E5%B8%83%E5%BC%8F%E5%B9%B6%E8%A1%8C%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="分布式并行文件系统">分布式并行文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-03-04T01:49:52.000Z" title="Created 2024-03-04 09:49:52">2024-03-04</time></span></div><div class="content">分布式文件系统
-“分布式”是重点，它是相对于本地文件系统而言的，分布式文件系统通常指C&#x2F;S架构或网络文件系统，用户数据没有直接连接到本地主机，而是存储到远程存储服务器上。
-需要请求forwarding
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/" title="指令集概念">指令集概念</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-05-11T06:03:20.000Z" title="Created 2024-05-11 14:03:20">2024-05-11</time></span></div><div class="content">
+指令：由程序发出的指挥CPU内部电路协同工作的命令，简称为指令。
+例如，如果要让CPU完成一次A+B-&gt;C的计算，就要发两条存取指令，从存储器把A和B取出来送到运算器中；再发1条加法指令，让运算器执行加法运算，最后发一条存取指令，把C存入寄存器。这个例子用到了两种指令：存取指令和加法指令。
+一个通用CPU要完成各类计算、推理、判断和控制工作，它的指令种类少则几十种，多则数百种，CPU的各种指令的集合称为CPU的指令集。指令集确定了CPU的工作方式和与之相适应CPU内部的硬件架构，这种硬件架构称为CPU的微架构。指令集和微架构是一个公司研发出新款CPU后形成的核心知识产权。指令集是CPU的顶层设计规范，微架构是这个顶层规范的物理实现，这种实现可以有多种，实现方法可以有变化。一般说的CPU架构就包含了CPU指令集和微架构两个东西。
 
 
 
-并行文件系统
-支持并行应用。在并行文件系统环境下，所有客户端可以在同一时间并发读写同一个文件。
-并行文件系统，是客户端知道数据在哪一个节点上直接去对应节点获取数据，没有forwarding这个过程。
-通常并行系统都是携带私有客户端
+指令集是连接软件和硬件的纽带。如论是应用程序还是操作系统中的系统代码，最终都被编译成可以在CPU芯片内部执行的符合指令集规范的机器代码程序。机器代码程序中的指令控制着CPU内部部件协调高效工作，并实现CPU的整体功能，进而由CPU控制整机系统工作。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/15/mmap/" title="mmap">mmap</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-04-15T02:14:01.000Z" title="Created 2024-04-15 10:14:01">2024-04-15</time></span></div><div class="content">
+
+https://mp.weixin.qq.com/s/Ihw3vQf0pBNIbGxwvPlY3A?version=4.1.10.6015&amp;platform=win
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/11/fio%E5%8F%82%E6%95%B0/" title="fio参数">fio参数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-04-11T01:35:58.000Z" title="Created 2024-04-11 09:35:58">2024-04-11</time></span></div><div class="content">12- 1. fio 存储性能测试 （https://islocal.cc/arlo/687d8f2c/）- 2. 
+
+
+numjobs 和 iodepth 关系
+使用numjobs参数测试出的效果要好，更能够增加集群客户端测试压力，使测试结果更准确。而iodepth参数设置后，集群带宽值几乎不变，反而延时随着iodepth增加而成倍增加。混合设置后也同样如此，随着iodepth的值增加，带宽值没有增加，反而延时成倍增加。所有延时增加的倍数刚好是iodepth增加的倍数。
+numjobs和iodepth他们具体设置多少不重要，他们的乘积才重要，就是这两个参数的乘积，代表了总并发数，总并发数达到某一个值之后，性能达到峰值。想明白了这一点之后，以后的测试就简单了，固定住一个参数调节另一个参数就可以了，比如固定线程数为4，调整队列深度就可以了。
+
+参数设置
+在同步模式（psync）和异步模式（libaio）下测试，在顺序写- 的时候同步模式iops会低于异步模式，其他基本无差异
+队列深度（iodepth）对测试影响不大，网上说法是一般设置32个
+线程数（numjobs）对测试效果影响较大，建 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/07/DPU-%E6%99%BA%E8%83%BD%E7%BD%91%E5%8D%A1/" title="DPU&amp;智能网卡">DPU&amp;智能网卡</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-04-07T01:08:48.000Z" title="Created 2024-04-07 09:08:48">2024-04-07</time></span></div><div class="content">
+目的：将计算从CPU卸载到网卡，减少CPU的负担。
+发展
+
+相关概念
+SR-IOV
+
+SR-IOV（Single Root I&#x2F;O Virtualization）, 是intel提出的一种基于硬件的虚拟化解决方案。
+一个物理设备可以虚拟出多个虚拟设备给虚拟机使用。
+SR-IOV 是一种规范，使得单根端口下的单个快速外围组件互联PCIE 物理设备显示为管理程序或客户机操作系统的多个单独的物理设备，既有直通设备的性能优势，又可以支持多个虚拟机。
+
+
+SR-IOV 使用physical functions PF 和 virtual functions (VF) 为 SR-IOV 设备管理全局功能。
+
+
+DPU智能网卡
+DPU的出现是为了解决数据中心中存在三个方面共五大问题：节点间：服务器数据交换效率低、数据传输可靠性低，节点内：数据中心模型执行效率低，I&#x2F;O切换效率低、服务器架构不灵活，网络系统：不安全。
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/03/ai%E5%A4%A7%E6%A8%A1%E5%9E%8B/" title="ai大模型">ai大模型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-04-03T08:48:54.000Z" title="Created 2024-04-03 16:48:54">2024-04-03</time></span></div><div class="content"></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/04/03/spdk-rdma-dpdk-nvme-of/" title="spdk rdma dpdk nvme-of">spdk rdma dpdk nvme-of</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-04-03T08:24:51.000Z" title="Created 2024-04-03 16:24:51">2024-04-03</time></span></div><div class="content">概念解释DPDK （Data Plane Development Kit）
+是一种高性能数据包处理框架，可以用于构建网络应用程序。
+通过最小化CPU与内存之间的数据复制，实现最佳的数据包处理性能。
+核心是用户空间驱动程序，它提供了一套高度优化的数据包处理函数库。这些函数库可在硬件设备（如网卡）和应用程序之间创建一个通信路径，以便快速地处理网络数据包。DPDK框架还支持多线程、异步事件处理和大规模并发操作等特性，这些特性有助于提高应用程序的整体性能。
+
+特点
+
+绕过内核 （Kernel bypass）
+
+
+少了内核处理环节，便于减少数据的拷贝；
+可使用更轻量级的协议栈
 
 
 
-
-区别
-并行文件系统是分布式文件系统的一种。分布式文件系统和并行文件系统都可以将数据分布在多个存储服务器上，可横向扩展从而容纳PB级数据，并支持高带宽。
-
-分布式文件系统通常也像并行文件系统一样，支持共享的全局名称空间。但是对于分布式文件系统而言，即使部分文件数据被分配和放置在不同服务器上，客户端在访问数据或元数据时，仍然需要通过指定的协议服务器来完成，协议服务器可能会成为 IO 路由的瓶颈。现在市场上主流的分布式文件存储为了解决这个协议服务器瓶颈的问题，使用 DNS 技术将不同的客户端连接至多个协议服务器，实现一定程度的负载均衡，但即使 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/29/seastar/" title="seastar">seastar</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T08:26:16.000Z" title="Created 2024-02-29 16:26:16">2024-02-29</time></span></div><div class="content">并发范式 share nothing
-Seastar引入了一层非常薄的抽象：它会在每个核上创建一个线程，并将此线程绑定在其上。不同核（线程）之间禁共享数据，只能通过消息队列来传递数据。
-
-用户态操作系统 seastar
-Seastar 是一个应用框架，它几乎将操作系统所提供的抽象完整地搬移到了用户态中，以减少操作系统的抽象开销，实现软硬件一体化。
-
-Seastar之执行流抽象
-可以将seastar想象成一个支持多核的操作系统，每个核上运行着许多的“进程”
-Seastar将每个核抽象成一台单核计算机，每个单核计算机上运行着许多执行流，一个单核计算机上的多个执行流可以共享数据，不同单核计算机上的执行流只能通过消息来共享数据。
-执行流：从头到尾只能在一个核上运行，并且位于不同核上执行流之间，只能通过跨核消息来通信。
-Seastar在每个用户态CPU上运行一个调度器，来调度一系列的微任务。
-
-</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/29/posix/" title="posix">posix</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T02:49:25.000Z" title="Created 2024-02-29 10:49:25">2024-02-29</time></span></div><div class="content">posxi 简介概念
-POSIX：可移植操作系统接口（Portable Operating System Interface of UNIX）,缩写为POSIX
-
-发布-IEEE系统调用，posix, C库，系统命令和内核函数
-linux三种接口
-
-linux提供了用户接口（shell）,库函数接口（c语言程序调用库），系统调用接口三种接口。
+轮询收包，而不是中断
 
 
-系统调用
-
-操作系统是不能运行进程之间操作硬件资源，进程如果要想访问这些资源，必须向操作系统申请。进程向系统申请的入口就是系统调用（system call）,它由操作系统提供。
-在linux中系统调用是用户空间访问内核的唯一手段，除异常和陷入外，系统调用是内核唯一的合法入口。
+中断会强行打断cpu当前正在执行的任务，任务被中断然后再恢复，可能会导致重新加载Cpu缓存，从而影响效率。
+轮询可以每次批量处理多个包，但中断可能每个包都会触发难以优化收包次数。
 
 
-系统调用和posix
 
-系统调用虽然是内核和用户应用程序之间的沟通桥梁，是用户应用程序访问内核的入口点。但通常，应用程序是通过操作系统提供的应用编程接口API，而不是之间通过系统调用来编程。
-应用程序可以直接调用系统调用接口，但大多数都是通过应用编程接口api。
+大页
 
 
-操作系统api 的主要功能就是把操作系统的功能完全展示出来，提供给应用程序，基于该操作系统，与文件、 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/02/29/bluestore/" title="bluestore">bluestore</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-02-29T02:17:07.000Z" title="Created 2024-02-29 10:17:07">2024-02-29</time></span></div><div class="content">blueStore架构
-BlueStore工作原理
-Ceph OSD执行两个功能
-
-在网络中和其他osd之间复制数据（多副本），
-在本地存储设备上存储数据。
+使用大页可以提高TLB的查询效率，也就提高了地址翻译的效率。
 
 
-传统的ceph osd是将数据存储到现有的文件存储模块，例如xfs文件系统，性能开销比较大，因为需要实现ceph数据到posix的转换。
 
-RocksDB：存储 WAL 、对象元数据、对象扩展属性 Omap、磁盘分配器元数据。
-BlueRocksEnv：抛弃了传统文件系统，封装 RocksDB 文件操作的接口。
-BlueFS：小型的 Append 文件系统，实现了 RocksDB::Env 接口，给 RocksDB 用。
-Allocator：磁盘分配器，负责高效的分配磁盘空间。
-根据上图，可以很直观的了解到：BlueStore 把数据分成两条路径。一条是 data 直接通过 Allocator（磁盘空间分配器）分配磁盘空间，然后写入 BlockDevice。另一条是 metadata 先写入 RocksDB（内存数据库），通过 BlueFs（BlueStore 专用文件系统）来管理 RocksDB 数据，经过 Allocato ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/%E5%86%85%E6%A0%B8%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E5%BC%8A%E7%AB%AF%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="内核传输数据弊端和解决方案">内核传输数据弊端和解决方案</a><time datetime="2024-03-14T05:40:35.000Z" title="Created 2024-03-14 13:40:35">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/14/uio/" title="uio">uio</a><time datetime="2024-03-14T01:33:02.000Z" title="Created 2024-03-14 09:33:02">2024-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/11/%E7%A3%81%E7%9B%98%E6%80%A7%E8%83%BD/" title="磁盘性能">磁盘性能</a><time datetime="2024-03-11T08:00:15.000Z" title="Created 2024-03-11 16:00:15">2024-03-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/07/linux-uio/" title="linux uio">linux uio</a><time datetime="2024-03-07T02:20:54.000Z" title="Created 2024-03-07 10:20:54">2024-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统">文件系统</a><time datetime="2024-03-04T06:56:42.000Z" title="Created 2024-03-04 14:56:42">2024-03-04</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/true-nas-rsync/" style="font-size: 1.5em; color: #99a9bf">true nas, rsync</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.5em; color: #99a9bf">wireguard,VPN</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" style="font-size: 1.5em; color: #99a9bf">个人介绍</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.1em; color: #999">wireguard VPN</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">January 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">December 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">6</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">25</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-03-15T03:33:07.091Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+零拷贝技术
+
+
+在许多数据处理环节可以使用同一段buffer,从而减少了数据拷贝。
+
+
+
+dpdk ring
+
+
+“无锁”队列 实 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/linux-%E6%8D%A2%E6%BA%90-ssh-%E7%BD%91%E7%BB%9C/" title="linux 换源&amp;ssh&amp;网络">linux 换源&amp;ssh&amp;网络</a><time datetime="2024-08-06T09:28:32.000Z" title="Created 2024-08-06 17:28:32">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/03/rag/" title="rag">rag</a><time datetime="2024-07-03T02:28:20.000Z" title="Created 2024-07-03 10:28:20">2024-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/02/embedding/" title="Embedding">Embedding</a><time datetime="2024-07-02T05:30:41.000Z" title="Created 2024-07-02 13:30:41">2024-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/15/FC-Fibrechannel-fiber-channel/" title="FC,Fibre channel,Fiber channel">FC,Fibre channel,Fiber channel</a><time datetime="2024-05-15T10:02:24.000Z" title="Created 2024-05-15 18:02:24">2024-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/" title="指令集概念">指令集概念</a><time datetime="2024-05-11T06:03:20.000Z" title="Created 2024-05-11 14:03:20">2024-05-11</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/true-nas-rsync/" style="font-size: 1.5em; color: #99a9bf">true nas, rsync</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.5em; color: #99a9bf">wireguard,VPN</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%8CRAG-Embedding-word2vec/" style="font-size: 1.5em; color: #99a9bf">人工智能，RAG, Embedding, word2vec</a> <a href="/tags/%E6%8D%A2%E6%BA%90-linux-ssh/" style="font-size: 1.5em; color: #99a9bf">换源,linux,ssh</a> <a href="/tags/wireguard-VPN/" style="font-size: 1.1em; color: #999">wireguard VPN</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" style="font-size: 1.5em; color: #99a9bf">个人介绍</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="View More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">August 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">July 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">April 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">15</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">February 2024</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">January 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">December 2023</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">45</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-08-06T09:34:32.698Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

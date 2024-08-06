@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>linux 文件系统查找文件原理 | Blog of Fisher JJ</title><meta name="author" content="Fisher JJ"><meta name="copyright" content="Fisher JJ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="目录项理解 本质就是为了链接产生了，多个目录项的inode可以同一个。 目录文件的结构非常简单，就是一系列目录项（dirent）的列表。目录项是一个二元组&lt;文件名, inode号码&gt;。 每个文件都对应一个inode，文件名是文件的别名，inode是文件的本体   但是一般可以将其 直接缓存在 内存中 例如查找  目录项缓存 Dentry缓存是一种内核缓存，用于存储目录项（directo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 文件系统查找文件原理">
+<meta property="og:url" content="http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Blog of Fisher JJ">
+<meta property="og:description" content="目录项理解 本质就是为了链接产生了，多个目录项的inode可以同一个。 目录文件的结构非常简单，就是一系列目录项（dirent）的列表。目录项是一个二元组&lt;文件名, inode号码&gt;。 每个文件都对应一个inode，文件名是文件的别名，inode是文件的本体   但是一般可以将其 直接缓存在 内存中 例如查找  目录项缓存 Dentry缓存是一种内核缓存，用于存储目录项（directo">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-03-29T03:20:52.000Z">
+<meta property="article:modified_time" content="2024-04-02T01:13:12.862Z">
+<meta property="article:author" content="Fisher JJ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux 文件系统查找文件原理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-02 09:13:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">linux 文件系统查找文件原理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-29T03:20:52.000Z" title="Created 2024-03-29 11:20:52">2024-03-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-04-02T01:13:12.862Z" title="Updated 2024-04-02 09:13:12">2024-04-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="linux 文件系统查找文件原理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="目录项理解"><a href="#目录项理解" class="headerlink" title="目录项理解"></a>目录项理解</h2><ul>
+<li>本质就是为了链接产生了，多个目录项的inode可以同一个。</li>
+<li>目录文件的结构非常简单，就是一系列目录项（dirent）的列表。目录项是一个二元组&lt;文件名, inode号码&gt;。<ul>
+<li>每个文件都对应一个inode，文件名是文件的别名，inode是文件的本体</li>
+</ul>
+</li>
+<li>但是一般可以将其 直接缓存在 内存中</li>
+<li>例如查找</li>
+</ul>
+<h2 id="目录项缓存"><a href="#目录项缓存" class="headerlink" title="目录项缓存"></a>目录项缓存</h2><ul>
+<li><p>Dentry缓存是一种内核缓存，用于存储目录项（directory entry），每个目录项都指向文件系统中的一个文件或目录。当一个应用程序访问文件或目录时，内核会首先在dentry缓存中查找对应的目录项，如果找到了就可以直接访问对应的文件或目录，这样就可以避免频繁地访问磁盘，提高了文件系统的性能。如果dentry缓存中没有找到对应的目录项，则内核会访问磁盘，从文件系统中读取对应的目录项，同时将其存储到dentry缓存中以供下次访问使用。</p>
+</li>
+<li><p>dentry要解决的是路径查找问题。 我们通过文件路径去访问一个文件，进行文件数据或元数据的读写操作，VFS首先要通过路径解析，找到文件对应的inode。如果没有dentry缓存，那每次路径解析都要根据去读取父目录inode在磁盘上的数据块，拿到父目录的内容，从中找到子目录（文件）的inode，然后依次重复这个过程，最后拿到目标文件的inode进行操作。</p>
+</li>
+<li><p>VFS 如果每次都解析路径字符串来定位目录项（缓存），会是很费时的操作，所以引入散列表(dentry_hashtable)，让路径和目录项直接映射。key 为路径字符串的 hash（TODO:是完整的绝对路径还是分割后的路径），value 为对应的目录项的一条链表（hash 表特性，不同的路径可能被 hash 成相同的 key，value 会是一条链表），然后在这条链表中找到对应路径的目录项缓存（TODO：怎么在链表中找到对应的目录项）。</p>
+</li>
+<li><p>举例说明，假设你需要在自己目录中编译一个源文件，&#x2F;home&#x2F;dracula&#x2F;src&#x2F;the_sun_sucks.c，每一次对文件进行访问(比如说，首先要打开它，然后要存储它，还要进行编译等)，VFS 都必须沿着嵌套的目录依次解析全部路径:&#x2F;、home、dracula、src和最终的the_sun_sucks.c。为了避免每次访问该路径名都进行这种耗时的操作,**VFS 会先在目录项缓存中搜索路径名(散列表 dentry_hashtable)**，如果找到了，就无须花费那么大的力气了。相反，如果该目录项在目录项缓存中并不存在，VFS 就必须自己通过遍历文件系统为每个路径分量解析路径，解析完毕后，再将目录项对象加入 dcache 中，以便以后可以快速查找到它。</p>
+</li>
+<li><p><strong>本质上，dentry缓存提供了根据name（path）快速找到inode的途径。</strong></p>
+</li>
+</ul>
+<h2 id="Inode-缓存"><a href="#Inode-缓存" class="headerlink" title="Inode 缓存"></a>Inode 缓存</h2><ul>
+<li>Inode缓存是另一种内核缓存，用于存储inode节点。每个文件或目录在文件系统中都有一个唯一的inode节点，该节点包含文件或目录的元数据信息，如文件大小、创建时间、修改时间等。当一个应用程序访问文件或目录时，内核会首先在dentry缓存中查找对应的目录项，然后通过该目录项找到对应的inode节点。如果找到了inode节点，则可以直接访问对应的文件或目录，避免频繁地访问磁盘，提高了文件系统的性能。如果inode缓存中没有找到对应的inode节点，则内核会访问磁盘，从文件系统中读取对应的inode节点，同时将其存储到inode缓存中以供下次访问使用。</li>
+</ul>
+<h2 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a>查找文件</h2><h3 id="没有目录项缓存的步骤"><a href="#没有目录项缓存的步骤" class="headerlink" title="没有目录项缓存的步骤"></a>没有目录项缓存的步骤</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="http://chuquan.me/2022/05/01/understand-principle-of-filesystem/">参考</a></p>
+</blockquote>
+<ul>
+<li>当我们使用ls查看&#x2F;bin&#x2F;ln这个文件时，执行：ls -lih &#x2F; &#x2F;bin &#x2F;bin&#x2F;ln<br><img src="/../images/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86_112441.png"><ul>
+<li>读取“&#x2F;”目录，因为“&#x2F;”是挂载点，所以可以知道挂载点的inode号码是2，</li>
+<li>读取bin目录，通过“&#x2F;”的inode找到“&#x2F;”的block块，在这个block块里面查询看是否有“bin”这个文件名字，找到这个名字并返回这个名字对应的inode号码，也就是174。</li>
+<li>通过编号为174的inode块来找到对应block块，并查询是否有ln这个文件名，找到这个名字并返回对应的inode号码，也就是4824。然后在4824这个inode中，来查询所有保存了block索引的记录，并读取对应索引的block。完毕。</li>
+</ul>
+</li>
+</ul>
+<h3 id="有目录项缓存"><a href="#有目录项缓存" class="headerlink" title="有目录项缓存"></a>有目录项缓存</h3><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">struct dentry &#123;</span><br><span class="line">   </span><br><span class="line">	atomic_t d_count;				/* 目录项对象引用计数器 */</span><br><span class="line">	unsigned int d_flags;			/* 目录项高速缓存标志 */</span><br><span class="line">	spinlock_t d_lock;				/* 保护目录项对象的自旋锁 */</span><br><span class="line">	struct inode *d_inode;			/* 与文件名关联的索引节点 */</span><br><span class="line">	struct hlist_node d_hash;		/* 指向散列表表项链表的指针 */</span><br><span class="line">	struct dentry *d_parent;		/* 父目录的目录项对象 */</span><br><span class="line">	struct qstr d_name;				/* 文件名 */</span><br><span class="line">	struct list_head d_lru;			/* 用于未使用目录项链表的指针 */</span><br><span class="line">	union &#123;</span><br><span class="line">   </span><br><span class="line">		struct list_head d_child;	/* 对目录而言，用于同一父目录中的目录项链表的指针 */</span><br><span class="line">	 	struct rcu_head d_rcu;		/* 回收目录项对象时，由RCU描述符使用 */</span><br><span class="line">	&#125; d_u;</span><br><span class="line">	struct list_head d_subdirs;		/* 对目录而言，子目录项链表的头 */</span><br><span class="line">	struct list_head d_alias;		/* 用于与同一索引节点（别名）相关的目录项链表的指针 */</span><br><span class="line">	unsigned long d_time;			/* 由d_revalidate方法使用 */</span><br><span class="line">	struct dentry_operations *d_op;	/* 目录项方法 */</span><br><span class="line">	struct super_block *d_sb;		/* 文件的超级块对象 */</span><br><span class="line">	void *d_fsdata;					/* 依赖于文件系统的数据 */</span><br><span class="line">	struct dcookie_struct *d_cookie;/* 指向内核配置文件使用的数据结构的指针 */</span><br><span class="line">	int d_mounted;					/* 对目录项而言，用于记录安装该目录项的文件系统数的计数器 */</span><br><span class="line">	unsigned char d_iname[DNAME_INLINE_LEN_MIN];	/* 存放短文件名的空间 */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>-<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7081656737891090468">解释</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Fisher JJ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/">http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/29/linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB/" title="linux内核体系"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">linux内核体系</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/29/%E7%A1%AC%E7%9B%98%E6%A0%BC%E5%BC%8F%E5%8C%96/" title="硬盘格式化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">硬盘格式化</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">目录项理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">目录项缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Inode-%E7%BC%93%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text">Inode 缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">查找文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%BC%93%E5%AD%98%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.1.</span> <span class="toc-text">没有目录项缓存的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%9B%AE%E5%BD%95%E9%A1%B9%E7%BC%93%E5%AD%98"><span class="toc-number">4.2.</span> <span class="toc-text">有目录项缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE"><span class="toc-number">5.</span> <span class="toc-text">查找</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/linux-%E6%8D%A2%E6%BA%90-ssh-%E7%BD%91%E7%BB%9C/" title="linux 换源&amp;ssh&amp;网络">linux 换源&amp;ssh&amp;网络</a><time datetime="2024-08-06T09:28:32.000Z" title="Created 2024-08-06 17:28:32">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/03/rag/" title="rag">rag</a><time datetime="2024-07-03T02:28:20.000Z" title="Created 2024-07-03 10:28:20">2024-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/02/embedding/" title="Embedding">Embedding</a><time datetime="2024-07-02T05:30:41.000Z" title="Created 2024-07-02 13:30:41">2024-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/15/FC-Fibrechannel-fiber-channel/" title="FC,Fibre channel,Fiber channel">FC,Fibre channel,Fiber channel</a><time datetime="2024-05-15T10:02:24.000Z" title="Created 2024-05-15 18:02:24">2024-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/" title="指令集概念">指令集概念</a><time datetime="2024-05-11T06:03:20.000Z" title="Created 2024-05-11 14:03:20">2024-05-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

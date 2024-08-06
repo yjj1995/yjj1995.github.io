@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>指令集概念 | Blog of Fisher JJ</title><meta name="author" content="Fisher JJ"><meta name="copyright" content="Fisher JJ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="指令：由程序发出的指挥CPU内部电路协同工作的命令，简称为指令。 例如，如果要让CPU完成一次A+B-&gt;C的计算，就要发两条存取指令，从存储器把A和B取出来送到运算器中；再发1条加法指令，让运算器执行加法运算，最后发一条存取指令，把C存入寄存器。这个例子用到了两种指令：存取指令和加法指令。 一个通用CPU要完成各类计算、推理、判断和控制工作，它的指令种类少则几十种，多则数百种，CPU的各种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="指令集概念">
+<meta property="og:url" content="http://example.com/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:site_name" content="Blog of Fisher JJ">
+<meta property="og:description" content="指令：由程序发出的指挥CPU内部电路协同工作的命令，简称为指令。 例如，如果要让CPU完成一次A+B-&gt;C的计算，就要发两条存取指令，从存储器把A和B取出来送到运算器中；再发1条加法指令，让运算器执行加法运算，最后发一条存取指令，把C存入寄存器。这个例子用到了两种指令：存取指令和加法指令。 一个通用CPU要完成各类计算、推理、判断和控制工作，它的指令种类少则几十种，多则数百种，CPU的各种">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-05-11T06:03:20.000Z">
+<meta property="article:modified_time" content="2024-05-11T09:19:12.268Z">
+<meta property="article:author" content="Fisher JJ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '指令集概念',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-11 17:19:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">指令集概念</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-05-11T06:03:20.000Z" title="Created 2024-05-11 14:03:20">2024-05-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-05-11T09:19:12.268Z" title="Updated 2024-05-11 17:19:12">2024-05-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="指令集概念"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
+<li>指令：由程序发出的指挥CPU内部电路协同工作的命令，简称为指令。</li>
+<li>例如，如果要让CPU完成一次A+B-&gt;C的计算，就要发两条存取指令，从存储器把A和B取出来送到运算器中；再发1条加法指令，让运算器执行加法运算，最后发一条存取指令，把C存入寄存器。这个例子用到了两种指令：存取指令和加法指令。</li>
+<li>一个通用CPU要完成各类计算、推理、判断和控制工作，它的指令种类少则几十种，多则数百种，CPU的各种指令的集合称为CPU的指令集。指令集确定了CPU的工作方式和与之相适应CPU内部的硬件架构，这种硬件架构称为CPU的微架构。指令集和微架构是一个公司研发出新款CPU后形成的核心知识产权。指令集是CPU的顶层设计规范，微架构是这个顶层规范的物理实现，这种实现可以有多种，实现方法可以有变化。一般说的CPU架构就包含了CPU指令集和微架构两个东西。</li>
+</ul>
+<p><img src="/../images/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5_153628.png"><br><img src="/../images/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5_153714.png"></p>
+<ul>
+<li>指令集是连接软件和硬件的纽带。如论是应用程序还是操作系统中的系统代码，最终都被编译成可以在CPU芯片内部执行的符合指令集规范的机器代码程序。机器代码程序中的指令控制着CPU内部部件协调高效工作，并实现CPU的整体功能，进而由CPU控制整机系统工作。指令集是系统软件和硬件工程师共同遵从的法条，只有遵守了这个法条，软件工程师编写的软件才能在不同型号的整机系统上运行。硬件工程师开发的整机系统才能运行现有的应用软件。</li>
+</ul>
+<h3 id="IP-核"><a href="#IP-核" class="headerlink" title="IP 核"></a>IP 核</h3><ul>
+<li>ARM IP指的是ARM的知识产权（Intellectual Property）核。这些IP核是经过优化和验证的硬件模块，可以在不同的处理器和芯片设计中重复使用。通过使用ARM IP核，芯片设计人员可以更快地开发出高性能、低功耗的处理器和芯片。</li>
+</ul>
+<h3 id="为什么要授权？"><a href="#为什么要授权？" class="headerlink" title="为什么要授权？"></a>为什么要授权？</h3><ul>
+<li>说指令集有版权其实不太准确，指令集本身没有版权，你可以这么理解，<strong>指令集就相当于一堆函数名，所谓开源指令集，开源的是函数体，也就是代码实现的部分，当然你也可以直接用API来理解，不过和程序不同的是，代码的版权通常只要不照抄，是可以不侵权的绕过去的，但是指令集的“代码实现”，是芯片上的集成电路，一些经过设计的指令集的实现，基本上是绕不过去的。</strong>这就对市场的进入者形成了门槛，<strong>如果你想兼容已有的上层生态（操作系统，软件），你就必须用目前市场拥有者定义的函数名，因为现有软件都是针对现有的函数名编译的，但是因为电路实现本身有版权并且绕不过去，你就做不到兼容，这就是为什么指令集可以成为一个门槛。</strong></li>
+<li>开源指令集指的是开放指令集的集成电路设计，但事实上目前所有的开源指令集其实都没有自己的生态，用开源指令集并不是图方便用现成的东西，因为指令集的开发在CPU设计中并不是难点，任何有能力设计CPU的公司其实都可以设计自己的指令集，但是除非是你是一个市场的先行者，否则你不得不面对自己设计的指令集和市场已有的生态不兼容的问题。没有多少软件公司愿意为了一个没有市场的硬件产品重新写一遍自己的软件，而没有软件可用你的硬件就没有市场，这就是后发者需要面对的局面。</li>
+</ul>
+<h4 id="arm授权"><a href="#arm授权" class="headerlink" title="arm授权"></a>arm授权</h4><ul>
+<li>一个公司若想使用ARM的内核来做自己的处理器，比如苹果三星TI等等，必须向ARM公司购买其架构下的不同层级授权，根据使用需要购买相应的层级授权。<br>架构的授权方式有三种：架构层级授权、内核层级授权(也就是你所说的ip核授权)、使用层级授权。<br><strong>使用层级授权</strong>，要想使用一款处理器，得到使用层级的授权是最基本的，这就意味着你只能拿别人提供的定义好的ip来嵌入在你的设计中，不能更改人家的ip，也不能借助人家的ip创造自己的基于该ip的封装产品；<br><strong>内核层级授权</strong>，是指可以以一个内核为基础然后在加上自己的外设，比如USART GPIO SPI ADC 等等，最后形成了自己的MCU，这些很多，比如三星TI。<br><strong>架构层级授权</strong>，是指可以对ARM架构进行大幅度改造，甚至可以对ARM指令集进行扩展或缩减，苹果就是一个很好的例子，在使用ARMv7-A架构基础上，扩展出了自己的苹果swift架构；</li>
+<li>因此，如果华为分别拿到架构授权和ip核授权，那么意味着它可以在ARM指令集基础上根据需要创建出自己的内核架构，并可添加各种片内外设比如通信接口、显示器控制接口、GPIO等等，从而生产出自己的“处理器芯片”。<br>其实就像我写了一篇文章，我告诉甲，你可以拿去修改后使用，便是架构层级授权，我告诉乙，你可以在你的文章中引用我的文章，便是内核级授权，我告诉丙，你只能对我的文章进行转发，不能更改，不能添油加醋，便是使用层级授权。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://marlous.github.io/2019/03/01/%E5%A4%84%E7%90%86%E5%99%A8%E3%80%81%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%8C%87%E4%BB%A4%E9%9B%86%E5%85%B3%E7%B3%BB/">处理器、处理器架构与指令集关系</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Fisher JJ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/">http://example.com/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/15/FC-Fibrechannel-fiber-channel/" title="FC,Fibre channel,Fiber channel"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">FC,Fibre channel,Fiber channel</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/15/mmap/" title="mmap"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">mmap</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">45</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#IP-%E6%A0%B8"><span class="toc-number">1.</span> <span class="toc-text">IP 核</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%8E%88%E6%9D%83%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">为什么要授权？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#arm%E6%8E%88%E6%9D%83"><span class="toc-number">2.1.</span> <span class="toc-text">arm授权</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/linux-%E6%8D%A2%E6%BA%90-ssh-%E7%BD%91%E7%BB%9C/" title="linux 换源&amp;ssh&amp;网络">linux 换源&amp;ssh&amp;网络</a><time datetime="2024-08-06T09:28:32.000Z" title="Created 2024-08-06 17:28:32">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/03/rag/" title="rag">rag</a><time datetime="2024-07-03T02:28:20.000Z" title="Created 2024-07-03 10:28:20">2024-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/02/embedding/" title="Embedding">Embedding</a><time datetime="2024-07-02T05:30:41.000Z" title="Created 2024-07-02 13:30:41">2024-07-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/15/FC-Fibrechannel-fiber-channel/" title="FC,Fibre channel,Fiber channel">FC,Fibre channel,Fiber channel</a><time datetime="2024-05-15T10:02:24.000Z" title="Created 2024-05-15 18:02:24">2024-05-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/" title="指令集概念">指令集概念</a><time datetime="2024-05-11T06:03:20.000Z" title="Created 2024-05-11 14:03:20">2024-05-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
