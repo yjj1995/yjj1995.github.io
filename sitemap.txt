@@ -1,3 +1,7 @@
+http://example.com/2024/08/21/ceph%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%BF%B0/
+http://example.com/2024/01/29/k8s/
+http://example.com/2024/03/18/linux-io/
+http://example.com/2023/11/22/ESXI/
 http://example.com/2024/08/06/linux-%E6%8D%A2%E6%BA%90-ssh-%E7%BD%91%E7%BB%9C/
 http://example.com/2024/07/02/embedding/
 http://example.com/2024/07/03/rag/
@@ -13,7 +17,6 @@ http://example.com/2024/04/03/ai%E5%A4%A7%E6%A8%A1%E5%9E%8B/
 http://example.com/2024/04/03/%E7%BD%91%E7%BB%9C%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/
 http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/
 http://example.com/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/
-http://example.com/2024/03/18/linux-io/
 http://example.com/2024/04/01/linux%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/
 http://example.com/2024/03/29/%E7%A1%AC%E7%9B%98%E6%A0%BC%E5%BC%8F%E5%8C%96/
 http://example.com/2024/03/29/linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB/
@@ -32,14 +35,12 @@ http://example.com/2024/03/04/%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%8Cb%E6%A0%91%EF%
 http://example.com/2023/12/28/linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/
 http://example.com/2024/02/29/seastar/
 http://example.com/2024/02/19/go%E5%9F%BA%E7%A1%80/
-http://example.com/2024/01/29/k8s/
 http://example.com/2023/11/17/wireguard-%E4%BB%8B%E7%BB%8D/
 http://example.com/2023/12/18/LDAP/
 http://example.com/2023/12/20/%E5%AE%B9%E5%99%A8%EF%BC%8Cdocker/
 http://example.com/2023/12/14/nfs%E6%9C%8D%E5%8A%A1%E7%94%A8%E6%88%B7%E8%BA%AB%E4%BB%BD%E6%98%A0%E5%B0%84/
 http://example.com/2023/12/05/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/
 http://example.com/2023/12/01/rsync/
-http://example.com/2023/11/22/ESXI/
 http://example.com/2023/11/29/ubuntu-%E9%85%8D%E7%BD%AE/
 http://example.com/2023/11/21/tun-tap-%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E4%B8%8EVPN%E9%9A%A7%E9%81%93%E5%8E%9F%E7%90%86/
 http://example.com/2023/11/16/%E5%8D%9A%E5%AE%A2%E4%BB%8B%E7%BB%8D/
@@ -50,3 +51,4 @@ http://example.com/tags/wireguard-VPN/
 http://example.com/tags/true-nas-rsync/
 http://example.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%EF%BC%8CRAG-Embedding-word2vec/
 http://example.com/tags/%E6%8D%A2%E6%BA%90-linux-ssh/
+http://example.com/tags/ceph-%E9%9D%A2%E8%AF%95-%E5%AD%98%E5%82%A8/
