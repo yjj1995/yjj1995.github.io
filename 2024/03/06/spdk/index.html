@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>spdk | Blog of Fisher JJ</title><meta name="author" content="Fisher JJ"><meta name="copyright" content="Fisher JJ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="简介：SPDK（Storage Performance Development Kit）是intel发布的一套高性能存储开发工具包，用于加速nvme ssd作为后端存储使用的应用软件加速库。  关键技术  全用户态：所有必要的驱动全部移到了用户态，避免了系统调用的开销，真正实现内存零拷贝。   零拷贝是指计算机执行IO操作时，CPU不需要将数据从一个存储区域复制到另一个存储区域，从而可以减少上下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spdk">
+<meta property="og:url" content="http://example.com/2024/03/06/spdk/index.html">
+<meta property="og:site_name" content="Blog of Fisher JJ">
+<meta property="og:description" content="简介：SPDK（Storage Performance Development Kit）是intel发布的一套高性能存储开发工具包，用于加速nvme ssd作为后端存储使用的应用软件加速库。  关键技术  全用户态：所有必要的驱动全部移到了用户态，避免了系统调用的开销，真正实现内存零拷贝。   零拷贝是指计算机执行IO操作时，CPU不需要将数据从一个存储区域复制到另一个存储区域，从而可以减少上下">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-03-06T01:27:39.000Z">
+<meta property="article:modified_time" content="2025-07-11T09:26:28.712Z">
+<meta property="article:author" content="Fisher JJ">
+<meta property="article:tag" content="s">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/03/06/spdk/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'spdk',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-07-11 17:26:28'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="Blog of Fisher JJ" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Blog of Fisher JJ"><span class="site-name">Blog of Fisher JJ</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">spdk</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-06T01:27:39.000Z" title="Created 2024-03-06 09:27:39">2024-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-07-11T09:26:28.712Z" title="Updated 2025-07-11 17:26:28">2025-07-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="spdk"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>简介：SPDK（Storage Performance Development Kit）是intel发布的一套高性能存储开发工具包，用于加速nvme ssd作为后端存储使用的应用软件加速库。</p>
+</blockquote>
+<h3 id="关键技术"><a href="#关键技术" class="headerlink" title="关键技术"></a>关键技术</h3><ul>
+<li><ol>
+<li>全用户态：所有必要的驱动全部移到了用户态，避免了系统调用的开销，真正实现内存零拷贝。</li>
+</ol>
+<ul>
+<li>零拷贝是指计算机执行IO操作时，CPU不需要将数据从一个存储区域复制到另一个存储区域，从而可以减少上下文切换以及CPU拷贝的时间，是一种IO操作优化技术。<ul>
+<li>零拷贝（Zero-copy）技术，因为我们没有在内存层面去拷贝数据，也就是说全程没有通过 CPU 来搬运数据，所有的数据都是通过 DMA 来进行传输的。</li>
+<li>当传输大文件时，不能使用零拷贝。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>轮询模式：针对高速物理存储设备，采用轮询而非中断方式判断请求完成，大大降低时延并减少性能波动。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>无锁机制：在IO路径上避免采用任何锁机制进行同步，降低时延并提升吞吐量。</li>
+</ol>
+</li>
+</ul>
+<h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><p><img src="/../images/spdk_110105.png"></p>
+<h4 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h4><ul>
+<li>驱动层<ul>
+<li>实现了存储服务层定义的抽象接口，以对接不同的存储类型，细分成两层：<ul>
+<li><p>硬件驱动</p>
+<ul>
+<li>Nvme Driver: 高度优化且无锁的驱动。高扩展性，高效性和高性能</li>
+<li>IOAT：英特尔I&#x2F;O加速技术，基于Xeon处理器平台上的copy offload引擎.通过提供用户空间访问，减少DMA数据移动的阈值，允许对小尺寸I&#x2F;O或NTB的更好利用。</li>
+</ul>
+</li>
+<li><p>后端块设备</p>
+<ul>
+<li>NVMe over Fabrics（-oF）initiator：从程序员的角度来看，本地SPDK NVMe驱动和NVMe-oF启动器共享一套共同的API命令。这意味着，比如本地&#x2F;远程复制非常容易实现。</li>
+<li>Ceph RADOS Block Device（RBD）：使Ceph成为SPDK的后端设备，比如这可能允许Ceph用作另一个存储层。</li>
+<li>Blobstore Block Device：由SPDK Blobstore分配的块设备，是虚拟机或数据库可以与之交互的虚拟设备。这些设备得到SPDK基础架构的优势，意味着零拷贝和令人难以置信的可扩展性。</li>
+<li>Linux Asynchrounous I&#x2F;O（AIO）：允许SPDK与内核设备（比如机械硬盘）交互。</li>
+</ul>
+</li>
+<li><p>存储服务层： 实现对块和文件的抽象</p>
+<ul>
+<li>Block device abstration layer (bdev): 连接到各种不同设备驱动和块设备的存储协议的粘合剂。提供灵活的api用于额外的用户功能（磁盘阵列，压缩，去冗等）</li>
+<li>BlobStore：一个高精简的文件式语义（非POSXI）。为数据库，容器，虚拟机或其他不依赖于大部分POSIX文件系统功能集（比如用户访问控制）的工作负载提供高性能基础。</li>
+</ul>
+</li>
+<li><p>存储协议层(Storage Protocols): 支持存储应用类型。</p>
+<ul>
+<li>iSCSI Target：对外提供标准的iSCSI存储设备, 建立了通过以太网的块流量规范，大约是内核LIO效率的两倍。</li>
+<li>NVMe-oF target：实现了新NVMe-oF规范, 为每个CPU核提供高达40Gbps的流量。</li>
+<li>vhost-scsi target：KVM&#x2F;QEMU的功能利用了SPDK NVMe驱动，使得访客虚拟机访问存储设备时延迟更低，使得I&#x2F;O密集型工作负载的整体CPU负载减低。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
+<li>提供块设备接口的后端存储应用。如iSCSI Target、NVMe-oF Target；</li>
+<li>对虚拟机中I&#x2F;O的加速。主要是指在Linux系统下QEMU&#x2F;KVM作为Hypervisor管理虚拟机的场景，使用vhost交互协议，实现基于共享内存通道的高效vhost用户态Target。如vhost SCSI&#x2F;blk&#x2F;NVMe Target，从而加速虚拟机中virtio SCSI&#x2F;blk及Kernel Native NVMe协议的I&#x2F;O驱动。其主要原理是减少了VM中断等事件的数目（如interrupt、VM_EXIT），并且缩短了host OS中的I&#x2F;O栈。</li>
+<li>SPDK加速数据库存储引擎。通过实现RocksDB中的抽象文件类，SPDK的blobfs&#x2F;blobstore目前可以和RocksDB集成，<strong>用于加速在NVMe SSD上使用RocksDB引擎，其实质是bypass kernel文件系统，完全使用基于SPDK的用户态I&#x2F;O栈</strong>。此外，参照SPDK对RocksDB的支持，亦可以用SPDK的blobfs&#x2F;blobstore整合其他的数据库存储引擎。</li>
+</ul>
+<h3 id="应用框架"><a href="#应用框架" class="headerlink" title="应用框架"></a>应用框架</h3><ul>
+<li>SPDK的应用框架可以分为：<ul>
+<li>CPU core和线程的管理: 通过CPU核绑定函数的亲和性，在每个核上运行一个thread(Reactor);</li>
+</ul>
+</li>
+</ul>
+<h3 id="DMA技术-（直接内存访问（Direct-Memory-Access））"><a href="#DMA技术-（直接内存访问（Direct-Memory-Access））" class="headerlink" title="DMA技术 （直接内存访问（Direct Memory Access））"></a>DMA技术 （直接内存访问（Direct Memory Access））</h3><ul>
+<li>在进行 I&#x2F;O 设备和内存的数据传输的时候，数据搬运的工作全部交给DMA控制器，而CPU不再参与任何与数据搬运相关的事情，注这样cpi就可以去处理别的事物。</li>
+<li>CPU 不再参与「将数据从磁盘控制器缓冲区搬运到内核空间」的工作，这部分工作全程由 DMA 完成。但是 CPU 在这个过程中也是必不可少的，因为传输什么数据，从哪里传输到哪里，都需要 CPU 来告诉 DMA 控制器。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Fisher JJ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/06/spdk/">http://example.com/2024/03/06/spdk/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/s/">s</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/07/linux-uio/" title="linux uio"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">linux uio</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/04/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="文件系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">文件系统</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Fisher JJ</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yjj1995"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">关键技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E8%AF%B4%E6%98%8E"><span class="toc-number">2.1.</span> <span class="toc-text">架构说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">4.</span> <span class="toc-text">应用框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DMA%E6%8A%80%E6%9C%AF-%EF%BC%88%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE%EF%BC%88Direct-Memory-Access%EF%BC%89%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">DMA技术 （直接内存访问（Direct Memory Access））</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/11/test/" title="test">test</a><time datetime="2025-07-11T09:21:42.000Z" title="Created 2025-07-11 17:21:42">2025-07-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/21/ceph%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%BF%B0/" title="ceph知识点概述">ceph知识点概述</a><time datetime="2024-08-21T06:08:26.000Z" title="Created 2024-08-21 14:08:26">2024-08-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/06/linux-%E6%8D%A2%E6%BA%90-ssh-%E7%BD%91%E7%BB%9C/" title="linux 换源&amp;ssh">linux 换源&amp;ssh</a><time datetime="2024-08-06T09:28:32.000Z" title="Created 2024-08-06 17:28:32">2024-08-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/03/rag/" title="rag">rag</a><time datetime="2024-07-03T02:28:20.000Z" title="Created 2024-07-03 10:28:20">2024-07-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/02/embedding/" title="Embedding">Embedding</a><time datetime="2024-07-02T05:30:41.000Z" title="Created 2024-07-02 13:30:41">2024-07-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Fisher JJ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
