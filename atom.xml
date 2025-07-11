@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-07-11T09:21:42.583Z</updated>
+  <updated>2025-07-11T09:50:58.732Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,11 +21,13 @@
     <link href="http://example.com/2025/07/11/test/"/>
     <id>http://example.com/2025/07/11/test/</id>
     <published>2025-07-11T09:21:42.000Z</published>
-    <updated>2025-07-11T09:21:42.583Z</updated>
+    <updated>2025-07-11T09:50:58.732Z</updated>
     
     
     
     
+    
+    <category term="测试" scheme="http://example.com/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -78,7 +80,7 @@
     <link href="http://example.com/2024/07/03/rag/"/>
     <id>http://example.com/2024/07/03/rag/</id>
     <published>2024-07-03T02:28:20.000Z</published>
-    <updated>2024-07-03T02:29:06.356Z</updated>
+    <updated>2025-07-11T09:49:06.812Z</updated>
     
     <content type="html"><![CDATA[<h1 id="RAG-Retrieval-Augmented-Generation"><a href="#RAG-Retrieval-Augmented-Generation" class="headerlink" title="RAG (Retrieval-Augmented Generation)"></a>RAG (Retrieval-Augmented Generation)</h1><ul><li>技术原理图<br><img src="/../images/rag_102853.png"></li></ul>]]></content>
     
@@ -90,6 +92,8 @@
     
     
     
+    
+    <category term="RAG, 人工智能" scheme="http://example.com/tags/RAG-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
     
   </entry>
   
@@ -121,7 +125,7 @@
     <link href="http://example.com/2024/05/15/FC-Fibrechannel-fiber-channel/"/>
     <id>http://example.com/2024/05/15/FC-Fibrechannel-fiber-channel/</id>
     <published>2024-05-15T10:02:24.000Z</published>
-    <updated>2024-05-15T10:25:53.665Z</updated>
+    <updated>2025-07-11T09:41:32.290Z</updated>
     
     <content type="html"><![CDATA[<ul><li><p><strong>Fibre</strong> Channel 也就是 “网状通道”的意思，简称FC。</p><ul><li>FC（Fibre Channel）协议时一套完全独立的网络协议，比以太网要复杂得多。FC自1988年出现以来，已经发展成为一项非常复杂、高速的网络技术。Fibre Channel可以称其为FC协议或者FC网络，像TCP&#x2F;IP一样，FC协议集同样具备TCP&#x2F;IP协议集以及以太网中的很多概念，比如FC交换、FC交换机、FC路由、SPF路由算法等。</li></ul></li><li><p>FC只代表Fibre Channel,而不是Fiber Channel</p></li><li><p>FC和光纤没有必然的联系</p></li><li><p>Fibre Channel 可以称为FC 协议，FC网络，FC互联。FC协议集同样具备TCP&#x2F;IP协议集以及以太网中的很多概念，比如FC交换、FC交换机、FC路由、FC路由器，SPF路由算法等。我们完全可以类比地看待TCP&#x2F;IP协议以及FC协议，因为它们都遵循OSI的模型。</p></li><li></li></ul>]]></content>
     
@@ -137,6 +141,8 @@
     
     
     
+    <category term="FC, 光纤通道, 存储网络" scheme="http://example.com/tags/FC-%E5%85%89%E7%BA%A4%E9%80%9A%E9%81%93-%E5%AD%98%E5%82%A8%E7%BD%91%E7%BB%9C/"/>
+    
   </entry>
   
   <entry>
@@ -144,7 +150,7 @@
     <link href="http://example.com/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/"/>
     <id>http://example.com/2024/05/11/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5/</id>
     <published>2024-05-11T06:03:20.000Z</published>
-    <updated>2024-05-11T09:19:12.268Z</updated>
+    <updated>2025-07-11T09:37:48.161Z</updated>
     
     <content type="html"><![CDATA[<ul><li>指令：由程序发出的指挥CPU内部电路协同工作的命令，简称为指令。</li><li>例如，如果要让CPU完成一次A+B-&gt;C的计算，就要发两条存取指令，从存储器把A和B取出来送到运算器中；再发1条加法指令，让运算器执行加法运算，最后发一条存取指令，把C存入寄存器。这个例子用到了两种指令：存取指令和加法指令。</li><li>一个通用CPU要完成各类计算、推理、判断和控制工作，它的指令种类少则几十种，多则数百种，CPU的各种指令的集合称为CPU的指令集。指令集确定了CPU的工作方式和与之相适应CPU内部的硬件架构，这种硬件架构称为CPU的微架构。指令集和微架构是一个公司研发出新款CPU后形成的核心知识产权。指令集是CPU的顶层设计规范，微架构是这个顶层规范的物理实现，这种实现可以有多种，实现方法可以有变化。一般说的CPU架构就包含了CPU指令集和微架构两个东西。</li></ul><p><img src="/../images/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5_153628.png"><br><img src="/../images/%E6%8C%87%E4%BB%A4%E9%9B%86%E6%A6%82%E5%BF%B5_153714.png"></p><ul><li>指令集是连接软件和硬件的纽带。如论是应用程序还是操作系统中的系统代码，最终都被编译成可以在CPU芯片内部执行的符合指令集规范的机器代码程序。机器代码程序中的指令控制着CPU内部部件协调高效工作，并实现CPU的整体功能，进而由CPU控制整机系统工作。指令集是系统软件和硬件工程师共同遵从的法条，只有遵守了这个法条，软件工程师编写的软件才能在不同型号的整机系统上运行。硬件工程师开发的整机系统才能运行现有的应用软件。</li></ul><h3 id="IP-核"><a href="#IP-核" class="headerlink" title="IP 核"></a>IP 核</h3><ul><li>ARM IP指的是ARM的知识产权（Intellectual Property）核。这些IP核是经过优化和验证的硬件模块，可以在不同的处理器和芯片设计中重复使用。通过使用ARM IP核，芯片设计人员可以更快地开发出高性能、低功耗的处理器和芯片。</li></ul><h3 id="为什么要授权？"><a href="#为什么要授权？" class="headerlink" title="为什么要授权？"></a>为什么要授权？</h3><ul><li>说指令集有版权其实不太准确，指令集本身没有版权，你可以这么理解，<strong>指令集就相当于一堆函数名，所谓开源指令集，开源的是函数体，也就是代码实现的部分，当然你也可以直接用API来理解，不过和程序不同的是，代码的版权通常只要不照抄，是可以不侵权的绕过去的，但是指令集的“代码实现”，是芯片上的集成电路，一些经过设计的指令集的实现，基本上是绕不过去的。</strong>这就对市场的进入者形成了门槛，<strong>如果你想兼容已有的上层生态（操作系统，软件），你就必须用目前市场拥有者定义的函数名，因为现有软件都是针对现有的函数名编译的，但是因为电路实现本身有版权并且绕不过去，你就做不到兼容，这就是为什么指令集可以成为一个门槛。</strong></li><li>开源指令集指的是开放指令集的集成电路设计，但事实上目前所有的开源指令集其实都没有自己的生态，用开源指令集并不是图方便用现成的东西，因为指令集的开发在CPU设计中并不是难点，任何有能力设计CPU的公司其实都可以设计自己的指令集，但是除非是你是一个市场的先行者，否则你不得不面对自己设计的指令集和市场已有的生态不兼容的问题。没有多少软件公司愿意为了一个没有市场的硬件产品重新写一遍自己的软件，而没有软件可用你的硬件就没有市场，这就是后发者需要面对的局面。</li></ul><h4 id="arm授权"><a href="#arm授权" class="headerlink" title="arm授权"></a>arm授权</h4><ul><li>一个公司若想使用ARM的内核来做自己的处理器，比如苹果三星TI等等，必须向ARM公司购买其架构下的不同层级授权，根据使用需要购买相应的层级授权。<br>架构的授权方式有三种：架构层级授权、内核层级授权(也就是你所说的ip核授权)、使用层级授权。<br><strong>使用层级授权</strong>，要想使用一款处理器，得到使用层级的授权是最基本的，这就意味着你只能拿别人提供的定义好的ip来嵌入在你的设计中，不能更改人家的ip，也不能借助人家的ip创造自己的基于该ip的封装产品；<br><strong>内核层级授权</strong>，是指可以以一个内核为基础然后在加上自己的外设，比如USART GPIO SPI ADC 等等，最后形成了自己的MCU，这些很多，比如三星TI。<br><strong>架构层级授权</strong>，是指可以对ARM架构进行大幅度改造，甚至可以对ARM指令集进行扩展或缩减，苹果就是一个很好的例子，在使用ARMv7-A架构基础上，扩展出了自己的苹果swift架构；</li><li>因此，如果华为分别拿到架构授权和ip核授权，那么意味着它可以在ARM指令集基础上根据需要创建出自己的内核架构，并可添加各种片内外设比如通信接口、显示器控制接口、GPIO等等，从而生产出自己的“处理器芯片”。<br>其实就像我写了一篇文章，我告诉甲，你可以拿去修改后使用，便是架构层级授权，我告诉乙，你可以在你的文章中引用我的文章，便是内核级授权，我告诉丙，你只能对我的文章进行转发，不能更改，不能添油加醋，便是使用层级授权。</li></ul><p><a href="https://marlous.github.io/2019/03/01/%E5%A4%84%E7%90%86%E5%99%A8%E3%80%81%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%8C%87%E4%BB%A4%E9%9B%86%E5%85%B3%E7%B3%BB/">处理器、处理器架构与指令集关系</a></p>]]></content>
     
@@ -159,6 +165,8 @@
     
     
     
+    <category term="CPU, 指令集, ARM" scheme="http://example.com/tags/CPU-%E6%8C%87%E4%BB%A4%E9%9B%86-ARM/"/>
+    
   </entry>
   
   <entry>
@@ -166,7 +174,7 @@
     <link href="http://example.com/2024/04/15/mmap/"/>
     <id>http://example.com/2024/04/15/mmap/</id>
     <published>2024-04-15T02:14:01.000Z</published>
-    <updated>2024-04-15T02:25:35.363Z</updated>
+    <updated>2025-07-11T09:46:56.626Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/../images/mmap_102515.png"></p><ul><li><a href="https://mp.weixin.qq.com/s/Ihw3vQf0pBNIbGxwvPlY3A?version=4.1.10.6015&platform=win">https://mp.weixin.qq.com/s/Ihw3vQf0pBNIbGxwvPlY3A?version=4.1.10.6015&amp;platform=win</a></li></ul>]]></content>
     
@@ -181,6 +189,8 @@
     
     
     
+    <category term="mmap, 内存映射" scheme="http://example.com/tags/mmap-%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84/"/>
+    
   </entry>
   
   <entry>
@@ -188,7 +198,7 @@
     <link href="http://example.com/2024/04/11/fio%E5%8F%82%E6%95%B0/"/>
     <id>http://example.com/2024/04/11/fio%E5%8F%82%E6%95%B0/</id>
     <published>2024-04-11T01:35:58.000Z</published>
-    <updated>2024-04-11T09:37:24.985Z</updated>
+    <updated>2025-07-11T09:41:56.078Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 1. fio 存储性能测试 （https://islocal.cc/arlo/687d8f2c/）</span><br><span class="line">- 2. </span><br></pre></td></tr></table></figure><h2 id="numjobs-和-iodepth-关系"><a href="#numjobs-和-iodepth-关系" class="headerlink" title="numjobs 和 iodepth 关系"></a>numjobs 和 iodepth 关系</h2><ul><li>使用numjobs参数测试出的效果要好，更能够增加集群客户端测试压力，使测试结果更准确。而iodepth参数设置后，集群带宽值几乎不变，反而延时随着iodepth增加而成倍增加。混合设置后也同样如此，随着iodepth的值增加，带宽值没有增加，反而延时成倍增加。所有延时增加的倍数刚好是iodepth增加的倍数。</li><li>numjobs和iodepth他们具体设置多少不重要，他们的乘积才重要，就是这两个参数的乘积，代表了总并发数，总并发数达到某一个值之后，性能达到峰值。想明白了这一点之后，以后的测试就简单了，固定住一个参数调节另一个参数就可以了，比如固定线程数为4，调整队列深度就可以了。</li></ul><h2 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h2><ul><li>在同步模式（psync）和异步模式（libaio）下测试，在顺序写- 的时候同步模式iops会低于异步模式，其他基本无差异</li><li>队列深度（iodepth）对测试影响不大，网上说法是一般设置32个</li><li>线程数（numjobs）对测试效果影响较大，建议设置为逻辑cpu核数</li><li>文件块大小（bs）可以看到块越小，iops越高</li><li>测试 IOPS 就需要定义小的 I&#x2F;O size，如果要测试 吞吐量 则需要定义稍大的 I&#x2F;O size，主要还是根据读写磁盘数据的大小而定。</li></ul><h2 id="size-和-bs-的关系"><a href="#size-和-bs-的关系" class="headerlink" title="size 和 bs 的关系"></a>size 和 bs 的关系</h2><p>- </p>]]></content>
     
@@ -201,6 +211,8 @@
     
     
     
+    <category term="fio, 性能测试, IO" scheme="http://example.com/tags/fio-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95-IO/"/>
+    
   </entry>
   
   <entry>
@@ -208,7 +220,7 @@
     <link href="http://example.com/2024/04/07/DPU-%E6%99%BA%E8%83%BD%E7%BD%91%E5%8D%A1/"/>
     <id>http://example.com/2024/04/07/DPU-%E6%99%BA%E8%83%BD%E7%BD%91%E5%8D%A1/</id>
     <published>2024-04-07T01:08:48.000Z</published>
-    <updated>2024-04-11T09:37:10.573Z</updated>
+    <updated>2025-07-11T09:39:57.273Z</updated>
     
     <content type="html"><![CDATA[<ul><li>目的：将计算从CPU卸载到网卡，减少CPU的负担。</li><li>发展<br><img src="/../images/DPU-%E6%99%BA%E8%83%BD%E7%BD%91%E5%8D%A1_091758.png"></li></ul><h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><ul><li><p>SR-IOV<br><img src="/../images/DPU-%E6%99%BA%E8%83%BD%E7%BD%91%E5%8D%A1_092921.png"></p><ul><li>SR-IOV（Single Root I&#x2F;O Virtualization）, 是intel提出的一种基于硬件的虚拟化解决方案。</li><li>一个物理设备可以虚拟出多个虚拟设备给虚拟机使用。</li><li>SR-IOV 是一种规范，使得单根端口下的单个快速外围组件互联PCIE 物理设备显示为管理程序或客户机操作系统的多个单独的物理设备，既有直通设备的性能优势，又可以支持多个虚拟机。</li></ul></li><li><p>SR-IOV 使用physical functions PF 和 virtual functions (VF) 为 SR-IOV 设备管理全局功能。</p></li></ul><h2 id="DPU智能网卡"><a href="#DPU智能网卡" class="headerlink" title="DPU智能网卡"></a>DPU智能网卡</h2><ul><li>DPU的出现是为了解决数据中心中存在三个方面共五大问题：节点间：服务器数据交换效率低、数据传输可靠性低，节点内：数据中心模型执行效率低，I&#x2F;O切换效率低、服务器架构不灵活，网络系统：不安全。</li></ul>]]></content>
     
@@ -225,6 +237,8 @@
     
     
     
+    <category term="DPU, 智能网卡, SR-IOV" scheme="http://example.com/tags/DPU-%E6%99%BA%E8%83%BD%E7%BD%91%E5%8D%A1-SR-IOV/"/>
+    
   </entry>
   
   <entry>
@@ -232,11 +246,13 @@
     <link href="http://example.com/2024/04/03/ai%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
     <id>http://example.com/2024/04/03/ai%E5%A4%A7%E6%A8%A1%E5%9E%8B/</id>
     <published>2024-04-03T08:48:54.000Z</published>
-    <updated>2024-04-03T08:48:54.982Z</updated>
+    <updated>2025-07-11T09:39:27.254Z</updated>
     
     
     
     
+    
+    <category term="人工智能, 大模型" scheme="http://example.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   
@@ -245,7 +261,7 @@
     <link href="http://example.com/2024/04/03/spdk-rdma-dpdk-nvme-of/"/>
     <id>http://example.com/2024/04/03/spdk-rdma-dpdk-nvme-of/</id>
     <published>2024-04-03T08:24:51.000Z</published>
-    <updated>2024-04-07T06:17:22.736Z</updated>
+    <updated>2025-07-11T09:50:03.270Z</updated>
     
     <content type="html"><![CDATA[<h2 id="概念解释"><a href="#概念解释" class="headerlink" title="概念解释"></a>概念解释</h2><h3 id="DPDK-（Data-Plane-Development-Kit）"><a href="#DPDK-（Data-Plane-Development-Kit）" class="headerlink" title="DPDK （Data Plane Development Kit）"></a>DPDK （Data Plane Development Kit）</h3><ul><li>是一种<strong>高性能数据包处理框架</strong>，可以用于构建网络应用程序。</li><li>通过最小化CPU与内存之间的数据复制，实现最佳的数据包处理性能。</li><li><strong>核心是用户空间驱动程序，它提供了一套高度优化的数据包处理函数库。</strong>这些函数库可在硬件设备（如网卡）和应用程序之间创建一个通信路径，以便快速地处理网络数据包。DPDK框架还支持多线程、异步事件处理和大规模并发操作等特性，这些特性有助于提高应用程序的整体性能。</li></ul><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul><li><ol><li>绕过内核 （Kernel bypass）</li></ol><ul><li>少了内核处理环节，便于减少数据的拷贝；</li><li>可使用更轻量级的协议栈</li></ul></li><li><ol start="2"><li>轮询收包，而不是中断</li></ol><ul><li>中断会强行打断cpu当前正在执行的任务，任务被中断然后再恢复，可能会导致重新加载Cpu缓存，从而影响效率。</li><li>轮询可以每次批量处理多个包，但中断可能每个包都会触发难以优化收包次数。</li></ul></li><li><ol start="3"><li>大页</li></ol><ul><li>使用大页可以提高TLB的查询效率，也就提高了地址翻译的效率。</li></ul></li><li><ol start="4"><li>零拷贝技术</li></ol><ul><li>在许多数据处理环节可以使用同一段buffer,从而减少了数据拷贝。</li></ul></li><li><ol start="5"><li>dpdk ring</li></ol><ul><li>“无锁”队列 实际上是尽量减少资源独占的时间，减少没必要的等待。</li></ul></li></ul><h3 id="SPDK"><a href="#SPDK" class="headerlink" title="SPDK"></a>SPDK</h3><ul><li>运用了DPDK的技术和理念</li><li>抽象了存储单位</li><li>底层对接了各种存储方式</li><li>基于抽象出来的存储块，提供各种上层服务</li></ul><h3 id="RDMA"><a href="#RDMA" class="headerlink" title="RDMA"></a>RDMA</h3><ul><li>是一种新的内存访问技术，RDMA将服务器应用数据直接由内存传输到智能网卡（固化RDMA协议），由智能网卡硬件完成RDMA传输报文封装，这样就可以让服务器直接高速读写其他服务器的内存数据，而不需要经过操作系统&#x2F;CPU耗时的处理。</li><li>将可靠数据传输的协议栈交由网卡处理（硬件offload）</li><li>减少数据拷贝</li><li>与用户程序共用内存，减少数据拷贝<br><img src="/../images/spdk-rdma-dpdk-nvme-of_141626.png"></li></ul><h2 id="DPDK-VS-RDMA"><a href="#DPDK-VS-RDMA" class="headerlink" title="DPDK VS RDMA"></a>DPDK VS RDMA</h2><h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><ul><li>两者均为kernel bypass技术，可以减少中断次数，消除内核态和用户态的内存拷贝。</li></ul><h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><ul><li>DPDK 是将协议栈上移到用户态，而RDMA是将协议栈下沉到网卡硬件，DPDK仍然会消耗CPU资源</li><li>DPDK的并发度取决于CPU核数，而RDMA的收包速率完全取决于网卡的硬件转发能力</li><li>DPDK在低负荷场景下会造成CPU的无谓空转，而RDMA不存在此问题。</li><li>DPDK用户可获得协议栈的控制权，可自主定制协议栈；RDMA则无法定制协议栈<br><img src="/../images/spdk-rdma-dpdk-nvme-of_141718.png"></li></ul>]]></content>
     
@@ -258,6 +274,8 @@
     
     
     
+    <category term="SPDK, RDMA, DPDK, NVMe-oF" scheme="http://example.com/tags/SPDK-RDMA-DPDK-NVMe-oF/"/>
+    
   </entry>
   
   <entry>
@@ -265,7 +283,7 @@
     <link href="http://example.com/2024/04/03/%E7%BD%91%E7%BB%9C%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/"/>
     <id>http://example.com/2024/04/03/%E7%BD%91%E7%BB%9C%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B/</id>
     <published>2024-04-03T01:31:39.000Z</published>
-    <updated>2024-04-03T02:58:33.050Z</updated>
+    <updated>2025-07-11T09:36:32.481Z</updated>
     
     <content type="html"><![CDATA[<h3 id="专业词语"><a href="#专业词语" class="headerlink" title="专业词语"></a>专业词语</h3><ul><li>URL: Uniform Resource Locator 统一资源定位符</li><li>URI: Uniform Resource Identifier 统一资源标识符<ul><li>URI的内容是一个存放网页数据的文件名或是一个CGI程序的文件名。</li></ul></li><li>URN: Uniform Resource Name 统一资源名称</li></ul><blockquote><p>三者区别<br>URI是抽象的定义，不管用什么方法表示，只要能定位一个资源，就叫URI，本来设想的的使用两种方法定位：1，URL，用地址定位；2，URN 用名称定位。</p><p>举个例子：去村子找个具体的人（URI），如果用地址：某村多少号房子第几间房的主人 就是URL， 如果用身份证号+名字 去找就是URN了。</p></blockquote>]]></content>
     
@@ -280,6 +298,8 @@
     
     
     
+    <category term="网络基础, URL, URI, URN" scheme="http://example.com/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80-URL-URI-URN/"/>
+    
   </entry>
   
   <entry>
@@ -287,11 +307,13 @@
     <link href="http://example.com/2024/04/01/linux%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/"/>
     <id>http://example.com/2024/04/01/linux%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/</id>
     <published>2024-04-01T02:57:08.000Z</published>
-    <updated>2024-04-01T02:59:23.491Z</updated>
+    <updated>2025-07-11T09:46:24.304Z</updated>
     
     
     
     
+    
+    <category term="Linux, 内存管理" scheme="http://example.com/tags/Linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
@@ -300,7 +322,7 @@
     <link href="http://example.com/2024/03/29/linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB/"/>
     <id>http://example.com/2024/03/29/linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB/</id>
     <published>2024-03-29T06:14:19.000Z</published>
-    <updated>2024-03-29T06:16:02.240Z</updated>
+    <updated>2025-07-11T09:44:56.723Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/../images/linux%E5%86%85%E6%A0%B8%E4%BD%93%E7%B3%BB_141524.png"></p><ul><li><img src="https://github.com/0voice/linux_kernel_wiki/blob/main/Linux%E5%86%85%E6%A0%B8%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB.png" alt="参考博客"></li></ul>]]></content>
     
@@ -315,6 +337,8 @@
     
     
     
+    <category term="Linux内核" scheme="http://example.com/tags/Linux%E5%86%85%E6%A0%B8/"/>
+    
   </entry>
   
   <entry>
@@ -322,7 +346,7 @@
     <link href="http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/"/>
     <id>http://example.com/2024/03/29/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86/</id>
     <published>2024-03-29T03:20:52.000Z</published>
-    <updated>2024-04-02T01:13:12.862Z</updated>
+    <updated>2025-07-11T09:44:35.947Z</updated>
     
     <content type="html"><![CDATA[<h2 id="目录项理解"><a href="#目录项理解" class="headerlink" title="目录项理解"></a>目录项理解</h2><ul><li>本质就是为了链接产生了，多个目录项的inode可以同一个。</li><li>目录文件的结构非常简单，就是一系列目录项（dirent）的列表。目录项是一个二元组&lt;文件名, inode号码&gt;。<ul><li>每个文件都对应一个inode，文件名是文件的别名，inode是文件的本体</li></ul></li><li>但是一般可以将其 直接缓存在 内存中</li><li>例如查找</li></ul><h2 id="目录项缓存"><a href="#目录项缓存" class="headerlink" title="目录项缓存"></a>目录项缓存</h2><ul><li><p>Dentry缓存是一种内核缓存，用于存储目录项（directory entry），每个目录项都指向文件系统中的一个文件或目录。当一个应用程序访问文件或目录时，内核会首先在dentry缓存中查找对应的目录项，如果找到了就可以直接访问对应的文件或目录，这样就可以避免频繁地访问磁盘，提高了文件系统的性能。如果dentry缓存中没有找到对应的目录项，则内核会访问磁盘，从文件系统中读取对应的目录项，同时将其存储到dentry缓存中以供下次访问使用。</p></li><li><p>dentry要解决的是路径查找问题。 我们通过文件路径去访问一个文件，进行文件数据或元数据的读写操作，VFS首先要通过路径解析，找到文件对应的inode。如果没有dentry缓存，那每次路径解析都要根据去读取父目录inode在磁盘上的数据块，拿到父目录的内容，从中找到子目录（文件）的inode，然后依次重复这个过程，最后拿到目标文件的inode进行操作。</p></li><li><p>VFS 如果每次都解析路径字符串来定位目录项（缓存），会是很费时的操作，所以引入散列表(dentry_hashtable)，让路径和目录项直接映射。key 为路径字符串的 hash（TODO:是完整的绝对路径还是分割后的路径），value 为对应的目录项的一条链表（hash 表特性，不同的路径可能被 hash 成相同的 key，value 会是一条链表），然后在这条链表中找到对应路径的目录项缓存（TODO：怎么在链表中找到对应的目录项）。</p></li><li><p>举例说明，假设你需要在自己目录中编译一个源文件，&#x2F;home&#x2F;dracula&#x2F;src&#x2F;the_sun_sucks.c，每一次对文件进行访问(比如说，首先要打开它，然后要存储它，还要进行编译等)，VFS 都必须沿着嵌套的目录依次解析全部路径:&#x2F;、home、dracula、src和最终的the_sun_sucks.c。为了避免每次访问该路径名都进行这种耗时的操作,**VFS 会先在目录项缓存中搜索路径名(散列表 dentry_hashtable)**，如果找到了，就无须花费那么大的力气了。相反，如果该目录项在目录项缓存中并不存在，VFS 就必须自己通过遍历文件系统为每个路径分量解析路径，解析完毕后，再将目录项对象加入 dcache 中，以便以后可以快速查找到它。</p></li><li><p><strong>本质上，dentry缓存提供了根据name（path）快速找到inode的途径。</strong></p></li></ul><h2 id="Inode-缓存"><a href="#Inode-缓存" class="headerlink" title="Inode 缓存"></a>Inode 缓存</h2><ul><li>Inode缓存是另一种内核缓存，用于存储inode节点。每个文件或目录在文件系统中都有一个唯一的inode节点，该节点包含文件或目录的元数据信息，如文件大小、创建时间、修改时间等。当一个应用程序访问文件或目录时，内核会首先在dentry缓存中查找对应的目录项，然后通过该目录项找到对应的inode节点。如果找到了inode节点，则可以直接访问对应的文件或目录，避免频繁地访问磁盘，提高了文件系统的性能。如果inode缓存中没有找到对应的inode节点，则内核会访问磁盘，从文件系统中读取对应的inode节点，同时将其存储到inode缓存中以供下次访问使用。</li></ul><h2 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a>查找文件</h2><h3 id="没有目录项缓存的步骤"><a href="#没有目录项缓存的步骤" class="headerlink" title="没有目录项缓存的步骤"></a>没有目录项缓存的步骤</h3><blockquote><p><a href="http://chuquan.me/2022/05/01/understand-principle-of-filesystem/">参考</a></p></blockquote><ul><li>当我们使用ls查看&#x2F;bin&#x2F;ln这个文件时，执行：ls -lih &#x2F; &#x2F;bin &#x2F;bin&#x2F;ln<br><img src="/../images/linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%8E%9F%E7%90%86_112441.png"><ul><li>读取“&#x2F;”目录，因为“&#x2F;”是挂载点，所以可以知道挂载点的inode号码是2，</li><li>读取bin目录，通过“&#x2F;”的inode找到“&#x2F;”的block块，在这个block块里面查询看是否有“bin”这个文件名字，找到这个名字并返回这个名字对应的inode号码，也就是174。</li><li>通过编号为174的inode块来找到对应block块，并查询是否有ln这个文件名，找到这个名字并返回对应的inode号码，也就是4824。然后在4824这个inode中，来查询所有保存了block索引的记录，并读取对应索引的block。完毕。</li></ul></li></ul><h3 id="有目录项缓存"><a href="#有目录项缓存" class="headerlink" title="有目录项缓存"></a>有目录项缓存</h3><h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">struct dentry &#123;</span><br><span class="line">   </span><br><span class="line">atomic_t d_count;/* 目录项对象引用计数器 */</span><br><span class="line">unsigned int d_flags;/* 目录项高速缓存标志 */</span><br><span class="line">spinlock_t d_lock;/* 保护目录项对象的自旋锁 */</span><br><span class="line">struct inode *d_inode;/* 与文件名关联的索引节点 */</span><br><span class="line">struct hlist_node d_hash;/* 指向散列表表项链表的指针 */</span><br><span class="line">struct dentry *d_parent;/* 父目录的目录项对象 */</span><br><span class="line">struct qstr d_name;/* 文件名 */</span><br><span class="line">struct list_head d_lru;/* 用于未使用目录项链表的指针 */</span><br><span class="line">union &#123;</span><br><span class="line">   </span><br><span class="line">struct list_head d_child;/* 对目录而言，用于同一父目录中的目录项链表的指针 */</span><br><span class="line"> struct rcu_head d_rcu;/* 回收目录项对象时，由RCU描述符使用 */</span><br><span class="line">&#125; d_u;</span><br><span class="line">struct list_head d_subdirs;/* 对目录而言，子目录项链表的头 */</span><br><span class="line">struct list_head d_alias;/* 用于与同一索引节点（别名）相关的目录项链表的指针 */</span><br><span class="line">unsigned long d_time;/* 由d_revalidate方法使用 */</span><br><span class="line">struct dentry_operations *d_op;/* 目录项方法 */</span><br><span class="line">struct super_block *d_sb;/* 文件的超级块对象 */</span><br><span class="line">void *d_fsdata;/* 依赖于文件系统的数据 */</span><br><span class="line">struct dcookie_struct *d_cookie;/* 指向内核配置文件使用的数据结构的指针 */</span><br><span class="line">int d_mounted;/* 对目录项而言，用于记录安装该目录项的文件系统数的计数器 */</span><br><span class="line">unsigned char d_iname[DNAME_INLINE_LEN_MIN];/* 存放短文件名的空间 */</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>-<br><a href="https://juejin.cn/post/7081656737891090468">解释</a></p>]]></content>
     
@@ -337,6 +361,8 @@
     
     
     
+    <category term="Linux文件系统, 缓存, inode, dentry" scheme="http://example.com/tags/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-%E7%BC%93%E5%AD%98-inode-dentry/"/>
+    
   </entry>
   
   <entry>
@@ -344,7 +370,7 @@
     <link href="http://example.com/2024/03/29/%E7%A1%AC%E7%9B%98%E6%A0%BC%E5%BC%8F%E5%8C%96/"/>
     <id>http://example.com/2024/03/29/%E7%A1%AC%E7%9B%98%E6%A0%BC%E5%BC%8F%E5%8C%96/</id>
     <published>2024-03-29T01:35:14.000Z</published>
-    <updated>2024-03-29T08:25:38.514Z</updated>
+    <updated>2025-07-11T09:37:02.840Z</updated>
     
     <content type="html"><![CDATA[<h2 id="硬盘格式化"><a href="#硬盘格式化" class="headerlink" title="硬盘格式化"></a>硬盘格式化</h2><ul><li>硬盘格式化一般分为两个步骤，分别是：<ul><li>低级格式化：物理格式化</li><li>高级格式化：逻辑格式化</li></ul></li></ul><h3 id="低级格式化"><a href="#低级格式化" class="headerlink" title="低级格式化"></a>低级格式化</h3><ul><li>硬盘寻址方式：<ul><li>CHS寻址方式：由柱面数，磁头数，扇区数组成3D参数，简称CHS寻址方式。硬盘容量相对较小，如传统的机械硬盘（Hard Dsik Driver）</li><li>LBA寻址方式：线性寻址，以逻辑区块为单位进行寻址，全称为Logic Block Address (即扇区的逻辑块地址)，硬盘容量相对较大。如固态硬盘。</li></ul></li></ul>]]></content>
     
@@ -360,6 +386,8 @@
     
     
     
+    <category term="硬盘, 格式化" scheme="http://example.com/tags/%E7%A1%AC%E7%9B%98-%E6%A0%BC%E5%BC%8F%E5%8C%96/"/>
+    
   </entry>
   
   <entry>
@@ -367,7 +395,7 @@
     <link href="http://example.com/2024/03/28/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%92%8C%E5%9D%97%E8%AE%BE%E5%A4%87/"/>
     <id>http://example.com/2024/03/28/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%92%8C%E5%9D%97%E8%AE%BE%E5%A4%87/</id>
     <published>2024-03-28T02:48:39.000Z</published>
-    <updated>2024-03-28T05:46:02.231Z</updated>
+    <updated>2025-07-11T09:37:58.322Z</updated>
     
     <content type="html"><![CDATA[<ul><li><p>linux 内核驱动根据访问方法, 可以分为以下三类</p><ul><li><ol><li>字符设备驱动</li></ol><ul><li>字符设备是指存取时没有缓存，就能像字节流（类似文件）的形式一样被访问的设备，最终在文件系统中以设备文件的方式存在。</li><li>常见的字符设备：键盘，键盘（IO设备），LCD，Camera（帧缓冲设备）等。</li></ul></li><li><p>块设备驱动</p><ul><li>块设备和字符设备的区别在于块设备有缓存支持的，块设备必须才能随机存取，内核内部的数据管理方法的根据块为最小单位管理，数据块通常为512字节，1024字节等。</li><li>常见的块设备：硬碟、光盘、SD卡、emmc、flash等储存设备。</li></ul></li></ul></li></ul>]]></content>
     
@@ -387,6 +415,8 @@
     
     
     
+    <category term="Linux驱动, 设备" scheme="http://example.com/tags/Linux%E9%A9%B1%E5%8A%A8-%E8%AE%BE%E5%A4%87/"/>
+    
   </entry>
   
   <entry>
@@ -394,11 +424,13 @@
     <link href="http://example.com/2024/03/27/c-%E6%A8%A1%E6%9D%BF/"/>
     <id>http://example.com/2024/03/27/c-%E6%A8%A1%E6%9D%BF/</id>
     <published>2024-03-27T07:45:29.000Z</published>
-    <updated>2024-03-27T07:45:30.018Z</updated>
+    <updated>2025-07-11T09:39:49.575Z</updated>
     
     
     
     
+    
+    <category term="C++, 模板" scheme="http://example.com/tags/C-%E6%A8%A1%E6%9D%BF/"/>
     
   </entry>
   
@@ -407,7 +439,7 @@
     <link href="http://example.com/2024/03/20/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E6%8E%A7%E5%88%B6%E5%99%A8-raid/"/>
     <id>http://example.com/2024/03/20/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97%E6%8E%A7%E5%88%B6%E5%99%A8-raid/</id>
     <published>2024-03-20T02:48:44.000Z</published>
-    <updated>2024-03-20T03:18:14.208Z</updated>
+    <updated>2025-07-11T09:31:46.244Z</updated>
     
     <content type="html"><![CDATA[<h2 id="参考-一般主机上的SCSI卡都会带有RAID功能，那么可以用这个RAID卡（或者叫RAID控制器或者简单称为控制器）先来对认到的多块硬盘做一下RAID，划分出逻辑盘，这个时候操作系统识别到的就是逻辑磁盘，而不是直接识别到箱子中的物理硬盘，这样可以再经过逻辑卷配置划分，然后为应用提供存储空间。-如果主机上安装的不是带有RAID功能的SCSI卡，那么加电之后，主机会识别到箱子里的所有硬盘，这种简单的硬盘箱叫做JBOD，即-Just-a-Bound-of-Disks，只是一串磁盘，非常形象的描述，中文叫做硬-磁盘柜，简称盘柜。-RAID控制器集成在上面提到的硬盘箱子里面。这样自带RAID控制器（简称为控制器）的硬盘箱叫做磁盘阵列或者简称盘阵。盘阵是在盘柜的基础上，将内部的硬盘经过其自带的RAID控制器的分分合合，虚拟化成逻辑盘，然后再经过外部的SCSI接口连接到主机端上的SCSI接口。此时，整个盘阵对于主机来说，就是主机SCSI总线上的一个或者多个设备，具有一个或者多个SCSI-ID，所有逻辑盘都以LUN的形式呈现给主机。"><a href="#参考-一般主机上的SCSI卡都会带有RAID功能，那么可以用这个RAID卡（或者叫RAID控制器或者简单称为控制器）先来对认到的多块硬盘做一下RAID，划分出逻辑盘，这个时候操作系统识别到的就是逻辑磁盘，而不是直接识别到箱子中的物理硬盘，这样可以再经过逻辑卷配置划分，然后为应用提供存储空间。-如果主机上安装的不是带有RAID功能的SCSI卡，那么加电之后，主机会识别到箱子里的所有硬盘，这种简单的硬盘箱叫做JBOD，即-Just-a-Bound-of-Disks，只是一串磁盘，非常形象的描述，中文叫做硬-磁盘柜，简称盘柜。-RAID控制器集成在上面提到的硬盘箱子里面。这样自带RAID控制器（简称为控制器）的硬盘箱叫做磁盘阵列或者简称盘阵。盘阵是在盘柜的基础上，将内部的硬盘经过其自带的RAID控制器的分分合合，虚拟化成逻辑盘，然后再经过外部的SCSI接口连接到主机端上的SCSI接口。此时，整个盘阵对于主机来说，就是主机SCSI总线上的一个或者多个设备，具有一个或者多个SCSI-ID，所有逻辑盘都以LUN的形式呈现给主机。" class="headerlink" title="参考- 一般主机上的SCSI卡都会带有RAID功能，那么可以用这个RAID卡（或者叫RAID控制器或者简单称为控制器）先来对认到的多块硬盘做一下RAID，划分出逻辑盘，这个时候操作系统识别到的就是逻辑磁盘，而不是直接识别到箱子中的物理硬盘，这样可以再经过逻辑卷配置划分，然后为应用提供存储空间。- 如果主机上安装的不是带有RAID功能的SCSI卡，那么加电之后，主机会识别到箱子里的所有硬盘，这种简单的硬盘箱叫做JBOD，即 Just a Bound of Disks，只是一串磁盘，非常形象的描述，中文叫做硬&#x2F;磁盘柜，简称盘柜。- RAID控制器集成在上面提到的硬盘箱子里面。这样自带RAID控制器（简称为控制器）的硬盘箱叫做磁盘阵列或者简称盘阵。盘阵是在盘柜的基础上，将内部的硬盘经过其自带的RAID控制器的分分合合，虚拟化成逻辑盘，然后再经过外部的SCSI接口连接到主机端上的SCSI接口。此时，整个盘阵对于主机来说，就是主机SCSI总线上的一个或者多个设备，具有一个或者多个SCSI ID，所有逻辑盘都以LUN的形式呈现给主机。"></a><a href="https://cloud.tencent.com/developer/news/268932">参考</a><br>- 一般<strong>主机</strong>上的SCSI卡都会带有RAID功能，那么可以用这个RAID卡（或者叫RAID控制器或者简单称为控制器）先来对认到的多块硬盘做一下RAID，划分出逻辑盘，这个时候操作系统识别到的就是逻辑磁盘，而不是直接识别到箱子中的物理硬盘，这样可以再经过逻辑卷配置划分，然后为应用提供存储空间。<br>- 如果主机上安装的不是带有RAID功能的SCSI卡，那么加电之后，主机会识别到箱子里的所有硬盘，这种简单的硬盘箱叫做JBOD，即 Just a Bound of Disks，只是一串磁盘，非常形象的描述，中文叫做硬&#x2F;磁盘柜，简称盘柜。<br>- RAID控制器集成在上面提到的硬盘箱子里面。这样<strong>自带RAID控制器</strong>（简称为控制器）的硬盘箱叫做<strong>磁盘阵列或者简称盘阵</strong>。盘阵是在盘柜的基础上，将内部的硬盘经过其自带的RAID控制器的分分合合，虚拟化成逻辑盘，然后再经过外部的SCSI接口连接到主机端上的SCSI接口。此时，整个盘阵对于主机来说，就是主机SCSI总线上的一个或者多个设备，具有一个或者多个SCSI ID，所有逻辑盘都以LUN的形式呈现给主机。</h2>]]></content>
     
@@ -419,6 +451,8 @@
     
     
     
+    
+    <category term="磁盘阵列, RAID, 存储" scheme="http://example.com/tags/%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97-RAID-%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
